@@ -1,0 +1,445 @@
+/* ==========================================================================
+   Dashbook — base stylesheet
+   Tokens are the canonical source from
+   /Users/zy/dev/dash/dash-fi-app-ds/project/colors_and_type.css
+   ========================================================================== */
+
+@import 'tailwindcss';
+
+/* Scan @dashfi/svelte compiled JS so Tailwind generates classes used by lib components. */
+@source "../node_modules/@dashfi/svelte/dist/**/*.{js,svelte}";
+
+/* Safelist for utility classes consumed by lib components that Tailwind's
+   scanner sometimes misses inside tailwind-variants `tv()` definitions. */
+@source inline("bg-cobalt");
+@source inline("text-cobalt-foreground");
+@source inline("hover:bg-cobalt/80");
+@source inline("bg-orange");
+@source inline("text-orange-foreground");
+
+/* --- Fonts (self-hosted, Pangram Pangram commercial license) -------------- */
+@font-face {
+	font-family: 'PP Supply Mono';
+	src: url('/fonts/PPSupplyMono-Ultralight.otf') format('opentype');
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'PP Supply Mono';
+	src: url('/fonts/PPSupplyMono-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'PP Supply Sans';
+	src: url('/fonts/PPSupplySans-Ultralight.otf') format('opentype');
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'PP Supply Sans';
+	src: url('/fonts/PPSupplySans-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Bai Jamjuree (body sans) — explicit @font-face per weight, served from jsDelivr. */
+@font-face {
+	font-family: 'Bai Jamjuree';
+	src: url('https://cdn.jsdelivr.net/npm/@fontsource/bai-jamjuree@5.1.0/files/bai-jamjuree-latin-400-normal.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Bai Jamjuree';
+	src: url('https://cdn.jsdelivr.net/npm/@fontsource/bai-jamjuree@5.1.0/files/bai-jamjuree-latin-500-normal.woff2')
+		format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Bai Jamjuree';
+	src: url('https://cdn.jsdelivr.net/npm/@fontsource/bai-jamjuree@5.1.0/files/bai-jamjuree-latin-600-normal.woff2')
+		format('woff2');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Bai Jamjuree';
+	src: url('https://cdn.jsdelivr.net/npm/@fontsource/bai-jamjuree@5.1.0/files/bai-jamjuree-latin-700-normal.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* --- Tailwind v4 theme ----------------------------------------------------
+   Color utilities are defined as direct hex values so Tailwind generates
+   working `.bg-primary`, `.text-primary-foreground`, etc. classes that the
+   @dashfi/svelte components reference. Dark mode overrides happen via the
+   `.dark` cascade below; per-canvas dark mode happens in PreviewCanvas.
+   Portal chrome uses dashbook-side --bg/--fg/--brand CSS vars (declared in
+   the base layer) directly in <style> blocks — those are independent. */
+@theme {
+	--font-sans: 'Bai Jamjuree', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'PP Supply Mono', ui-monospace, SFMono-Regular, monospace;
+	--font-display: 'PP Supply Mono', ui-monospace, monospace;
+
+	--color-background: #faf8f1;
+	--color-foreground: #123b39;
+	--color-card: #faf8f1;
+	--color-card-foreground: #123b39;
+	--color-popover: #ffffff;
+	--color-popover-foreground: #123b39;
+	--color-primary: #25261d;
+	--color-primary-foreground: #ffffff;
+	--color-secondary: #eceae0;
+	--color-secondary-foreground: #123b39;
+	--color-muted: #eceae0;
+	--color-muted-foreground: #6e7878;
+	--color-accent: #eceae0;
+	--color-accent-foreground: #123b39;
+	--color-destructive: #ff4000;
+	--color-destructive-foreground: #ffffff;
+	--color-brand: #2b605c;
+	--color-brand-foreground: #ffffff;
+	--color-cobalt: #354cef;
+	--color-cobalt-foreground: #ffffff;
+	--color-orange: #ff4000;
+	--color-orange-foreground: #ffffff;
+	--color-border: #e8e6dc;
+	--color-input: #b6c0bf;
+	--color-ring: #2b605c;
+
+	--radius-none: 0;
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--radius-lg: 8px;
+	--radius-full: 9999px;
+}
+
+/* --- Dark mode override for Tailwind theme vars ------------------------- */
+@layer base {
+	html.dark,
+	[data-theme='dark'] {
+		--color-background: #0f1413;
+		--color-foreground: #ffffff;
+		--color-card: #0f1413;
+		--color-card-foreground: #ffffff;
+		--color-popover: #141a19;
+		--color-popover-foreground: #ffffff;
+		--color-primary: #ffffff;
+		--color-primary-foreground: #000000;
+		--color-secondary: #181e1d;
+		--color-secondary-foreground: #ffffff;
+		--color-muted: #181e1d;
+		--color-muted-foreground: #8b9695;
+		--color-accent: #181e1d;
+		--color-accent-foreground: #ffffff;
+		--color-destructive: #ff4000;
+		--color-destructive-foreground: #ffffff;
+		--color-brand: #5bb8b0;
+		--color-brand-foreground: #ffffff;
+		--color-cobalt: #354cef;
+		--color-cobalt-foreground: #ffffff;
+		--color-orange: #ff4000;
+		--color-orange-foreground: #ffffff;
+		--color-border: #1f2a29;
+		--color-input: #1f2a29;
+		--color-ring: #5bb8b0;
+	}
+}
+
+/* --- Token layer: hex CSS vars (mirror of canonical handoff) ------------- */
+@layer base {
+	:root {
+		/* PRODUCT — light */
+		--bg: #faf8f1;
+		--bg-muted: #eceae0;
+		--fg: #123b39;
+		--fg-muted: #6e7878;
+		--border: #e8e6dc;
+		--input-border: #b6c0bf;
+		--primary: #000000;
+		--primary-fg: #ffffff;
+		--brand: #2b605c;
+		--brand-fg: #ffffff;
+		--destructive: #000000;
+		--ring: #2b605c;
+		--radius: 0;
+		--card: #faf8f1;
+		--popover: #ffffff;
+
+		/* Base palette — named brand primitives. Single source of every brand hex. */
+		--dash-cobalt: #354cef;
+		--dash-cobalt-deep: #2a3ecc;
+		--dash-periwinkle: #b6c1f2;
+		--dash-mist: #e7e7f0;
+		--dash-cream: #ebede4;
+		--dash-white: #ffffff;
+		--dash-yellow: #ebff00;
+		--dash-yellow-glow: rgba(235, 255, 0, 0.5);
+		--dash-jade: #2b605c;
+		--dash-jade-deep: #123b39;
+		--dash-ink: #25261d;
+		--dash-graphite: #505148;
+		--dash-graphite-soft: #80817a;
+
+		/* Marketing aliases — every --m-* references a --dash-* primitive. */
+		--m-cobalt: var(--dash-cobalt);
+		--m-cobalt-deep: var(--dash-cobalt-deep);
+		--m-lavender: var(--dash-periwinkle);
+		--m-cobalt-dust: var(--dash-mist);
+		--m-cream: var(--dash-cream);
+		--m-yellow: var(--dash-yellow);
+		--m-jade: var(--dash-jade);
+		--m-jade-deep: var(--dash-jade-deep);
+		--m-near-black: var(--dash-ink);
+		--m-warm-fg: var(--dash-graphite);
+
+		/* Gradients — reference the base palette */
+		--gradient-jade: radial-gradient(
+			120% 80% at 80% 20%,
+			var(--dash-jade) 0%,
+			var(--dash-jade-deep) 60%,
+			var(--dash-ink) 100%
+		);
+		--gradient-jade-linear: linear-gradient(
+			135deg,
+			var(--dash-jade) 0%,
+			var(--dash-jade-deep) 100%
+		);
+		--gradient-cobalt: linear-gradient(135deg, var(--dash-cobalt) 0%, #1f2d9c 100%);
+
+		/* Shadows (sparing) */
+		--shadow-sm: 0 1px 2px 0 rgba(18, 59, 57, 0.08);
+		--shadow-md: 0 6px 20px -6px rgba(18, 59, 57, 0.14), 0 1px 2px rgba(18, 59, 57, 0.06);
+
+		/* Motion */
+		--easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+		--easing-in: cubic-bezier(0.4, 0, 1, 1);
+		--easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+		--dur-instant: 50ms;
+		--dur-fast: 150ms;
+		--dur-normal: 300ms;
+		--dur-slow: 500ms;
+	}
+
+	html.dark,
+	[data-theme='dark'] {
+		--bg: #0f1413;
+		--bg-muted: #181e1d;
+		--fg: #ffffff;
+		--fg-muted: #8b9695;
+		--border: #1f2a29;
+		--input-border: #1f2a29;
+		--primary: #ffffff;
+		--primary-fg: #000000;
+		--brand: #5bb8b0;
+		--brand-fg: #ffffff;
+		--destructive: #ffffff;
+		--ring: #5bb8b0;
+		--card: #0f1413;
+		--popover: #141a19;
+	}
+}
+
+/* --- Base ----------------------------------------------------------------- */
+@layer base {
+	html {
+		font-feature-settings: 'ss01', 'ss02', 'cv01';
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		scrollbar-gutter: stable;
+	}
+
+	body {
+		font-family: var(--font-sans);
+		background-color: var(--bg);
+		color: var(--fg);
+		letter-spacing: -0.01em;
+		line-height: 1.6;
+		min-height: 100vh;
+	}
+
+	/* Mono / numeric content uses display family with tabular figures */
+	code,
+	kbd,
+	pre,
+	samp,
+	[data-mono],
+	[data-numeric],
+	.font-mono,
+	.tabular-nums {
+		font-family: var(--font-mono);
+		font-variant-numeric: tabular-nums;
+		letter-spacing: -0.02em;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 500;
+		letter-spacing: -0.025em;
+		line-height: 1.2;
+	}
+
+	:focus-visible {
+		outline: 1px solid var(--fg);
+		outline-offset: 2px;
+	}
+
+	::selection {
+		background: var(--brand);
+		color: var(--brand-fg);
+	}
+}
+
+/* --- Semantic typography classes (mirror of canonical handoff) ---------- */
+@layer components {
+	.heading-display {
+		font-family: var(--font-display);
+		font-weight: 200;
+		letter-spacing: -0.01em;
+		line-height: 0.9;
+		text-transform: uppercase;
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+	}
+
+	.section-header,
+	.label-caps,
+	.nav-section {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--fg-muted);
+	}
+
+	.page-label {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.3em;
+		text-transform: uppercase;
+		color: var(--fg-muted);
+	}
+
+	.data-value {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.body-lg {
+		font-size: 1.0625rem;
+		line-height: 1.6;
+	}
+	.body {
+		font-size: 0.9375rem;
+		line-height: 1.6;
+	}
+	.body-sm {
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		color: var(--fg-muted);
+	}
+	.caption {
+		font-size: 0.75rem;
+		line-height: 1.4;
+		color: var(--fg-muted);
+	}
+
+	.brand-underline {
+		background-image: linear-gradient(to right, var(--brand), var(--brand));
+		background-size: 100% 0.4em;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+	}
+
+	.card-minimal {
+		background: transparent;
+		border: none;
+		border-top: 1px solid var(--border);
+		padding-top: 1.5rem;
+	}
+
+	/* --- Component-page docs primitives ------------------------------------ */
+	.preview-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.docs-h {
+		font-family: var(--font-mono);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--fg-muted);
+		margin: 32px 0 12px;
+	}
+	.docs-h:first-child {
+		margin-top: 0;
+	}
+	.docs-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.docs-list li {
+		padding: 10px 0;
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--fg);
+		border-top: 1px solid var(--border);
+	}
+	.docs-list li:first-child {
+		border-top: 0;
+		padding-top: 0;
+	}
+	.docs-list code {
+		font-family: var(--font-mono);
+		font-size: 0.95em;
+		background: var(--bg-muted);
+		padding: 1px 6px;
+	}
+	.docs-cl {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.docs-cl li {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		gap: 24px;
+		padding: 16px 0;
+		border-top: 1px solid var(--border);
+	}
+	.docs-cl li:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+	.docs-cl-when {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		color: var(--fg-muted);
+	}
+	.docs-cl p {
+		font-size: 14px;
+		color: var(--fg);
+	}
+}
