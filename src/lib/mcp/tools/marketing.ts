@@ -17,6 +17,12 @@ import {
 	wordmarkPresets,
 	appIconPresets
 } from '$chrome/logo-sources.js';
+import {
+	brandVoice,
+	getPartnerKit,
+	listPartnerSlugs,
+	partnerKits
+} from '../../specs/marketing/index.js';
 
 function json(value: unknown): { content: { type: 'text'; text: string }[] } {
 	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }] };
@@ -26,6 +32,19 @@ const DOCS_BASE = 'https://dashbook.vercel.app';
 
 const wordmarkPresetIds = wordmarkPresets.map((p) => p.id) as [string, ...string[]];
 const appIconPresetIds = appIconPresets.map((p) => p.id) as [string, ...string[]];
+
+// Disclosure catalogue — duplicated as a typed map so `marketing_search` can
+// index across kinds without re-parsing the registerTool handler.
+type DisclosureKind = 'fdic' | 'partner-bank' | 'card-issuer' | 'full-footer';
+const legalDisclosures: Record<DisclosureKind, string> = {
+	fdic: 'Banking services provided by partner banks, members FDIC.',
+	'partner-bank':
+		'Dash.fi is a financial technology company, not a bank. Banking services provided by partner banks, members FDIC.',
+	'card-issuer':
+		'The Dash.fi Card is issued by [partner bank], pursuant to a license from Visa U.S.A. Inc.',
+	'full-footer':
+		'Dash.fi is a financial technology company, not a bank. Banking services provided by partner banks, members FDIC. The Dash.fi Card is issued by [partner bank], pursuant to a license from Visa U.S.A. Inc.'
+};
 
 export function registerMarketingTools(server: McpServer): void {
 	// ── get_brand_voice ────────────────────────────────────────────────
@@ -39,19 +58,9 @@ export function registerMarketingTools(server: McpServer): void {
 		},
 		async () => {
 			return json({
-				principles: [
-					'Confident, direct, warm without being chummy.',
-					'Sentence case across the UI. No title-case for UI labels.',
-					'No exclamation marks.',
-					'No emoji.',
-					'Numerals not spelled-out numbers — "5–7%" not "five to seven percent".'
-				],
-				examples: {
-					good: 'The audit is already running.',
-					bad: "We're so excited to announce that the audit has started! 🚀"
-				},
+				...brandVoice,
 				docs: `${DOCS_BASE}/brand/voice`,
-				note: 'Marketing voice extension (longer-form principles, do/dont matrix) is Phase 2.'
+				note: 'Canonical voice spec extracted from /brand/voice. Use the `contextualGuidance` block when drafting for a specific surface (product UI vs marketing email vs press release).'
 			});
 		}
 	);
@@ -177,16 +186,7 @@ export function registerMarketingTools(server: McpServer): void {
 			}
 		},
 		async ({ kind }) => {
-			const disclosures: Record<string, string> = {
-				fdic: 'Banking services provided by partner banks, members FDIC.',
-				'partner-bank':
-					'Dash.fi is a financial technology company, not a bank. Banking services provided by partner banks, members FDIC.',
-				'card-issuer':
-					'The Dash.fi Card is issued by [partner bank], pursuant to a license from Visa U.S.A. Inc.',
-				'full-footer':
-					'Dash.fi is a financial technology company, not a bank. Banking services provided by partner banks, members FDIC. The Dash.fi Card is issued by [partner bank], pursuant to a license from Visa U.S.A. Inc.'
-			};
-			const text = disclosures[kind];
+			const text = legalDisclosures[kind];
 			if (!text) {
 				return {
 					content: [
@@ -218,19 +218,35 @@ export function registerMarketingTools(server: McpServer): void {
 		async ({ partner }) => {
 			if (!partner) {
 				return json({
-					note: 'Partner kit data is Phase 2. The full list lives at /press.',
-					docs: `${DOCS_BASE}/press`
+					summary:
+						'Co-branding rules, Powered-by-Dash badge variants, and publicly disclosed partner relationships.',
+					partnerSlugs: listPartnerSlugs(),
+					general: partnerKits.general,
+					notes: partnerKits.notes,
+					docs: `${DOCS_BASE}/press`,
+					hint: 'Call again with `partner: "<slug>"` to get a single partner kit with its category, co-branding rules, legal disclosure, and any asset URLs.'
 				});
 			}
+			const kit = getPartnerKit(partner);
+			if (!kit) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Unknown partner slug "${partner}". Known slugs: ${listPartnerSlugs().join(', ')}.`
+						}
+					],
+					isError: true
+				};
+			}
 			return json({
-				partner,
-				rules: [
-					'Powered-by-Dash badge is opt-in for partner surfaces.',
-					'Co-branded lockups use jade + partner brand color side-by-side, never overlayed.',
-					'Legal disclosures: see `marketing_get_legal_disclosure({ kind: "partner-bank" })`.'
-				],
-				note: 'Per-partner asset bundles are Phase 2.',
-				docs: `${DOCS_BASE}/press`
+				...kit,
+				generalRules: partnerKits.general.rules,
+				legalDisclosurePolicy: partnerKits.general.legalDisclosures,
+				docs: `${DOCS_BASE}/press`,
+				note: kit.assetUrls
+					? undefined
+					: 'Asset URLs (lockup SVG, partner logo) are not yet authored — coordinate with Partner Operations.'
 			});
 		}
 	);
@@ -241,16 +257,239 @@ export function registerMarketingTools(server: McpServer): void {
 		{
 			title: 'Search marketing assets + guidance',
 			description:
-				'Fuzzy search across marketing-surface content — voice, logos, palette, disclosures, partner kits.',
+				'Fuzzy search across marketing-surface content — voice principles, voice examples, copywriting rules, palette tokens, legal disclosures, partner kits. Returns up to 10 matches ordered by relevance.',
 			inputSchema: {
-				query: z.string().describe('Search query.')
+				query: z.string().describe('Search query — e.g. "exclamation", "cobalt", "FDIC", "issuing bank".'),
+				limit: z.number().int().min(1).max(50).optional().default(10),
+				kinds: z
+					.array(
+						z.enum([
+							'voice-principle',
+							'voice-rule',
+							'voice-example',
+							'voice-guidance',
+							'palette',
+							'legal-disclosure',
+							'partner',
+							'partner-rule',
+							'badge-variant'
+						])
+					)
+					.optional()
+					.describe('Restrict search to these kinds. Omit for all kinds.')
 			}
 		},
-		async ({ query }) => {
+		async ({ query, limit, kinds }) => {
+			type SearchKind =
+				| 'voice-principle'
+				| 'voice-rule'
+				| 'voice-example'
+				| 'voice-guidance'
+				| 'palette'
+				| 'legal-disclosure'
+				| 'partner'
+				| 'partner-rule'
+				| 'badge-variant';
+
+			type Candidate = {
+				kind: SearchKind;
+				id: string;
+				title: string;
+				snippet: string;
+				ref?: string;
+				haystack: string;
+			};
+
+			const candidates: Candidate[] = [];
+
+			// Voice principles
+			for (const p of brandVoice.principles) {
+				candidates.push({
+					kind: 'voice-principle',
+					id: p.title.toLowerCase().replace(/\s+/g, '-'),
+					title: p.title,
+					snippet: p.body,
+					ref: 'marketing_get_brand_voice → principles',
+					haystack: `${p.title} ${p.body}`.toLowerCase()
+				});
+			}
+
+			// Voice copywriting rules
+			for (const r of brandVoice.rules) {
+				candidates.push({
+					kind: 'voice-rule',
+					id: r.id,
+					title: r.id,
+					snippet: `${r.do} | ${r.dont}`,
+					ref: `marketing_get_brand_voice → rules.${r.id}`,
+					haystack: `${r.id} ${r.do} ${r.dont} ${r.exception ?? ''}`.toLowerCase()
+				});
+			}
+
+			// Voice examples (good + bad)
+			for (const ex of brandVoice.examples.good) {
+				candidates.push({
+					kind: 'voice-example',
+					id: `good:${ex.context}`,
+					title: `Good — ${ex.context}`,
+					snippet: ex.text,
+					ref: 'marketing_get_brand_voice → examples.good',
+					haystack: `good ${ex.context} ${ex.text}`.toLowerCase()
+				});
+			}
+			for (const ex of brandVoice.examples.bad) {
+				candidates.push({
+					kind: 'voice-example',
+					id: `bad:${ex.context}`,
+					title: `Bad — ${ex.context}`,
+					snippet: `${ex.text}${ex.why ? ` — ${ex.why}` : ''}`,
+					ref: 'marketing_get_brand_voice → examples.bad',
+					haystack: `bad ${ex.context} ${ex.text} ${ex.why ?? ''}`.toLowerCase()
+				});
+			}
+
+			// Voice before/after pairs
+			for (const ba of brandVoice.beforeAfter) {
+				candidates.push({
+					kind: 'voice-example',
+					id: `before-after:${ba.context}`,
+					title: `Before/after — ${ba.context}`,
+					snippet: `Before: ${ba.before} → After: ${ba.after}`,
+					ref: 'marketing_get_brand_voice → beforeAfter',
+					haystack: `before after ${ba.context} ${ba.before} ${ba.after}`.toLowerCase()
+				});
+			}
+
+			// Voice surface guidance
+			for (const sg of brandVoice.contextualGuidance) {
+				candidates.push({
+					kind: 'voice-guidance',
+					id: sg.surface.toLowerCase().replace(/\s+/g, '-'),
+					title: sg.surface,
+					snippet: sg.rules.join(' · '),
+					ref: 'marketing_get_brand_voice → contextualGuidance',
+					haystack: `${sg.surface} ${sg.rules.join(' ')}`.toLowerCase()
+				});
+			}
+
+			// Palette tokens (marketing + base — these are the colorways exposed for marketing)
+			for (const t of [...marketingColors, ...baseColors]) {
+				candidates.push({
+					kind: 'palette',
+					id: t.name,
+					title: t.name,
+					snippet: `${t.cssVar} · light ${t.light} · dark ${t.dark}${t.role ? ` · ${t.role}` : ''}`,
+					ref: 'marketing_get_marketing_palette',
+					haystack: `${t.name} ${t.cssVar} ${t.light} ${t.dark} ${t.role ?? ''}`.toLowerCase()
+				});
+			}
+
+			// Legal disclosures
+			for (const [kind, text] of Object.entries(legalDisclosures)) {
+				candidates.push({
+					kind: 'legal-disclosure',
+					id: kind,
+					title: kind,
+					snippet: text,
+					ref: `marketing_get_legal_disclosure({ kind: "${kind}" })`,
+					haystack: `${kind} ${text}`.toLowerCase()
+				});
+			}
+
+			// Partners
+			for (const partner of partnerKits.partners) {
+				const blob = [
+					partner.slug,
+					partner.displayName,
+					partner.category,
+					partner.legalDisclosure ?? '',
+					partner.regulator ?? '',
+					partner.coBrandingRules.join(' ')
+				].join(' ');
+				candidates.push({
+					kind: 'partner',
+					id: partner.slug,
+					title: partner.displayName,
+					snippet: `${partner.category}${partner.regulator ? ` · ${partner.regulator}` : ''}`,
+					ref: `marketing_get_partner_kit({ partner: "${partner.slug}" })`,
+					haystack: blob.toLowerCase()
+				});
+			}
+
+			// General partner co-branding rules
+			for (let i = 0; i < partnerKits.general.rules.length; i++) {
+				const rule = partnerKits.general.rules[i];
+				candidates.push({
+					kind: 'partner-rule',
+					id: `general-${i}`,
+					title: `General co-branding rule #${i + 1}`,
+					snippet: rule,
+					ref: 'marketing_get_partner_kit → general.rules',
+					haystack: rule.toLowerCase()
+				});
+			}
+
+			// Powered-by-Dash badge variants
+			for (const bv of partnerKits.general.badgeVariants) {
+				candidates.push({
+					kind: 'badge-variant',
+					id: bv.id,
+					title: bv.label,
+					snippet: `${bv.note} · fg ${bv.fg} on bg ${bv.bg}`,
+					ref: 'marketing_get_partner_kit → general.badgeVariants',
+					haystack: `${bv.id} ${bv.label} ${bv.note} ${bv.fg} ${bv.bg}`.toLowerCase()
+				});
+			}
+
+			// Filter by kinds if specified
+			const filtered = kinds && kinds.length > 0
+				? candidates.filter((c) => kinds.includes(c.kind))
+				: candidates;
+
+			// Score (mirrors product_search pattern)
+			const q = query.toLowerCase().trim();
+			const words = q.split(/\s+/).filter(Boolean);
+			const scored = filtered
+				.map((c) => {
+					let score = 0;
+					if (c.id.toLowerCase() === q) score += 100;
+					else if (c.title.toLowerCase() === q) score += 80;
+					else if (c.haystack.includes(q)) score += 40;
+					for (const w of words) {
+						if (!w) continue;
+						if (c.haystack.includes(w)) score += 10;
+					}
+					return { c, score };
+				})
+				.filter((r) => r.score > 0)
+				.sort((a, b) => b.score - a.score)
+				.slice(0, limit);
+
 			return json({
 				query,
-				note: 'Marketing search is Phase 2. For now, see the docs index at /brand and /press.',
-				docs: { brand: `${DOCS_BASE}/brand`, press: `${DOCS_BASE}/press` }
+				count: scored.length,
+				results: scored.map((r) => ({
+					kind: r.c.kind,
+					id: r.c.id,
+					title: r.c.title,
+					snippet: r.c.snippet,
+					ref: r.c.ref,
+					relevance: r.score
+				})),
+				kindsSearched:
+					kinds && kinds.length > 0
+						? kinds
+						: [
+							'voice-principle',
+							'voice-rule',
+							'voice-example',
+							'voice-guidance',
+							'palette',
+							'legal-disclosure',
+							'partner',
+							'partner-rule',
+							'badge-variant'
+						]
 			});
 		}
 	);
