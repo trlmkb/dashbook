@@ -11,12 +11,21 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { marketingColors, baseColors } from '../../tokens.js';
+import {
+	wordmarkSvg,
+	appIconSvg,
+	wordmarkPresets,
+	appIconPresets
+} from '$chrome/logo-sources.js';
 
 function json(value: unknown): { content: { type: 'text'; text: string }[] } {
 	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }] };
 }
 
 const DOCS_BASE = 'https://dashbook.vercel.app';
+
+const wordmarkPresetIds = wordmarkPresets.map((p) => p.id) as [string, ...string[]];
+const appIconPresetIds = appIconPresets.map((p) => p.id) as [string, ...string[]];
 
 export function registerMarketingTools(server: McpServer): void {
 	// ── get_brand_voice ────────────────────────────────────────────────
@@ -53,29 +62,79 @@ export function registerMarketingTools(server: McpServer): void {
 		{
 			title: 'Dash.fi logo SVG (inline + URL)',
 			description:
-				'Returns the wordmark or app icon SVG. Both the inline content (for embedding directly into HTML/JSX) and the canonical URL are returned. Specify a preset to pick a colorway.',
+				'Returns the wordmark or app icon SVG. Both the inline content (for embedding directly into HTML/JSX) and the canonical URL are returned — same bytes either way. Specify a preset to pick a colorway; both wordmark and app-icon expose their own preset list (see `marketing_list_logo_presets`).',
 			inputSchema: {
-				variant: z.enum(['wordmark', 'app']).default('wordmark').describe('Which mark.'),
+				variant: z
+					.enum(['wordmark', 'app'])
+					.default('wordmark')
+					.describe('Which mark. `wordmark` = the "dash.fi" letters (viewBox 426×90). `app` = the rounded-square "d" icon (viewBox 236×236).'),
 				preset: z
-					.enum([
-						'jade-on-cream',
-						'jade-on-ink',
-						'cream-on-jade',
-						'white-on-ink',
-						'white-on-cobalt',
-						'black-on-white'
-					])
-					.default('jade-on-cream')
-					.describe('Colorway preset.')
+					.string()
+					.optional()
+					.describe(
+						'Colorway preset ID. Wordmark: jade, jade-dark, ink, cream-on-jade, white-on-ink, white-on-cobalt, black, transparent. App: jade, cobalt, ink, cream, white, black. Defaults to "jade" for both variants.'
+					),
+				size: z
+					.number()
+					.int()
+					.positive()
+					.optional()
+					.describe('Pixel width (wordmark) / square edge (app). Omit for natural size — 426×90 wordmark, 236×236 app.')
 			}
 		},
-		async ({ variant, preset }) => {
+		async ({ variant, preset, size }) => {
+			const presets = variant === 'wordmark' ? wordmarkPresets : appIconPresets;
+			const resolvedPresetId = preset ?? 'jade';
+			const p = presets.find((x) => x.id === resolvedPresetId);
+			if (!p) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Unknown ${variant} preset "${resolvedPresetId}". Valid: ${presets.map((x) => x.id).join(', ')}`
+						}
+					],
+					isError: true
+				};
+			}
+
+			const sz = size ?? null;
+			const inlineSvg =
+				variant === 'wordmark'
+					? wordmarkSvg(p.fg, p.bg, sz)
+					: appIconSvg(p.bg ?? p.fg, p.glyph ?? '#FFFFFF', sz);
+
+			const urlBase = `${DOCS_BASE}/api/logo/${variant}/${p.id}`;
+			const url = sz ? `${urlBase}?size=${sz}` : urlBase;
+
 			return json({
 				variant,
-				preset,
-				url: `${DOCS_BASE}/brand/logo/${variant}-${preset}.svg`,
-				inlineSvg: null,
-				note: 'Inline SVG content delivery is Phase 2. For now, fetch the URL above. Source presets are defined in src/lib/chrome/logo-sources.ts; the docs page at /brand/logo has the live AssetConfigurator for human downloads.'
+				preset: { id: p.id, label: p.label, fg: p.fg, bg: p.bg, glyph: p.glyph ?? null },
+				size: sz ?? (variant === 'wordmark' ? { width: 426, height: 90 } : { width: 236, height: 236 }),
+				url,
+				inlineSvg,
+				note: 'Same SVG content is served at the URL — fetch it or paste the inlineSvg string directly into your markup. The /api/logo endpoint sets Content-Type: image/svg+xml and caches for 24h.'
+			});
+		}
+	);
+
+	// ── list_logo_presets ──────────────────────────────────────────────
+	server.registerTool(
+		'marketing_list_logo_presets',
+		{
+			title: 'List logo colorway presets',
+			description:
+				'Returns the available colorway presets for either the wordmark or the app icon. Each preset has an id, label, foreground color, optional background, and (app icon only) glyph color.',
+			inputSchema: {
+				variant: z.enum(['wordmark', 'app']).default('wordmark').describe('Which mark.')
+			}
+		},
+		async ({ variant }) => {
+			const presets = variant === 'wordmark' ? wordmarkPresets : appIconPresets;
+			return json({
+				variant,
+				count: presets.length,
+				presets
 			});
 		}
 	);

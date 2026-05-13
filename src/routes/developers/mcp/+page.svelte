@@ -82,7 +82,8 @@ email with the partner-bank disclosure."
 		{ name: 'product_search', ns: 'product', description: 'Fuzzy search across all components.' },
 		{ name: 'product_port_to', ns: 'product', description: 'Stack-specific porting checklist for a component.' },
 		{ name: 'marketing_get_brand_voice', ns: 'marketing', description: 'Tone / sentence-case / numerics rules.' },
-		{ name: 'marketing_get_logo', ns: 'marketing', description: 'Wordmark + app icon SVG (URL + inline).' },
+		{ name: 'marketing_get_logo', ns: 'marketing', description: 'Wordmark + app icon SVG. Returns both URL and inline content.' },
+		{ name: 'marketing_list_logo_presets', ns: 'marketing', description: 'Available colorway presets for wordmark + app icon.' },
 		{ name: 'marketing_get_marketing_palette', ns: 'marketing', description: 'Cobalt-based marketing palette.' },
 		{ name: 'marketing_get_legal_disclosure', ns: 'marketing', description: 'FDIC / partner-bank / card-issuer disclosure text.' },
 		{ name: 'marketing_get_partner_kit', ns: 'marketing', description: 'Partner co-branding rules.' },
@@ -158,7 +159,7 @@ email with the partner-bank disclosure."
 
 	<Section
 		label="Tools"
-		note="14 tools total. Prefix tells you the namespace at a glance."
+		note="15 tools total. Prefix tells you the namespace at a glance."
 	>
 		<div class="tool-table">
 			{#each ['product', 'marketing', 'shared'] as ns (ns)}
@@ -196,9 +197,10 @@ email with the partner-bank disclosure."
 				families + license notes), spacing scale, radius scale, motion durations, shadow scale.
 			</li>
 			<li>
-				<strong>Marketing</strong> (Phase 1 — basic) — brand voice rules, legal disclosure text. Logo
-				+ partner-kit endpoints currently return URLs; Phase 2 ships inline SVG + per-partner asset
-				bundles.
+				<strong>Marketing</strong> — brand voice rules, legal disclosure text, and <strong>logo SVGs
+				returned both as URL and inline content</strong> (same bytes either way; pick whichever
+				fits the surface you're building). Partner-kit endpoint still returns URLs only — per-partner
+				asset bundles are Phase 2.
 			</li>
 		</ul>
 	</Section>
@@ -228,9 +230,9 @@ email with the partner-bank disclosure."
 		note="Phase 2 items — slated for the next sprint."
 	>
 		<ul class="docs-list">
-			<li>Inline SVG content from <code>marketing_get_logo</code> (today returns URL only).</li>
 			<li>Per-partner asset bundles + co-branding lockup rules in <code>marketing_get_partner_kit</code>.</li>
 			<li>Full marketing search across voice / palette / disclosures.</li>
+			<li>Foundations deep-extract — typography type scale + spacing scale beyond what's in <code>tokens.ts</code>.</li>
 			<li>
 				Auth gating for partner-specific assets (FDIC partner data, exec bios, etc.). Public
 				surfaces stay public.
