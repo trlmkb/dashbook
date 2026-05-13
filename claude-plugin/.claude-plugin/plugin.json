@@ -1,0 +1,28 @@
+{
+	"$schema": "https://json.schemastore.org/claude-plugin.json",
+	"name": "dashbook",
+	"version": "0.1.0",
+	"description": "Dashbook — Dash.fi's brand & design system, as a Claude plugin. Adds the dashbook-design-system skill, registers the hosted Dashbook MCP server (60 components, foundations, brand voice, logos, partner kits), and ships three slash commands.",
+	"author": {
+		"name": "Dash.fi",
+		"email": "hi@dash.fi"
+	},
+	"homepage": "https://dashbook.vercel.app/developers/mcp",
+	"repository": "https://github.com/dashfi/dashbook",
+	"license": "MIT",
+	"keywords": [
+		"dashfi",
+		"dashbook",
+		"design-system",
+		"brand",
+		"components",
+		"tokens",
+		"mcp"
+	],
+	"mcpServers": {
+		"dashbook": {
+			"type": "http",
+			"url": "https://dashbook.vercel.app/mcp"
+		}
+	}
+}

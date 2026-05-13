@@ -1,0 +1,23 @@
+{
+	"$schema": "https://json.schemastore.org/claude-plugin-marketplace.json",
+	"name": "dashfi",
+	"description": "Dash.fi brand & design system plugins for Claude Code and Claude Desktop.",
+	"owner": {
+		"name": "Dash.fi",
+		"email": "hi@dash.fi"
+	},
+	"plugins": [
+		{
+			"name": "dashbook",
+			"source": "./claude-plugin",
+			"description": "Dashbook — Dash.fi's brand & design system. Adds the dashbook-design-system skill, registers the hosted Dashbook MCP server, and ships three slash commands for fetching component anatomy, porting components to other stacks, and pulling the brand voice rules.",
+			"version": "0.1.0",
+			"author": {
+				"name": "Dash.fi",
+				"email": "hi@dash.fi"
+			},
+			"keywords": ["dashfi", "design-system", "brand", "components", "mcp", "tokens"],
+			"homepage": "https://dashbook.vercel.app/developers/mcp"
+		}
+	]
+}

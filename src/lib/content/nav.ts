@@ -72,7 +72,8 @@ export const primaryNav: NavItem[] = [
 			{ title: 'Overview', href: '/developers' },
 			{ title: 'Figma library', href: '/developers/figma' },
 			{ title: 'From another stack', href: '/developers/from-another-stack' },
-			{ title: 'MCP server', href: '/developers/mcp' }
+			{ title: 'MCP server', href: '/developers/mcp' },
+			{ title: 'Install', href: '/developers/install' }
 		]
 	},
 	{
