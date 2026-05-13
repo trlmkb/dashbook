@@ -2,330 +2,65 @@
 	import ComponentLayout from '$chrome/ComponentLayout.svelte';
 	import PreviewCanvas from '$chrome/PreviewCanvas.svelte';
 	import CodeSnippet from '$chrome/CodeSnippet.svelte';
-	import PropsTable, { type PropDef } from '$chrome/PropsTable.svelte';
-
-	const enhancedTableProps: PropDef[] = [
-		{
-			name: 'columns',
-			type: 'EnhancedTableColumnDef<TData>[]',
-			required: true,
-			description: 'TanStack column definitions extended with align, sortable, sticky, minWidth, cellClassName, and headerClassName.'
-		},
-		{
-			name: 'data',
-			type: 'TData[]',
-			required: true,
-			bindable: true,
-			description: 'Row data array.'
-		},
-		{
-			name: 'page',
-			type: 'number',
-			default: '1',
-			bindable: true,
-			description: '1-indexed current page. When set together with totalItems triggers server-side pagination.'
-		},
-		{
-			name: 'pageSize',
-			type: 'number',
-			default: '10',
-			bindable: true,
-			description: 'Rows per page.'
-		},
-		{
-			name: 'totalItems',
-			type: 'number',
-			bindable: true,
-			description: 'Total server-side row count. Presence switches the table into manual pagination mode.'
-		},
-		{
-			name: 'loading',
-			type: 'boolean',
-			bindable: true,
-			description: 'Show the loading overlay and dim the table.'
-		},
-		{
-			name: 'sorting',
-			type: 'SortingState',
-			default: '[]',
-			bindable: true,
-			description: 'Active sort state from @tanstack/table-core.'
-		},
-		{
-			name: 'onSortingChange',
-			type: '(sorting: SortingState) => void',
-			description: 'Fired when sort state changes.'
-		},
-		{
-			name: 'columnVisibility',
-			type: 'VisibilityState',
-			default: '{}',
-			bindable: true,
-			description: 'Map of columnId → boolean controlling column visibility.'
-		},
-		{
-			name: 'showColumnVisibility',
-			type: 'boolean',
-			default: 'false',
-			description: 'Render the column-visibility dropdown in the toolbar.'
-		},
-		{
-			name: 'searchable',
-			type: 'boolean',
-			default: 'false',
-			description: 'Render the global search input in the toolbar.'
-		},
-		{
-			name: 'searchPlaceholder',
-			type: 'string',
-			default: "'Search...'",
-			description: 'Placeholder for the search input.'
-		},
-		{
-			name: 'onSearchChange',
-			type: '(value: string) => void',
-			description: 'Server-side search handler. When set, disables client-side global filtering.'
-		},
-		{
-			name: 'filters',
-			type: 'FilterConfig[]',
-			description: 'Declarative filter definitions (text, select, date-range).'
-		},
-		{
-			name: 'filterValues',
-			type: 'FilterValues',
-			description: 'Current filter values, keyed by filter id.'
-		},
-		{
-			name: 'onFilterChange',
-			type: '(values: FilterValues) => void',
-			description: 'Fired when any filter value changes.'
-		},
-		{
-			name: 'enableRowSelection',
-			type: 'boolean',
-			default: 'false',
-			description: 'Show a leading checkbox column and emit selected rows.'
-		},
-		{
-			name: 'onSelected',
-			type: '(rows: TData[]) => void',
-			description: 'Fired with the currently selected row originals.'
-		},
-		{
-			name: 'expandableRows',
-			type: 'boolean',
-			default: 'false',
-			description: 'Add an expand toggle column.'
-		},
-		{
-			name: 'renderExpandedContent',
-			type: '(row: TData) => unknown',
-			description: 'Renderer for the expanded panel body.'
-		},
-		{
-			name: 'onRowClick',
-			type: '(row: TData) => void',
-			description: 'Fired when a row is clicked (or activated via Enter/Space).'
-		},
-		{
-			name: 'groupBy',
-			type: '(row: TData) => string | undefined',
-			description: 'Group rows visually under a header row by the returned key.'
-		},
-		{
-			name: 'persistState',
-			type: 'boolean | { sorting?: boolean; columnVisibility?: boolean; pageSize?: boolean }',
-			default: 'false',
-			description: 'Persist selected pieces of table state to localStorage. Requires tableId.'
-		},
-		{
-			name: 'tableId',
-			type: 'string',
-			description: 'Storage key prefix for persistState.'
-		},
-		{
-			name: 'stickyHeader',
-			type: 'boolean',
-			default: 'false',
-			description: 'Pin the header to the top of the scroll container.'
-		},
-		{
-			name: 'emptyMessage',
-			type: 'string',
-			default: "'No results'",
-			description: 'Heading shown when there are no rows.'
-		}
-	];
-
-	const example = `<script lang="ts">
-	import { EnhancedTable, type EnhancedTableColumnDef } from '@dashfi/svelte/ui/enhanced-table';
-<\/script>
-
-type Tx = { ref: string; merchant: string; amount: number; date: string };
-
-const columns: EnhancedTableColumnDef<Tx>[] = [
-\t{ accessorKey: 'ref', header: 'Reference' },
-\t{ accessorKey: 'merchant', header: 'Merchant' },
-\t{
-\t\taccessorKey: 'amount',
-\t\theader: 'Amount',
-\t\tcell: ({ getValue }) => '
-<\/script>
-
-<svelte:head><title>Enhanced Table — Components — Dashbook</title></svelte:head>
-
-<ComponentLayout
-	name="Enhanced Table"
-	description="Feature-rich table — sorting, filtering, pagination, column visibility. Built on @tanstack/table-core."
-	importPath="@dashfi/svelte/ui/enhanced-table"
-	status="beta"
->
-	{#snippet preview()}
-		<PreviewCanvas minHeight="280px">
-			{#snippet children(_m)}
-				<div style:font-size="13px" style:color="var(--fg-muted)" style:max-width="540px" style:text-align="center">
-					Live preview omitted — Enhanced Table requires column definitions, data, and a wrapping page context.
-					See Code tab for the canonical pattern; the lib's Storybook has interactive examples.
-				</div>
-			{/snippet}
-		</PreviewCanvas>
-	{/snippet}
-	{#snippet code()}<CodeSnippet code={example} language="svelte" />{/snippet}
-	{#snippet docs()}
-		<PropsTable title="EnhancedTable" props={enhancedTableProps} />
-	{/snippet}
-	{#snippet anatomy()}
-		<div>
-			<div class="docs-h">Parts</div>
-			<ul class="docs-list">
-				<li><strong>EnhancedTable (root)</strong> — opinionated all-in-one wrapper around DataTable.</li>
-				<li><strong>SortButton</strong> — click-to-sort column header with up/down chevron indicator. Cycles asc → desc → none.</li>
-				<li><strong>FilterButton</strong> — header-cell filter trigger; opens a Popover with the appropriate filter primitive.</li>
-				<li><strong>ColumnVisibilityDropdown</strong> — top-right utility that toggles column visibility.</li>
-				<li><strong>ExpandButton</strong> — per-row chevron for expandable rows.</li>
-			</ul>
-			<div class="docs-h">Dimensions</div>
-			<ul class="docs-list">
-				<li>Built on canonical Table — 48px headers (mono caps), 16/16 cells, hairline rows. Buttons inside are <code>size="icon"</code> or <code>size="sm"</code>.</li>
-				<li>Sticky columns supported via the column <code>sticky</code> def.</li>
-				<li>Per-column controls: <code>align</code>, <code>minWidth</code>, <code>cellClassName</code>, <code>headerClassName</code>.</li>
-			</ul>
-			<div class="docs-h">Tokens</div>
-			<ul class="docs-list">
-				<li>Inherits Table + Button tokens. Sort indicator on active uses <code>--color-foreground</code>; inactive at <code>opacity-50</code>.</li>
-			</ul>
-			<div class="docs-h">Composition</div>
-			<ul class="docs-list">
-				<li>Pass <code>columns: EnhancedTableColumnDef&lt;TData&gt;[]</code> (extends TanStack column def) + <code>data</code>. The component handles sort / filter / column-visibility / expansion state internally.</li>
-				<li>Use <code>TableSearch</code> alongside in the toolbar; bind <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> for controlled behaviour.</li>
-				<li>For very large datasets, paginate <code>data</code> server-side.</li>
-			</ul>
-			<div class="docs-h">Not part of EnhancedTable</div>
-			<ul class="docs-list">
-				<li>Not unstyled — opinionated variant. For barebones primitives use Table / DataTable.</li>
-				<li>No CSV export.</li>
-			</ul>
-			<div class="docs-h">Porting</div>
-			<ul class="docs-list">
-				<li>TanStack-driven table with Sort / Filter / ColumnVisibility / Expand buttons composed into the canonical Table primitives.</li>
-			</ul>
-		</div>
-	{/snippet}
-
-	{#snippet changelog()}
-		<ul class="docs-cl">
-			<li>
-				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
-				<p>
-					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
-					branch. Opinionated wrapper on DataTable — Sort / Filter /
-					ColumnVisibility / Expand buttons + sticky columns + per-column
-					align/minWidth/className.
-				</p>
-			</li>
-		</ul>
-	{/snippet}
-</ComponentLayout>
- + (getValue<number>()).toLocaleString()
-\t},
-\t{ accessorKey: 'date', header: 'Date' }
-];
-
-<EnhancedTable {columns} data={transactions} />`;
+	import PropsTable from '$chrome/PropsTable.svelte';
+	import Anatomy from '$specs/render/Anatomy.svelte';
+	import { enhancedTable as spec } from '$specs/components/enhanced-table';
 </script>
 
 <svelte:head><title>Enhanced Table — Components — Dashbook</title></svelte:head>
 
 <ComponentLayout
-	name="Enhanced Table"
-	description="Feature-rich table — sorting, filtering, pagination, column visibility. Built on @tanstack/table-core."
-	importPath="@dashfi/svelte/ui/enhanced-table"
-	status="beta"
+	name={spec.name}
+	description={spec.description}
+	importPath={spec.importPath.replace(/^import .+ from '/, '').replace(/'$/, '')}
+	status={spec.status}
 >
 	{#snippet preview()}
 		<PreviewCanvas minHeight="280px">
 			{#snippet children(_m)}
-				<div style:font-size="13px" style:color="var(--fg-muted)" style:max-width="540px" style:text-align="center">
+				<div
+					style:font-size="13px"
+					style:color="var(--fg-muted)"
+					style:max-width="540px"
+					style:text-align="center"
+				>
 					Live preview omitted — Enhanced Table requires column definitions, data, and a wrapping page context.
 					See Code tab for the canonical pattern; the lib's Storybook has interactive examples.
 				</div>
 			{/snippet}
 		</PreviewCanvas>
 	{/snippet}
-	{#snippet code()}<CodeSnippet code={example} language="svelte" />{/snippet}
-	{#snippet docs()}
-		<PropsTable title="EnhancedTable" props={enhancedTableProps} />
+
+	{#snippet code()}
+		<CodeSnippet code={spec.example} language="svelte" />
 	{/snippet}
+
+	{#snippet docs()}
+		<PropsTable props={spec.props} />
+	{/snippet}
+
 	{#snippet anatomy()}
+		<Anatomy {spec} />
+	{/snippet}
+
+	{#snippet accessibility()}
 		<div>
-			<div class="docs-h">Parts</div>
 			<ul class="docs-list">
-				<li><strong>EnhancedTable (root)</strong> — opinionated all-in-one wrapper around DataTable.</li>
-				<li><strong>SortButton</strong> — click-to-sort column header with up/down chevron indicator. Cycles asc → desc → none.</li>
-				<li><strong>FilterButton</strong> — header-cell filter trigger; opens a Popover with the appropriate filter primitive.</li>
-				<li><strong>ColumnVisibilityDropdown</strong> — top-right utility that toggles column visibility.</li>
-				<li><strong>ExpandButton</strong> — per-row chevron for expandable rows.</li>
-			</ul>
-			<div class="docs-h">Dimensions</div>
-			<ul class="docs-list">
-				<li>Built on canonical Table — 48px headers (mono caps), 16/16 cells, hairline rows. Buttons inside are <code>size="icon"</code> or <code>size="sm"</code>.</li>
-				<li>Sticky columns supported via the column <code>sticky</code> def.</li>
-				<li>Per-column controls: <code>align</code>, <code>minWidth</code>, <code>cellClassName</code>, <code>headerClassName</code>.</li>
-			</ul>
-			<div class="docs-h">Tokens</div>
-			<ul class="docs-list">
-				<li>Inherits Table + Button tokens. Sort indicator on active uses <code>--color-foreground</code>; inactive at <code>opacity-50</code>.</li>
-			</ul>
-			<div class="docs-h">Composition</div>
-			<ul class="docs-list">
-				<li>Pass <code>columns: EnhancedTableColumnDef&lt;TData&gt;[]</code> (extends TanStack column def) + <code>data</code>. The component handles sort / filter / column-visibility / expansion state internally.</li>
-				<li>Use <code>TableSearch</code> alongside in the toolbar; bind <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> for controlled behaviour.</li>
-				<li>For very large datasets, paginate <code>data</code> server-side.</li>
-			</ul>
-			<div class="docs-h">Not part of EnhancedTable</div>
-			<ul class="docs-list">
-				<li>Not unstyled — opinionated variant. For barebones primitives use Table / DataTable.</li>
-				<li>No CSV export.</li>
-			</ul>
-			<div class="docs-h">Porting</div>
-			<ul class="docs-list">
-				<li>TanStack-driven table with Sort / Filter / ColumnVisibility / Expand buttons composed into the canonical Table primitives.</li>
+				{#each spec.accessibility as item (item)}
+					<li>{@html item}</li>
+				{/each}
 			</ul>
 		</div>
 	{/snippet}
 
 	{#snippet changelog()}
 		<ul class="docs-cl">
-			<li>
-				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
-				<p>
-					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
-					branch. Opinionated wrapper on DataTable — Sort / Filter /
-					ColumnVisibility / Expand buttons + sticky columns + per-column
-					align/minWidth/className.
-				</p>
-			</li>
+			{#each spec.changelog as entry (entry.version)}
+				<li>
+					<span class="docs-cl-when">{entry.version} — {entry.date}</span>
+					<p>{entry.note}</p>
+				</li>
+			{/each}
 		</ul>
 	{/snippet}
 </ComponentLayout>

@@ -2,7 +2,9 @@
 	import ComponentLayout from '$chrome/ComponentLayout.svelte';
 	import PreviewCanvas from '$chrome/PreviewCanvas.svelte';
 	import CodeSnippet from '$chrome/CodeSnippet.svelte';
-	import PropsTable, { type PropDef } from '$chrome/PropsTable.svelte';
+	import PropsTable from '$chrome/PropsTable.svelte';
+	import Anatomy from '$specs/render/Anatomy.svelte';
+	import { dropdownMenu as spec } from '$specs/components/dropdown-menu';
 	import {
 		DropdownMenu,
 		DropdownMenuTrigger,
@@ -12,176 +14,22 @@
 		DropdownMenuLabel
 	} from '@dashfi/svelte/ui/dropdown-menu';
 	import { Button } from '@dashfi/svelte/ui/button';
-
-	const dropdownMenuProps: PropDef[] = [
-		{
-			name: 'open',
-			type: 'boolean',
-			default: 'false',
-			bindable: true,
-			description: 'Whether the menu is open.'
-		},
-		{
-			name: 'onOpenChange',
-			type: '(open: boolean) => void',
-			description: 'Fired when the open state changes.'
-		},
-		{
-			name: 'dir',
-			type: "'ltr' | 'rtl'",
-			default: "'ltr'",
-			description: 'Text direction for the menu.'
-		},
-		{
-			name: 'closeOnEscape',
-			type: 'boolean',
-			default: 'true',
-			description: 'Close when the Escape key is pressed.'
-		}
-	];
-
-	const dropdownMenuTriggerProps: PropDef[] = [
-		{
-			name: 'disabled',
-			type: 'boolean',
-			default: 'false',
-			description: 'Disable the trigger.'
-		},
-		{
-			name: 'class',
-			type: 'string',
-			description: 'Additional Tailwind classes merged via clsx + tailwind-merge.'
-		},
-		{
-			name: 'ref',
-			type: 'HTMLButtonElement | null',
-			default: 'null',
-			bindable: true,
-			description: 'Element ref binding for the trigger.'
-		},
-		{
-			name: 'child',
-			type: 'Snippet<[{ props: Record<string, unknown> }]>',
-			description: 'Render-prop snippet to compose the trigger with a custom element such as a Button.'
-		}
-	];
-
-	const dropdownMenuContentProps: PropDef[] = [
-		{
-			name: 'side',
-			type: "'top' | 'right' | 'bottom' | 'left'",
-			default: "'bottom'",
-			description: 'Preferred side relative to the trigger.'
-		},
-		{
-			name: 'align',
-			type: "'start' | 'center' | 'end'",
-			default: "'center'",
-			description: 'Alignment along the chosen side.'
-		},
-		{
-			name: 'sideOffset',
-			type: 'number',
-			default: '4',
-			description: 'Pixel gap between the trigger and the content panel.'
-		},
-		{
-			name: 'alignOffset',
-			type: 'number',
-			default: '0',
-			description: 'Pixel offset along the alignment axis.'
-		},
-		{
-			name: 'avoidCollisions',
-			type: 'boolean',
-			default: 'true',
-			description: 'Automatically reposition to stay within the viewport.'
-		},
-		{
-			name: 'forceMount',
-			type: 'boolean',
-			default: 'false',
-			description: 'Force mounting when closed — useful for animated transitions.'
-		},
-		{
-			name: 'class',
-			type: 'string',
-			description: 'Additional Tailwind classes merged via clsx + tailwind-merge.'
-		},
-		{
-			name: 'ref',
-			type: 'HTMLDivElement | null',
-			default: 'null',
-			bindable: true,
-			description: 'Element ref binding for the content panel.'
-		}
-	];
-
-	const dropdownMenuItemProps: PropDef[] = [
-		{
-			name: 'onSelect',
-			type: '(event: Event) => void',
-			description: 'Fired when the item is selected via click or keyboard.'
-		},
-		{
-			name: 'disabled',
-			type: 'boolean',
-			default: 'false',
-			description: 'Disable this item.'
-		},
-		{
-			name: 'inset',
-			type: 'boolean',
-			default: 'false',
-			description: 'Add left padding so the label aligns with checked/radio items.'
-		},
-		{
-			name: 'textValue',
-			type: 'string',
-			description: 'Text used for typeahead matching when the item content is not a plain string.'
-		},
-		{
-			name: 'class',
-			type: 'string',
-			description: 'Additional Tailwind classes merged via clsx + tailwind-merge.'
-		},
-		{
-			name: 'ref',
-			type: 'HTMLDivElement | null',
-			default: 'null',
-			bindable: true,
-			description: 'Element ref binding for the item.'
-		}
-	];
-
-	const example = `<script lang="ts">
-	import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@dashfi/svelte/ui/dropdown-menu';
-<\/script>
-
-<DropdownMenu>
-\t<DropdownMenuTrigger>Actions</DropdownMenuTrigger>
-\t<DropdownMenuContent>
-\t\t<DropdownMenuItem>Issue card</DropdownMenuItem>
-\t\t<DropdownMenuItem>Freeze card</DropdownMenuItem>
-\t\t<DropdownMenuItem>Close card</DropdownMenuItem>
-\t</DropdownMenuContent>
-</DropdownMenu>`;
 </script>
 
 <svelte:head><title>Dropdown Menu — Components — Dashbook</title></svelte:head>
 
 <ComponentLayout
-	name="Dropdown Menu"
-	description="Contextual action menu attached to a trigger. Keyboard-navigable, supports nested submenus."
-	importPath="@dashfi/svelte/ui/dropdown-menu"
-	status="beta"
+	name={spec.name}
+	description={spec.description}
+	importPath={spec.importPath.replace(/^import .+ from '/, '').replace(/'$/, '')}
+	status={spec.status}
 >
 	{#snippet preview()}
 		<PreviewCanvas minHeight="200px">
 			{#snippet children(_m)}
 				<DropdownMenu>
 					<DropdownMenuTrigger>
-						{#snippet child({ props })}
+						{#snippet child({ props }: { props: Record<string, unknown> })}
 							<Button variant="outline" {...props}>Actions</Button>
 						{/snippet}
 					</DropdownMenuTrigger>
@@ -196,66 +44,37 @@
 			{/snippet}
 		</PreviewCanvas>
 	{/snippet}
-	{#snippet code()}<CodeSnippet code={example} language="svelte" />{/snippet}
-	{#snippet docs()}
-		<div style:display="flex" style:flex-direction="column" style:gap="32px">
-			<PropsTable title="DropdownMenu" props={dropdownMenuProps} />
-			<PropsTable title="DropdownMenuTrigger" props={dropdownMenuTriggerProps} />
-			<PropsTable title="DropdownMenuContent" props={dropdownMenuContentProps} />
-			<PropsTable title="DropdownMenuItem" props={dropdownMenuItemProps} />
-		</div>
+
+	{#snippet code()}
+		<CodeSnippet code={spec.example} language="svelte" />
 	{/snippet}
+
+	{#snippet docs()}
+		<PropsTable props={spec.props} />
+	{/snippet}
+
 	{#snippet anatomy()}
+		<Anatomy {spec} />
+	{/snippet}
+
+	{#snippet accessibility()}
 		<div>
-			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li><strong>Content</strong> — popover panel with <code>min-w-[8rem]</code> (128px), <code>rounded-md</code> (6px), <code>p-1</code> (4px), 1px border, <code>shadow-md</code>. Portal-rendered.</li>
-				<li><strong>Item</strong> — <code>relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none</code>. Focus state via <code>focus:bg-accent focus:text-accent-foreground</code>.</li>
-				<li><strong>Separator</strong> — <code>-mx-1 my-1 h-px bg-border</code>.</li>
-				<li><strong>Label / group heading</strong> — <code>px-2 py-1.5 text-sm font-semibold</code>.</li>
-				<li><strong>Shortcut</strong> — right-aligned <code>ml-auto text-xs tracking-widest text-muted-foreground</code>.</li>
-				<li><strong>Checkbox / Radio items</strong> — left indicator slot via <code>pl-8</code> with absolute-positioned check glyph.</li>
-				<li><strong>Sub-trigger</strong> — appends a right-chevron and renders a nested submenu.</li>
-			</ul>
-			<div class="docs-h">Tokens</div>
-			<ul class="docs-list">
-				<li><strong>Content</strong> bg <code>--color-popover</code> (<code>#ffffff</code>/<code>#141a19</code>), text <code>--color-popover-foreground</code>.</li>
-				<li><strong>Item hover/focus</strong> bg <code>--color-accent</code>, text <code>--color-accent-foreground</code>.</li>
-				<li><strong>Separator</strong> bg <code>--color-border</code>.</li>
-				<li><strong>Shortcut</strong> text <code>--color-muted-foreground</code>.</li>
-			</ul>
-			<div class="docs-h">Composition</div>
-			<ul class="docs-list">
-				<li><code>DropdownMenu &gt; DropdownMenuTrigger &gt; DropdownMenuContent &gt; DropdownMenuItem*</code>. Interleave with Separators and group Labels.</li>
-				<li>Use <code>child</code> snippet on the Trigger to delegate to a Button.</li>
-				<li>For toggle-able items, use <code>DropdownMenuCheckboxItem</code> / <code>DropdownMenuRadioItem</code>.</li>
-				<li>Submenus via <code>DropdownMenuSub &gt; DropdownMenuSubTrigger &gt; DropdownMenuSubContent</code>.</li>
-			</ul>
-			<div class="docs-h">Not part of DropdownMenu</div>
-			<ul class="docs-list">
-				<li>Not a Select — for value-binding form pickers use Select.</li>
-				<li>Not a Command palette — for searchable lists use Command.</li>
-				<li>No icon prop on Items. Compose a Lucide glyph as the first child.</li>
-			</ul>
-			<div class="docs-h">Porting</div>
-			<ul class="docs-list">
-				<li>bits-ui DropdownMenu primitives + Tailwind chrome. Portal panel, popover-tone surface, accent-tone hover/focus on items.</li>
+				{#each spec.accessibility as item (item)}
+					<li>{@html item}</li>
+				{/each}
 			</ul>
 		</div>
 	{/snippet}
 
 	{#snippet changelog()}
 		<ul class="docs-cl">
-			<li>
-				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
-				<p>
-					Anatomy added (regenerated against the
-					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Portal popover —
-					<code>min-w-[8rem] rounded-md p-1 border shadow-md</code> on
-					<code>--color-popover</code>. Items, separators, group-heading labels,
-					shortcuts, checkbox/radio items, and submenus all in canonical.
-				</p>
-			</li>
+			{#each spec.changelog as entry (entry.version)}
+				<li>
+					<span class="docs-cl-when">{entry.version} — {entry.date}</span>
+					<p>{entry.note}</p>
+				</li>
+			{/each}
 		</ul>
 	{/snippet}
 </ComponentLayout>

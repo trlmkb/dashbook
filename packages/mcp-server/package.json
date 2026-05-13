@@ -1,0 +1,27 @@
+{
+	"name": "@dashfi/mcp-server",
+	"version": "0.1.0",
+	"description": "Dashbook MCP server — Dash.fi brand & design system as MCP tools (components, foundations, brand voice, logos, partner kits).",
+	"keywords": ["mcp", "dashfi", "dashbook", "design-system", "brand", "ai", "claude"],
+	"homepage": "https://dashbook.vercel.app/developers/mcp",
+	"bugs": "https://github.com/dashfi/dashbook/issues",
+	"license": "MIT",
+	"author": "Dash.fi <hi@dash.fi>",
+	"type": "module",
+	"bin": {
+		"dashbook-mcp": "./src/cli.js"
+	},
+	"main": "./src/cli.js",
+	"files": ["src", "README.md"],
+	"engines": {
+		"node": ">=18"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.29.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dashfi/dashbook.git",
+		"directory": "packages/mcp-server"
+	}
+}

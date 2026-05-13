@@ -71,7 +71,8 @@ export const primaryNav: NavItem[] = [
 		children: [
 			{ title: 'Overview', href: '/developers' },
 			{ title: 'Figma library', href: '/developers/figma' },
-			{ title: 'From another stack', href: '/developers/from-another-stack' }
+			{ title: 'From another stack', href: '/developers/from-another-stack' },
+			{ title: 'MCP server', href: '/developers/mcp' }
 		]
 	},
 	{

@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 
@@ -12,13 +12,15 @@ const config = {
 		})
 	],
 	kit: {
+		// adapter-vercel keeps prerendered pages static and only spins up a
+		// Vercel function for routes that opt out — currently just `/mcp`.
 		adapter: adapter({
-			fallback: 'index.html',
-			strict: false
+			runtime: 'nodejs22.x'
 		}),
 		alias: {
 			$chrome: 'src/lib/chrome',
-			$content: 'src/lib/content'
+			$content: 'src/lib/content',
+			$specs: 'src/lib/specs'
 		},
 		prerender: {
 			handleHttpError: ({ path, referrer, status }) => {
