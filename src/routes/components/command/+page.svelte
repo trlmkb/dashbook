@@ -248,4 +248,55 @@
 			</ul>
 		</div>
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Command (root)</strong> — <code>bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden</code>. Fills its parent.</li>
+				<li><strong>CommandInput</strong> — <code>flex h-10 w-full bg-transparent py-3 text-base md:text-sm</code> in a row with a <code>size-4</code> Search icon, wrapped in a <code>border-b px-3</code> container. 40px tall.</li>
+				<li><strong>CommandItem</strong> — <code>relative flex cursor-default items-center gap-2 px-2 py-1.5 text-sm outline-none select-none</code>. 14px text, 8px horizontal padding, 6px vertical. Lucide glyph auto-sized to 16px.</li>
+				<li><strong>Selection state</strong> — <code>aria-selected:bg-accent aria-selected:text-accent-foreground</code> via keyboard navigation.</li>
+				<li><strong>Disabled state</strong> — <code>data-disabled:pointer-events-none data-disabled:opacity-50</code>.</li>
+				<li><strong>CommandGroup</strong> — labelled list; heading uses <code>--color-muted-foreground</code> mono caps.</li>
+				<li><strong>CommandEmpty</strong> — centered no-results placeholder.</li>
+				<li><strong>CommandSeparator</strong> — <code>-mx-1 my-1 h-px bg-border</code>.</li>
+				<li><strong>CommandDialog</strong> — wraps Command in a Dialog for the spotlight-style palette.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Surface <code>--color-popover</code>; item hover/select <code>--color-accent</code>; separator <code>--color-border</code>; Search icon at <code>opacity-50</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li><code>Command &gt; CommandInput &gt; CommandList &gt; (CommandEmpty | CommandGroup &gt; CommandItem*)</code>.</li>
+				<li>Use inside a Popover for inline search; use <code>CommandDialog</code> for ⌘K spotlight UX.</li>
+				<li>Filtering is built-in via bits-ui Command — items match the input value automatically.</li>
+			</ul>
+			<div class="docs-h">Not part of Command</div>
+			<ul class="docs-list">
+				<li>Not a Select — for value binding form pickers use <code>Select</code>.</li>
+				<li>Not a DropdownMenu — different a11y semantics.</li>
+				<li>No custom filter function exposed in the canonical (bits-ui Command handles matching internally).</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui Command palette. Input at top with Search icon; filterable list of items below.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). 40px Input row
+					with Search icon and <code>border-b px-3</code> container; items
+					<code>px-2 py-1.5 text-sm</code> with <code>aria-selected:bg-accent</code> highlight.
+					CommandDialog wraps for ⌘K palette UX.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

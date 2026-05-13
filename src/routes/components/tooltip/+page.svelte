@@ -206,6 +206,59 @@
 			</ul>
 		</div>
 	{/snippet}
+
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Content</strong> — <code>rounded-md px-3 py-1.5 text-xs</code>. 6px radius, 12px horizontal padding, 6px vertical padding, 12px text.</li>
+				<li><strong>Side offset</strong> — 4px default between trigger and content.</li>
+				<li><strong>Z-index</strong> — <code>z-50</code>.</li>
+				<li><strong>Animations</strong> — <code>data-[state=open]:animate-in fade-in-0 zoom-in-95</code> + side-aware slide-in by 2; reversed on close.</li>
+			</ul>
+
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li><strong>Background</strong> — <code>bg-primary</code> → <code>--color-primary</code> (light <code>#25261d</code> ink, dark <code>#ffffff</code>).</li>
+				<li><strong>Text</strong> — <code>text-primary-foreground</code> → <code>--color-primary-foreground</code> (<code>#ffffff</code>/<code>#000000</code>).</li>
+				<li>Inverted from surrounding surface — that's the tooltip's signature.</li>
+			</ul>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Wrap your app root with <code>TooltipProvider</code> once. Per-tooltip <code>delayDuration</code>/<code>disableHoverableContent</code> overrides are supported.</li>
+				<li>Use <code>TooltipTrigger</code>'s <code>child</code> snippet to delegate to a custom element (Button, IconButton, etc.) — never re-trigger by stacking buttons.</li>
+				<li>Content goes through a Portal so positioning never gets clipped by ancestor overflow.</li>
+			</ul>
+
+			<div class="docs-h">Not part of Tooltip</div>
+			<ul class="docs-list">
+				<li>No arrow / caret. Content is rectangular; positioning is the only directional cue.</li>
+				<li>No multi-line layout helpers. Tooltips are single-sentence affordances.</li>
+				<li>No interactive content. Use Popover or HoverCard instead.</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li><code>--color-primary</code> bg, <code>--color-primary-foreground</code> text, 6px radius, 12/6 padding, 12px type. Position via Floating UI / equivalent.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Inverted
+					surface — <code>bg-primary text-primary-foreground rounded-md px-3 py-1.5
+					text-xs</code>. No arrow. Portal-rendered. Open/close
+					<code>animate-in/fade-in-0/zoom-in-95</code> + side-aware slide-in.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>
 
 <style>

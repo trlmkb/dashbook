@@ -134,4 +134,59 @@
 			<PropsTable title="EmptyMedia" props={emptyMediaProps} />
 		</div>
 	{/snippet}
+
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Empty (root)</strong> — <code>flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12</code>. 24px padding on mobile, 48px from <code>md</code>. 24px gap between sections. Centered both axes. <code>rounded-lg</code> (8px) container with <code>border-dashed</code> — but no border-width set, so dashed style is opt-in (caller adds <code>border</code>).</li>
+				<li><strong>EmptyHeader</strong> — title + description block.</li>
+				<li><strong>EmptyTitle</strong> — heading text.</li>
+				<li><strong>EmptyDescription</strong> — supporting copy.</li>
+				<li><strong>EmptyContent</strong> — action area (typically a Button).</li>
+				<li><strong>EmptyMedia</strong> — optional icon/graphic. Variant <code>'icon'</code> adds a muted square background.</li>
+			</ul>
+
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li><strong>Container border (when applied)</strong> — <code>border-border</code> dashed.</li>
+				<li><strong>Title / description</strong> — inherit foreground; description typically uses <code>text-muted-foreground</code>.</li>
+				<li><strong>EmptyMedia (icon variant)</strong> — muted background <code>--color-muted</code>.</li>
+			</ul>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Compose like a card: <code>Empty</code> → <code>EmptyHeader</code> (Title + Description) → <code>EmptyContent</code> (action Button).</li>
+				<li>For an icon empty state, prepend <code>EmptyMedia variant="icon"</code> with a Lucide glyph inside.</li>
+				<li>Use inside data-driven surfaces (table empty state, search-no-results, blank dashboard).</li>
+			</ul>
+
+			<div class="docs-h">Not part of Empty</div>
+			<ul class="docs-list">
+				<li>No background fill. The container is transparent — the dashed border is the only chrome (and only if caller adds <code>border</code> class).</li>
+				<li>No size variants. Padding scales responsively via the built-in <code>md:p-12</code> breakpoint.</li>
+				<li>No animations.</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li>Six composable parts (Empty/Header/Title/Description/Content/Media). Centered flex column with responsive padding (24/48), 24px gap, 8px radius, dashed-border-ready.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Six-part
+					composable empty-state. Root is <code>flex flex-col items-center
+					justify-center gap-6 rounded-lg border-dashed p-6 md:p-12</code> with
+					dashed border opt-in. Transparent fill, responsive padding (24/48).
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

@@ -236,13 +236,45 @@ const params = filtersToURLParams({ search, merchant, range });`;
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Parts</div>
 			<ul class="docs-list">
-				<li><code>SearchFilter</code> — debounced text input.</li>
-				<li><code>SelectFilter</code> — single-select facet.</li>
-				<li><code>DateRangeFilter</code> — start + end with presets.</li>
-				<li><code>FilterPanel</code> — wrapping container for advanced filter sets.</li>
-				<li>Helpers: <code>countActiveFilters</code>, <code>hasActiveFilters</code>, <code>resetFilters</code>, <code>filtersToURLParams</code>, <code>filtersFromURLParams</code>, <code>debounce</code>.</li>
+				<li><strong>FilterPanel</strong> — the container wrapping a row of filters.</li>
+				<li><strong>SearchFilter</strong> — Input-shaped search box bound to a string (typically with debounce).</li>
+				<li><strong>SelectFilter</strong> — Select-shaped facet picker; bound to a single value.</li>
+				<li><strong>DateRangeFilter</strong> — DateRangeSelector composed into the panel.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>All filter inputs use the canonical Input/Select underline shape (<code>h-10 border-b</code>, no full border, no radius).</li>
+				<li>Panel is a horizontal flex row with gap between filters.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Inherits Input + Select tokens. No additional chrome.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Place above a Table or DataTable. Bind each filter's value into the table's filter state.</li>
+				<li>Mix and match — only include the filter primitives you actually need.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Composable row of filter primitives wrapping Input/Select/DateRangeSelector.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Composable
+					filter row above Tables: SearchFilter, SelectFilter, DateRangeFilter,
+					all using canonical underline Input/Select shapes.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

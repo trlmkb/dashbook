@@ -124,11 +124,44 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li>For marketing surfaces only — auth screens, decks, landing hero.</li>
-				<li>Honors <code>prefers-reduced-motion</code>: animation pauses to a static frame.</li>
-				<li>See <a href="/brand/photography">Brand / Photography</a> for the underlying motif rationale.</li>
+				<li>Fills its parent — apply <code>absolute inset-0</code> + <code>h-full w-full</code> at the call site.</li>
+				<li>Renders a single <code>&lt;canvas&gt;</code> sized to the container; resolution presets <code>low</code>/<code>medium</code>/<code>high</code>.</li>
+				<li><code>z-index</code> low; optional <code>children</code> render above the canvas at z-10.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li><strong>Default gradient</strong> — <code>['#123B39', '#0c1614']</code> (jade-deep → near-black). Overridable via <code>gradientColors</code>.</li>
+				<li><strong>Line color</strong> — caller-controlled via <code>lineColor</code> (any CSS color).</li>
+			</ul>
+			<div class="docs-h">Presets</div>
+			<ul class="docs-list">
+				<li><code>auth</code> · <code>hero</code> · <code>subtle</code> · <code>vibrant</code> — predefined tileSize / flowRadius / resolution / strength bundles.</li>
+			</ul>
+			<div class="docs-h">Not part of FlowLines</div>
+			<ul class="docs-list">
+				<li>Decorative-only: <code>aria-hidden="true"</code> by default. Never use for state communication.</li>
+				<li>Marketing surfaces only — auth screens, landing hero, deck covers.</li>
+				<li>Honors <code>prefers-reduced-motion</code> (static fallback).</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>WebGL fluid sim with vec-field flow + dye layer. Match presets via own renderer if needed.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. WebGL canvas fluid simulation, four presets
+					(auth/hero/subtle/vibrant). Decorative-only, honors reduced-motion.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

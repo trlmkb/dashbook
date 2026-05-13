@@ -197,13 +197,54 @@ const columns: EnhancedTableColumnDef<Tx>[] = [
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Parts</div>
 			<ul class="docs-list">
-				<li>Pass <code>columns</code> as <code>EnhancedTableColumnDef[]</code> with optional <code>cell</code> renderers.</li>
-				<li>State <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> are bindable.</li>
-				<li>Pair with <code>TableSearch</code>, <code>FilterButton</code>, <code>SortButton</code>, <code>ColumnVisibilityDropdown</code> in the toolbar.</li>
-				<li>For very large datasets, supply paginated <code>data</code> and a server-side fetch.</li>
+				<li><strong>EnhancedTable (root)</strong> — opinionated all-in-one wrapper around DataTable.</li>
+				<li><strong>SortButton</strong> — click-to-sort column header with up/down chevron indicator. Cycles asc → desc → none.</li>
+				<li><strong>FilterButton</strong> — header-cell filter trigger; opens a Popover with the appropriate filter primitive.</li>
+				<li><strong>ColumnVisibilityDropdown</strong> — top-right utility that toggles column visibility.</li>
+				<li><strong>ExpandButton</strong> — per-row chevron for expandable rows.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>Built on canonical Table — 48px headers (mono caps), 16/16 cells, hairline rows. Buttons inside are <code>size="icon"</code> or <code>size="sm"</code>.</li>
+				<li>Sticky columns supported via the column <code>sticky</code> def.</li>
+				<li>Per-column controls: <code>align</code>, <code>minWidth</code>, <code>cellClassName</code>, <code>headerClassName</code>.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Inherits Table + Button tokens. Sort indicator on active uses <code>--color-foreground</code>; inactive at <code>opacity-50</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Pass <code>columns: EnhancedTableColumnDef&lt;TData&gt;[]</code> (extends TanStack column def) + <code>data</code>. The component handles sort / filter / column-visibility / expansion state internally.</li>
+				<li>Use <code>TableSearch</code> alongside in the toolbar; bind <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> for controlled behaviour.</li>
+				<li>For very large datasets, paginate <code>data</code> server-side.</li>
+			</ul>
+			<div class="docs-h">Not part of EnhancedTable</div>
+			<ul class="docs-list">
+				<li>Not unstyled — opinionated variant. For barebones primitives use Table / DataTable.</li>
+				<li>No CSV export.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>TanStack-driven table with Sort / Filter / ColumnVisibility / Expand buttons composed into the canonical Table primitives.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. Opinionated wrapper on DataTable — Sort / Filter /
+					ColumnVisibility / Expand buttons + sticky columns + per-column
+					align/minWidth/className.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>
  + (getValue<number>()).toLocaleString()
@@ -238,12 +279,53 @@ const columns: EnhancedTableColumnDef<Tx>[] = [
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Parts</div>
 			<ul class="docs-list">
-				<li>Pass <code>columns</code> as <code>EnhancedTableColumnDef[]</code> with optional <code>cell</code> renderers.</li>
-				<li>State <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> are bindable.</li>
-				<li>Pair with <code>TableSearch</code>, <code>FilterButton</code>, <code>SortButton</code>, <code>ColumnVisibilityDropdown</code> in the toolbar.</li>
-				<li>For very large datasets, supply paginated <code>data</code> and a server-side fetch.</li>
+				<li><strong>EnhancedTable (root)</strong> — opinionated all-in-one wrapper around DataTable.</li>
+				<li><strong>SortButton</strong> — click-to-sort column header with up/down chevron indicator. Cycles asc → desc → none.</li>
+				<li><strong>FilterButton</strong> — header-cell filter trigger; opens a Popover with the appropriate filter primitive.</li>
+				<li><strong>ColumnVisibilityDropdown</strong> — top-right utility that toggles column visibility.</li>
+				<li><strong>ExpandButton</strong> — per-row chevron for expandable rows.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>Built on canonical Table — 48px headers (mono caps), 16/16 cells, hairline rows. Buttons inside are <code>size="icon"</code> or <code>size="sm"</code>.</li>
+				<li>Sticky columns supported via the column <code>sticky</code> def.</li>
+				<li>Per-column controls: <code>align</code>, <code>minWidth</code>, <code>cellClassName</code>, <code>headerClassName</code>.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Inherits Table + Button tokens. Sort indicator on active uses <code>--color-foreground</code>; inactive at <code>opacity-50</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Pass <code>columns: EnhancedTableColumnDef&lt;TData&gt;[]</code> (extends TanStack column def) + <code>data</code>. The component handles sort / filter / column-visibility / expansion state internally.</li>
+				<li>Use <code>TableSearch</code> alongside in the toolbar; bind <code>SortingState</code> + <code>VisibilityState</code> from <code>@tanstack/table-core</code> for controlled behaviour.</li>
+				<li>For very large datasets, paginate <code>data</code> server-side.</li>
+			</ul>
+			<div class="docs-h">Not part of EnhancedTable</div>
+			<ul class="docs-list">
+				<li>Not unstyled — opinionated variant. For barebones primitives use Table / DataTable.</li>
+				<li>No CSV export.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>TanStack-driven table with Sort / Filter / ColumnVisibility / Expand buttons composed into the canonical Table primitives.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. Opinionated wrapper on DataTable — Sort / Filter /
+					ColumnVisibility / Expand buttons + sticky columns + per-column
+					align/minWidth/className.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

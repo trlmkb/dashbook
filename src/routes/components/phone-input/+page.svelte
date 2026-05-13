@@ -97,4 +97,49 @@
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Wrapper</strong> — <code>relative</code> div housing the country Select on the left and the phone Input on the right.</li>
+				<li><strong>Country Select trigger</strong> — <code>absolute inset-y-0 left-0 h-9 w-32 rounded-r-none bg-muted/50 hover:bg-muted/80</code>. 36px tall, 128px wide, muted background. Right radius removed so it visually joins the input.</li>
+				<li><strong>Phone Input</strong> — canonical underline-only Input (<code>h-10 border-b px-0 py-2</code>) with left padding to clear the country select.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Country select bg <code>--color-muted</code> at 50% / 80% on hover; chevron + flag glyph use currentColor.</li>
+				<li>Phone field tokens inherit from Input.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Pass <code>allowedCountryCodes</code> (Set of ISO-2 strings) to narrow the dropdown to relevant markets.</li>
+				<li>Bind <code>value</code> for the E.164 string; bind <code>country</code> separately to read/write the ISO-2 code.</li>
+				<li><code>valid</code> binding flips to false when libphonenumber-js can't parse the input.</li>
+			</ul>
+			<div class="docs-h">Not part of PhoneInput</div>
+			<ul class="docs-list">
+				<li>No label / wrapper. Pair with <code>Label</code> at the call site.</li>
+				<li>No formatting on blur. Caller decides when to format / display the canonical form.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>libphonenumber-js + dial-code Select on the left of an underline Input. Validates against E.164.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Country Select
+					(<code>h-9 w-32 bg-muted/50 rounded-r-none</code>) on the left, canonical
+					underline Input on the right. E.164 binding with allowed-country
+					filter.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

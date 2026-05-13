@@ -70,7 +70,8 @@ export const primaryNav: NavItem[] = [
 		description: 'Install, theming, contribution guide, status board.',
 		children: [
 			{ title: 'Overview', href: '/developers' },
-			{ title: 'Figma library', href: '/developers/figma' }
+			{ title: 'Figma library', href: '/developers/figma' },
+			{ title: 'From another stack', href: '/developers/from-another-stack' }
 		]
 	},
 	{

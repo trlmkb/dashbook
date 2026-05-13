@@ -98,4 +98,49 @@ let selected = $state<string[]>([]);
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Trigger</strong> — mirrors the canonical Input shape (<code>h-10 border-b</code> underline). Shows selected <code>Badge</code> chips inline with a <code>ChevronDown</code> on the right.</li>
+				<li><strong>Selected Badge chips</strong> — use the canonical <code>Badge</code> component with an <code>X</code> icon for in-place removal.</li>
+				<li><strong>Dropdown panel</strong> — popover container with option rows; checked options show a check glyph.</li>
+				<li><strong>Disabled state</strong> — opacity-40 + pointer-events-none on the whole control.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Trigger inherits Input tokens; chips inherit Badge tokens (mono caps, hairline border).</li>
+				<li>Panel uses <code>--color-popover</code> + <code>--color-popover-foreground</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Pass <code>options: {`{ value, label }[]`}</code>; bind <code>selected: string[]</code>.</li>
+				<li><code>onchange</code> fires with the new selected array on every toggle.</li>
+			</ul>
+			<div class="docs-h">Not part of MultiSelect</div>
+			<ul class="docs-list">
+				<li>No search / typeahead. For searchable lists use <code>Command</code> inside a <code>Popover</code>.</li>
+				<li>No grouped options. Flat list only.</li>
+				<li>No custom option render slot.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Underline trigger + Badge chips + popover list. <code>options</code> + <code>selected</code> + <code>onchange</code> is the surface.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Underline-Input-shaped
+					trigger with inline Badge chips, X-to-remove per chip,
+					ChevronDown right. No search.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

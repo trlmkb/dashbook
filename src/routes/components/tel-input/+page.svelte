@@ -53,4 +53,47 @@
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Wrapper</strong> — <code>flex items-center gap-2</code>.</li>
+				<li><strong>Country trigger</strong> — Popover trigger styled as <code>buttonVariants(&#123; variant: 'outline' &#125;)</code>. Shows the dial code (e.g. <code>+1</code>).</li>
+				<li><strong>Country picker</strong> — Popover.Content with <code>p-0</code> wrapping a Command (search + list).</li>
+				<li><strong>Phone input</strong> — bare Input next to the country trigger.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Lighter alternative to <code>PhoneInput</code> — uses a composite <code>&#123; raw, dialCode, iso2 &#125;</code> object instead of E.164.</li>
+				<li>Country picker is a searchable Command inside a Popover — better for long country lists.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Trigger inherits Button outline tokens; popover surface uses <code>--color-popover</code>.</li>
+			</ul>
+			<div class="docs-h">Not part of TelInput</div>
+			<ul class="docs-list">
+				<li>No E.164 validation. The raw + dial + iso2 split is intentional for storage flexibility.</li>
+				<li>No allowed-countries filter — full list shown. Use <code>PhoneInput</code> to narrow.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Outline button (dial code) + searchable Command popover + bare Input. Composite value object.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Outline Button +
+					Popover+Command country picker + Input. Composite <code>{`{ raw, dialCode,
+					iso2 }`}</code> value.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

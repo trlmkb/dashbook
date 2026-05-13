@@ -130,4 +130,38 @@
 			<PropsTable title="CollapsibleContent" props={collapsibleContentProps} />
 		</div>
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>All three parts (<code>Collapsible</code>, <code>CollapsibleTrigger</code>, <code>CollapsibleContent</code>) are unstyled bits-ui primitives. Caller styles every part.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>For inline show-more affordances. For full disclosure rows with a divider, use Accordion.</li>
+				<li>Bind <code>open</code> for controlled state.</li>
+			</ul>
+			<div class="docs-h">Not part of Collapsible</div>
+			<ul class="docs-list">
+				<li>No styling, no animation, no chevron — all caller responsibility.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Unstyled disclosure primitive — <code>data-state="open"/"closed"</code> on the root drives show/hide.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Unstyled bits-ui
+					Collapsible — caller styles every part.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

@@ -101,11 +101,45 @@ const table = createSvelteTable({
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">What it is</div>
 			<ul class="docs-list">
-				<li>Re-export of <code>@tanstack/table-core</code> wired for Svelte 5 reactivity.</li>
-				<li>Bring-your-own DOM. Use Table primitives (<a href="/components/table">/components/table</a>) for the markup.</li>
-				<li>If you need sorting + filtering + pagination out of the box, prefer <a href="/components/enhanced-table">Enhanced Table</a>.</li>
+				<li>A thin TanStack-Table integration that renders into canonical <code>Table</code>/<code>TableRow</code>/<code>TableCell</code> primitives.</li>
+				<li><strong>flex-render.svelte</strong> bridges TanStack's column-def cell renderers to Svelte's snippet API.</li>
+				<li><strong>createSvelteTable(options)</strong> returns a reactive table instance — pass <code>data</code>/<code>columns</code> as getters for live updates.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>Visual chrome comes entirely from the underlying <code>Table</code> primitives — 48px headers in mono caps, 16/16 cells, hairline-bottom rows.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Define columns with <code>{`{ accessorKey | id, header, cell }`}</code>. Call <code>createSvelteTable</code>. Iterate over rows / cells inside the canonical Table primitives.</li>
+				<li>Wire TanStack features (sorting, filtering, pagination, row selection) via the options object; chrome stays inside the Table primitives.</li>
+			</ul>
+			<div class="docs-h">Not part of DataTable</div>
+			<ul class="docs-list">
+				<li>No baked-in column headers, sort buttons, or pagination controls. Compose them yourself using TanStack's sort/filter state.</li>
+				<li>No virtualisation built-in.</li>
+				<li>For the opinionated all-in-one variant use <code>EnhancedTable</code>.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>TanStack Table + your stack's table primitives. <code>flex-render</code> bridges the cell-renderer abstraction.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Thin TanStack
+					integration — <code>createSvelteTable</code> + <code>flex-render</code> + canonical
+					Table primitives. No baked chrome.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

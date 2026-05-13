@@ -194,11 +194,42 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li><code>type="single"</code> — only one item open at a time.</li>
-				<li><code>type="multiple"</code> — any number of items can be open.</li>
-				<li><code>value</code> is bindable.</li>
+				<li><strong>AccordionItem</strong> — <code>border-b</code> hairline in <code>--color-border</code>.</li>
+				<li><strong>AccordionTrigger</strong> — flex row button with a <code>ChevronDown</code> chevron (<code>size-4</code>) that rotates 180° on open (<code>duration-200</code>).</li>
+				<li><strong>AccordionContent</strong> — <code>pt-0 pb-4</code> inner padding (16px bottom).</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Item separator <code>--color-border</code>; chevron + text are currentColor.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li><code>Accordion type="single|multiple" &gt; AccordionItem &gt; AccordionTrigger + AccordionContent</code>.</li>
+			</ul>
+			<div class="docs-h">Not part of Accordion</div>
+			<ul class="docs-list">
+				<li>No nested rows.</li>
+				<li>No left-side chevron / icon prefix slot.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui Accordion with hairline-bottom items and rotating ChevronDown.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Hairline-bottom
+					rows; <code>size-4</code> ChevronDown rotates 180° in 200ms.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

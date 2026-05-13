@@ -96,4 +96,46 @@
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Root</strong> — <code>relative</code>; caller sets bounding height/width.</li>
+				<li><strong>Viewport</strong> — <code>size-full rounded-[inherit]</code>; scrollable content area with <code>focus-visible:ring-4 focus-visible:outline-1</code>.</li>
+				<li><strong>Scrollbar rail</strong> — 10px (<code>w-2.5</code> / <code>h-2.5</code>) with <code>p-px</code> padding.</li>
+				<li><strong>Thumb</strong> — <code>bg-border relative flex-1 rounded-full</code> (pill).</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Thumb <code>--color-border</code>; focus ring <code>--color-ring</code> (jade).</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Wrap any overflowing region (sidebar list, long table, code block) for custom scrollbars vs native.</li>
+				<li><code>orientation</code> sets vertical / horizontal / both.</li>
+			</ul>
+			<div class="docs-h">Not part of ScrollArea</div>
+			<ul class="docs-list">
+				<li>No virtualization. For huge lists use a virtual-scroller wrapped by ScrollArea.</li>
+				<li>No native fallback toggle.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui ScrollArea with 10px rails, <code>--color-border</code> pill thumbs, jade focus-ring.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). 10px rails,
+					<code>bg-border</code> pill thumbs, <code>--color-ring</code> focus ring.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

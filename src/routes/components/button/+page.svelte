@@ -16,9 +16,9 @@
 		},
 		{
 			name: 'size',
-			type: "'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg'",
+			type: "'sm' | 'default' | 'lg' | 'icon-sm' | 'icon' | 'icon-lg'",
 			default: "'default'",
-			description: 'Size token. Icon sizes are square (no horizontal padding).'
+			description: 'Size token. h-9 / h-10 / h-11; icon sizes are square (size-9 / size-10 / size-11).'
 		},
 		{
 			name: 'loading',
@@ -41,7 +41,7 @@
 			name: 'disabled',
 			type: 'boolean',
 			default: 'false',
-			description: 'Native disabled — non-interactive, dimmed to 40% opacity.'
+			description: 'Native disabled — non-interactive, dimmed to 40% opacity, pointer-events disabled.'
 		},
 		{
 			name: 'children',
@@ -149,48 +149,85 @@
 	{/snippet}
 
 	{#snippet anatomy()}
-		<div class="anatomy">
-			<h3>Variants</h3>
-			<ul>
-				<li><strong>default</strong> — black surface, white text. The system's primary CTA.</li>
-				<li><strong>brand</strong> — jade surface, white text. Used for brand-tied affirmative actions.</li>
-				<li><strong>destructive</strong> — black on light, white on dark (monochrome — never red).</li>
-				<li><strong>outline</strong> — transparent background, hairline border, foreground text.</li>
-				<li><strong>secondary</strong> — same as outline but with a hover-tint instead of a tonal shift.</li>
-				<li><strong>ghost</strong> — no border or background; muted text resolves to fg on hover.</li>
-				<li><strong>link</strong> — inline-text affordance with underline-offset on hover.</li>
+		<div>
+			<div class="docs-h">Dimensions (per size)</div>
+			<ul class="docs-list">
+				<li><strong>sm</strong> — 36px height (<code>h-9</code>), 16px horizontal padding (<code>px-4</code>), 13px type (<code>text-[13px]</code>), 6px gap (<code>gap-1.5</code>).</li>
+				<li><strong>default</strong> — 40px height (<code>h-10</code>), 20px horizontal padding (<code>px-5</code>), 8px vertical (<code>py-2</code>), 14px type (<code>text-sm</code>), 8px gap (<code>gap-2</code>).</li>
+				<li><strong>lg</strong> — 44px height (<code>h-11</code>), 32px horizontal padding (<code>px-8</code>), 14px type, 8px gap.</li>
+				<li><strong>icon-sm</strong> — 36×36px square (<code>size-9</code>). Icon-only.</li>
+				<li><strong>icon</strong> — 40×40px square (<code>size-10</code>). Default icon-only size.</li>
+				<li><strong>icon-lg</strong> — 44×44px square (<code>size-11</code>). Larger icon-only.</li>
+				<li><strong>Radius</strong> — <code>rounded-md</code> (<code>--radius-md</code> 6px), with <code>[corner-shape:squircle]</code> applied so corners render as squircles in browsers that support the property.</li>
+				<li><strong>Type weight</strong> — 500 (<code>font-medium</code>), <code>font-sans</code> (Bai Jamjuree), <code>whitespace-nowrap</code>.</li>
+				<li><strong>Inline icons</strong> — 16px (<code>[&_svg]:size-4</code>), <code>shrink-0</code>, pointer-events disabled. Icons compose as children.</li>
+				<li><strong>Press</strong> — <code>active:scale-[0.97]</code> baked in (the brand's signature press feedback applies to every button by default on this branch).</li>
 			</ul>
-			<h3>Sizes</h3>
-			<ul>
-				<li><strong>sm</strong> — h-9, gap-1.5, 13px</li>
-				<li><strong>default</strong> — h-10, px-5, 14px</li>
-				<li><strong>lg</strong> — h-11, px-8, 14px</li>
-				<li><strong>icon · icon-sm · icon-lg</strong> — square, no padding</li>
+
+			<div class="docs-h">Tokens (per variant)</div>
+			<ul class="docs-list">
+				<li><strong>brand</strong> — bg <code>--color-brand</code> (light jade <code>#2b605c</code>, dark <code>#5bb8b0</code>), text <code>--color-brand-foreground</code> (<code>#ffffff</code>). Hover drops opacity to 80%.</li>
+				<li><strong>default</strong> — bg <code>--color-primary</code> (light <code>#25261d</code>, dark <code>#ffffff</code>), text <code>--color-primary-foreground</code> (light <code>#ffffff</code>, dark <code>#000000</code>). Hover 80% opacity.</li>
+				<li><strong>destructive</strong> — bg <code>--color-destructive</code> (<code>#ff4000</code>, both modes), text <code>--color-destructive-foreground</code> (<code>#ffffff</code>). Hover 80% opacity.</li>
+				<li><strong>outline</strong> — transparent bg, 1px border in <code>--color-border</code>, text <code>--color-foreground</code>. Hover bg <code>--color-muted</code> at 50% alpha.</li>
+				<li><strong>secondary</strong> — bg <code>--color-cobalt</code> (<code>#354cef</code>, both modes — brand constant), text <code>--color-cobalt-foreground</code> (<code>#ffffff</code>). Hover 80% opacity. <em>Note: secondary on this branch is cobalt blue, not the warm-grey surface from previous releases.</em></li>
+				<li><strong>ghost</strong> — transparent bg, text <code>--color-muted-foreground</code>. Hover bg <code>--color-muted</code> at 40% alpha, text <code>--color-foreground</code>. No shadow.</li>
+				<li><strong>link</strong> — transparent bg, text <code>--color-foreground</code> with <code>underline-offset-4</code>, underline on hover. No shadow.</li>
+				<li><strong>Shadow</strong> — none on this branch. Buttons are flat surfaces; the press-scale carries the affordance.</li>
+				<li><strong>Focus</strong> — native <code>outline-none</code>. Focus is communicated by browser keyboard cursor / app-level focus styling; the button class doesn't add a ring.</li>
+				<li><strong>Disabled</strong> — <code>opacity-40</code> + <code>pointer-events-none</code>. No alternate fill.</li>
+				<li><strong>Transition</strong> — <code>transition-all duration-150</code>. Bg, text, border, and scale animate.</li>
 			</ul>
-			<h3>Behavior</h3>
-			<ul>
-				<li><code>active:scale(0.97)</code> on every press — 100ms snap, brand-signature.</li>
-				<li><code>loading</code> prop renders an inline spinner over a blurred-content layer.</li>
-				<li><code>href</code> prop converts the element to an anchor. Use for navigation only.</li>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Render as <code>&lt;button&gt;</code> by default. Passing <code>href</code> swaps the element to <code>&lt;a&gt;</code> — never both.</li>
+				<li>Icons compose as <em>children</em> using <code>@lucide/svelte</code> at <code>size={16}</code>: <code>&lt;Button&gt;&lt;Plus size=&#123;16&#125; /&gt;New&lt;/Button&gt;</code>. There is no <code>icon</code> prop.</li>
+				<li><code>loading</code> renders a centred <code>Loader</code> overlay (lucide, <code>animate-spin</code>) inside <code>inset-2</code>; the children layer drops to 50% opacity with <code>blur-xs</code>. On the button (vs anchor) variant the wrapper also adds a <code>backdrop-blur-sm</code> layer.</li>
+			</ul>
+
+			<div class="docs-h">Not part of Button</div>
+			<ul class="docs-list">
+				<li>No <code>icon</code> / <code>iconRight</code> prop. Icons go in the children slot.</li>
+				<li>No <code>fullWidth</code> prop. Set <code>w-full</code> via <code>class</code> at the call site.</li>
+				<li>No drop shadow. Buttons on this branch are flat — the press-scale and opacity changes are the affordance.</li>
+				<li>No focus ring on the class. Rely on the browser keyboard cursor (Buttons inherit <code>outline-none</code>; surface-level focus styling is the caller's responsibility if needed).</li>
+				<li>No "primary" variant alias. Use <code>default</code> directly; <code>brand</code> for jade.</li>
+				<li>No warm-grey secondary. Secondary is cobalt on this branch.</li>
+			</ul>
+
+			<div class="docs-h">Props (behaviour-only)</div>
+			<ul class="docs-list">
+				<li><code>variant</code> — see the variant matrix above.</li>
+				<li><code>size</code> — <code>'sm' | 'default' | 'lg' | 'icon-sm' | 'icon' | 'icon-lg'</code>.</li>
+				<li><code>loading</code> — overlay spinner + disabled. Mutually exclusive with content interactions.</li>
+				<li><code>href</code> — switches to <code>&lt;a&gt;</code>.</li>
+				<li>All native <code>&lt;button&gt;</code> / <code>&lt;a&gt;</code> attributes pass through.</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li>Sizes: h-9 / h-10 / h-11 (sm / default / lg) with px-4 / px-5 / px-8. Three square icon sizes match the three width sizes. Radius is <code>--radius-md</code> 6px with optional squircle corner-shape; bake the active scale 0.97 transition into the class. No shadows.</li>
+				<li>Variant table is the contract: brand jade, default ink, destructive orange, secondary <strong>cobalt</strong> (not warm-grey), outline hairline + muted hover, ghost muted-foreground text, link underline-only. Hover drops opacity to 80%.</li>
 			</ul>
 		</div>
 	{/snippet}
 
 	{#snippet accessibility()}
-		<div class="a11y">
-			<h3>Keyboard</h3>
-			<ul>
+		<div>
+			<div class="docs-h">Keyboard</div>
+			<ul class="docs-list">
 				<li><code>Tab</code> — focuses the button.</li>
 				<li><code>Space</code> / <code>Enter</code> — activates.</li>
 			</ul>
-			<h3>Screen reader</h3>
-			<ul>
+			<div class="docs-h">Screen reader</div>
+			<ul class="docs-list">
 				<li>Renders as a native <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> — inherits semantics. No extra ARIA needed for typical use.</li>
 				<li>For icon-only buttons, pass <code>aria-label</code> via <code>{`{...restProps}`}</code>.</li>
 				<li><code>loading</code> state visually disables the button and prevents activation; consider an <code>aria-busy</code> announcement.</li>
 			</ul>
-			<h3>Focus</h3>
-			<ul>
+			<div class="docs-h">Focus</div>
+			<ul class="docs-list">
 				<li>Outline ring uses <code>--ring</code> (jade in light, lifted jade in dark).</li>
 				<li>Visible only on keyboard focus (<code>:focus-visible</code>).</li>
 			</ul>
@@ -198,84 +235,37 @@
 	{/snippet}
 
 	{#snippet changelog()}
-		<ul class="cl">
+		<ul class="docs-cl">
 			<li>
-				<span class="when">v0.3.0 — 2026-05-10</span>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. Variant table refreshed: <code>secondary</code> is now <strong>cobalt
+					blue</strong> (<code>--color-cobalt</code> <code>#354cef</code>), not warm-grey.
+					Sizes bumped one notch (sm → <code>h-9</code>, default → <code>h-10</code>,
+					lg → <code>h-11</code>); padding default is now <code>px-5</code>. New
+					<code>icon-sm</code> / <code>icon-lg</code> sizes (<code>size-9</code> /
+					<code>size-11</code>). Hover drops opacity to <strong>80%</strong> (was 90%).
+					Press scale <code>active:scale-[0.97]</code> baked into base. Drop shadows
+					removed across all variants. Disabled is now <code>opacity-40</code>. Focus
+					ring removed (relies on native <code>outline-none</code>).
+				</p>
+			</li>
+			<li>
+				<span class="docs-cl-when">v0.3.1 — 2026-05-12</span>
+				<p>
+					Anatomy tightened: per-size dimensions (h-8/9/10), per-variant
+					token tuples (bg, text, border, hover, shadow) with resolved hex
+					for both modes, composition rule (icons as children, never an
+					<code>icon</code> prop), and explicit non-features. Matches the
+					Input precedent so non-Svelte re-implementations have an
+					unambiguous spec.
+				</p>
+			</li>
+			<li>
+				<span class="docs-cl-when">v0.3.0 — 2026-05-10</span>
 				<p>First documented in Dashbook.</p>
 			</li>
 		</ul>
 	{/snippet}
 </ComponentLayout>
-
-<style>
-	.preview-stack {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-	}
-	.anatomy h3,
-	.a11y h3 {
-		font-family: var(--font-mono);
-		font-size: 11px;
-		font-weight: 500;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-		color: var(--fg-muted);
-		margin: 32px 0 12px;
-	}
-	.anatomy h3:first-child,
-	.a11y h3:first-child {
-		margin-top: 0;
-	}
-	.anatomy ul,
-	.a11y ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-	}
-	.anatomy li,
-	.a11y li {
-		padding: 8px 0;
-		font-size: 14px;
-		line-height: 1.6;
-		color: var(--fg);
-		border-top: 1px solid var(--border);
-	}
-	.anatomy li:first-child,
-	.a11y li:first-child {
-		border-top: 0;
-		padding-top: 0;
-	}
-	code {
-		font-family: var(--font-mono);
-		font-size: 0.95em;
-		background: var(--bg-muted);
-		padding: 1px 6px;
-	}
-	.cl {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-	.cl li {
-		display: grid;
-		grid-template-columns: 200px 1fr;
-		gap: 24px;
-		padding: 16px 0;
-		border-top: 1px solid var(--border);
-	}
-	.cl li:last-child {
-		border-bottom: 1px solid var(--border);
-	}
-	.when {
-		font-family: var(--font-mono);
-		font-size: 12px;
-		color: var(--fg-muted);
-	}
-	.cl p {
-		font-size: 14px;
-		color: var(--fg);
-	}
-</style>

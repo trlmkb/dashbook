@@ -225,4 +225,47 @@
 			<PropsTable title="SheetClose" props={closeProps} />
 		</div>
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Content</strong> — <code>fixed z-50</code> with side-aware sizing via <code>sheetVariants</code>. The default <code>right</code> side is typically <code>w-3/4 sm:max-w-sm</code> (or similar); refer to the canonical for the exact size matrix.</li>
+				<li><strong>Overlay</strong> — <code>fixed inset-0 z-50 bg-black/40</code> (40% black; lighter than Drawer's 80%).</li>
+				<li><strong>Close button</strong> — <code>absolute end-2 top-2 rounded-xs</code> with <code>size-4</code> X glyph. Focus-visible ring at 2px offset 2.</li>
+				<li><strong>Header / Footer / Title / Description</strong> — composable sub-components mirror Dialog's pattern.</li>
+			</ul>
+			<div class="docs-h">Sides</div>
+			<ul class="docs-list">
+				<li>Top / right / bottom / left — slides in from the matching edge with bits-ui's slide animations.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Content bg <code>--color-background</code>; overlay literal <code>bg-black/40</code>.</li>
+				<li>Close button focus ring uses <code>--color-ring</code>.</li>
+			</ul>
+			<div class="docs-h">Not part of Sheet</div>
+			<ul class="docs-list">
+				<li>No drag-to-dismiss. Use Drawer for the bottom-sheet draggable behavior.</li>
+				<li>No nested sheets. Compose carefully — keyboard focus management is per-instance.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Side-anchored modal panel, 40% black overlay, side-aware slide-in. Built on bits-ui Dialog primitives.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Side-anchored modal
+					(top/right/bottom/left), <code>bg-black/40</code> overlay, absolute Close
+					button at <code>end-2 top-2</code>.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

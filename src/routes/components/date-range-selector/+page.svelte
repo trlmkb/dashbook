@@ -97,4 +97,51 @@
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Parts</div>
+			<ul class="docs-list">
+				<li><strong>Trigger button</strong> — Button outline with start–end date label and ChevronDown.</li>
+				<li><strong>Popover content</strong> — popover panel housing the preset column + RangeCalendar.</li>
+				<li><strong>Preset list</strong> — vertical Button-ghost rows for "Today", "Yesterday", "Last 7 days", "Last 30 days", etc.</li>
+				<li><strong>RangeCalendar</strong> — embedded for custom range selection.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>Trigger inherits Button outline dimensions (h-10 by default).</li>
+				<li>Popover content uses <code>--color-popover</code> with <code>rounded-xl p-4 shadow-lg</code>.</li>
+				<li>Preset Buttons full-width, <code>justify-start</code>.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Trigger uses Button outline tokens; presets use Button ghost; calendar inherits RangeCalendar tokens.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Bind <code>value: DateRange</code>. Selecting a preset auto-fills the range; the calendar updates to highlight the selection.</li>
+				<li>Use for analytics / reporting filters where presets are essential.</li>
+			</ul>
+			<div class="docs-h">Not part of DateRangeSelector</div>
+			<ul class="docs-list">
+				<li>No custom preset slot in the canonical — preset list is fixed. Wrap your own if you need custom labels.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Outline Button trigger + Popover containing preset list and RangeCalendar.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Outline Button
+					trigger + Popover (presets column + RangeCalendar).
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

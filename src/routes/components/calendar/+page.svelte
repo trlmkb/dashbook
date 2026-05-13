@@ -142,4 +142,52 @@
 			</ul>
 		</div>
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Root</strong> — centred container, ~3em padding around the grid.</li>
+				<li><strong>Caption / nav</strong> — month-year header with prev/next chevron buttons. Buttons are <code>size="icon"</code> Button variants.</li>
+				<li><strong>GridHead (weekday row)</strong> — <code>text-muted-foreground text-xs</code> (12px) abbreviated day names, equally spaced.</li>
+				<li><strong>Day cell</strong> — <code>size-8</code> (32×32) hit target. The day Button uses <code>size="icon"</code> with default Button height; matches the rest of the system.</li>
+				<li><strong>Selected day</strong> — <code>bg-primary text-primary-foreground</code>.</li>
+				<li><strong>Today</strong> — <code>bg-accent text-accent-foreground</code> (when not selected).</li>
+				<li><strong>Outside month</strong> — <code>text-muted-foreground/50</code>.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Selected day fills with <code>--color-primary</code>; today is <code>--color-accent</code>; muted dates are <code>--color-muted-foreground</code>.</li>
+				<li>Weekday row uses <code>--color-muted-foreground</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Bind <code>value</code> for single or multiple selection via <code>type</code>; pair with Popover for a date-picker pattern.</li>
+				<li>Uses <code>@internationalized/date</code> DateValue.</li>
+			</ul>
+			<div class="docs-h">Not part of Calendar</div>
+			<ul class="docs-list">
+				<li>No time picker. Date only.</li>
+				<li>No range selection. Use <code>RangeCalendar</code>.</li>
+				<li>No preset shortcuts. Use <code>DateRangeSelector</code>.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui Calendar wrapped with Tailwind classes. Day cells are icon-sized buttons; selected/today/outside states swap surface tokens.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Day cells are
+					<code>size-8</code> icon-Buttons. Selected <code>bg-primary</code>, today
+					<code>bg-accent</code>, outside-month <code>text-muted-foreground/50</code>.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

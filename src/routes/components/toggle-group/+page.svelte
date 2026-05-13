@@ -140,10 +140,43 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li><code>type="single"</code> — exactly one item selected; <code>value</code> is a string.</li>
-				<li><code>type="multiple"</code> — zero or more items; <code>value</code> is a string array.</li>
+				<li><strong>Root</strong> — <code>flex items-center justify-center gap-1</code>. 4px gap between items.</li>
+				<li><strong>Items</strong> — inherit Toggle's dimensions and variant via context (no need to pass <code>size</code> / <code>variant</code> per-item).</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li><code>ToggleGroup type="single|multiple" &gt; ToggleGroupItem*</code>. Set <code>size</code> and <code>variant</code> on the root; children inherit via Svelte context.</li>
+				<li>Use for segmented controls (text alignment, sort direction, view mode).</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Items use <code>--color-accent</code> for the pressed state; identical to a lone Toggle.</li>
+			</ul>
+			<div class="docs-h">Not part of ToggleGroup</div>
+			<ul class="docs-list">
+				<li>No equal-width sizing — caller controls each item.</li>
+				<li>No connected pill / segmented background. Items are independent buttons separated by gap.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui ToggleGroup with shared Toggle context. <code>type</code> drives single vs multiple selection.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Flex row of Toggle
+					items, 4px gap. Shared size/variant via Svelte context. Single or multiple
+					selection.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

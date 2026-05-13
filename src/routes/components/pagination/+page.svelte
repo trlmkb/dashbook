@@ -217,10 +217,46 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li><code>count</code>, <code>perPage</code>, <code>page</code> on the root.</li>
-				<li>For numbered links, use bits-ui's <code>pages</code> snippet — pass <code>page</code> objects (each has <code>type</code> and <code>value</code>) to <code>PaginationLink</code>.</li>
+				<li><strong>Pagination (root)</strong> — <code>mx-auto flex w-full flex-col items-center</code>. Centered horizontally.</li>
+				<li><strong>PaginationContent</strong> — <code>flex flex-row items-center gap-1</code>.</li>
+				<li><strong>PaginationLink</strong> — Button at <code>size="icon"</code> (36×36 default). Variant flips on active: <code>outline</code> when current, <code>ghost</code> otherwise.</li>
+				<li><strong>PaginationNextButton / PrevButton</strong> — Button variants with leading/trailing chevron glyph.</li>
+				<li><strong>PaginationEllipsis</strong> — non-interactive 36×36 slot showing "...".</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>All sub-parts inherit Button tokens. Active page uses <code>outline</code> variant (border + transparent bg); non-active uses <code>ghost</code> (transparent, hover-only).</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li><code>Pagination count perPage page (bindable) siblingCount</code> drives the page model.</li>
+				<li>Inside: <code>PaginationContent</code> with <code>PaginationPrevButton</code>, mapped <code>PaginationItem &gt; PaginationLink</code>, optional <code>PaginationEllipsis</code>, <code>PaginationNextButton</code>.</li>
+			</ul>
+			<div class="docs-h">Not part of Pagination</div>
+			<ul class="docs-list">
+				<li>No total-page text. Caller composes a "Page X of Y" label outside if needed.</li>
+				<li>No "go to page" input field.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>bits-ui Pagination wired into Button variants. Icon-sized links, outline for active, ghost for others.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Centered flex
+					list of icon-size Button links — <code>outline</code> for active, <code>ghost</code>
+					for the rest. Driven by bits-ui Pagination state.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

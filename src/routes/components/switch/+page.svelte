@@ -131,18 +131,52 @@ let notifications = $state(true);
 
 	{#snippet anatomy()}
 		<div>
-			<div class="docs-h">Sizes</div>
+			<div class="docs-h">Dimensions (per size)</div>
 			<ul class="docs-list">
-				<li><code>xs</code> — h-4 w-7 (16×28px). Inline with body copy.</li>
-				<li><code>sm</code> — h-5 w-9 (20×36px). Compact settings rows.</li>
-				<li><code>base</code> — h-6 w-11 (24×44px). Default — meets 24px touch target.</li>
-				<li><code>lg</code> — h-7 w-12 (28×48px). Prominent toggles.</li>
+				<li><strong>xs</strong> — track 16×28px (<code>h-4 w-7</code>), thumb 12px (<code>size-3</code>) translating 12px.</li>
+				<li><strong>sm</strong> — track 20×36px (<code>h-5 w-9</code>), thumb 16px (<code>size-4</code>) translating 16px.</li>
+				<li><strong>base</strong> — track 24×44px (<code>h-6 w-11</code>) — default — thumb 20px (<code>size-5</code>) translating 20px.</li>
+				<li><strong>lg</strong> — track 28×48px (<code>h-7 w-12</code>), thumb 24px (<code>size-6</code>) translating 24px.</li>
+				<li><strong>Radius</strong> — track and thumb both <code>rounded-full</code>.</li>
+				<li><strong>Border</strong> — 2px transparent border on the track (<code>border-2 border-transparent</code>) reserves space so the focus ring sits cleanly. Thumb has no border.</li>
 			</ul>
-			<div class="docs-h">Props</div>
+
+			<div class="docs-h">Tokens</div>
 			<ul class="docs-list">
-				<li><code>checked</code> — bindable state.</li>
-				<li><code>disabled</code> — non-interactive, dimmed.</li>
-				<li>All bits-ui Switch.Root props pass through.</li>
+				<li><strong>Track unchecked</strong> — bg <code>--color-input</code> (light <code>#b6c0bf</code>, dark <code>#1f2a29</code>).</li>
+				<li><strong>Track checked</strong> — bg <code>--color-primary</code> (light <code>#25261d</code>, dark <code>#ffffff</code>).</li>
+				<li><strong>Thumb</strong> — bg <code>--color-background</code> (light <code>#faf8f1</code>, dark <code>#0f1413</code>) — always the surface colour, regardless of state. Shadow <code>shadow-lg</code> (Tailwind v4 default) for lift.</li>
+				<li><strong>Focus ring</strong> — 2px (<code>focus-visible:ring-2</code>) in <code>--color-ring</code> with 2px offset against <code>--color-background</code>.</li>
+				<li><strong>Disabled</strong> — <code>opacity-50</code> + <code>cursor-not-allowed</code>.</li>
+				<li><strong>Transition</strong> — track colour animates (<code>transition-colors</code>); thumb position animates (<code>transition-transform</code>).</li>
+			</ul>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Pair with a sibling <code>&lt;Label for="…"&gt;</code> via matching <code>id</code>. The label takes the role of "what this switch toggles".</li>
+				<li>For settings rows, place Switch right of a label-and-helper-text block: <code>&lt;div&gt;Label + helper&lt;/div&gt; &lt;Switch /&gt;</code>.</li>
+				<li>Use Switch for settings that <em>commit immediately</em>. Use Checkbox for selections that need a submit step.</li>
+			</ul>
+
+			<div class="docs-h">Not part of Switch</div>
+			<ul class="docs-list">
+				<li>No <code>label</code> prop. Use a sibling <code>&lt;Label&gt;</code>.</li>
+				<li>No icon inside the thumb. The brand stays minimal — no check / cross glyphs inside the thumb.</li>
+				<li>No coloured track variants. Track-on is always <code>--color-primary</code> — switches read as state, not as brand.</li>
+				<li>No loading or async confirmation state. Wrap with your own optimistic / pending logic at the call site.</li>
+			</ul>
+
+			<div class="docs-h">Props (behaviour-only)</div>
+			<ul class="docs-list">
+				<li><code>checked</code> — bindable.</li>
+				<li><code>size</code> — <code>'xs' | 'sm' | 'base' | 'lg'</code>.</li>
+				<li><code>disabled</code>, <code>name</code>, <code>value</code>, <code>id</code> — standard form attributes.</li>
+				<li>All bits-ui <code>Switch.Root</code> props pass through (<code>onCheckedChange</code>, <code>required</code>, etc).</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li>Track + thumb radii are both <code>rounded-full</code>. Thumb is the surface colour. Track flips from <code>--color-input</code> to <code>--color-primary</code> on check. Thumb translates by <code>(track_width − thumb_size − 2)</code>px (the 2 comes from the 2px transparent border).</li>
 			</ul>
 		</div>
 	{/snippet}
@@ -161,6 +195,31 @@ let notifications = $state(true);
 
 	{#snippet changelog()}
 		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch. Track
+					colour spec confirmed: off uses <code>--color-input</code>, on
+					uses <code>--color-primary</code> (not <code>--color-brand</code>).
+					Thumb is always <code>--color-background</code> (the surface
+					colour), with Tailwind v4 <code>shadow-lg</code>. The size
+					table holds — xs/sm/base/lg track-and-thumb pairs unchanged.
+					The previous v0.3.1 anatomy referenced a stale branch and is
+					no longer accurate.
+				</p>
+			</li>
+			<li>
+				<span class="docs-cl-when">v0.3.1 — 2026-05-13</span>
+				<p>
+					Anatomy tightened: per-size track + thumb dimensions, per-state
+					token tuples (<code>--color-input</code> off, <code>--color-primary</code>
+					on, thumb <code>--color-background</code>), composition rule
+					(Label as sibling), and explicit non-features (no inside-thumb
+					icon, no coloured track variants, no loading state). Matches
+					the Input precedent.
+				</p>
+			</li>
 			<li>
 				<span class="docs-cl-when">v0.3.0 — 2026-05-10</span>
 				<p>First documented in Dashbook.</p>

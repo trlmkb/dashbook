@@ -64,11 +64,40 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li>Resolves the logo via a CDN at runtime.</li>
-				<li>Falls back to a colored square with merchant initials on miss.</li>
-				<li>Pair with the merchant name in body copy — never rely on the logo alone for identification.</li>
+				<li><strong>Sizes</strong> — <code>sm</code> = <code>size-6 text-xs</code> (24×24 / 12px text), <code>md</code> = <code>size-8 text-sm</code> (32×32 / 14px), <code>lg</code> = <code>size-12 text-base</code> (48×48 / 16px).</li>
+				<li><strong>Image</strong> — sized to fill, falls back to initials on load error or missing URL.</li>
+				<li><strong>Loading</strong> — when an image URL is provided, renders a <code>Spinner</code> while fetching.</li>
+				<li><strong>Spade placeholders</strong> — URLs containing <code>spadeapi.com</code> or <code>static.spade.com</code> are auto-filtered to the initials fallback.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Initials fallback uses muted background and foreground tokens — caller sees clean restraint without manually styling.</li>
+			</ul>
+			<div class="docs-h">Not part of MerchantLogo</div>
+			<ul class="docs-list">
+				<li>No accessibility text — pair with the merchant name in body copy.</li>
+				<li>No custom fallback. Initials are derived from <code>merchantName</code>.</li>
+				<li>No badge / status. Compose with <code>Indicator</code> at the call site.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Square avatar in three sizes (24/32/48), CDN logo with initials fallback.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. Three sizes (24/32/48px), CDN-fetched image with Spinner on load
+					and initials fallback on error/miss.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

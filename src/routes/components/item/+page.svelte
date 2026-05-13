@@ -215,4 +215,53 @@
 			<PropsTable title="ItemActions" props={itemActionsProps} />
 		</div>
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Item (root)</strong> — <code>flex flex-wrap items-center rounded-md border border-transparent text-sm transition-colors duration-100 outline-none</code>. 14px type, transparent 1px border (stable sizing when variant adds outline).</li>
+				<li><strong>Sizes</strong> — <code>default</code> = <code>gap-4 p-4</code>; <code>sm</code> = <code>gap-2.5 px-4 py-3</code>.</li>
+				<li><strong>Variants</strong> — <code>default</code> (transparent), <code>outline</code> (<code>border-border</code>), <code>muted</code> (<code>bg-muted/50</code>).</li>
+				<li><strong>Header / Footer</strong> — <code>flex basis-full items-center justify-between gap-2</code>.</li>
+				<li><strong>Content</strong> — <code>flex flex-1 flex-col gap-1</code> with neighbor-aware <code>[&amp;+[data-slot=item-content]]:flex-none</code>.</li>
+				<li><strong>Title</strong> — <code>text-sm leading-snug font-medium</code>.</li>
+				<li><strong>Description</strong> — <code>text-muted-foreground text-sm</code>.</li>
+				<li><strong>Actions</strong> — right-anchored <code>flex items-center gap-2</code>.</li>
+				<li><strong>Media</strong> — variant-driven (icon vs image).</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Link hover <code>[a]:hover:bg-accent/50</code>; focus ring <code>border-ring</code> + <code>ring-ring/50 ring-[3px]</code>; muted variant <code>bg-muted/50</code>.</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>List row primitive — sidebar nav, transaction rows, settings.</li>
+				<li><code>ItemMedia? + (ItemHeader | ItemContent) + ItemActions?</code>; optional <code>ItemFooter</code>.</li>
+				<li>Group with <code>ItemGroup</code>; separate with <code>ItemSeparator</code>.</li>
+			</ul>
+			<div class="docs-h">Not part of Item</div>
+			<ul class="docs-list">
+				<li>No selection state — caller wires <code>aria-current</code> / <code>data-state</code>.</li>
+				<li>No fixed height — sizes to content.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Composable list-row with two sizes / three variants and jade focus ring.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Composable row
+					(default/sm × default/outline/muted) with sub-parts
+					Media/Header/Content/Title/Description/Actions/Footer/Group/Separator.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

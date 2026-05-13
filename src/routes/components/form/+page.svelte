@@ -293,12 +293,55 @@ const { form: formData, errors, enhance } = form;
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Parts</div>
 			<ul class="docs-list">
-				<li><code>Form.Field</code> — wraps a single field, holds form context.</li>
-				<li><code>Form.Control</code> — renders the input, wires aria-* attributes via the <code>props</code> snippet arg.</li>
-				<li><code>Form.Label</code>, <code>Form.Description</code>, <code>Form.FieldErrors</code> — semantic siblings.</li>
-				<li>Validation comes from your zod schema; errors render automatically when present.</li>
+				<li><strong>FormField</strong> — wraps a SuperForm field, providing validation context.</li>
+				<li><strong>FormElementField</strong> — radio/checkbox-group variant.</li>
+				<li><strong>FormLabel</strong> — canonical Label component, wired to the field's id.</li>
+				<li><strong>FormDescription</strong> — helper copy below the input.</li>
+				<li><strong>FormFieldErrors</strong> — validation messages slot.</li>
+				<li><strong>FormFieldset</strong> + <strong>FormLegend</strong> — grouped fields with a legend heading.</li>
+				<li><strong>FormButton</strong> — Button wired to submit state.</li>
+			</ul>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li>Fields stack vertically; default gap inherits from parent. Label + Input + Description + Errors typically stacked with <code>gap-2</code>.</li>
+				<li>Inputs inside use canonical Input shape (underline-only).</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Error messages use <code>--color-destructive</code> (monochrome).</li>
+				<li>Description text <code>--color-muted-foreground</code>.</li>
+				<li>Labels inherit Label tokens (uppercase mono caps).</li>
+			</ul>
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Built on <code>sveltekit-superforms</code> + <code>formsnap</code>. Pass the <code>form</code> instance to <code>FormField</code> with the field <code>name</code>.</li>
+				<li>Use <code>FormElementField</code> for radio groups (the field id needs to match all radios in the group).</li>
+			</ul>
+			<div class="docs-h">Not part of Form</div>
+			<ul class="docs-list">
+				<li>No layout primitives beyond stacking. Use Card / Item / your own wrapper for visual grouping.</li>
+				<li>No client-only validation — driven entirely by superforms schema.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Wraps superforms + formsnap. Caller composes Label + Input + Description + Errors per field.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). superforms +
+					formsnap stacked-field primitives. Field / Label / Description / Errors
+					/ Fieldset / Legend / Button parts; uses canonical underline Input shape.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>

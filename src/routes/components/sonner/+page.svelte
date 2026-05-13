@@ -112,4 +112,47 @@
 	{#snippet docs()}
 		<PropsTable props={propsTable} />
 	{/snippet}
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Setup</div>
+			<ul class="docs-list">
+				<li>Mount <code>&lt;Toaster /&gt;</code> once near the app root.</li>
+				<li>Invoke <code>toast(message)</code>, <code>toast.success(message)</code>, <code>toast.error(message)</code>, etc. from anywhere — <code>svelte-sonner</code> handles the queue.</li>
+			</ul>
+			<div class="docs-h">Defaults</div>
+			<ul class="docs-list">
+				<li><strong>Theme</strong> — follows <code>mode-watcher</code> (<code>light</code>/<code>dark</code>/<code>system</code>).</li>
+				<li><strong>Position</strong> — <code>bottom-right</code>.</li>
+				<li><strong>richColors</strong> — false (monochrome). Set true for saturated status tints (success green, error red).</li>
+				<li><strong>closeButton</strong> — false (auto-dismiss). Set true for explicit x-to-dismiss.</li>
+			</ul>
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li>Container is <code>class="toaster group"</code> — the actual toast surfaces use sonner's internal CSS but inherit theme via the <code>group</code> class for dark-mode awareness.</li>
+			</ul>
+			<div class="docs-h">Not part of Sonner</div>
+			<ul class="docs-list">
+				<li>No per-toast variant props in the Toaster — those are passed to <code>toast()</code> calls.</li>
+				<li>No portal config — Toaster is its own portal at mount-point.</li>
+			</ul>
+			<div class="docs-h">Porting</div>
+			<ul class="docs-list">
+				<li>Wraps the upstream sonner library. To port: pick a sonner-equivalent for the target stack (e.g. <code>sonner</code> on React) and mirror the defaults (bottom-right, mode-watcher theme, monochrome).</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). Mounts as a single
+					<code>&lt;Toaster /&gt;</code> with default position bottom-right and mode-watcher
+					theming. Toasts triggered imperatively via <code>toast(...)</code>.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

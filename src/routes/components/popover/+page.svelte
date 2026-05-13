@@ -164,4 +164,58 @@
 			<PropsTable title="PopoverClose" props={closeProps} />
 		</div>
 	{/snippet}
+
+	{#snippet anatomy()}
+		<div>
+			<div class="docs-h">Dimensions</div>
+			<ul class="docs-list">
+				<li><strong>Content</strong> — <code>w-72 rounded-xl p-4 shadow-lg</code>. 288px wide, 12px radius, 16px padding, Tailwind v4 <code>shadow-lg</code> = <code>0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)</code>.</li>
+				<li><strong>Side offset</strong> — 4px default between trigger and content; <code>align</code> defaults to <code>'center'</code>. Supports <code>side='bottom-end'</code> as an extension.</li>
+				<li><strong>Z-index</strong> — <code>z-[60]</code> — sits above tooltips (z-50).</li>
+				<li><strong>Animations</strong> — <code>data-[state=open]:animate-in fade-in-0 zoom-in-95</code> + side-aware slide-in by 2; reversed on close.</li>
+				<li><strong>Outline</strong> — <code>outline-none</code> on focus (the surface itself doesn't show a ring; focusable children manage their own).</li>
+			</ul>
+
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li><strong>Background</strong> — <code>bg-popover</code> → <code>--color-popover</code> (light <code>#ffffff</code>, dark <code>#141a19</code> — brighter than <code>--color-background</code>).</li>
+				<li><strong>Text</strong> — <code>text-popover-foreground</code> → <code>--color-popover-foreground</code> (<code>#123b39</code>/<code>#ffffff</code>).</li>
+				<li>No border — shadow alone separates the popover from the surface.</li>
+			</ul>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Wrap a <code>PopoverTrigger</code> + <code>PopoverContent</code> inside <code>Popover</code>. Use the trigger's <code>child</code> snippet to delegate to a Button.</li>
+				<li>Portal-rendered — positioning never gets clipped by ancestor overflow.</li>
+				<li>For interactive forms / filter chips. Use Tooltip for read-only labels and HoverCard for previews.</li>
+			</ul>
+
+			<div class="docs-h">Not part of Popover</div>
+			<ul class="docs-list">
+				<li>No arrow / caret. Positioning is the only directional cue.</li>
+				<li>No backdrop overlay. Use Dialog if you need a modal interaction context.</li>
+				<li>No header/footer slots — compose your own padding within <code>PopoverContent</code>.</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li>288px-wide panel, 12px radius, 16px padding, <code>shadow-lg</code>, no border. Brighter <code>--color-popover</code> surface against the page bg. Position via Floating UI / equivalent.</li>
+			</ul>
+		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy added (regenerated against the
+					<code>EN-XX/design-vnext--sidebar-feature</code> branch). 288px
+					Portal-rendered panel — <code>bg-popover rounded-xl p-4 shadow-lg</code>.
+					No border. <code>z-[60]</code> above tooltips. Open/close animations are
+					fade + zoom-95 + side-aware slide-in.
+				</p>
+			</li>
+		</ul>
+	{/snippet}
 </ComponentLayout>

@@ -61,10 +61,48 @@
 	{/snippet}
 	{#snippet anatomy()}
 		<div>
+			<div class="docs-h">Dimensions</div>
 			<ul class="docs-list">
-				<li>Pass dimensions via Tailwind classes: <code>h-*</code>, <code>w-*</code>, <code>rounded-*</code>.</li>
-				<li>The pulse animation comes from <code>tailwindcss-animate</code> and respects <code>prefers-reduced-motion</code>.</li>
+				<li><strong>Root</strong> — bare <code>&lt;div&gt;</code>. No intrinsic dimensions — caller sizes it via <code>class</code> (<code>h-*</code>, <code>w-*</code>, <code>rounded-*</code>).</li>
+				<li><strong>Animation</strong> — <code>animate-pulse</code>: 2s ease-in-out infinite, alternates opacity 1 → 0.5 → 1. Respects <code>prefers-reduced-motion</code>.</li>
+			</ul>
+
+			<div class="docs-h">Tokens</div>
+			<ul class="docs-list">
+				<li><strong>Background</strong> — <code>bg-muted</code> → <code>--color-muted</code> (light <code>#eceae0</code>, dark <code>#181e1d</code>).</li>
+			</ul>
+
+			<div class="docs-h">Composition</div>
+			<ul class="docs-list">
+				<li>Match the silhouette of the eventual content. One Skeleton per visible text line / shape; not one giant block.</li>
+				<li>Replace with real content as soon as data arrives — do not animate the transition.</li>
+				<li>Stack vertically with gap; do not nest.</li>
+			</ul>
+
+			<div class="docs-h">Not part of Skeleton</div>
+			<ul class="docs-list">
+				<li>No size prop / no <code>size</code> variants. Caller controls dimensions via Tailwind classes.</li>
+				<li>No shimmer / gradient animation. The single <code>animate-pulse</code> motion is intentional restraint.</li>
+				<li>No children. The component does not accept content — it's a placeholder only.</li>
+			</ul>
+
+			<div class="docs-h">Porting to another stack</div>
+			<ul class="docs-list">
+				<li>Single <code>--color-muted</code> background + pulse animation. That's the entire contract.</li>
 			</ul>
 		</div>
+	{/snippet}
+
+	{#snippet changelog()}
+		<ul class="docs-cl">
+			<li>
+				<span class="docs-cl-when">v0.3.2 — 2026-05-13</span>
+				<p>
+					Anatomy regenerated against the <code>EN-XX/design-vnext--sidebar-feature</code>
+					branch. Canonical is <code>bg-muted animate-pulse</code>; everything else
+					(dimensions, radius) is caller-controlled.
+				</p>
+			</li>
+		</ul>
 	{/snippet}
 </ComponentLayout>
