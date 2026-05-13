@@ -23,20 +23,25 @@ Several packages are imported from the published `dist/` but only declared in
 `devDependencies`. Consumers running `npm install @dashfi/svelte` don't get
 them, and Rollup fails to resolve at build time:
 
-| Package | Used by | Currently in |
-| --- | --- | --- |
-| `svelte-radix` | `ui/breadcrumb/breadcrumb-ellipsis.svelte` (and others importing `svelte-radix/Check.svelte`, `ChevronRight.svelte`, `DotFilled.svelte`, `DotsHorizontal.svelte`, `Minus.svelte`) | `devDependencies` |
-| `svelte-tel-input` | `ui/phone-input/phone-input.svelte`, `ui/tel-input/...` | `devDependencies` |
-| `formsnap` | `ui/form/...` (FormField composition) | `devDependencies` |
-| `@internationalized/date` | `ui/calendar/...`, `ui/range-calendar/...` | `devDependencies` |
+| Package | Used by | Version the lib was built against | Currently declared in |
+| --- | --- | --- | --- |
+| `svelte-radix` | `ui/breadcrumb/breadcrumb-ellipsis.svelte` + several others importing `svelte-radix/Check.svelte`, `ChevronRight.svelte`, `DotFilled.svelte`, `DotsHorizontal.svelte`, `Minus.svelte` | **`^2.0.1`** (v3 restructured exports) | `devDependencies` |
+| `svelte-tel-input` | `ui/phone-input/phone-input.svelte`, `ui/tel-input/...` (uses `normalizedCountries` export) | **`^3.6.0`** (v4 dropped `normalizedCountries`) | `devDependencies` |
+| `formsnap` | `ui/form/...` (FormField composition) | **`2.0.1`** (catalog:svelte) | `devDependencies` |
+| `@internationalized/date` | `ui/calendar/...`, `ui/range-calendar/...` | **`^3.10.1`** (catalog:svelte) | `devDependencies` |
 
 **Fix:** decide per package whether it should be `dependencies` (the lib owns
 the version constraint) or `peerDependencies` (consumers pick the version).
 Most likely all four should be `peerDependencies` to match the convention
 established by `svelte`, `bits-ui`, `clsx`, `date-fns`, etc.
 
-Until then, dashbook works around it by listing all four in its own
-`dependencies`. See `dashbook/package.json` after commit `d51b4c4`.
+**Important:** when promoting these to `peerDependencies`, use the exact
+constraints above. The lib calls into APIs that don't exist in newer major
+versions (svelte-tel-input v4 dropped `normalizedCountries`; svelte-radix v3
+restructured per-icon export paths). Until then, dashbook works around it by
+listing all four in its own `dependencies` with the same version ranges. See
+dashbook commits `d51b4c4` (initial add — missed the version constraints) and
+`539756a` (corrected pins).
 
 ## 2. Filter test / Storybook leftovers out of `dist`
 
