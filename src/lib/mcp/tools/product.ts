@@ -8,6 +8,10 @@ import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { allComponentSpecs, getComponentSpec } from '../../specs/components/index.js';
 import {
+	spacingFoundation,
+	typographyFoundation
+} from '../../specs/foundations/index.js';
+import {
 	productColors,
 	baseColors,
 	marketingColors,
@@ -144,30 +148,13 @@ export function registerProductTools(server: McpServer): void {
 					});
 				case 'typography':
 					return json({
-						families: {
-							sans: { name: 'Bai Jamjuree', license: 'SIL OFL', usage: 'Body, UI, buttons.' },
-							mono: {
-								name: 'PP Supply Mono',
-								license: 'Commercial (Pangram Pangram)',
-								usage: 'Display, labels, data values, tabular numbers.'
-							},
-							display: {
-								name: 'PP Supply Mono Ultralight (weight 200)',
-								usage: 'Display headings — uppercase, tight letter-spacing.'
-							}
-						},
-						note: 'See https://dashbook.vercel.app/foundations/typography for the full type scale and tabular-numerics rules.'
+						...typographyFoundation,
+						note: 'See https://dashbook.vercel.app/foundations/typography for the rendered docs.'
 					});
 				case 'spacing':
 					return json({
-						scale: [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128],
-						unit: 'px',
-						rules: [
-							'4px base unit. Pairs cleanly with Tailwind\'s default scale.',
-							'Form-field rhythm: 6px label-to-input gap, 16px field-to-field gap.',
-							'Section rhythm: 32px between related groups, 64px between sections.'
-						],
-						note: 'See https://dashbook.vercel.app/foundations/spacing for usage examples.'
+						...spacingFoundation,
+						note: 'See https://dashbook.vercel.app/foundations/spacing for the rendered docs.'
 					});
 			}
 		}
