@@ -9,6 +9,10 @@
  *                                                    (live preview only — NOT
  *                                                    for MDES upload)
  *
+ *   Append `?format=png` to any of the above to receive a server-rasterized
+ *   PNG instead. Optional `?scale=N` (1–4) multiplies the output resolution
+ *   for retina renders.
+ *
  * Same SVG content the `marketing_get_card_art` MCP tool inlines, so URL
  * fetches and inline-string consumption are byte-identical.
  */
@@ -18,10 +22,11 @@ import { error } from '@sveltejs/kit';
 import {
 	cardSlotSvg,
 	cardPreviewSvg,
-	getCardVariant,
 	cardVariants,
+	CARD_DIMENSIONS,
 	type CardSlot
 } from '$chrome/card-sources';
+import { svgToPng } from '$chrome/rasterize';
 
 const ONE_DAY = 60 * 60 * 24;
 
@@ -36,7 +41,7 @@ const slotAliases: Record<string, CardSlot | 'preview'> = {
 	preview: 'preview'
 };
 
-export const GET: RequestHandler = ({ params }) => {
+export const GET: RequestHandler = async ({ params, url }) => {
 	const { variant: variantId, slot: slotParam } = params;
 
 	const variant = cardVariants.find((v) => v.id === variantId);
@@ -56,8 +61,35 @@ export const GET: RequestHandler = ({ params }) => {
 	}
 
 	const svg = slot === 'preview' ? cardPreviewSvg(variant) : cardSlotSvg(variant, slot);
-	const filename = `dashfi-card-${variantId}-${slotParam}.svg`;
 
+	const format = (url.searchParams.get('format') ?? 'svg').toLowerCase();
+	if (format !== 'svg' && format !== 'png') {
+		error(400, `Unknown format "${format}". Use "svg" (default) or "png".`);
+	}
+
+	if (format === 'png') {
+		const dims = slot === 'preview' ? CARD_DIMENSIONS.background : CARD_DIMENSIONS[slot];
+		const scaleParam = url.searchParams.get('scale');
+		const scale = scaleParam ? Math.max(1, Math.min(4, parseInt(scaleParam, 10) || 1)) : 1;
+
+		const png = await svgToPng(svg, {
+			width: dims.width,
+			height: dims.height,
+			scale
+		});
+		const filename = `dashfi-card-${variantId}-${slotParam}${scale > 1 ? `@${scale}x` : ''}.png`;
+		return new Response(png, {
+			status: 200,
+			headers: {
+				'Content-Type': 'image/png',
+				'Cache-Control': `public, max-age=${ONE_DAY}, s-maxage=${ONE_DAY}`,
+				'Content-Disposition': `inline; filename="${filename}"`,
+				'Access-Control-Allow-Origin': '*'
+			}
+		});
+	}
+
+	const filename = `dashfi-card-${variantId}-${slotParam}.svg`;
 	return new Response(svg, {
 		status: 200,
 		headers: {

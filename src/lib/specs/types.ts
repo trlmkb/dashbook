@@ -30,7 +30,8 @@ export type ComponentCategory =
 	| 'Feedback'
 	| 'Navigation'
 	| 'Layout'
-	| 'Data';
+	| 'Data'
+	| 'Chrome';
 
 /** A token reference with resolved values per theme. */
 export type TokenRef = {

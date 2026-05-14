@@ -77,9 +77,9 @@ export function registerMarketingTools(server: McpServer): void {
 	server.registerTool(
 		'marketing_get_logo',
 		{
-			title: 'Dash.fi logo SVG (inline + URL)',
+			title: 'Dash.fi logo SVG / PNG (inline + URL)',
 			description:
-				'Returns the wordmark or app icon SVG. Both the inline content (for embedding directly into HTML/JSX) and the canonical URL are returned — same bytes either way. Specify a preset to pick a colorway; both wordmark and app-icon expose their own preset list (see `marketing_list_logo_presets`).',
+				'Returns the wordmark or app icon. SVG by default; pass `format: "png"` to receive a server-rasterized PNG as base64. Both the inline content and the canonical URL are returned — fetching the URL yields the same bytes. Specify a preset to pick a colorway; both wordmark and app-icon expose their own preset list (see `marketing_list_logo_presets`).',
 			inputSchema: {
 				variant: z
 					.enum(['wordmark', 'app'])
@@ -96,10 +96,21 @@ export function registerMarketingTools(server: McpServer): void {
 					.int()
 					.positive()
 					.optional()
-					.describe('Pixel width (wordmark) / square edge (app). Omit for natural size — 426×90 wordmark, 236×236 app.')
+					.describe('Pixel width (wordmark) / square edge (app). Omit for natural size — 426×90 wordmark, 236×236 app.'),
+				format: z
+					.enum(['svg', 'png'])
+					.default('svg')
+					.describe('Output format. `svg` (default) returns vector content inline. `png` returns server-rasterized PNG bytes base64-encoded — use this when your consumer can\'t render inline SVG.'),
+				scale: z
+					.number()
+					.int()
+					.min(1)
+					.max(4)
+					.optional()
+					.describe('PNG-only DPI multiplier (1–4). Default 1. Use 2 for retina-quality renders. Ignored when format is "svg".')
 			}
 		},
-		async ({ variant, preset, size }) => {
+		async ({ variant, preset, size, format, scale }) => {
 			const presets = variant === 'wordmark' ? wordmarkPresets : appIconPresets;
 			const resolvedPresetId = preset ?? 'jade';
 			const p = presets.find((x) => x.id === resolvedPresetId);
@@ -121,16 +132,50 @@ export function registerMarketingTools(server: McpServer): void {
 					? wordmarkSvg(p.fg, p.bg, sz)
 					: appIconSvg(p.bg ?? p.fg, p.glyph ?? '#FFFFFF', sz);
 
+			const naturalSize =
+				variant === 'wordmark' ? { width: 426, height: 90 } : { width: 236, height: 236 };
+			const renderedSize = sz
+				? variant === 'wordmark'
+					? { width: sz, height: Math.round((sz / naturalSize.width) * naturalSize.height) }
+					: { width: sz, height: sz }
+				: naturalSize;
+
 			const urlBase = `${DOCS_BASE}/api/logo/${variant}/${p.id}`;
-			const url = sz ? `${urlBase}?size=${sz}` : urlBase;
+			const urlQuery: string[] = [];
+			if (sz) urlQuery.push(`size=${sz}`);
+			if (format === 'png') urlQuery.push('format=png');
+			if (format === 'png' && scale && scale > 1) urlQuery.push(`scale=${scale}`);
+			const url = urlQuery.length ? `${urlBase}?${urlQuery.join('&')}` : urlBase;
+
+			if (format === 'png') {
+				const { svgToPng } = await import('$chrome/rasterize');
+				const png = await svgToPng(inlineSvg, {
+					width: renderedSize.width,
+					height: renderedSize.height,
+					scale: scale ?? 1
+				});
+				// Base64-encode for transport — MCP doesn't natively carry binary content.
+				const base64 = Buffer.from(png).toString('base64');
+				return json({
+					variant,
+					preset: { id: p.id, label: p.label, fg: p.fg, bg: p.bg, glyph: p.glyph ?? null },
+					size: renderedSize,
+					format: 'png',
+					scale: scale ?? 1,
+					url,
+					pngBase64: base64,
+					note: 'Decode the `pngBase64` field to bytes for use, or fetch the URL directly (same bytes). The endpoint sets Content-Type: image/png and caches for 24h.'
+				});
+			}
 
 			return json({
 				variant,
 				preset: { id: p.id, label: p.label, fg: p.fg, bg: p.bg, glyph: p.glyph ?? null },
-				size: sz ?? (variant === 'wordmark' ? { width: 426, height: 90 } : { width: 236, height: 236 }),
+				size: renderedSize,
+				format: 'svg',
 				url,
 				inlineSvg,
-				note: 'Same SVG content is served at the URL — fetch it or paste the inlineSvg string directly into your markup. The /api/logo endpoint sets Content-Type: image/svg+xml and caches for 24h.'
+				note: 'Same SVG content is served at the URL — fetch it or paste the inlineSvg string directly into your markup. The /api/logo endpoint sets Content-Type: image/svg+xml and caches for 24h. Pass format="png" to receive a server-rasterized PNG instead.'
 			});
 		}
 	);
@@ -198,9 +243,9 @@ export function registerMarketingTools(server: McpServer): void {
 	server.registerTool(
 		'marketing_get_card_art',
 		{
-			title: 'Dash.fi credit card art (one MDES slot)',
+			title: 'Dash.fi credit card art (one MDES slot, SVG or PNG)',
 			description:
-				'Returns the SVG for a single Mastercard MDES asset slot of one card variant. Both inline SVG content and the canonical URL are returned. Use `marketing_list_card_variants` to discover variant ids before calling this. The `preview` slot returns a composite of all four slots simulating the rendered card — useful for visual review, but NOT for MDES upload.',
+				'Returns one Mastercard MDES asset slot for one card variant. SVG by default; pass `format: "png"` to receive a server-rasterized PNG as base64 (useful for consumers that can\'t render inline SVG). Both inline content and the canonical URL are returned. Use `marketing_list_card_variants` to discover variant ids before calling this. The `preview` slot returns a composite of all four slots simulating the rendered card — useful for visual review, but NOT for MDES upload (which only accepts SVG).',
 			inputSchema: {
 				variant: z
 					.string()
@@ -209,10 +254,21 @@ export function registerMarketingTools(server: McpServer): void {
 					.enum(cardSlotInputs)
 					.describe(
 						'Which asset slot. MDES requires four separate uploads per BIN: background (1536×969), app-icon (100×100), cobrand-logo (1372×283), issuer-logo (1372×283 transparent). `preview` returns a composite preview (NOT for MDES upload).'
-					)
+					),
+				format: z
+					.enum(['svg', 'png'])
+					.default('svg')
+					.describe('Output format. `svg` (default) returns vector content inline — required for MDES uploads. `png` returns server-rasterized PNG bytes base64-encoded — useful for visual previews in consumers that can\'t render SVG.'),
+				scale: z
+					.number()
+					.int()
+					.min(1)
+					.max(4)
+					.optional()
+					.describe('PNG-only DPI multiplier (1–4). Default 1. Use 2 for retina-quality renders. Ignored when format is "svg".')
 			}
 		},
-		async ({ variant, slot }) => {
+		async ({ variant, slot, format, scale }) => {
 			const v = cardVariants.find((x) => x.id === variant);
 			if (!v) {
 				return {
@@ -233,11 +289,35 @@ export function registerMarketingTools(server: McpServer): void {
 					? CARD_DIMENSIONS.background
 					: CARD_DIMENSIONS[internalSlot];
 
+			const urlBase = `${DOCS_BASE}/api/card/${v.id}/${slot}`;
+			const urlQuery: string[] = [];
+			if (format === 'png') urlQuery.push('format=png');
+			if (format === 'png' && scale && scale > 1) urlQuery.push(`scale=${scale}`);
+			const url = urlQuery.length ? `${urlBase}?${urlQuery.join('&')}` : urlBase;
+
+			if (format === 'png') {
+				const { svgToPng } = await import('$chrome/rasterize');
+				const png = await svgToPng(svg, { width: dims.width, height: dims.height, scale: scale ?? 1 });
+				const base64 = Buffer.from(png).toString('base64');
+				return json({
+					variant: v.id,
+					slot,
+					dimensions: dims,
+					format: 'png',
+					scale: scale ?? 1,
+					url,
+					pngBase64: base64,
+					mdesUploadable: false,
+					note: 'PNG is NOT accepted by the MDES portal — request the same slot with format="svg" (the default) for upload. PNG is provided for preview/embedding only.'
+				});
+			}
+
 			return json({
 				variant: v.id,
 				slot,
 				dimensions: dims,
-				url: `${DOCS_BASE}/api/card/${v.id}/${slot}`,
+				format: 'svg',
+				url,
 				inlineSvg: svg,
 				mdesUploadable: slot !== 'preview',
 				note:

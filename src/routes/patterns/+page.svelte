@@ -28,6 +28,9 @@
 						<a class="card" href={`/patterns/${p.slug}`}>
 							<div class="card-head">
 								<span class="name">{p.name}</span>
+								{#if p.draft}
+									<span class="draft-tag" aria-label="Drafting">Drafting</span>
+								{/if}
 							</div>
 							<p class="desc">{p.description}</p>
 							<div class="uses">
@@ -120,5 +123,16 @@
 	}
 	.card:hover .uses code {
 		background: var(--bg);
+	}
+	.draft-tag {
+		font-family: var(--font-mono);
+		font-size: 9px;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--fg-muted);
+		border: 1px dashed var(--border);
+		padding: 2px 6px;
+		flex-shrink: 0;
 	}
 </style>

@@ -26,6 +26,7 @@ import { button } from './button.js';
 import { calendar } from './calendar.js';
 import { card } from './card.js';
 import { checkbox } from './checkbox.js';
+import { authFooter, pageShell, partnerCobrand, wordmark } from './chrome.js';
 import { codeBlock } from './code-block.js';
 import { collapsible } from './collapsible.js';
 import { command } from './command.js';
@@ -88,6 +89,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 	breadcrumb,
 	button,
 	calendar,
+	'auth-footer': authFooter,
 	card,
 	checkbox,
 	'code-block': codeBlock,
@@ -115,7 +117,9 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 	'merchant-logo': merchantLogo,
 	'multi-select': multiSelect,
 	navigation,
+	'page-shell': pageShell,
 	pagination,
+	'partner-cobrand': partnerCobrand,
 	'phone-input': phoneInput,
 	pill,
 	popover,
@@ -138,7 +142,8 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 	textarea,
 	toggle,
 	'toggle-group': toggleGroup,
-	tooltip
+	tooltip,
+	wordmark
 };
 
 /** Flat array — convenient for iteration in the MCP server. */

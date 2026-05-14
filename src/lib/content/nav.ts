@@ -57,12 +57,23 @@ export const primaryNav: NavItem[] = [
 		href: '/patterns',
 		description: 'Page templates and recipes — card detail, KYC, transactions.',
 		children: [
+			{ title: 'Protected app shell', href: '/patterns/protected-app-shell' },
+			{ title: 'Auth split-screen', href: '/patterns/auth-split-screen' },
+			{ title: 'Sub-section tabs', href: '/patterns/sub-section-tabs' },
 			{ title: 'Transaction list', href: '/patterns/transaction-list' },
 			{ title: 'Metric card', href: '/patterns/metric-card' },
+			{ title: 'Tabbed section with counts', href: '/patterns/tabbed-section-counts' },
+			{ title: 'Workflow data table page', href: '/patterns/workflow-data-table-page' },
+			{ title: 'Dashboard summary', href: '/patterns/dashboard-summary' },
+			{ title: 'Settings section', href: '/patterns/settings-section' },
+			{ title: 'Multi-section settings', href: '/patterns/multi-section-settings' },
+			{ title: 'Multi-step onboarding', href: '/patterns/multi-step-onboarding' },
 			{ title: 'Destructive confirm', href: '/patterns/destructive-confirm' },
 			{ title: 'Empty state', href: '/patterns/empty-zero-state' },
-			{ title: 'Settings section', href: '/patterns/settings-section' },
-			{ title: 'Card detail', href: '/patterns/card-detail' }
+			{ title: 'Terminal state', href: '/patterns/terminal-state' },
+			{ title: 'Card detail', href: '/patterns/card-detail' },
+			{ title: 'Auth route groups', href: '/patterns/auth-route-groups' },
+			{ title: 'URL-state dialog', href: '/patterns/url-state-dialog' }
 		]
 	},
 	{
