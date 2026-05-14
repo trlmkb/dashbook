@@ -22,6 +22,7 @@ export const primaryNav: NavItem[] = [
 		description: 'Logo, color, typography, voice, motion, photography, iconography.',
 		children: [
 			{ title: 'Logo', href: '/brand/logo' },
+			{ title: 'Card', href: '/brand/card' },
 			{ title: 'Color', href: '/brand/color' },
 			{ title: 'Typography', href: '/brand/typography' },
 			{ title: 'Voice', href: '/brand/voice' },

@@ -18,6 +18,14 @@ import {
 	appIconPresets
 } from '$chrome/logo-sources.js';
 import {
+	cardVariants,
+	cardSlotSvg,
+	cardPreviewSvg,
+	getCardVariant,
+	CARD_DIMENSIONS,
+	type CardSlot
+} from '$chrome/card-sources.js';
+import {
 	brandVoice,
 	getPartnerKit,
 	listPartnerSlugs,
@@ -144,6 +152,98 @@ export function registerMarketingTools(server: McpServer): void {
 				variant,
 				count: presets.length,
 				presets
+			});
+		}
+	);
+
+	// ── list_card_variants ─────────────────────────────────────────────
+	server.registerTool(
+		'marketing_list_card_variants',
+		{
+			title: 'List Dash.fi credit card art variants',
+			description:
+				'Returns the catalogue of available card design variants. Each variant generates the four Mastercard MDES asset slots (Card Background, App Icon, Cobrand Logo, Issuer Logo) at the exact dimensions required by the MC tokenization portal. Use this before calling `marketing_get_card_art` to discover variant ids.',
+			inputSchema: {}
+		},
+		async () => {
+			return json({
+				count: cardVariants.length,
+				variants: cardVariants.map((v) => ({
+					id: v.id,
+					label: v.label,
+					status: v.status,
+					description: v.description,
+					usedForBins: v.usedForBins,
+					colors: { bg: v.bg, wordmarkFg: v.wordmarkFg, appIconBg: v.appIcon.bg }
+				})),
+				slots: Object.entries(CARD_DIMENSIONS).map(([slot, { width, height }]) => ({
+					slot,
+					width,
+					height
+				}))
+			});
+		}
+	);
+
+	// ── get_card_art ───────────────────────────────────────────────────
+	const cardSlotInputs = ['background', 'app-icon', 'cobrand-logo', 'issuer-logo', 'preview'] as const;
+	const slotAliasToInternal: Record<(typeof cardSlotInputs)[number], CardSlot | 'preview'> = {
+		background: 'background',
+		'app-icon': 'appIcon',
+		'cobrand-logo': 'cobrandLogo',
+		'issuer-logo': 'issuerLogo',
+		preview: 'preview'
+	};
+
+	server.registerTool(
+		'marketing_get_card_art',
+		{
+			title: 'Dash.fi credit card art (one MDES slot)',
+			description:
+				'Returns the SVG for a single Mastercard MDES asset slot of one card variant. Both inline SVG content and the canonical URL are returned. Use `marketing_list_card_variants` to discover variant ids before calling this. The `preview` slot returns a composite of all four slots simulating the rendered card — useful for visual review, but NOT for MDES upload.',
+			inputSchema: {
+				variant: z
+					.string()
+					.describe('Card variant id — e.g. "cobalt-current". Use marketing_list_card_variants to discover.'),
+				slot: z
+					.enum(cardSlotInputs)
+					.describe(
+						'Which asset slot. MDES requires four separate uploads per BIN: background (1536×969), app-icon (100×100), cobrand-logo (1372×283), issuer-logo (1372×283 transparent). `preview` returns a composite preview (NOT for MDES upload).'
+					)
+			}
+		},
+		async ({ variant, slot }) => {
+			const v = cardVariants.find((x) => x.id === variant);
+			if (!v) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Unknown card variant "${variant}". Valid: ${cardVariants.map((x) => x.id).join(', ')}`
+						}
+					],
+					isError: true
+				};
+			}
+			const internalSlot = slotAliasToInternal[slot];
+			const svg =
+				internalSlot === 'preview' ? cardPreviewSvg(v) : cardSlotSvg(v, internalSlot);
+			const dims =
+				internalSlot === 'preview'
+					? CARD_DIMENSIONS.background
+					: CARD_DIMENSIONS[internalSlot];
+
+			return json({
+				variant: v.id,
+				slot,
+				dimensions: dims,
+				url: `${DOCS_BASE}/api/card/${v.id}/${slot}`,
+				inlineSvg: svg,
+				mdesUploadable: slot !== 'preview',
+				note:
+					slot === 'preview'
+						? 'This is a composite preview only — do NOT upload to MDES. Use the individual slot URLs/SVGs for MC submissions.'
+						: 'Upload this SVG to the matching slot in the MC MDES portal. Asset name must be ≤30 characters.'
 			});
 		}
 	);
