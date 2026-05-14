@@ -11,9 +11,13 @@ One-click install for the Dash.fi brand & design system. Bundles:
 ### Claude Code
 
 ```
-/plugin marketplace add dashfi/dashbook
+/plugin marketplace add trlmkb/dashbook
 /plugin install dashbook@dashfi
 ```
+
+The GitHub coord is `trlmkb/dashbook` (where the source repo lives) but the
+marketplace itself is named `dashfi` — that's what shows up in your plugin
+list after install.
 
 ### Claude Desktop — via Anthropic Console (org-wide)
 

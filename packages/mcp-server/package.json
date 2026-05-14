@@ -4,7 +4,7 @@
 	"description": "Dashbook MCP server — Dash.fi brand & design system as MCP tools (components, foundations, brand voice, logos, partner kits).",
 	"keywords": ["mcp", "dashfi", "dashbook", "design-system", "brand", "ai", "claude"],
 	"homepage": "https://dashbook.vercel.app/developers/mcp",
-	"bugs": "https://github.com/dashfi/dashbook/issues",
+	"bugs": "https://github.com/trlmkb/dashbook/issues",
 	"license": "MIT",
 	"author": "Dash.fi <hi@dash.fi>",
 	"type": "module",
@@ -21,7 +21,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/dashfi/dashbook.git",
+		"url": "git+https://github.com/trlmkb/dashbook.git",
 		"directory": "packages/mcp-server"
 	}
 }

@@ -138,7 +138,7 @@ pnpm build
 		<span>
 			<strong>Internal only.</strong> The lib is referenced via pnpm
 			<code>workspace:*</code> from packages in
-			<code>github.com/dashfi/dash</code>. External consumption is not supported.
+			<code>github.com/FunnelDash/core</code>. External consumption is not supported.
 		</span>
 	</div>
 
@@ -263,7 +263,7 @@ pnpm build
 			<div class="contrib-row">
 				<div class="contrib-cap">Component changes</div>
 				<p>
-					Open a PR against <code>github.com/dashfi/dash</code> touching
+					Open a PR against <code>github.com/FunnelDash/core</code> touching
 					<code>libs/svelte-components/lib/</code>. CI runs visual regression via Storybook
 					Chromatic and svelte-check. Dashbook will hot-reload via the
 					<code>link:</code> symlink — no extra step.
@@ -273,7 +273,7 @@ pnpm build
 				<div class="contrib-cap">Dashbook changes</div>
 				<p>
 					Documentation, new patterns, foundations content — PR against
-					<code>dashfi/dashbook</code>. Match the existing chrome
+					<code>trlmkb/dashbook</code>. Match the existing chrome
 					(<code>InnerPage</code>, <code>PageHeader</code>, <code>Section</code>) and tone
 					(sentence case, no exclamation marks, no emoji). See
 					<code>PLAN.md</code> §13 in the repo root.
@@ -295,7 +295,7 @@ pnpm build
 		note="Storybook is the engineering deep-dive; the Figma library is the design source of truth and ships in a parallel track."
 	>
 		<div class="links">
-			<a class="link-card" href="https://github.com/dashfi/dash" target="_blank" rel="noopener">
+			<a class="link-card" href="https://github.com/FunnelDash/core" target="_blank" rel="noopener">
 				<Github size={18} strokeWidth={1.5} />
 				<div class="link-body">
 					<div class="link-title">dash monorepo <span class="link-tag">private</span></div>
@@ -303,7 +303,7 @@ pnpm build
 				</div>
 				<ExternalLink size={14} strokeWidth={1.5} class="link-arrow" />
 			</a>
-			<a class="link-card" href="https://github.com/dashfi/dashbook" target="_blank" rel="noopener">
+			<a class="link-card" href="https://github.com/trlmkb/dashbook" target="_blank" rel="noopener">
 				<Github size={18} strokeWidth={1.5} />
 				<div class="link-body">
 					<div class="link-title">dashbook repo <span class="link-tag">private</span></div>

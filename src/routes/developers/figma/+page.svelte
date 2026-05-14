@@ -126,7 +126,7 @@
 		note="Two complementary files at the repo root. The HANDOFF goes to a designer authoring the file; the INTEGRATION RULES go to an engineer using figma-desktop MCP to generate code from designs."
 	>
 		<div class="links">
-			<a class="link-card" href="https://github.com/dashfi/dashbook" target="_blank" rel="noopener">
+			<a class="link-card" href="https://github.com/trlmkb/dashbook" target="_blank" rel="noopener">
 				<FileText size={18} strokeWidth={1.5} />
 				<div class="link-body">
 					<div class="link-title">FIGMA_HANDOFF.md <span class="link-tag">repo root</span></div>
@@ -134,7 +134,7 @@
 				</div>
 				<ExternalLink size={14} strokeWidth={1.5} class="link-arrow" />
 			</a>
-			<a class="link-card" href="https://github.com/dashfi/dashbook" target="_blank" rel="noopener">
+			<a class="link-card" href="https://github.com/trlmkb/dashbook" target="_blank" rel="noopener">
 				<FileText size={18} strokeWidth={1.5} />
 				<div class="link-body">
 					<div class="link-title">FIGMA_INTEGRATION_RULES.md <span class="link-tag">repo root</span></div>

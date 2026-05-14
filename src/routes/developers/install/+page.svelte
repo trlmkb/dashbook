@@ -4,12 +4,17 @@
 	import Section from '$chrome/Section.svelte';
 	import CodeSnippet from '$chrome/CodeSnippet.svelte';
 
-	const MARKETPLACE = 'dashfi/dashbook';
+	// GitHub coords for the source repo. The marketplace name (used after the
+	// `@` in `/plugin install dashbook@dashfi`) is set in
+	// `.claude-plugin/marketplace.json` and stays `dashfi` regardless of
+	// where the source is hosted.
+	const MARKETPLACE_GH = 'trlmkb/dashbook';
+	const MARKETPLACE_NAME = 'dashfi';
 
 	const claudeCodeInstall = `# In Claude Code, run two commands:
 
-/plugin marketplace add ${MARKETPLACE}
-/plugin install dashbook@dashfi`;
+/plugin marketplace add ${MARKETPLACE_GH}
+/plugin install dashbook@${MARKETPLACE_NAME}`;
 
 	const claudeCodeAfterInstall = `# Verify the install:
 /mcp                          # should list a "dashbook" MCP server, connected
@@ -27,7 +32,8 @@
 # 1. Open https://console.anthropic.com → your workspace
 # 2. Go to: Customizations → Plugins → Manage organization plugins
 # 3. Add plugin from marketplace:
-#       Marketplace coordinates: ${MARKETPLACE}
+#       Marketplace coordinates: ${MARKETPLACE_GH}     (GitHub repo)
+#       Marketplace name:        ${MARKETPLACE_NAME}     (what users see in their plugin list)
 #       Plugin name:             dashbook
 # 4. Approve and publish
 

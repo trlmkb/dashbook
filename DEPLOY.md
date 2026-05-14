@@ -9,7 +9,7 @@ Production target: **`brand.dash.fi`** on Vercel. Fully public, no auth, prerend
 ### Connect the repo
 
 1. Sign into Vercel with the dashfi org account.
-2. **New Project → Import Git Repository** → pick `dashfi/dashbook`.
+2. **New Project → Import Git Repository** → pick `trlmkb/dashbook`.
 3. Framework preset: **Other** (Vercel auto-detects SvelteKit's `package.json` script + `vercel.json`).
 4. Root directory: `.` (default).
 5. Build & output settings: leave defaults — `vercel.json` overrides them with:
