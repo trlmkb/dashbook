@@ -2,6 +2,7 @@
 	import PatternLayout from '$chrome/PatternLayout.svelte';
 	import PreviewCanvas from '$chrome/PreviewCanvas.svelte';
 	import CodeSnippet from '$chrome/CodeSnippet.svelte';
+	import LogoMark from '$chrome/LogoMark.svelte';
 	import { Button } from '@dashfi/svelte/ui/button';
 	import { Input } from '@dashfi/svelte/ui/input';
 	import { Label } from '@dashfi/svelte/ui/label';
@@ -110,8 +111,7 @@
 				<div class="shell">
 					<aside class="brand-pane">
 						<div class="brand">
-							<div class="brand-mark">d</div>
-							<span class="brand-text">dash<span class="brand-accent">.</span>fi</span>
+							<LogoMark variant="wordmark" class="brand-wordmark" />
 						</div>
 						<div class="brand-message">
 							<div class="brand-eyebrow">Brand &amp; design system</div>
@@ -129,7 +129,10 @@
 								<div class="form-label">Sign in</div>
 								<h3 class="form-title">Welcome back.</h3>
 								<p class="form-lede">
-									New here? <a href="#">Create an account</a>.
+									New here?
+									<a href="/patterns/auth-split-screen" onclick={(e) => e.preventDefault()}
+										>Create an account</a
+									>.
 								</p>
 							</div>
 							<form class="form" onsubmit={(e) => e.preventDefault()}>
@@ -140,7 +143,11 @@
 								<div class="field">
 									<div class="field-row">
 										<Label for="demo-password">Password</Label>
-										<a class="field-aside" href="#">Forgot?</a>
+										<a
+											class="field-aside"
+											href="/patterns/auth-split-screen"
+											onclick={(e) => e.preventDefault()}>Forgot?</a
+										>
 									</div>
 									<Input id="demo-password" type="password" placeholder="••••••••" />
 								</div>
@@ -306,29 +313,13 @@
 	.brand {
 		display: flex;
 		align-items: center;
-		gap: 8px;
 	}
-	.brand-mark {
-		width: 26px;
-		height: 26px;
-		background: var(--m-cream, #ebede4);
-		color: var(--m-jade, #2b605c);
-		font-family: var(--font-mono);
-		font-size: 14px;
-		font-weight: 500;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 4px;
-	}
-	.brand-text {
-		font-family: var(--font-mono);
-		font-size: 14px;
-		font-weight: 500;
+	/* Canonical wordmark via `<LogoMark variant="wordmark" />` — `currentColor`
+	   inherits cream from the jade brand pane. Never substitute, never invent. */
+	:global(.brand-wordmark) {
+		width: 96px;
+		height: auto;
 		color: var(--m-cream, #ebede4);
-	}
-	.brand-accent {
-		color: var(--m-yellow, #ebff00);
 	}
 	.brand-message {
 		max-width: 380px;

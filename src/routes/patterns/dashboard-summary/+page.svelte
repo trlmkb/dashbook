@@ -204,7 +204,11 @@
 									{/each}
 								</TableBody>
 							</Table>
-							<a href="#" class="view-all" onclick={(e) => e.preventDefault()}>
+							<a
+								href="/patterns/dashboard-summary"
+								class="view-all"
+								onclick={(e) => e.preventDefault()}
+							>
 								View all transactions →
 							</a>
 						</div>

@@ -60,7 +60,7 @@
 \t\t\t>
 \t\t\t\t<span>{t.label}</span>
 \t\t\t\t{#if t.count !== undefined}
-\t\t\t\t\t<Pill type="base" size="sm">{t.count}</Pill>
+\t\t\t\t\t<Pill type="base">{t.count}</Pill>
 \t\t\t\t{/if}
 \t\t\t</a>
 \t\t{/each}
@@ -91,7 +91,7 @@
 						</p>
 					</header>
 
-					<nav class="tab-strip" role="tablist">
+					<div class="tab-strip" role="tablist">
 						{#each tabs as t (t.id)}
 							<button
 								type="button"
@@ -103,11 +103,11 @@
 							>
 								<span>{t.label}</span>
 								{#if t.count !== undefined}
-									<Pill type="base" size="sm">{t.count}</Pill>
+									<Pill type="base">{t.count}</Pill>
 								{/if}
 							</button>
 						{/each}
-					</nav>
+					</div>
 
 					<div class="content">
 						{#if active === 'overview'}

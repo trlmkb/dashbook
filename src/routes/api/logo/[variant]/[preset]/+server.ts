@@ -81,7 +81,8 @@ export const GET: RequestHandler = async ({ params, url }) => {
 		const scale = scaleParam ? Math.max(1, Math.min(4, parseInt(scaleParam, 10) || 1)) : 1;
 
 		const png = await svgToPng(svg, { width: dims.width, height: dims.height, scale });
-		return new Response(png, {
+		// Buffer is a Uint8Array subclass; satisfies BodyInit cleanly under TS strict.
+		return new Response(Buffer.from(png), {
 			status: 200,
 			headers: {
 				'Content-Type': 'image/png',

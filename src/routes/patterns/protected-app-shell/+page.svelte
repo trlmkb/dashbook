@@ -2,6 +2,7 @@
 	import PatternLayout from '$chrome/PatternLayout.svelte';
 	import PreviewCanvas from '$chrome/PreviewCanvas.svelte';
 	import CodeSnippet from '$chrome/CodeSnippet.svelte';
+	import LogoMark from '$chrome/LogoMark.svelte';
 	import {
 		SidebarProvider,
 		Sidebar,
@@ -137,8 +138,7 @@
 						<Sidebar collapsible="none">
 							<SidebarHeader>
 								<div class="brand">
-									<div class="brand-mark">d</div>
-									<span class="brand-text">dash<span class="brand-accent">.</span>fi</span>
+									<LogoMark variant="wordmark" class="brand-wordmark" />
 								</div>
 							</SidebarHeader>
 
@@ -366,30 +366,15 @@
 	.brand {
 		display: flex;
 		align-items: center;
-		gap: 8px;
 		padding: 8px 12px;
 	}
-	.brand-mark {
-		width: 24px;
-		height: 24px;
-		background: var(--m-jade, #2b605c);
-		color: #fff;
-		font-family: var(--font-mono);
-		font-size: 14px;
-		font-weight: 500;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 4px;
-	}
-	.brand-text {
-		font-family: var(--font-mono);
-		font-size: 14px;
-		font-weight: 500;
-		letter-spacing: -0.01em;
-	}
-	.brand-accent {
-		color: var(--m-jade, #2b605c);
+	/* Canonical wordmark SVG via `<LogoMark variant="wordmark" />`.
+	   No hand-rolled "D in a square" — that's the anti-pattern this
+	   pattern's own anatomy warns against. */
+	:global(.brand-wordmark) {
+		width: 72px;
+		height: auto;
+		color: var(--fg);
 	}
 	.user-menu {
 		display: flex;

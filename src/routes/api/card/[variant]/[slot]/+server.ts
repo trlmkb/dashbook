@@ -78,7 +78,8 @@ export const GET: RequestHandler = async ({ params, url }) => {
 			scale
 		});
 		const filename = `dashfi-card-${variantId}-${slotParam}${scale > 1 ? `@${scale}x` : ''}.png`;
-		return new Response(png, {
+		// Buffer is a Uint8Array subclass; satisfies BodyInit cleanly under TS strict.
+		return new Response(Buffer.from(png), {
 			status: 200,
 			headers: {
 				'Content-Type': 'image/png',

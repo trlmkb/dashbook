@@ -143,7 +143,7 @@
 								onclick={() => (active = tab.id)}
 							>
 								<span class="tab-label">{tab.label}</span>
-								<Pill type={tab.pillType} size="sm">{tab.count}</Pill>
+								<Pill type={tab.pillType}>{tab.count}</Pill>
 							</button>
 						{/each}
 					</nav>
@@ -164,7 +164,7 @@
 									<TableCell>{r.merchant}</TableCell>
 									<TableCell class="text-right font-mono tabular-nums">{fmt(r.amount)}</TableCell>
 									<TableCell>
-										<Pill type={statusPillType(r.status)} size="sm">{r.status}</Pill>
+										<Pill type={statusPillType(r.status)}>{r.status}</Pill>
 									</TableCell>
 								</TableRow>
 							{/each}
