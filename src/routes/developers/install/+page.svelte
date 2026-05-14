@@ -87,6 +87,22 @@ curl -sS -X POST https://dashbook.vercel.app/mcp \\
         "clientInfo":{"name":"curl","version":"0"}}}'
 
 # Expect: data: {"result":{...,"serverInfo":{"name":"dashbook"...}}}`;
+
+	// ── Direct asset fetches (no MCP required) ────────────────────────
+	const directAssetsCurl = `# Logo SVG (variants: wordmark, app · presets: jade, ink, white-on-ink, …):
+curl -sS 'https://dashbook.vercel.app/api/logo/wordmark/jade?format=svg&size=400'
+curl -sS 'https://dashbook.vercel.app/api/logo/wordmark/jade?format=png&scale=2'
+
+# Card art SVG (MDES slots: background, app-icon, cobrand-logo, issuer-logo, preview):
+curl -sS 'https://dashbook.vercel.app/api/card/jade/background'
+curl -sS 'https://dashbook.vercel.app/api/card/jade/preview?format=png'
+
+# Component catalogue + per-component anatomy JSON:
+curl -sS 'https://dashbook.vercel.app/api/components.json'
+curl -sS 'https://dashbook.vercel.app/api/components/button.json'
+
+# Foundation JSON (color, typography, spacing):
+curl -sS 'https://dashbook.vercel.app/api/foundations/color.json'`;
 </script>
 
 <svelte:head>
@@ -297,6 +313,44 @@ curl -sS -X POST https://dashbook.vercel.app/mcp \\
 		note="No client needed — works from any machine with curl."
 	>
 		<CodeSnippet code={verifyCurl} language="bash" />
+	</Section>
+
+	<Section
+		label="Assets you can fetch directly"
+		note="When MCP isn't the right tool — agents without MCP, crawlers, archives, SEO, server-side render pipelines — Dashbook exposes every asset over plain HTTP. All GET, no auth, 24-hour cache, CORS-enabled. Designed for any client."
+	>
+		<ul class="docs-list">
+			<li>
+				<strong>Logo SVG</strong> —
+				<code>GET https://dashbook.vercel.app/api/logo/&lt;variant&gt;/&lt;preset&gt;?format=svg&amp;size=400</code>.
+				Variants: <code>wordmark</code>, <code>app</code>. Presets: <code>jade</code>,
+				<code>ink</code>, <code>white-on-ink</code>, others. Also accepts
+				<code>format=png&amp;scale=1-4</code>.
+			</li>
+			<li>
+				<strong>Card art SVG (MDES slots)</strong> —
+				<code>GET https://dashbook.vercel.app/api/card/&lt;variant&gt;/&lt;slot&gt;</code>.
+				Slots: <code>background</code>, <code>app-icon</code>,
+				<code>cobrand-logo</code>, <code>issuer-logo</code>, <code>preview</code>.
+				Also <code>?format=png</code>.
+			</li>
+			<li>
+				<strong>Component catalogue JSON</strong> —
+				<code>GET https://dashbook.vercel.app/api/components.json</code>.
+			</li>
+			<li>
+				<strong>Component anatomy JSON</strong> —
+				<code>GET https://dashbook.vercel.app/api/components/&lt;slug&gt;.json</code>
+				(e.g. <code>button</code>, <code>input</code>, <code>dialog</code>).
+				Same structured data the <code>product_get_component</code> MCP tool returns.
+			</li>
+			<li>
+				<strong>Foundation JSON</strong> —
+				<code>GET https://dashbook.vercel.app/api/foundations/&#123;color,typography,spacing&#125;.json</code>.
+			</li>
+		</ul>
+		<div class="setup-head">Try it</div>
+		<CodeSnippet code={directAssetsCurl} language="bash" />
 	</Section>
 
 	<Section

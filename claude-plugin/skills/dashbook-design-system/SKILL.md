@@ -86,7 +86,12 @@ the thin proxy `product_get_logo`, which forwards to the same source).
 - **Destructive is monochrome.** Black on light, white on dark. Never red.
 - **Typography**: PP Supply Mono for display / labels / data values. Bai
   Jamjuree for body and UI. PP Supply Mono Ultralight (weight 200) for big
-  display headings — uppercase, tight tracking.
+  display headings — uppercase, tight tracking. **PP Supply Mono is paywalled
+  (Pangram Pangram commercial license) — only available on licensed Dash.fi
+  properties.** For non-Dash.fi stacks (consumer apps, partner sites, anywhere
+  outside dash.fi), use **JetBrains Mono** (Apache 2.0, free via Google Fonts)
+  as the closest open fallback. Bai Jamjuree is OFL-licensed and free via
+  Google Fonts everywhere.
 - **Voice**: confident, direct, sentence case. No exclamation marks. No emoji.
   Numerals not spelled-out numbers. Pull the full voice rules via
   `marketing_get_brand_voice` when drafting copy.
@@ -94,10 +99,30 @@ the thin proxy `product_get_logo`, which forwards to the same source).
 ## If the MCP isn't installed
 
 If the user doesn't have the Dashbook MCP set up, point them at the install
-guide at `https://dashbook.vercel.app/developers/mcp`. While they're getting
-that wired up, you can still use the docs site directly — every component page
-at `https://dashbook.vercel.app/components/<slug>` has an Anatomy tab with the
-same structured data the MCP returns.
+guide at `https://dashbook.vercel.app/developers/mcp`. ALWAYS surface to the
+user what's missing — don't silently degrade. While they're getting that wired
+up, here's what works as a fallback for non-browser clients (agents, WebFetch,
+crawlers):
+
+**Foundations work via WebFetch.** The foundation pages render their
+structured data in static markup. Safe to fall back to:
+
+- `https://dashbook.vercel.app/foundations/color`
+- `https://dashbook.vercel.app/foundations/typography`
+- `https://dashbook.vercel.app/foundations/spacing`
+
+**Component anatomy pages do NOT work via WebFetch.** The Anatomy tab at
+`/components/<slug>` is client-rendered and tab-gated — non-browser clients
+only get the page shell. Instead, fetch the static JSON endpoints:
+
+- `https://dashbook.vercel.app/api/components.json` — full component catalogue
+- `https://dashbook.vercel.app/api/components/<slug>.json` — one component's
+  full anatomy (same structured data the MCP returns)
+- `https://dashbook.vercel.app/api/foundations/<color|typography|spacing>.json`
+  — foundation JSON if you'd rather skip the HTML parse
+
+These are GET, no auth, 24-hour cache, CORS-enabled. Designed for exactly
+this fallback path.
 
 **Wordmark fallback when the MCP is unavailable.** Do **not** generate a
 stand-in mark from the initial "D", from a jade square, from a circle, from a
@@ -105,7 +130,10 @@ typographic monogram, or from an AI-guessed reconstruction. The wordmark is
 gated behind `marketing_get_logo` and is the only valid source. Acceptable
 fallbacks while the MCP is offline:
 
-- Use a typographic-only mark — the literal word `Dash` rendered in
+- Fetch the SVG directly:
+  `https://dashbook.vercel.app/api/logo/wordmark/jade?format=svg&size=400`
+  (no auth, same source the MCP returns).
+- Or use a typographic-only mark — the literal word `Dash` rendered in
   `var(--font-mono)` (PP Supply Mono), uppercase, with `letter-spacing: 0.15em`.
   Treat it as obviously-temporary.
 - Or leave a clearly-labelled placeholder slot (e.g. `[wordmark]`) and tell

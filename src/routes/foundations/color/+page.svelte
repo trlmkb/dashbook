@@ -36,6 +36,44 @@
 
 		<section class="block">
 			<div class="block-head">
+				<div class="section-header">Light / dark pairs</div>
+				<p class="block-note">
+					Both theme hex values for every product semantic token. Use this table when porting
+					to a stack-agnostic theme system — the swatches above only render the active theme.
+				</p>
+			</div>
+			<div class="pairs">
+				<div class="pair-row pair-head">
+					<div class="pair-token">Token</div>
+					<div class="pair-hex">Light</div>
+					<div class="pair-hex">Dark</div>
+					<div class="pair-role">Role</div>
+				</div>
+				{#each productColors as token (token.cssVar)}
+					<div class="pair-row">
+						<div class="pair-token">{token.cssVar}</div>
+						<div class="pair-hex">
+							<span
+								class="pair-chip"
+								style="background-color: {token.light}; border: 1px solid var(--border);"
+							></span>
+							<span class="pair-hex-value">{token.light}</span>
+						</div>
+						<div class="pair-hex">
+							<span
+								class="pair-chip"
+								style="background-color: {token.dark}; border: 1px solid var(--border);"
+							></span>
+							<span class="pair-hex-value">{token.dark}</span>
+						</div>
+						<div class="pair-role">{token.role}</div>
+					</div>
+				{/each}
+			</div>
+		</section>
+
+		<section class="block">
+			<div class="block-head">
 				<div class="section-header">Base palette</div>
 				<p class="block-note">
 					Named brand primitives — the single source of every brand hex value. Product semantic
@@ -132,6 +170,60 @@
 		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 		gap: 24px;
 	}
+	.pairs {
+		display: flex;
+		flex-direction: column;
+	}
+	.pair-row {
+		display: grid;
+		grid-template-columns: 160px 160px 160px 1fr;
+		gap: 24px;
+		padding: 12px 0;
+		border-top: 1px solid var(--border);
+		align-items: center;
+		font-size: 13px;
+		line-height: 1.5;
+	}
+	.pair-row:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+	.pair-head {
+		font-family: var(--font-mono);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--fg-muted);
+		padding: 8px 0;
+	}
+	.pair-token {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		color: var(--fg);
+		letter-spacing: -0.01em;
+	}
+	.pair-hex {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	.pair-chip {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		flex-shrink: 0;
+	}
+	.pair-hex-value {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		color: var(--fg);
+		letter-spacing: -0.01em;
+	}
+	.pair-role {
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--fg-muted);
+	}
 	.usage ul {
 		list-style: none;
 		padding: 0;
@@ -161,6 +253,10 @@
 		.page {
 			grid-template-columns: 1fr;
 			gap: 32px;
+		}
+		.pair-row {
+			grid-template-columns: 1fr;
+			gap: 8px;
 		}
 	}
 </style>

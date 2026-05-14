@@ -182,6 +182,29 @@ export const typographyFoundation: TypographyFoundation = {
 		}
 	],
 
+	webDelivery: {
+		sans: {
+			family: 'Bai Jamjuree',
+			license: 'SIL OFL',
+			googleFonts:
+				'https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200;300;400;500;600;700&display=swap',
+			notes: 'Free for any use, self-host or load from the Google CDN.'
+		},
+		mono: {
+			family: 'PP Supply Mono',
+			license: 'Commercial (Pangram Pangram)',
+			source: 'https://pangrampangram.com/products/supply',
+			fallback: {
+				family: 'JetBrains Mono',
+				license: 'Apache-2.0',
+				googleFonts:
+					'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600;700&display=swap'
+			},
+			notes:
+				'PP Supply Mono is paywalled — embed licensed @font-face files inside the licensed project. On surfaces without a license, fall back to JetBrains Mono for both the mono and display roles.'
+		}
+	},
+
 	rules: [
 		'Three families. Eight semantic styles. Tabular figures everywhere a number appears.',
 		'Use the semantic class names — `.heading-display`, `.body`, `.caption`. Never reach for ad-hoc `font-size`.',

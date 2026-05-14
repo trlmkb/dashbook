@@ -76,11 +76,47 @@ export type TabularNumericsRule = {
 	autoOptIn: string[];
 };
 
+/** Web-delivery URLs for the font families used by the system. */
+export type FontWebDelivery = {
+	/**
+	 * Open-licensed sans family — Bai Jamjuree (SIL OFL). Free to self-host
+	 * or load from Google Fonts.
+	 */
+	sans: {
+		family: string;
+		license: string;
+		googleFonts: string;
+		notes: string;
+	};
+	/**
+	 * Commercial mono family — PP Supply Mono (Pangram Pangram). Paywalled.
+	 * Embed licensed `@font-face` files inside licensed projects; surfaces
+	 * without a license must fall back to `fallback` (JetBrains Mono).
+	 */
+	mono: {
+		family: string;
+		license: string;
+		source: string;
+		fallback: {
+			family: string;
+			license: string;
+			googleFonts: string;
+		};
+		notes: string;
+	};
+};
+
 export type TypographyFoundation = {
 	families: Record<'sans' | 'mono' | 'display', FontFamily>;
 	typeScale: TypeScaleEntry[];
 	tabularNumerics: TabularNumericsRule;
 	semanticClasses: SemanticClass[];
+	/**
+	 * Web-delivery URLs — Google Fonts URL for the free sans, license source
+	 * + JetBrains Mono fallback for the paywalled mono. Non-Svelte consumers
+	 * need these to actually load the fonts.
+	 */
+	webDelivery: FontWebDelivery;
 	rules: string[];
 };
 
