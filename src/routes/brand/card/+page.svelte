@@ -4,6 +4,7 @@
 	import Section from '$chrome/Section.svelte';
 	import DoDontGrid from '$chrome/DoDontGrid.svelte';
 	import Download from '@lucide/svelte/icons/download';
+	import Package from '@lucide/svelte/icons/package';
 	import {
 		CARD_DIMENSIONS,
 		cardVariants,
@@ -16,6 +17,7 @@
 		slotDimensionsLabel,
 		type CardVariant
 	} from '$chrome/card-sources';
+	import { createZip, type ZipEntry } from '$chrome/zip';
 
 	const defaultVariant = cardVariants[0];
 	let selectedId = $state<string>(defaultVariant.id);
@@ -131,6 +133,124 @@
 		triggerDownload(blob, `dashfi-card-${selectedId}-${slot}.png`);
 	}
 
+	async function downloadPreviewSvg() {
+		const blob = new Blob([previewSvg], { type: 'image/svg+xml' });
+		triggerDownload(blob, `dashfi-card-${selectedId}-preview.svg`);
+	}
+
+	async function downloadPreviewPng() {
+		const { width, height } = CARD_DIMENSIONS.background;
+		const blob = await rasterizeSvgToPng(previewSvg, width, height);
+		triggerDownload(blob, `dashfi-card-${selectedId}-preview.png`);
+	}
+
+	// ── MDES bundle — all 4 slots × (SVG + PNG) + README in one zip ──────
+	// One click delivers everything brand-ops needs to feed the MC portal
+	// for a single BIN submission. Filenames match the MDES slot names so
+	// they're upload-form-friendly.
+
+	let bundleStatus = $state<'idle' | 'building' | 'done'>('idle');
+
+	async function downloadMdesBundle() {
+		bundleStatus = 'building';
+		try {
+			const slots: Slot[] = ['background', 'app-icon', 'cobrand-logo', 'issuer-logo'];
+			const entries: ZipEntry[] = [];
+
+			// Per-slot SVG + PNG
+			for (const slot of slots) {
+				const svg = svgFor(slot);
+				const { width, height } = dimsFor(slot);
+				entries.push({
+					name: `${slot}.svg`,
+					data: new TextEncoder().encode(svg)
+				});
+				const pngBlob = await rasterizeSvgToPng(svg, width, height);
+				const pngBytes = new Uint8Array(await pngBlob.arrayBuffer());
+				entries.push({ name: `${slot}.png`, data: pngBytes });
+			}
+
+			// Composite preview (SVG + PNG) — visual aid, NOT for MDES upload
+			entries.push({
+				name: 'preview-composite.svg',
+				data: new TextEncoder().encode(previewSvg)
+			});
+			const previewBlob = await rasterizeSvgToPng(
+				previewSvg,
+				CARD_DIMENSIONS.background.width,
+				CARD_DIMENSIONS.background.height
+			);
+			entries.push({
+				name: 'preview-composite.png',
+				data: new Uint8Array(await previewBlob.arrayBuffer())
+			});
+
+			// Submission README
+			const readme = buildReadme(liveVariant);
+			entries.push({
+				name: 'README.txt',
+				data: new TextEncoder().encode(readme)
+			});
+
+			const blob = createZip(entries);
+			triggerDownload(blob, `dashfi-card-${selectedId}-mdes-bundle.zip`);
+			bundleStatus = 'done';
+			setTimeout(() => (bundleStatus = 'idle'), 2000);
+		} catch (err) {
+			console.error('MDES bundle build failed', err);
+			bundleStatus = 'idle';
+		}
+	}
+
+	function buildReadme(v: CardVariant): string {
+		return `Dash.fi card art — MDES submission bundle
+Variant: ${v.label} (${v.id})
+Generated: ${new Date().toISOString()}
+
+UPLOADABLE ASSETS (one BIN per submission)
+──────────────────────────────────────────
+1. background.svg / .png     — 1536 × 969    upload as: dashfi-card-bg-${v.id.slice(0, 16)}
+2. app-icon.svg / .png       — 100 × 100     upload as: dashfi-app-icon-${v.id.slice(0, 16)}
+                               (PNG required — MDES does NOT accept SVG/PDF for icon slot)
+3. cobrand-logo.svg / .png   — 1372 × 283    upload as: dashfi-cobrand
+4. issuer-logo.svg / .png    — 1372 × 283    upload as: dashfi-issuer-hide
+                               (1×1 transparent placeholder — hides issuer mark)
+
+NOT FOR UPLOAD
+──────────────
+- preview-composite.svg / .png  — visual mock of how the card looks in Apple Pay /
+                                   Google Pay after Mastercard overlays the brand
+                                   mark + PAN. Reference only.
+
+MC COLOUR FIELDS (configure separately in MC's UI, not uploaded)
+────────────────────────────────────────────────────────────────
+- Card Background:  ${v.bg}
+- PAN:              #FFFFFF
+- Card Description: #EBEDE4
+
+WHAT MUST NOT APPEAR IN UPLOADED ART
+─────────────────────────────────────
+- PAN, cardholder name, expiration, CVC/CVV
+- EMV chip artwork, NFC / contactless symbol
+- Mastercard brand mark (MC composites at render time — 459×283 bottom-right)
+- Rounded corners (wallets round at composite time)
+
+LAYOUT (1536 × 969 canvas)
+──────────────────────────
+- A = 82 px   side padding
+- B = 57 px   top/bottom padding
+- C = 1372    cobrand + issuer area width
+- D = 283     logo area height
+- E = 459     brand-logo width (MC supplies, reserve safe zone)
+
+Cobrand + issuer band sits at top: (82, 57) → (1454, 340)
+Brand-mark slot bottom-right:     (995, 629) → (1454, 912)
+
+See https://dashbook.vercel.app/brand/card for the live configurator and
+.knowledge/mdes-asset-spec.md for the verified spec audit.
+`;
+	}
+
 	async function rasterizeSvgToPng(
 		svg: string,
 		width: number,
@@ -218,7 +338,7 @@
 
 	<Section
 		label="Preview"
-		note="What the card LOOKS like in Apple Pay / Google Pay after Mastercard composites their PAN + network mark on top. Updates live with the controls below."
+		note="What the card LOOKS like in Apple Pay / Google Pay after Mastercard composites their brand mark on top. Updates live with the controls below."
 	>
 		<div class="preview-stage">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -227,6 +347,28 @@
 				<div><strong>Card</strong> · 1536 × 969 · {bg}</div>
 				<div><strong>App icon</strong> · 100 × 100</div>
 			</div>
+			<div class="preview-actions">
+				<button class="bundle-btn" onclick={downloadMdesBundle} disabled={bundleStatus === 'building'}>
+					<Package size={14} stroke-width="1.5" />
+					{bundleStatus === 'building'
+						? 'Building bundle…'
+						: bundleStatus === 'done'
+							? 'Downloaded ✓'
+							: 'Download MDES bundle (zip)'}
+				</button>
+				<button class="preview-btn" onclick={downloadPreviewSvg}>
+					<Download size={14} stroke-width="1.5" />
+					Preview SVG
+				</button>
+				<button class="preview-btn" onclick={downloadPreviewPng}>
+					<Download size={14} stroke-width="1.5" />
+					Preview PNG
+				</button>
+			</div>
+			<p class="bundle-hint">
+				The MDES bundle ships all 4 upload slots (SVG + PNG) plus a README with
+				submission steps and naming conventions — one click instead of eight.
+			</p>
 		</div>
 	</Section>
 
@@ -453,6 +595,52 @@
 		font-family: var(--font-mono);
 		font-size: 11px;
 		color: var(--fg-muted);
+	}
+
+	.preview-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		align-items: center;
+		margin-top: 4px;
+	}
+	.bundle-btn,
+	.preview-btn {
+		all: unset;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-mono);
+		font-size: 12px;
+		letter-spacing: 0.04em;
+		padding: 10px 14px;
+		border: 1px solid var(--border);
+		transition:
+			border-color var(--dur-fast) var(--easing-out),
+			background-color var(--dur-fast) var(--easing-out);
+	}
+	.bundle-btn {
+		background: var(--m-jade, #2b605c);
+		color: #fff;
+		border-color: var(--m-jade, #2b605c);
+		font-weight: 500;
+	}
+	.bundle-btn:hover:not(:disabled) {
+		opacity: 0.88;
+	}
+	.bundle-btn:disabled {
+		opacity: 0.6;
+		cursor: progress;
+	}
+	.preview-btn:hover {
+		border-color: var(--fg);
+	}
+	.bundle-hint {
+		font-size: 12px;
+		color: var(--fg-muted);
+		margin: 0;
+		max-width: 540px;
 	}
 
 	.control-grid {

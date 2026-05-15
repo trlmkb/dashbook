@@ -158,25 +158,26 @@ export type CardVariant = {
  */
 export const cardVariants: CardVariant[] = [
 	{
-		id: 'cobalt-current',
-		label: 'Cobalt (current)',
+		id: 'jade',
+		label: 'Jade',
 		description:
-			"The card design currently submitted to Mastercard. Cobalt-deep base with a radial highlight, white dash.fi wordmark, white-on-cobalt app icon. Use as the fallback while new variants are in MDES review.",
+			"The Dash.fi card — facelift design language. Jade-deep base (#123B39) with a subtle jade highlight, cream wordmark, jade app icon with cream glyph. Single source of truth for every BIN — Mastercard composites the brand mark + PAN at render time.",
 		status: 'production',
 		usedForBins: [],
-		bg: '#2C3FB2',
+		bg: '#123B39',
 		gradient: {
-			from: '#5868D8',
+			// Subtle jade highlight — facelift restraint, not the old radial glow.
+			from: '#2B605C',
 			to: 'transparent',
-			cx: '30%',
-			cy: '35%',
-			r: '70%',
-			opacity: 0.55
+			cx: '25%',
+			cy: '30%',
+			r: '85%',
+			opacity: 0.22
 		},
-		wordmarkFg: '#FFFFFF',
+		wordmarkFg: '#EBEDE4',
 		appIcon: {
-			bg: '#2C3FB2',
-			glyph: '#FFFFFF',
+			bg: '#2B605C',
+			glyph: '#EBEDE4',
 			radius: 0.2
 		}
 	}
