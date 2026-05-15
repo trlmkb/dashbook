@@ -319,7 +319,7 @@ See https://dashbook.vercel.app/brand/card for the live configurator and
 
 	<Section
 		label="Variant"
-		note="Single design (Cobalt — current) today. Add new variants by extending `src/lib/chrome/card-sources.ts`."
+		note="Single canonical Dash.fi card. Mastercard composites the brand mark + PAN per-token at render time — one design serves every BIN."
 	>
 		<div class="variant-row">
 			{#each cardVariants as v (v.id)}

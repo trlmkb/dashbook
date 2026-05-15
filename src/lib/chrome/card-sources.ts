@@ -233,13 +233,14 @@ export function cardAppIconSvg(variant: CardVariant): string {
  * this band (cobrand-left, issuer-right) — so each is content-sized to
  * roughly half. Even when shipping cobrand-only (our case — issuer is a
  * 1×1 transparent placeholder), the wordmark should remain proportional
- * to a real wallet-card cobrand (~25-30% of card width, ~7% of card
+ * to a real wallet-card cobrand (~22% of card width, ~7% of card
  * height) so it doesn't dominate the composite.
  *
- * We target: wordmark height ≈ 96 px (about 1/3 of slot height, ~10%
- * of card height), centered horizontally and vertically in the slot.
- * The remaining slot area stays transparent so the background shows
- * through after MC composites.
+ * **Positioning.** Left-aligned within the slot per the MDES layout
+ * diagram (cobrand goes LEFT, issuer goes RIGHT in the same band).
+ * The slot itself sits at canvas offset (82, 57), so the slot's x=0
+ * lines up with the card's A=82 side padding — that natural margin
+ * is the visual left-edge, no extra internal padding needed.
  *
  * Wordmark paths come from `logo-sources.ts` so colourway stays in sync
  * with /brand/logo.
@@ -251,9 +252,11 @@ export function cardCobrandLogoSvg(variant: CardVariant): string {
 	// proportions of cobrand logos on real Apple Pay / Google Pay renders.
 	const targetH = 72;
 	const scale = targetH / 90;
-	const scaledW = 426 * scale;
 	const scaledH = 90 * scale;
-	const tx = (width - scaledW) / 2;
+	// Left-aligned: tx=0 puts the wordmark flush with the slot's left edge.
+	// The slot sits at canvas x=82, so the wordmark lines up with the card's
+	// A=82 side padding — that's the natural margin.
+	const tx = 0;
 	const ty = (height - scaledH) / 2;
 	const wordmark = wordmarkSvg(variant.wordmarkFg, null, null, null);
 	const inner = wordmark.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
