@@ -1,0 +1,1329 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - link "Mastercard Developers Logo" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Mastercard Developers Logo" [ref=e5]
+      - generic [ref=e10]:
+        - button "Products" [ref=e12] [cursor=pointer]:
+          - text: Products
+          - img [ref=e13]
+        - button "Solutions" [ref=e16] [cursor=pointer]
+        - button "Resources" [ref=e18] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e19]
+        - button "AI" [ref=e22] [cursor=pointer]
+        - button "Log in" [ref=e26] [cursor=pointer]
+        - button "Sign up" [ref=e28] [cursor=pointer]
+      - generic [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - searchbox "Search" [ref=e34]
+        - generic [ref=e35]:
+          - generic [ref=e36]: ⌘
+          - generic [ref=e37]: K
+    - generic [ref=e39]:
+      - complementary [ref=e89]:
+        - navigation [ref=e90]:
+          - generic [ref=e93]:
+            - generic [ref=e94]: MDES Digital Enablement API
+            - separator [ref=e95]
+            - generic [ref=e97]: Documentation
+            - generic [ref=e98]:
+              - link "Overview" [ref=e99] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/#overview
+                - generic [ref=e100]: Overview
+              - link "How It Works" [ref=e101] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/#how-it-works
+                - generic [ref=e102]: How It Works
+              - link "Next Steps" [ref=e103] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/#next-steps
+                - generic [ref=e104]: Next Steps
+              - heading "Release History" [level=2] [ref=e106]:
+                - button "Release History" [ref=e107] [cursor=pointer]:
+                  - generic [ref=e108]: Release History
+              - heading "Getting Started" [level=2] [ref=e110]:
+                - button "Getting Started" [ref=e111] [cursor=pointer]:
+                  - generic [ref=e112]: Getting Started
+              - heading "API Basics" [level=2] [ref=e114]:
+                - button "API Basics" [ref=e115] [cursor=pointer]:
+                  - generic [ref=e116]: API Basics
+              - generic [ref=e117]:
+                - heading "Use Cases" [level=2] [ref=e118]:
+                  - button "Use Cases" [expanded] [ref=e119] [cursor=pointer]:
+                    - generic [ref=e120]: Use Cases
+                - generic [ref=e123]:
+                  - generic [ref=e124]:
+                    - heading "MDES for Merchants" [level=2] [ref=e125]:
+                      - button "MDES for Merchants" [expanded] [ref=e126] [cursor=pointer]:
+                        - generic [ref=e127]: MDES for Merchants
+                    - generic [ref=e130]:
+                      - link "Tokenizing Account PANs" [ref=e131] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#tokenizing-account-pans
+                        - generic [ref=e132]: Tokenizing Account PANs
+                      - link "Managing Tokens" [ref=e133] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#managing-tokens
+                        - generic [ref=e134]: Managing Tokens
+                      - link "Displaying Payment Info" [ref=e135] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#displaying-payment-info
+                        - generic [ref=e136]: Displaying Payment Info
+                      - link "Making Payments" [ref=e137] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+                        - generic [ref=e138]: Making Payments
+                      - link "Customer Service" [ref=e139] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#customer-service
+                        - generic [ref=e140]: Customer Service
+                  - heading "On-Behalf of Program" [level=2] [ref=e142]:
+                    - button "On-Behalf of Program" [ref=e143] [cursor=pointer]:
+                      - generic [ref=e144]: On-Behalf of Program
+                  - heading "Push Provisioning with MDES Token Connect" [level=2] [ref=e146]:
+                    - button "Push Provisioning with MDES Token Connect" [ref=e147] [cursor=pointer]:
+                      - generic [ref=e148]: Push Provisioning with MDES Token Connect
+              - heading "Environment Domains" [level=2] [ref=e150]:
+                - button "Environment Domains" [ref=e151] [cursor=pointer]:
+                  - generic [ref=e152]: Environment Domains
+              - heading "API Reference" [level=2] [ref=e154]:
+                - button "API Reference" [ref=e155] [cursor=pointer]:
+                  - generic [ref=e156]: API Reference
+              - heading "Tutorials and Guides" [level=2] [ref=e158]:
+                - button "Tutorials and Guides" [ref=e159] [cursor=pointer]:
+                  - generic [ref=e160]: Tutorials and Guides
+              - heading "Code and Formats" [level=2] [ref=e162]:
+                - button "Code and Formats" [ref=e163] [cursor=pointer]:
+                  - generic [ref=e164]: Code and Formats
+              - heading "Support" [level=2] [ref=e166]:
+                - button "Support" [ref=e167] [cursor=pointer]:
+                  - generic [ref=e168]: Support
+            - separator [ref=e169]
+            - generic [ref=e170]:
+              - generic [ref=e171]: Useful Links
+              - menu [ref=e172]:
+                - menuitem "MDES" [ref=e173] [cursor=pointer]:
+                  - generic [ref=e174]: MDES
+                - menuitem "Create Project" [ref=e175] [cursor=pointer]:
+                  - generic [ref=e176]: Create Project
+            - separator [ref=e177]
+            - generic [ref=e178]:
+              - generic [ref=e179]: LLM Resources
+              - menu [ref=e180]:
+                - menuitem "llms-full.txt opens in a new tab" [ref=e181] [cursor=pointer]:
+                  - generic [ref=e182]: llms-full.txt
+                  - img [ref=e183]
+                  - generic [ref=e185]: opens in a new tab
+      - generic [ref=e40]:
+        - article [ref=e186]:
+          - generic [ref=e189]:
+            - generic [ref=e191]:
+              - heading "MDES for Merchants" [level=1] [ref=e192]
+              - button "Copy to Markdown" [ref=e194] [cursor=pointer]:
+                - img [ref=e195]
+                - generic [ref=e197]: Copy to Markdown
+            - paragraph [ref=e198]:
+              - text: This guide covers use cases for a merchant implementing the
+              - link "MDES Digital Enablement API" [ref=e199] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/
+              - text: and should be used alongside this documentation. It explains the tokenization process for Mastercard and Maestro Account PANs when used in a consumer facing application such as a merchant website, mobile application, or other card on file platform. In this program, eligible merchants act as Token Requestors and benefit from connectivity to all participating Mastercard issuers allowing Mastercard and Maestro cards from these issuers to be tokenized and stored.
+            - paragraph [ref=e200]: "The uses cases contained in this guide support the following merchant functions:"
+            - list [ref=e201]:
+              - listitem [ref=e202]:
+                - link "Tokenizing Account PANs:" [ref=e203] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#tokenizing-account-pans
+                - text: Tokenize an Account PAN by replacing it with a unique token, which represents the PAN but provides additional security benefits.
+              - listitem [ref=e204]:
+                - link "Managing Tokens:" [ref=e205] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#managing-tokens
+                - text: Handle consumer or issuer-initiated changes to the status of the token or associated Account PAN.
+              - listitem [ref=e206]:
+                - link "Displaying Payment Information:" [ref=e207] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#displaying-payment-info
+                - text: Displaying information pertaining to the PAN and Token to the account holder
+              - listitem [ref=e208]:
+                - link "Making Payments:" [ref=e209] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+                - text: When a card has been tokenized, you can use the TUR returned by MDES to obtain a cryptogram and the token which is used to make payments.
+              - listitem [ref=e210]:
+                - link "Customer Service:" [ref=e211] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#customer-service
+                - text: Facilitate customer service scenarios when Account PANs have been tokenized.
+            - paragraph [ref=e212]:
+              - text: This guide includes user interface illustrations for the use cases. However, the design of your merchant site, mobile application or card on file platform is completely under your control within the constraints imposed by PCI compliance, the requirements and features of the
+              - link "MDES Digital Enablement API" [ref=e213] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/
+              - text: ", and the mandatory certification requirements for MDES for merchants."
+            - paragraph [ref=e214]: For clarity, “website” is used in this guide, but MDES for merchants is device independent and can be used with a mobile app or any internet-connected system. The terms card and Account PAN are used interchangeably in this guide.
+            - paragraph [ref=e215]:
+              - strong [ref=e216]: "NOTE:"
+              - text: For full details of implementation certification requirements and recommendations, refer to the
+              - emphasis [ref=e217]: Merchant Token Requestor Self-Assessment Questionnaire
+              - text: .
+            - heading "Tokenizing Account PANs" [level=1] [ref=e219]: Tokenizing Account PANs
+            - paragraph [ref=e221]: The Tokenize request checks whether an Account PAN is eligible for tokenization, authorizes the tokenization with the issuer (as necessary), allocates a token for the Account PAN, and returns a Token Unique Reference (TUR) which you can store for future API requests. The TUR is a unique reference to the token.
+            - paragraph [ref=e222]: "There are three main scenarios in which an Account PAN can be tokenized:"
+            - list [ref=e223]:
+              - listitem [ref=e224]:
+                - link "Tokenization while Transacting" [ref=e225] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#tokenization-while-transacting
+                - text: – Creating a token when a consumer (or merchant) initiates a transaction on the account PAN already stored on file or by adding a new card during the checkout flow.
+              - listitem [ref=e226]:
+                - link "Add Card Tokenization" [ref=e227] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#add-card-tokenization
+                - text: – Creating a token as a result of a consumer action, such as when a consumer adds a new Account PAN to their profile on merchant website. This could occur when a consumer opts to store new payment details during checkout or when the consumer modifies the payment details associated with their profile (e.g. in account management).
+              - listitem [ref=e228]:
+                - link "Existing Card Tokenization" [ref=e229] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#existing-card-tokenization
+                - text: – Creating tokens for Account PANs already stored on file, outside of the transaction/checkout flow.
+            - paragraph [ref=e230]:
+              - strong [ref=e231]: "NOTE:"
+              - text: The tokenize response returns an active token and token unique reference (TUR). Token requestors can store the TUR to request for a token and cryptogram in the Transact API. If the Account PAN being tokenized is in an account range that has not yet been enabled by the issuer for MDES for merchants, the Account PAN will not be tokenized and MDES will return a PAN_INELIGIBLE response.
+            - paragraph [ref=e232]: All API requests must use OAUTH authentication and API requests / responses that contain sensitive data will use field level encryption.
+            - heading "Tokenization while Transacting" [level=2] [ref=e234]: Tokenization while Transacting
+            - paragraph [ref=e236]: "This use case describes how a token may be created and associated with a consumer profile during the transaction flow. For example:"
+            - list [ref=e237]:
+              - listitem [ref=e238]:
+                - text: The Consumer logs in to their profile, shops for items and clicks
+                - strong [ref=e239]: Checkout
+                - text: .
+              - listitem [ref=e240]: Your website displays the list of cards that the consumer has on file or an option to enter new card details.
+              - listitem [ref=e241]:
+                - text: The Consumer selects an available card or enters new card details and clicks
+                - strong [ref=e242]: Pay
+                - text: .
+              - listitem [ref=e243]:
+                - text: Your system sends a
+                - strong [ref=e244]: Tokenize
+                - text: request with the encrypted Account PAN details and optional data to support the decision to tokenize.
+              - listitem [ref=e245]: If MDES returns a declined decision in the previous step, you will not be able to tokenize the Account PAN and will need to proceed with the full Account PAN and re-try the tokenization process at a later stage, depending on the error type received.
+              - listitem [ref=e246]:
+                - text: If the tokenization request is not declined, you will receive an active token and TUR (Token Unique Reference). The response contains the token number in
+                - code [ref=e247]: tokenDetails
+                - text: ", last 4 digits of Account PAN in"
+                - code [ref=e248]: tokenInfo
+                - text: ", and card art details in the"
+                - code [ref=e249]: productConfig
+                - text: object. The last 4 digits of the token are also returned; however, Mastercard recommends that the merchant only display the Account PAN last 4 digits to the consumer, not the token last 4 digits, as the consumer may not be aware of tokenization. After receiving the Tokenize response, the token has been provisioned and ready for performing transactions.
+              - listitem [ref=e250]:
+                - text: You can then call the
+                - strong [ref=e251]: Transact API
+                - text: with the TUR to fetch the actual token, token expiry & cryptogram. The token and cryptogram can then be used for the transaction and TUR to be associated with the consumer’s merchant profile for future use.
+            - paragraph [ref=e252]:
+              - text: If you plan to display card art, you should use
+              - strong [ref=e253]: Get Asset
+              - text: requests to obtain (and cache) the card art image assets for display; see
+              - link "Displaying Tokenized Account PANs" [ref=e254] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#display-payment-info
+              - text: for more details. Update the state you maintain for this token in your system. See
+              - link "Making Payments with Tokenized Account PANs" [ref=e255] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+              - text: and
+              - link "Storing Cryptograms" [ref=e256] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#storing-cryptograms
+              - text: for details on performing the subsequent transactions.
+            - paragraph [ref=e257]:
+              - strong [ref=e258]: "NOTE:"
+              - text: The tokenization process may take a few seconds to complete. To avoid latency in tokenization during the consumer checkout flow, you may wish to proceed with the Account PAN for the first consumer transaction and initiate the tokenization process following a successful card add and checkout. Once the consumer’s Account PAN is tokenized, the token can be used for subsequent transactions.
+            - img [ref=e266]:
+              - generic [ref=e267]:
+                - generic [ref=e271]: Cardholder
+                - generic [ref=e275]: Merchant
+                - generic [ref=e279]: MDES
+                - generic [ref=e283]: Issuer
+                - generic [ref=e284]:
+                  - generic [ref=e285]: Initiate Checkout
+                  - generic [ref=e286]: "1"
+                - generic [ref=e287]:
+                  - generic [ref=e288]: Tokenize
+                  - generic [ref=e289]: "2"
+                - generic [ref=e290]:
+                  - generic [ref=e291]: Tokenization Authorization Request
+                  - generic [ref=e292]: "3"
+                - generic [ref=e293]:
+                  - generic [ref=e294]: Approved
+                  - generic [ref=e295]: "4"
+                - generic [ref=e296]:
+                  - generic [ref=e297]: Provision/Create the Token
+                  - generic [ref=e299]: "5"
+                - generic [ref=e300]:
+                  - generic [ref=e301]: Tokenize Response (active)(TUR, Token Number)
+                  - generic [ref=e302]: "6"
+                - generic [ref=e303]:
+                  - generic [ref=e305]: You are not required to wait
+                  - generic [ref=e306]: for the Notify Token Updated
+                  - generic [ref=e307]: (NTU) call from MDES to
+                  - generic [ref=e308]: indicate that a token is active
+                - generic [ref=e309]:
+                  - generic [ref=e310]: Tokenization Complete Notification
+                  - generic [ref=e311]: "7"
+                - generic [ref=e312]:
+                  - generic [ref=e313]: Transact(Token Unique Reference)
+                  - generic [ref=e314]: "8"
+                - generic [ref=e315]:
+                  - generic [ref=e316]: (Token, Token Expiry, Cryptogram)
+                  - generic [ref=e317]: "9"
+                - generic [ref=e321]: Cardholder
+                - generic [ref=e325]: Merchant
+                - generic [ref=e329]: MDES
+                - generic [ref=e333]: Issuer
+            - heading "Add Card Tokenization" [level=2] [ref=e335]: Add Card Tokenization
+            - paragraph [ref=e337]: "This use case describes how you could allow a consumer to tokenize a card and associate it with their website profile for later payment use. For example:"
+            - list [ref=e338]:
+              - listitem [ref=e339]:
+                - text: The Consumer logs in to their profile and clicks
+                - strong [ref=e340]: Add card
+                - text: .
+              - listitem [ref=e341]:
+                - text: The Consumer enters their card details and clicks
+                - strong [ref=e342]: Save
+                - text: .
+              - listitem [ref=e343]: Mastercard recommends your system perform regular card checks to verify the cards as per your current process.
+              - listitem [ref=e344]:
+                - text: If the card checks are successful, your system sends a
+                - strong [ref=e345]: Tokenize
+                - text: request with the encrypted Account PAN details and optional data to support the decision to tokenize. It is recommended to send at least Account PAN number, Account PAN expiry date and Account PAN Security code such as CVC2 for Add Card Tokenization in the
+                - strong [ref=e346]: Tokenize
+                - text: request.
+              - listitem [ref=e347]: If MDES returns a declined decision in the previous step, you will not be able to tokenize the Account PAN and will need to proceed with the full Account PAN and retry the tokenization process at a later stage, depending on the error type received.
+              - listitem [ref=e348]:
+                - text: If the tokenization request is not declined, associate the returned token details with the consumer’s merchant profile. The response contains the token number in tokenDetails, last 4 digits of the Account PAN in tokenInfo, and card art details in the
+                - strong [ref=e349]: productConfig
+                - text: object. The last 4 digits of the token are also returned; however, Mastercard recommends that they are not used to represent Account PANs to ensure consumers remain unaware of the tokenization process. After receiving the Tokenize response, the token has been provisioned and you can display the card as active.
+              - listitem [ref=e350]: You can then call the Transact API with the TUR to fetch the actual token, token expiry & cryptogram. The token and cryptogram can then be used for the transaction and TUR to be associated with the consumer’s merchant profile for future use
+            - paragraph [ref=e351]:
+              - text: If you plan to display card art, you should use
+              - strong [ref=e352]: Get Asset
+              - text: requests to obtain (and cache) the card art image assets for display; see
+              - link "Displaying Tokenized Account PANs" [ref=e353] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#display-payment-info
+              - text: for more details. Update the state you maintain for this token in your system. See
+              - link "Making Payments with Tokenized Account PANs" [ref=e354] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+              - text: and
+              - link "Storing Cryptograms" [ref=e355] [cursor=pointer]:
+                - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#storing-cryptograms
+              - text: for details.
+            - paragraph [ref=e356]:
+              - img "alt text" [ref=e361]
+            - paragraph [ref=e362]:
+              - strong [ref=e363]: Example Add Card Screen
+            - heading "Add Card Tokenization Steps:" [level=3] [ref=e365]: "Add Card Tokenization Steps:"
+            - paragraph [ref=e367]:
+              - strong [ref=e368]: "NOTE:"
+              - text: All user interface examples are illustrative.
+            - list [ref=e369]:
+              - listitem [ref=e370]:
+                - text: "Once consumer enters the card Account data, formulate the Tokenize request - Account PAN and expiry month and year (if the card has an expiry date) are mandatory, CVC2 is recommended to Add Card Tokenization; all other fields are optional. NOTE: Optional fields are used by the card issuer to decide whether to approve or decline tokenization for the card. You can include additional information in the optional"
+                - strong [ref=e371]: decisioningData
+                - text: object to support the issuer’s decision making process.
+              - listitem [ref=e372]:
+                - text: Combine the card data in step 1 with the
+                - strong [ref=e373]: source
+                - text: parameter, which must be set to
+                - strong [ref=e374]: CARD_ADDED_MANUALLY
+                - text: in this case, to create the JSON
+                - strong [ref=e375]: fundingAccountData
+                - text: object which will include the card data; see the first code sample below.
+              - listitem [ref=e376]:
+                - text: Make a
+                - strong [ref=e377]: Tokenize
+                - text: request with the
+                - strong [ref=e378]: fundingAccountData
+                - text: object. Supply
+                - strong [ref=e379]: taskId
+                - text: ","
+                - strong [ref=e380]: tokenRequestorId
+                - text: (unique to you as a merchant), a
+                - strong [ref=e381]: requestId
+                - text: (unique for each request), and
+                - strong [ref=e382]: tokenType
+                - text: = CLOUD. The
+                - strong [ref=e383]: TaskID
+                - text: can be used to monitor tokenization progress as tokens are provisioned and then activated on the MDES platform after the response in step 6 below
+              - listitem [ref=e384]:
+                - text: "Receive the response with the following data:"
+                - strong [ref=e385]: decision
+                - text: (tokenization decision),
+                - strong [ref=e386]: accountPanSuffix
+                - text: (the last four digits of the Account PAN),
+                - strong [ref=e387]: tokenPanSuffix
+                - text: (the last four digits of the Token),
+                - strong [ref=e388]: tokenExpiry
+                - text: (the expiry date in mmyy format), and a
+                - strong [ref=e389]: tokenUniqueReference
+                - text: (TUR) which uniquely identifies the token, and
+                - strong [ref=e390]: tokenDetails
+                - text: (tokenNumber, expiryMonth, expiryYear, dataValidUntilTimestamp, and PAR) .
+              - listitem [ref=e391]:
+                - text: If the tokenization request is not declined, associate the active token and
+                - strong [ref=e392]: tokenUniqueReference
+                - text: to the consumer’s profile and the last four digits of the Account PAN. After the tokenize response, tokens are active and are provisioned within the MDES platform. Optionally, you can use the last four digits of the Account PAN from step 2 to represent the card details or make
+                - strong [ref=e393]: Get Asset
+                - text: requests using the Asset ID values returned in the
+                - strong [ref=e394]: productConfig
+                - text: object to fetch, cache, and display card and issuer art, etc. See
+                - link "Displaying Tokenized Account PANs" [ref=e395] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#display-payment-info
+                - text: for details.
+              - listitem [ref=e396]: If MDES returns a decline decision in the previous step, you will not be able to tokenize the card and will need to try tokenization later based on the error code.
+              - listitem [ref=e397]:
+                - text: After receiving the Tokenize response, an active token has been provisioned. You could also update your user interface to show this Account PAN is now available for use in a payment. Additionally, you could proceed to make a
+                - strong [ref=e398]: Transact
+                - text: request to obtain the token and cryptogram needed for a payment authorization request. See
+                - link "Making Payments with Tokenized Account PANs" [ref=e399] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+                - text: and
+                - link "Storing Cryptograms" [ref=e400] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#storing-cryptograms
+                - text: for details.
+            - paragraph [ref=e401]:
+              - strong [ref=e402]: API Flow for Adding a Card
+            - img [ref=e410]:
+              - generic [ref=e411]:
+                - generic [ref=e415]: Cardholder
+                - generic [ref=e419]: Merchant
+                - generic [ref=e423]: MDES
+                - generic [ref=e427]: Issuer
+                - generic [ref=e428]:
+                  - generic [ref=e429]: New Card details
+                  - generic [ref=e430]: "1"
+                - generic [ref=e431]:
+                  - generic [ref=e432]: Tokenize (PAN, Expiry Date, CVC2)
+                  - generic [ref=e433]: "2"
+                - generic [ref=e434]:
+                  - generic [ref=e435]: Tokenization Authorization Request
+                  - generic [ref=e436]: "3"
+                - generic [ref=e437]:
+                  - generic [ref=e438]: Approved
+                  - generic [ref=e439]: "4"
+                - generic [ref=e440]:
+                  - generic [ref=e441]: Provision/Create the Token
+                  - generic [ref=e443]: "5"
+                - generic [ref=e444]:
+                  - generic [ref=e445]: Tokenize Response (active) (TUR, Token Number)
+                  - generic [ref=e446]: "6"
+                - generic [ref=e447]:
+                  - generic [ref=e448]: Tokenization Complete Notification
+                  - generic [ref=e449]: "7"
+                - generic [ref=e450]:
+                  - generic [ref=e451]: Notify Token Updated (Active)
+                  - generic [ref=e452]: "8"
+                - generic [ref=e453]:
+                  - generic [ref=e454]: Transact (Token Unique Reference)
+                  - generic [ref=e455]: "9"
+                - generic [ref=e456]:
+                  - generic [ref=e457]: (Token, Token Expiry, Cryptogram)
+                  - generic [ref=e458]: "10"
+                - generic [ref=e462]: Cardholder
+                - generic [ref=e466]: Merchant
+                - generic [ref=e470]: MDES
+                - generic [ref=e474]: Issuer
+            - paragraph
+            - paragraph [ref=e475]:
+              - strong [ref=e476]: "NOTE:"
+            - list [ref=e477]:
+              - listitem [ref=e478]:
+                - text: Currently, MDES for merchants creates a token if the issuer tokenization decision is either APPROVED or REQUIRE_ADDITIONAL_AUTHENTICATION. At this time, your system may handle these responses in the same manner. You may also receive an
+                - strong [ref=e479]: authenticationMethods
+                - text: object, which you can ignore.
+              - listitem [ref=e480]: The sample payload loaded from the OpenAPI configuration will contain a superset of all the possible fields. As some of these fields are conditional use the following trimmed request sample to get started. You can then add additional parameters as required.
+            - generic [ref=e481]:
+              - navigation [ref=e482]:
+                - list [ref=e483]:
+                  - button "JSON" [ref=e484] [cursor=pointer]
+                - generic [ref=e485]:
+                  - img [ref=e487] [cursor=pointer]
+                  - img [ref=e490] [cursor=pointer]
+                  - button "Copy" [ref=e494] [cursor=pointer]:
+                    - img "Copy" [ref=e495]
+              - code [ref=e502]:
+                - generic [ref=e504]: "{"
+                - generic [ref=e506]: "\"cardAccountData\": {"
+                - generic [ref=e508]: "\"accountNumber\": \"5412345678901234\","
+                - generic [ref=e510]: "\"expiryMonth\": \"12\","
+                - generic [ref=e512]: "\"expiryYear\": \"19\""
+                - generic [ref=e514]: "},"
+                - generic [ref=e516]: "\"accountHolderData\": {"
+                - generic [ref=e518]: "\"accountHolderName\": \"John Doe\","
+                - generic [ref=e520]: "\"consumerIdentifier\": \"\","
+                - generic [ref=e522]: "\"accountHolderAddress\": {"
+                - generic [ref=e524]: "\"line1\": \"100 1st Street\","
+                - generic [ref=e526]: "\"line2\": \"Apt. 4B\","
+                - generic [ref=e528]: "\"city\": \"St. Louis\","
+                - generic [ref=e530]: "\"countrySubdivision\": \"MO\","
+                - generic [ref=e532]: "\"postalCode\": \"61000\","
+                - generic [ref=e534]: "\"country\": \"USA\""
+                - generic [ref=e536]: "}"
+                - generic [ref=e538]: "}"
+                - generic [ref=e540]: "\"source\": \"ACCOUNT_ON_FILE\""
+                - generic [ref=e542]: "}"
+            - generic [ref=e544]:
+              - navigation [ref=e545]:
+                - list [ref=e546]:
+                  - button "JSON" [ref=e547] [cursor=pointer]
+                - generic [ref=e548]:
+                  - img [ref=e550] [cursor=pointer]
+                  - img [ref=e553] [cursor=pointer]
+                  - button "Copy" [ref=e557] [cursor=pointer]:
+                    - img "Copy" [ref=e558]
+              - code [ref=e565]:
+                - generic [ref=e567]: "\"fundingAccountInfo\" : {"
+                - generic [ref=e569]: "\"encryptedPayload\" : {"
+                - generic [ref=e571]: "\"encryptedData\":\"4545433044323232363739304532433610DE1D1461475BEB6D815F31764DDC20298BD779FBE37EE5AB3CBDA9F9825E1DDE321469537FE461E824AA55BA67BF6A\","
+                - generic [ref=e573]: "\"publicKeyFingerprint\" : \"4c4ead5927f0df8117f178eea9308daa58e27c2b\","
+                - generic [ref=e575]: "\"encryptedKey\" : \"A1B2C3D4E5F6112233445566\","
+                - generic [ref=e577]: "\"oaepHashingAlgorithm\" : \"SHA512\""
+                - generic [ref=e579]: "}"
+                - generic [ref=e581]: "}"
+            - paragraph [ref=e582]:
+              - strong [ref=e583]: "NOTE:"
+              - text: You are required to acknowledge
+              - strong [ref=e584]: Notify Token Updated
+              - text: requests. To minimize network traffic, you should use
+              - strong [ref=e585]: Notify Token Updated
+              - text: requests to monitor and keep a local copy of token state, rather than repeatedly polling MDES using
+              - strong [ref=e586]: Get Token
+              - text: requests.
+            - paragraph [ref=e587]:
+              - strong [ref=e588]: "NOTE:"
+              - text: You will need to decrypt the
+              - strong [ref=e589]: EncryptedPayload.encryptedData
+              - text: parameter in the
+              - strong [ref=e590]: Notify Token Updated
+              - text: request. The encrypted data contains an array of token objects (in this case just a single token) containing the updated status of each token and any other changes to the token or associated payment account, such as changes to card art, expiry date, and last 4 digits of the Account PAN. The decryption process is the reverse of the encryption process detailed in steps 3 and 4 above, but using the
+              - strong [ref=e591]: private
+              - text: key from the RSA wrapped
+              - strong [ref=e592]: decryption
+              - text: key pair.
+            - heading "Existing Card Tokenization" [level=2] [ref=e594]: Existing Card Tokenization
+            - paragraph [ref=e596]: Existing Card Tokenization is used to create multiple tokens by sending multiple tokenization requests as a bulk process. This is typically used to replace the Account PANs already stored in your card-on-file repository with tokens. No consumer interaction is necessary.
+            - paragraph [ref=e597]:
+              - strong [ref=e598]: NOTE
+              - text: ": only one Account PAN can be tokenized per API request"
+            - paragraph [ref=e599]: "When submitting multiple requests to MDES, you must ensure:"
+            - list [ref=e600]:
+              - listitem [ref=e601]: The speed of tokenization does not exceed the TPS (transaction per second) limit provided by Mastercard.
+              - listitem [ref=e602]: The submitted Account PANs are selected on a pseudo-random basis or spread evenly across different account ranges. This ensures an even load across Mastercard issuers and maximizes tokenization performance.
+            - paragraph [ref=e603]:
+              - strong [ref=e604]: "Design Guidelines:"
+            - paragraph [ref=e605]: Mastercard recommends that you implement one or more strategies during existing card tokenization to optimize the speed at which the repository can be converted into tokens. For example, when an Account PAN is not within an eligible account range for tokenization (as specified by the issuer), MDES will return a PAN_INELIGIBLE response. In this situation, you can filter out other cards with the same first 11 PAN digits. For simplicity, you do not need to persist the filter and should purge it after the bulk tokenization process is complete. This basic principle can be used or adapted (as necessary) to fit with your existing processes and its technical architecture and environment.
+            - paragraph [ref=e606]:
+              - strong [ref=e607]: "Technical Details:"
+            - list [ref=e608]:
+              - listitem [ref=e609]: Fetch an Account PAN stored on file using an optimization strategy as described above.
+              - listitem [ref=e610]:
+                - text: Combine the card data in step 1 with the
+                - strong [ref=e611]: source
+                - text: parameter, which must be set to CARD_ON_FILE in this case, to create a JSON
+                - strong [ref=e612]: fundingAccountInfo
+                - text: object for the card data; see the first code sample below these steps.
+              - listitem [ref=e613]:
+                - text: "Receive the response with the following data:"
+                - strong [ref=e614]: decision
+                - text: (tokenization decision),
+                - strong [ref=e615]: accountPanSuffix
+                - text: (the last four digits of the Account PAN),
+                - strong [ref=e616]: tokenPanSuffix
+                - text: (the last four digits of the token),
+                - strong [ref=e617]: tokenExpiry
+                - text: (the expiry date in mmyy format), and a
+                - strong [ref=e618]: tokenUniqueReference
+                - text: (TUR) which uniquely identifies the token, and
+                - strong [ref=e619]: tokenDetails
+                - text: (tokenNumber, expiryMonth, expiryYear, dataValidUntilTimestamp, and PAR).
+              - listitem [ref=e620]:
+                - text: If the tokenization request is not declined, associate the active token and
+                - strong [ref=e621]: tokenUniqueReference
+                - text: to the consumer’s profile and the last four digits of the Account PAN. After the tokenize response, tokens are active and are provisioned within the MDES platform. If you are displaying card art, you could make
+                - strong [ref=e622]: Get Asset
+                - text: requests using the Asset ID values returned in the
+                - strong [ref=e623]: productConfig
+                - text: object to fetch and cache card and issuer art, etc. See
+                - link "Displaying Tokenized Account PANs" [ref=e624] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#display-payment-info
+                - text: for details.
+              - listitem [ref=e625]: If MDES returns a decline decision in the previous step, you will not be able to tokenize the card and will need to try tokenization later based on the error code.
+              - listitem [ref=e626]:
+                - text: After receiving the Tokenize response, an active token has been provisioned. Additionally, you could proceed to make a
+                - strong [ref=e627]: Transact
+                - text: request to obtain the token and cryptogram needed for a payment authorization request. See
+                - link "Making Payments with Tokenized Account PANs" [ref=e628] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#making-payments
+                - text: and
+                - link "Storing Cryptograms" [ref=e629] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#storing-cryptograms
+                - text: for details.
+            - paragraph [ref=e630]:
+              - strong [ref=e631]: "NOTE:"
+              - text: Currently, MDES for merchants creates a token if the issuer tokenization decision is either APPROVED or REQUIRE_ADDITIONAL_AUTHENTICATION. At this time, your system may handle these responses in the same manner. You may also receive an
+              - strong [ref=e632]: authenticationMethods
+              - text: object, which you can ignore.
+            - generic [ref=e633]:
+              - navigation [ref=e634]:
+                - list [ref=e635]:
+                  - button "JSON" [ref=e636] [cursor=pointer]
+                - generic [ref=e637]:
+                  - img [ref=e639] [cursor=pointer]
+                  - img [ref=e642] [cursor=pointer]
+                  - button "Copy" [ref=e646] [cursor=pointer]:
+                    - img "Copy" [ref=e647]
+              - code [ref=e654]:
+                - generic [ref=e656]: "{"
+                - generic [ref=e658]: "\"accountNumber\": \"5412345678901234\","
+                - generic [ref=e660]: "\"expiryMonth\": \"12\","
+                - generic [ref=e662]: "\"expiryYear\": \"20\","
+                - generic [ref=e664]: "\"source\": \"CARD_ON_FILE\""
+                - generic [ref=e666]: "}"
+            - generic [ref=e667]:
+              - navigation [ref=e668]:
+                - list [ref=e669]:
+                  - button "JSON" [ref=e670] [cursor=pointer]
+                - generic [ref=e671]:
+                  - img [ref=e673] [cursor=pointer]
+                  - img [ref=e676] [cursor=pointer]
+                  - button "Copy" [ref=e680] [cursor=pointer]:
+                    - img "Copy" [ref=e681]
+              - code [ref=e688]:
+                - generic [ref=e690]: "\"fundingAccountInfo\" : {"
+                - generic [ref=e692]: "\"encryptedPayload\" : {"
+                - generic [ref=e694]: "\"encryptedData\":\"4545433044323232363739304532433610DE1D1461475BEB6D815F31764DDC20298BD779FBE37EE5AB3CBDA9F9825E1DDE321469537FE461E824AA55BA67BF6A\","
+                - generic [ref=e696]: "\"publicKeyFingerprint\" : \"4c4ead5927f0df8117f178eea9308daa58e27c2b\","
+                - generic [ref=e698]: "\"encryptedKey\" : \"A1B2C3D4E5F6112233445566\","
+                - generic [ref=e700]: "\"oaepHashingAlgorithm\" : \"SHA512\""
+                - generic [ref=e702]: "}"
+                - generic [ref=e704]: "}"
+            - paragraph [ref=e705]:
+              - strong [ref=e706]: "NOTE:"
+              - text: You are required to acknowledge
+              - strong [ref=e707]: Notify Token Updated
+              - text: requests. To minimize network traffic, you should use
+              - strong [ref=e708]: Notify Token Updated
+              - text: requests to monitor and keep a local copy of token state, rather than repeatedly polling MDES using Get Token requests.
+            - paragraph [ref=e709]:
+              - strong [ref=e710]: "NOTE:"
+              - text: You will need to decrypt the
+              - strong [ref=e711]: EncryptedPayload.encryptedData
+              - text: parameter in the
+              - strong [ref=e712]: Notify Token Updated
+              - text: request. The encrypted data contains an array of token objects (in this case just a single token) containing the updated status of each token and any other changes to the token or associated payment account, such as changes to card art, expiry date, and last 4 digits of the Account PAN. The decryption process is the reverse of the encryption process detailed in steps 3 and 4 above, but using the
+              - strong [ref=e713]: private
+              - text: key from the RSA wrapped
+              - strong [ref=e714]: decryption
+              - text: key pair.
+            - img [ref=e722]:
+              - generic [ref=e723]:
+                - generic [ref=e727]: Merchant
+                - generic [ref=e731]: MDES
+                - generic [ref=e735]: Issuer
+                - generic [ref=e736]:
+                  - generic [ref=e737]: Process existing PANs on file
+                  - generic [ref=e739]: "1"
+                - generic [ref=e740]:
+                  - generic [ref=e742]: Cardholder may or may not
+                  - generic [ref=e743]: be involved in or aware of
+                  - generic [ref=e744]: digitization process
+                - generic [ref=e745]:
+                  - generic [ref=e746]: Tokenize (PAN, Expiry Date, CVC2)
+                  - generic [ref=e747]: "2"
+                - generic [ref=e748]:
+                  - generic [ref=e749]: Tokenization Authorization Request
+                  - generic [ref=e750]: "3"
+                - generic [ref=e751]:
+                  - generic [ref=e752]: Approved
+                  - generic [ref=e753]: "4"
+                - generic [ref=e754]:
+                  - generic [ref=e755]: Provision/Create the Token
+                  - generic [ref=e757]: "5"
+                - generic [ref=e758]:
+                  - generic [ref=e759]: Tokenize Response (active)(TUR, Token Number)
+                  - generic [ref=e760]: "6"
+                - generic [ref=e761]:
+                  - generic [ref=e762]: Tokenization Complete Notification
+                  - generic [ref=e763]: "7"
+                - generic [ref=e764]:
+                  - generic [ref=e765]: Notify Token Updated (Active)
+                  - generic [ref=e766]: "8"
+                - generic [ref=e767]:
+                  - generic [ref=e768]: Transact(Token Unique Reference)
+                  - generic [ref=e769]: "9"
+                - generic [ref=e770]:
+                  - generic [ref=e771]: (Token, Token Expiry, Cryptogram)
+                  - generic [ref=e772]: "10"
+                - generic [ref=e776]: Merchant
+                - generic [ref=e780]: MDES
+                - generic [ref=e784]: Issuer
+            - paragraph [ref=e785]:
+              - strong [ref=e786]: API Flow for Tokenizing an Existing Payment Card Repository
+            - heading "Managing Tokens" [level=1] [ref=e788]: Managing Tokens
+            - heading "Consumer Updates the Details of a Card Associated with Their Profile" [level=2] [ref=e791]: Consumer Updates the Details of a Card Associated with Their Profile
+            - paragraph [ref=e793]: The details represented by the token (Account PAN and expiry date) cannot be updated by the consumer.
+            - heading "Issuer-Initiated Status Updates" [level=2] [ref=e795]: Issuer-Initiated Status Updates
+            - paragraph [ref=e797]: An issuer can initiate an account update within the account range or across another account range.
+            - paragraph [ref=e798]: "This use case explains how you can receive change notifications relating to a token or the underlying payment account based on the following events:"
+            - list [ref=e799]:
+              - listitem [ref=e800]: FPAN replacement within the same account range
+              - listitem [ref=e801]: FPAN replacement in a different account range
+              - listitem [ref=e802]: Routine issuer maintenance, such as moving from a 6 to 8-digit BIN, which may result in the token number being updated (even if underlying PAN does not change).
+              - listitem [ref=e803]: Token expiry extension
+            - paragraph [ref=e804]: In addition to these notifications, MDES seamlessly updates the Account PAN it associates with a consumer’s token if the consumer loses their card and a new card is issued. This account PAN mapping may also be updated if a new card is issued due to card expiration, fraud, etc.
+            - list [ref=e805]:
+              - listitem [ref=e806]:
+                - text: If your server receives a
+                - strong [ref=e807]: Notify Token Updated
+                - text: request from MDES, you must use the
+                - strong [ref=e808]: tokenUniqueReference
+                - text: value and
+                - strong [ref=e809]: tokenInfo
+                - text: object received to update the details and state you are storing for the appropriate token (or tokens—multiple tokens can be included in one request) in your system. For example, the issuer or consumer could close their card account, causing the token status to change to DEACTIVATED.
+              - listitem [ref=e810]: Send an acknowledgement response to the MDES server identified in the request received in the previous step.
+            - paragraph [ref=e811]:
+              - strong [ref=e812]: "NOTE:"
+              - text: You are required to acknowledge Notify Token Updated requests.
+            - img [ref=e820]:
+              - generic [ref=e821]:
+                - generic [ref=e825]: Merchant
+                - generic [ref=e829]: MDES
+                - generic [ref=e833]: Issuer
+                - generic [ref=e834]:
+                  - generic [ref=e835]: PAN Update
+                  - generic [ref=e836]: "1"
+                - generic [ref=e837]:
+                  - generic [ref=e838]: Update Token
+                  - generic [ref=e840]: "2"
+                - generic [ref=e841]:
+                  - generic [ref=e842]: Notify Token Updated
+                  - generic [ref=e843]: "3"
+                - generic [ref=e844]:
+                  - generic [ref=e845]: Respond (HTTP 200 OK)
+                  - generic [ref=e846]: "4"
+                - generic [ref=e847]:
+                  - generic [ref=e848]: Update Token Info
+                  - generic [ref=e850]: "5"
+                - generic [ref=e851]:
+                  - generic [ref=e853]: Required to call Transact to get latest
+                  - generic [ref=e854]: token information if
+                  - generic [ref=e855]: eventReasonCode
+                  - generic [ref=e856]: is REDIGITIZATION_COMPLETE
+                - generic [ref=e857]:
+                  - generic [ref=e858]: Transact(Token Unique Reference)
+                  - generic [ref=e859]: "6"
+                - generic [ref=e860]:
+                  - generic [ref=e861]: (Token, Token Expiry, Cryptogram)
+                  - generic [ref=e862]: "7"
+                - generic [ref=e863]:
+                  - generic [ref=e864]: Update card / token info
+                  - generic [ref=e866]: "8"
+                - generic [ref=e869]: alt
+                - generic [ref=e874]: Merchant
+                - generic [ref=e878]: MDES
+                - generic [ref=e882]: Issuer
+            - paragraph [ref=e883]:
+              - strong [ref=e884]: Issuer Account Update
+            - paragraph [ref=e885]:
+              - strong [ref=e886]: "Technical Details:"
+            - list [ref=e887]:
+              - listitem [ref=e888]:
+                - text: Decrypt the
+                - strong [ref=e889]: EncryptedPayload.encryptedData
+                - text: in the
+                - strong [ref=e890]: Notify Token Updated
+                - text: request received from MDES to fetch the array of updated tokens. This is the reverse of the encryption process in steps 3 and 4 of the Technical Details section of the
+                - link "Add Card Tokenization" [ref=e891] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#add-card-tokenization
+                - text: use case above, but using the
+                - strong [ref=e892]: private
+                - text: key from the RSA wrapped
+                - strong [ref=e893]: decryption
+                - text: key pair. The reason code will be present in the token object.
+              - listitem [ref=e894]:
+                - text: Use the
+                - strong [ref=e895]: tokenUniqueReference
+                - text: value and
+                - strong [ref=e896]: tokenInfo
+                - text: object received for each token to update status information for the associated tokens in your system. We recommend that you store this state information on your servers for actions such as
+                - link "displaying a list of available tokenized Account PANs" [ref=e897] [cursor=pointer]:
+                  - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#display-payment-info
+                - text: to the consumer.
+              - listitem [ref=e898]:
+                - text: A
+                - strong [ref=e899]: Notify Token Updated
+                - text: request can also contain information about new or changed card art in the productConfig object returned for each token. If you plan to display card art, you can also store the
+                - strong [ref=e900]: productConfig
+                - text: information (in particular, the Asset IDs) with the state information for each token. Every time you identify a new Asset ID value that has not previously been received, you can download and cache this image for future use. New Asset IDs are always used for both new and changed art, so you can cache art for unchanged Asset IDs. The
+                - strong [ref=e901]: productConfig
+                - text: table below (in the next section) lists the different Asset IDs that can be returned.
+              - listitem [ref=e902]:
+                - text: Respond to the MDES server identified in the initial request with a 200 OK HTTP response code and a JSON message body containing your server’s hostname in the
+                - strong [ref=e903]: responseHost
+                - text: parameter and a unique identifier for this response,
+                - strong [ref=e904]: responseId
+                - text: .
+              - listitem [ref=e905]:
+                - text: In the case of
+                - strong [ref=e906]: eventReasonCode = REDIGITIZATION_COMPLETE
+                - text: ", delete the old cryptogram and call"
+                - strong [ref=e907]: Transact API
+                - text: to update the token (accountNumber), token expiry (applicationExpiryDate) and cryptogram (de48se43Data).
+            - generic [ref=e911]:
+              - generic [ref=e912]: "Note:"
+              - generic [ref=e913]:
+                - paragraph [ref=e914]:
+                  - text: Failure to fetch the new token and other token related information after receiving a
+                  - strong [ref=e915]: REDIGITIZATION_COMPLETE
+                  - text: notification may cause future transactions to fail. It is important to call Transact to retrieve the latest token information before attempting to perform another transaction.
+                - paragraph [ref=e916]: In the case of a Merchant Initiated Transaction (MIT), if the token number has changed, you should restart the series with Security Level Indicator (SLI) value to 246 and establish domain control with a cryptogram. Subsequent transactions may revert to a 247 SLI value.
+            - generic [ref=e920]:
+              - generic [ref=e921]: "Note:"
+              - generic [ref=e922]:
+                - paragraph [ref=e923]:
+                  - text: If a
+                  - strong [ref=e924]: Notify Token Updated
+                  - text: request fails with a timeout, connection failure, or an HTTP response code of 302, 500, or 503, MDES will automatically retry three times with a wait of up to 5 seconds between each try. If the call has not succeeded after the initial retries, MDES will attempt a second round of three retries, with increasing time intervals between each retry. Between attempts, the system will wait 15 minutes, 30 minutes, and then 2 hours. In the case of a 503 response code, the Retry-After header will be respected if present and will count as a retry.
+                - paragraph [ref=e925]: The diagram below shows an example token update notification. In this scenario, a consumer closes their payment account and the issuer sends a delete account request to MDES. MDES in turn sends a Notify Token Updated request with status DEACTIVATED to the relevant merchant.
+            - img [ref=e933]:
+              - generic [ref=e934]:
+                - generic [ref=e938]: Merchant
+                - generic [ref=e942]: MDES
+                - generic [ref=e946]: Issuer
+                - generic [ref=e947]:
+                  - generic [ref=e948]: Account closed
+                  - generic [ref=e950]: "1"
+                - generic [ref=e951]:
+                  - generic [ref=e952]: Delete
+                  - generic [ref=e953]: "2"
+                - generic [ref=e954]:
+                  - generic [ref=e955]: Acknowledgement
+                  - generic [ref=e956]: "3"
+                - generic [ref=e957]:
+                  - generic [ref=e958]: Delete token mapping
+                  - generic [ref=e960]: "4"
+                - generic [ref=e961]:
+                  - generic [ref=e962]: Notify Token Updated
+                  - generic [ref=e963]: "5"
+                - generic [ref=e964]:
+                  - generic [ref=e965]: Acknowledgement
+                  - generic [ref=e966]: "6"
+                - generic [ref=e967]:
+                  - generic [ref=e968]: Token Event NotificationDeactivate
+                  - generic [ref=e969]: "7"
+                - generic [ref=e970]:
+                  - generic [ref=e971]: Delete card from file
+                  - generic [ref=e973]: "8"
+                - generic [ref=e977]: Merchant
+                - generic [ref=e981]: MDES
+                - generic [ref=e985]: Issuer
+            - paragraph [ref=e986]:
+              - strong [ref=e987]: Example API Flow for Notify Token Update
+            - heading "List of Events which Trigger a Notify Token Update" [level=3] [ref=e989]: List of Events which Trigger a Notify Token Update
+            - paragraph [ref=e991]: "Notify Token Updates are only sent in the following circumstances:"
+            - list [ref=e992]:
+              - listitem [ref=e993]: "Issuer initiated Token lifecycle events: Delete, Suspend and Unsuspend"
+              - listitem [ref=e994]: Token activated by MDES
+              - listitem [ref=e995]: ProductConfig changes (mainly card art changes)
+              - listitem [ref=e996]: TokenInfo changes e.g. a PAN change resulting in a change to the accountPanSuffix (typically, the last 4 digits of the PAN)
+            - paragraph [ref=e997]:
+              - strong [ref=e998]: NOTE
+              - text: ": Notify Token Update are not sent for Token Requestor initiated lifecycle events e.g. Suspend, Unsuspend, Delete."
+            - heading "Consumer Deletes a Card Associated with Their Profile" [level=2] [ref=e1000]: Consumer Deletes a Card Associated with Their Profile
+            - paragraph [ref=e1002]: This use case describes how you can offer the consumer the ability to delete a tokenized card associated with their merchant profile.
+            - paragraph [ref=e1003]:
+              - strong [ref=e1004]: "NOTE:"
+              - text: You are required to send a Delete request for the associated token when a consumer deletes a tokenized Account PAN.
+            - list [ref=e1005]:
+              - listitem [ref=e1006]:
+                - text: Make a
+                - strong [ref=e1007]: Delete
+                - text: request containing the
+                - strong [ref=e1008]: tokenUniqueReference
+                - text: for the card the consumer has chosen to delete.
+              - listitem [ref=e1009]: If the request is successful, archive the information associated with this token based on your internal policies and update the token status stored in your system to DEACTIVATED. You could then update the user interface to remove the deleted card.
+              - listitem [ref=e1010]: Mastercard recommends that you delete any cryptograms you may be storing for this token as well as the token itself.
+              - listitem [ref=e1011]: Based on your own internal policies and any regulatory requirements, you can delete all archived information about this token when a certain amount of time has passed, such as 2 years.
+            - img [ref=e1019]:
+              - generic [ref=e1020]:
+                - generic [ref=e1024]: Cardholder
+                - generic [ref=e1028]: Merchant
+                - generic [ref=e1032]: MDES
+                - generic [ref=e1036]: Issuer
+                - generic [ref=e1037]:
+                  - generic [ref=e1038]: Delete saved card (Token) from file
+                  - generic [ref=e1039]: "1"
+                - generic [ref=e1040]:
+                  - generic [ref=e1041]: Delete Token
+                  - generic [ref=e1042]: "2"
+                - generic [ref=e1043]:
+                  - generic [ref=e1044]: Tokenization Event Notification (Deactivate)
+                  - generic [ref=e1045]: "3"
+                - generic [ref=e1046]:
+                  - generic [ref=e1047]: Acknowledgement
+                  - generic [ref=e1048]: "4"
+                - generic [ref=e1049]:
+                  - generic [ref=e1050]: Deactivate Token mapping
+                  - generic [ref=e1052]: "5"
+                - generic [ref=e1053]:
+                  - generic [ref=e1054]: Delete OK
+                  - generic [ref=e1055]: "6"
+                - generic [ref=e1056]:
+                  - generic [ref=e1057]: Saved card removed
+                  - generic [ref=e1058]: "7"
+                - generic [ref=e1062]: Cardholder
+                - generic [ref=e1066]: Merchant
+                - generic [ref=e1070]: MDES
+                - generic [ref=e1074]: Issuer
+            - paragraph [ref=e1075]:
+              - strong [ref=e1076]: API Flow for Deleting a Card Associated with a Consumer Profile
+            - heading "Consumer Deletes Their Profile" [level=2] [ref=e1078]: Consumer Deletes Their Profile
+            - paragraph [ref=e1080]: This use case describes how a consumer can delete their merchant profile and all associated tokenized cards.
+            - paragraph [ref=e1081]:
+              - strong [ref=e1082]: "NOTE:"
+              - text: You are required to make Delete requests for all associated tokens when a consumer deletes their profile from your website.
+            - paragraph [ref=e1083]:
+              - strong [ref=e1084]: "Technical Details:"
+            - paragraph [ref=e1085]:
+              - text: Make a
+              - strong [ref=e1086]: Delete
+              - text: request with an array of
+              - strong [ref=e1087]: tokenUniqueReference
+              - text: values for all the cards associated with the consumer’s profile. A single Delete request can delete a maximum of 10 tokens. If the consumer has more than 10 tokenized cards, split the Delete requests into batches.
+            - paragraph [ref=e1088]: "For each Delete request:"
+            - list [ref=e1089]:
+              - listitem [ref=e1090]: If the request is successful, archive the information associated with this token based on your internal policies, update the token status you are storing to DEACTIVATED.
+              - listitem [ref=e1091]: Mastercard recommends that you delete any cryptograms you may be storing for this token as well as the token itself. Based on your internal policies and any regulatory requirements, you can delete all archived information about this token when a certain amount of time has passed, such as 2 years.
+            - paragraph [ref=e1092]: Once you have completed all the delete requests, update the user interface to remove the consumer’s profile.
+            - heading "Displaying Payment Info" [level=1] [ref=e1094]: Displaying Payment Info
+            - heading "Display Tokenized Account PANs Associated with a Profile" [level=2] [ref=e1097]: Display Tokenized Account PANs Associated with a Profile
+            - paragraph [ref=e1099]: "This use case describes how to display tokenized Account PANs associated with a consumer’s profile. There are several scenarios where this is required, for example:"
+            - list [ref=e1100]:
+              - listitem [ref=e1101]: Creating a screen to manage Account PANs associated with a profile
+              - listitem [ref=e1102]: Providing an option to select between different Account PANs before making payment
+            - paragraph [ref=e1103]:
+              - img "alt text" [ref=e1108]
+            - paragraph [ref=e1109]:
+              - strong [ref=e1110]: Example Manage Cards Screen
+            - heading "Displaying a List of Tokenized Account PANs Available for Payment" [level=3] [ref=e1112]: Displaying a List of Tokenized Account PANs Available for Payment
+            - paragraph [ref=e1114]:
+              - strong [ref=e1115]: "Technical Details:"
+            - list [ref=e1116]:
+              - listitem [ref=e1117]:
+                - text: Fetch the stored state you maintain for each
+                - strong [ref=e1118]: tokenUniqueReference
+                - text: associated with the consumer’s profile, such as status, Account PAN expiry date,
+                - strong [ref=e1119]: accountPanSuffix
+                - text: (last 4 digits of the consumer’s Account PAN), and the
+                - strong [ref=e1120]: productConfig
+                - text: object (customer service details, such as customer service link, email and phone number, and card art information) and
+                - strong [ref=e1121]: tokenDetails
+                - text: (tokenNumber, expiryMonth, expiryYear, dataValidUntilTimestamp and PAR). This state is maintained by your code which responds to MDES Notify Token Updated requests.
+              - listitem [ref=e1122]:
+                - text: If displaying card art, you can use the cached card art images you previously fetched from MDES using the
+                - strong [ref=e1123]: Get Asset
+                - text: request. You can then display the composite image created from the brand logo, the issuer logo, a co-brand logo (if any) and the card background.
+                - generic [ref=e1127]:
+                  - generic [ref=e1128]: "Note:"
+                  - list [ref=e1130]:
+                    - listitem [ref=e1131]:
+                      - text: You cannot always rely on the presence of the composite image and will need to write code to create and display your own composite image if one is not available. See
+                      - link "Creating a Combined Image from Components" [ref=e1132] [cursor=pointer]:
+                        - /url: /mdes-digital-enablement/documentation/use-cases/mdes-for-merchants-use-cases/#creating-a-combined-image-from-components
+                      - text: for more details.
+                    - listitem [ref=e1133]: Images may be received in either vector (PDF) or raster (PNG) format. If you choose to display card art, your code must be able to handle images in either format.
+              - listitem [ref=e1134]: Repeat steps 1–2 for each token associated with the profile.
+              - listitem [ref=e1135]:
+                - text: Display the consumer’s card details using the information and assets gathered in steps 1–2. Refer to the Mastercard brand guidelines for detailed information regarding brand requirements. See the sections on ‘Use at digital merchant locations’ and ‘Use in digital applications’ at
+                - link "https://brand.mastercard.com/brandcenter/mastercard-brand-mark.html opens in a new tab" [ref=e1136] [cursor=pointer]:
+                  - /url: https://brand.mastercard.com/brandcenter/mastercard-brand-mark.html
+                  - text: https://brand.mastercard.com/brandcenter/mastercard-brand-mark.html
+                  - generic [ref=e1137]: opens in a new tab
+                - text: . The following table shows some options for mapping token status to display state.
+            - table [ref=e1139]:
+              - rowgroup [ref=e1140]:
+                - row "Status Description Example User Interface State – Option A Example User Interface State – Option B" [ref=e1141]:
+                  - columnheader "Status" [ref=e1142]
+                  - columnheader "Description" [ref=e1143]
+                  - columnheader "Example User Interface State – Option A" [ref=e1144]
+                  - columnheader "Example User Interface State – Option B" [ref=e1145]
+              - rowgroup [ref=e1146]:
+                - row "INACTIVE Token has not yet been activated Show card grayed out Do not show last 4 digits of Account PAN" [ref=e1147]:
+                  - cell "INACTIVE" [ref=e1148]
+                  - cell "Token has not yet been activated" [ref=e1149]
+                  - cell "Show card grayed out" [ref=e1150]
+                  - cell "Do not show last 4 digits of Account PAN" [ref=e1151]
+                - row "ACTIVE Token is active and ready to transact Show card as normal (it can only be used for payments in this state) Show last 4 digits of Account PAN" [ref=e1152]:
+                  - cell "ACTIVE" [ref=e1153]
+                  - cell "Token is active and ready to transact" [ref=e1154]
+                  - cell "Show card as normal (it can only be used for payments in this state)" [ref=e1155]
+                  - cell "Show last 4 digits of Account PAN" [ref=e1156]
+                - row "SUSPENDED Token is suspended and unable to transact Show card grayed out Do not show last 4 digits of Account PAN" [ref=e1157]:
+                  - cell "SUSPENDED" [ref=e1158]
+                  - cell "Token is suspended and unable to transact" [ref=e1159]
+                  - cell "Show card grayed out" [ref=e1160]
+                  - cell "Do not show last 4 digits of Account PAN" [ref=e1161]
+                - row "DEACTIVATED Token has been permanently deactivated Show card grayed out Do not show last 4 digits of Account PAN" [ref=e1162]:
+                  - cell "DEACTIVATED" [ref=e1163]
+                  - cell "Token has been permanently deactivated" [ref=e1164]
+                  - cell "Show card grayed out" [ref=e1165]
+                  - cell "Do not show last 4 digits of Account PAN" [ref=e1166]
+            - paragraph [ref=e1167]: The tables below describe the combined image and the different components needed to create a combined image.
+            - table [ref=e1169]:
+              - rowgroup [ref=e1170]:
+                - row "productConfig Field Description" [ref=e1171]:
+                  - columnheader "productConfig Field" [ref=e1172]
+                  - columnheader "Description" [ref=e1173]
+              - rowgroup [ref=e1174]:
+                - row "brandLogoAssetId The Mastercard or Maestro brand logo associated with this card" [ref=e1175]:
+                  - cell "brandLogoAssetId" [ref=e1176]
+                  - cell "The Mastercard or Maestro brand logo associated with this card" [ref=e1177]
+                - row "issuerLogoAssetId The logo of the issuing bank" [ref=e1178]:
+                  - cell "issuerLogoAssetId" [ref=e1179]
+                  - cell "The logo of the issuing bank" [ref=e1180]
+                - row "coBrandLogoAssetId The co-brand logo (if any) for this product" [ref=e1181]:
+                  - cell "coBrandLogoAssetId" [ref=e1182]
+                  - cell "The co-brand logo (if any) for this product" [ref=e1183]
+                - row "cardBackgroundCombinedAssetId The card image used to represent the digital card; this ‘combined’ option contains the brand, issuer and any co-brand logos" [ref=e1184]:
+                  - cell "cardBackgroundCombinedAssetId" [ref=e1185]
+                  - cell "The card image used to represent the digital card; this ‘combined’ option contains the brand, issuer and any co-brand logos" [ref=e1186]
+                - row "cardBackgroundAssetId The card image used to represent the digital card; does not include the brand, issuer or co-brand logo" [ref=e1187]:
+                  - cell "cardBackgroundAssetId" [ref=e1188]
+                  - cell "The card image used to represent the digital card; does not include the brand, issuer or co-brand logo" [ref=e1189]
+                - row "iconAssetId The icon representing the primary brands associated with this product" [ref=e1190]:
+                  - cell "iconAssetId" [ref=e1191]
+                  - cell "The icon representing the primary brands associated with this product" [ref=e1192]
+                - row "foregroundColor Color of foreground text overlayed on the card image, e.g. product type, such as Debit or Credit" [ref=e1193]:
+                  - cell "foregroundColor" [ref=e1194]
+                  - cell "Color of foreground text overlayed on the card image, e.g. product type, such as Debit or Credit" [ref=e1195]
+            - paragraph [ref=e1196]: The images listed above are described in more detail below.
+            - table [ref=e1198]:
+              - rowgroup [ref=e1199]:
+                - row "Example Images Description Fieldname Details" [ref=e1200]:
+                  - columnheader "Example Images" [ref=e1201]
+                  - columnheader "Description" [ref=e1202]
+                  - columnheader "Fieldname" [ref=e1203]
+                  - columnheader "Details" [ref=e1204]
+              - rowgroup [ref=e1205]:
+                - row "Composite Card Composite Card Image cardBackgroundCombinedAsset Background image + Issuer logo + Brand logo + product type text (e.g. Debit, Credit). Height-to-width ratio should be 63%." [ref=e1206]:
+                  - cell "Composite Card" [ref=e1207]:
+                    - img "Composite Card" [ref=e1212]
+                  - cell "Composite Card Image" [ref=e1213]
+                  - cell "cardBackgroundCombinedAsset" [ref=e1214]
+                  - cell "Background image + Issuer logo + Brand logo + product type text (e.g. Debit, Credit). Height-to-width ratio should be 63%." [ref=e1215]:
+                    - text: Background image + Issuer logo + Brand logo + product type text (e.g. Debit, Credit).
+                    - text: Height-to-width ratio should be 63%.
+                - row "Example Card Icon Card Icon iconAsset Icon to represent the card. Supplied as a PNG image. PDF is not supported for the Icon asset. Dimensions 100 x 100 px." [ref=e1216]:
+                  - cell "Example Card Icon" [ref=e1217]:
+                    - img "Example Card Icon" [ref=e1222]
+                  - cell "Card Icon" [ref=e1223]
+                  - cell "iconAsset" [ref=e1224]
+                  - cell "Icon to represent the card. Supplied as a PNG image. PDF is not supported for the Icon asset. Dimensions 100 x 100 px." [ref=e1225]:
+                    - text: Icon to represent the card.
+                    - text: Supplied as a PNG image. PDF is not supported for the Icon asset.
+                    - text: Dimensions 100 x 100 px.
+                - 'row "Brand Logo Brand Logo brandLogoAsset Mastercard or Maestro logo supplied as a PNG image in RGB color format or a PDF vector resource. NOTE: A black background has been added for illustration purposes only. The actual PNG images would be transparent (alpha channel) with no background. The alpha channel can be used for compositing the brand logo onto the Card Background." [ref=e1226]':
+                  - cell "Brand Logo" [ref=e1227]:
+                    - img "Brand Logo" [ref=e1232]
+                  - cell "Brand Logo" [ref=e1233]
+                  - cell "brandLogoAsset" [ref=e1234]
+                  - 'cell "Mastercard or Maestro logo supplied as a PNG image in RGB color format or a PDF vector resource. NOTE: A black background has been added for illustration purposes only. The actual PNG images would be transparent (alpha channel) with no background. The alpha channel can be used for compositing the brand logo onto the Card Background." [ref=e1235]':
+                    - text: Mastercard or Maestro logo supplied as a PNG image in RGB color format or a PDF vector resource.
+                    - strong [ref=e1236]: "NOTE:"
+                    - text: A black background has been added for illustration purposes only. The actual PNG images would be transparent (alpha channel) with no background. The alpha channel can be used for compositing the brand logo onto the Card Background.
+                - 'row "Example Issuer Logo Issuer Logo issuerLogoAsset NOTE: A gray background has been added for illustration purposes only. The actual image would be transparent (alpha channel) with no background. Supplied as a PNG image in RGB color format or a PDF vector resource. PNG images will contain an alpha channel for compositing onto the Card Background." [ref=e1237]':
+                  - cell "Example Issuer Logo" [ref=e1238]:
+                    - img "Example Issuer Logo" [ref=e1243]
+                  - cell "Issuer Logo" [ref=e1244]
+                  - cell "issuerLogoAsset" [ref=e1245]
+                  - 'cell "NOTE: A gray background has been added for illustration purposes only. The actual image would be transparent (alpha channel) with no background. Supplied as a PNG image in RGB color format or a PDF vector resource. PNG images will contain an alpha channel for compositing onto the Card Background." [ref=e1246]':
+                    - strong [ref=e1247]: "NOTE:"
+                    - text: A gray background has been added for illustration purposes only. The actual image would be transparent (alpha channel) with no background.
+                    - text: Supplied as a PNG image in RGB color format or a PDF vector resource.
+                    - text: PNG images will contain an alpha channel for compositing onto the Card Background.
+                - 'row "Example Background Image Background Image cardBackgroundAsset NOTE: In this example, just a solid color. Supplied as a PNG image in RGB color format or a PDF vector resource. Height-to-width ratio should be 63%." [ref=e1248]':
+                  - cell "Example Background Image" [ref=e1249]:
+                    - img "Example Background Image" [ref=e1254]
+                  - cell "Background Image" [ref=e1255]
+                  - cell "cardBackgroundAsset" [ref=e1256]
+                  - 'cell "NOTE: In this example, just a solid color. Supplied as a PNG image in RGB color format or a PDF vector resource. Height-to-width ratio should be 63%." [ref=e1257]':
+                    - strong [ref=e1258]: "NOTE:"
+                    - text: In this example, just a solid color.
+                    - text: Supplied as a PNG image in RGB color format or a PDF vector resource.
+                    - text: Height-to-width ratio should be 63%.
+            - heading "Creating a Combined Image from Components" [level=3] [ref=e1260]: Creating a Combined Image from Components
+            - paragraph [ref=e1262]: To create a combined image
+            - list [ref=e1263]:
+              - listitem [ref=e1264]: Scale the component images to fit within area C x D (co-brand and/or issuer logo area) or area E x D (brand logo area) shown in the diagram below. The combined image should have a width of 1536 pixels and a height of 969 pixels (a height-to-width ratio of 63%). Your code should be able to handle PDF or PNG images.
+              - listitem [ref=e1265]: Using the alpha layer in the logo images, create a composite image by superimposing the logos over the background using the spacing described in the diagram below. Center the co-brand logo and/or issuer logo within the C x D area.
+              - listitem [ref=e1266]: Optionally, superimpose text on the image such as the last 4 digits of the consumer’s PAN, using the productConfig foregroundColor.
+            - paragraph [ref=e1267]:
+              - img "alt text" [ref=e1272]
+            - paragraph [ref=e1273]: The table below shows the pixel dimensions for the measurements shown above.
+            - table [ref=e1275]:
+              - rowgroup [ref=e1276]:
+                - row "Dimension Description Value (in Pixels)" [ref=e1277]:
+                  - columnheader "Dimension" [ref=e1278]
+                  - columnheader "Description" [ref=e1279]
+                  - columnheader "Value (in Pixels)" [ref=e1280]
+              - rowgroup [ref=e1281]:
+                - row "A Side Padding 82" [ref=e1282]:
+                  - cell "A" [ref=e1283]
+                  - cell "Side Padding" [ref=e1284]
+                  - cell "82" [ref=e1285]
+                - row "B Top / Bottom Padding 57" [ref=e1286]:
+                  - cell "B" [ref=e1287]
+                  - cell "Top / Bottom Padding" [ref=e1288]
+                  - cell "57" [ref=e1289]
+                - row "C Co-brand and/or Issuer logo area width 1372" [ref=e1290]:
+                  - cell "C" [ref=e1291]
+                  - cell "Co-brand and/or Issuer logo area width" [ref=e1292]
+                  - cell "1372" [ref=e1293]
+                - row "D Height for the 2 logo areas 283" [ref=e1294]:
+                  - cell "D" [ref=e1295]
+                  - cell "Height for the 2 logo areas" [ref=e1296]
+                  - cell "283" [ref=e1297]
+                - row "E Brand logo width 459" [ref=e1298]:
+                  - cell "E" [ref=e1299]
+                  - cell "Brand logo width" [ref=e1300]
+                  - cell "459" [ref=e1301]
+            - heading "Display Detailed Information About a Tokenized Account PAN" [level=2] [ref=e1303]: Display Detailed Information About a Tokenized Account PAN
+            - paragraph [ref=e1305]:
+              - text: If the consumer needs to view detailed information about a specific Account PAN, Mastercard recommends you use the
+              - strong [ref=e1306]: Get Token
+              - text: request because this fetches the most up-to-date token state from MDES. You should update any stored state you maintain for this
+              - strong [ref=e1307]: tokenUniqueReference
+              - text: to ensure that your internal system state has not got out of sync with MDES due to network outages, etc. The
+              - strong [ref=e1308]: Get Token
+              - text: request also returns Asset ID values for the different branding images associated with this card. If any new Asset ID values are returned, use the
+              - strong [ref=e1309]: Get Asset
+              - text: request to fetch these new images for display.
+            - paragraph [ref=e1310]:
+              - strong [ref=e1311]: "NOTE:"
+              - text: Assets retrieved through these requests may be cached in perpetuity. Any future updates to an asset will always result in a new Asset ID being issued. Mastercard strongly recommends you take advantage of caching to minimize
+              - strong [ref=e1312]: Get Asset
+              - text: requests.
+            - paragraph [ref=e1313]:
+              - strong [ref=e1314]: "NOTE:"
+              - text: If you set the
+              - strong [ref=e1315]: includeTokenDetail
+              - text: request flag to true, you can also receive an additional encrypted object,
+              - strong [ref=e1316]: tokenDetail,
+              - text: containing the token (in the field tokenNumber)
+            - heading "Making Payments" [level=1] [ref=e1318]: Making Payments
+            - heading "Consumer Checks Out or Makes a Payment" [level=2] [ref=e1321]: Consumer Checks Out or Makes a Payment
+            - paragraph [ref=e1323]: "This use case describes how a consumer can make payments using a tokenized Account PAN. For example, you could:"
+            - list [ref=e1324]:
+              - listitem [ref=e1325]: Allow the consumer to select their default payment card, choose another card, or pay with a new card added during checkout.
+              - listitem [ref=e1326]:
+                - text: Make a
+                - strong [ref=e1327]: Transact
+                - text: request using the reference for the token associated with the chosen card.
+              - listitem [ref=e1328]: Receive a token and cryptogram in the response.
+            - paragraph [ref=e1329]:
+              - strong [ref=e1330]: "NOTE:"
+              - text: Tokenize returns an active token and TUR. The TUR allows merchants to obtain a cryptogram (and token) via the Transact API to make payments.
+            - list [ref=e1331]:
+              - listitem [ref=e1332]: "Submit the token (instead of the Account PAN), cryptogram and token expiry date (returned in the Transact response: applicationExpiryDate) to your acquirer or payment processor for payment authorization. The acquirer or payment processor must support DSRP transactions. For subsequent recurring or partial shipment transactions, the cryptogram and expiry date should not be sent. Consult your acquirer or payment processor for details."
+              - listitem [ref=e1333]: When you receive a payment authorization response from your acquirer or payment processor, display the relevant success or failure message to the consumer.
+            - paragraph [ref=e1334]:
+              - img "alt text" [ref=e1339]
+            - paragraph [ref=e1340]:
+              - strong [ref=e1341]: Example Checkout Screen
+            - paragraph [ref=e1342]:
+              - strong [ref=e1343]: "Technical Details:"
+            - list [ref=e1344]:
+              - listitem [ref=e1345]:
+                - text: Fetch the
+                - strong [ref=e1346]: tokenUniqueReference
+                - text: associated with the consumer’s profile for the consumer’s chosen Account PAN via the Tokenize response. You should have already received confirmation, via a Notify Token Updated notification, that the token has been activated.
+              - listitem [ref=e1347]:
+                - text: Make a
+                - strong [ref=e1348]: Transact
+                - text: request with the
+                - strong [ref=e1349]: tokenUniqueReference
+                - text: from step 1 and a unique requestId.
+                - strong [ref=e1350]: dsrpType
+                - text: must be set to UCAF. Optionally, provide a 4-byte hex-encoded value in string format for the
+                - strong [ref=e1351]: unpredictableNumber
+                - text: parameter (you must use a cryptographically-secure random number generator, such as an HSM).
+                - generic [ref=e1355]:
+                  - generic [ref=e1356]: "Note:"
+                  - text: Tokenize returns an active token and TUR. The TUR allows merchants to obtain a cryptogram (and token) via the Transact API to make payments.
+              - listitem [ref=e1357]:
+                - text: Receive a response with an encrypted payload. Decrypt the response to extract the token (
+                - strong [ref=e1358]: encryptedPayload.encryptedData.accountNumber
+                - text: ) and the cryptogram contained in
+                - strong [ref=e1359]: encryptedPayload.encryptedData.de48se43Data
+                - text: .
+              - listitem [ref=e1360]: "Submit payment authorization requests, containing the token and cryptogram (from step 3), and token expiry date (returned in the Transact response: applicationExpiryDate) to your acquirer or payment processor for payment authorization. For subsequent recurring or partial shipment transactions, the cryptogram should not be sent. Consult your acquirer or payment processor for details."
+            - generic [ref=e1364]:
+              - generic [ref=e1365]: "Note:"
+              - generic [ref=e1366]:
+                - text: The acquirer used directly or through a payment processor to process these transactions must accept DSRP card-on-file tokens and e-commerce Security Level Indicator (SLI) values of 246 for standard payments and 247 for recurring/partial shipment payments.
+                - strong [ref=e1367]: DSRP cryptogram is required to be sent in the DE104 – Digital Payment Data (DPD) field - please refer to AN3363 bulletin for more details.
+            - img [ref=e1375]:
+              - generic [ref=e1376]:
+                - generic [ref=e1380]: Merchant
+                - generic [ref=e1384]: MDES
+                - generic [ref=e1388]: Acquirer or Payment Service Provider
+                - generic [ref=e1392]: Issuer
+                - generic [ref=e1393]:
+                  - generic [ref=e1394]: Transact (Unpredictable Number)
+                  - generic [ref=e1395]: "1"
+                - generic [ref=e1396]:
+                  - generic [ref=e1397]: (UCAF Cryptogram)
+                  - generic [ref=e1398]: "2"
+                - generic [ref=e1399]:
+                  - generic [ref=e1400]: Store Cryptogram readyfor next transaction
+                  - generic [ref=e1402]: "3"
+                - generic [ref=e1403]:
+                  - generic [ref=e1404]: Payment Authorization Request(POS Entry Mode = 10)
+                  - generic [ref=e1405]: "4"
+                - generic [ref=e1406]:
+                  - generic [ref=e1407]: Authorization Request
+                  - generic [ref=e1408]: "5"
+                - generic [ref=e1409]:
+                  - generic [ref=e1410]: Authorization Response
+                  - generic [ref=e1411]: "6"
+                - generic [ref=e1412]:
+                  - generic [ref=e1413]: Payment Authorization Response
+                  - generic [ref=e1414]: "7"
+                - generic [ref=e1418]: Merchant
+                - generic [ref=e1422]: MDES
+                - generic [ref=e1426]: Acquirer or Payment Service Provider
+                - generic [ref=e1430]: Issuer
+            - paragraph [ref=e1431]:
+              - strong [ref=e1432]: API Flow for Making a Payment
+            - heading "Recurring Payments" [level=3] [ref=e1434]: Recurring Payments
+            - paragraph [ref=e1436]: To allow a consumer to make repeated (recurring) or partial shipment payments, you should omit the cryptogram from subsequent authorization requests to your acquirer or payment processor. However, you must ensure that the original payment is made with a cryptogram. Mastercard will check that appropriate data is passed by acquirers and/or payment processors to ensure tokens are restricted to MDES for merchants program usage only.
+            - paragraph [ref=e1437]:
+              - strong [ref=e1438]: "NOTE:"
+              - text: Acquirers must use an e-commerce SLI value of 247 for recurring/partial shipments.
+            - heading "Storing Cryptograms" [level=3] [ref=e1440]: Storing Cryptograms
+            - paragraph [ref=e1442]: "There are several requirements for storing cryptograms:"
+            - list [ref=e1443]:
+              - listitem [ref=e1444]: It is recommended to use the cryptograms generated for a particular token in the order they are obtained.
+              - listitem [ref=e1445]: Mastercard recommends storing one encrypted cryptogram per token.
+              - listitem [ref=e1446]: Stored cryptograms must be considered sensitive information and stored in an encrypted format using strong cryptography as defined by the PCI SSC. If tokens and cryptograms are stored in the same environment, they should be protected under the requirements of PCI DSS, because storing both items together presents similar risks to storing an Account PAN.
+            - generic [ref=e1450]:
+              - generic [ref=e1451]: "Note:"
+              - generic [ref=e1452]:
+                - text: Starting March 1, 2025, cryptograms may expire 5 days after they are generated from the Transact API. See
+                - link "AN 6302 opens in a new tab" [ref=e1453] [cursor=pointer]:
+                  - /url: https://techdocs.mastercard.com/bundle/m_AN6302/page/tqi1649380838881.html
+                  - text: AN 6302
+                  - generic [ref=e1454]: opens in a new tab
+                - text: for details.
+            - heading "Customer Service" [level=1] [ref=e1456]: Customer Service
+            - heading "Consumer Contacts Your Website’s Customer Service Helpline" [level=2] [ref=e1459]: Consumer Contacts Your Website’s Customer Service Helpline
+            - paragraph [ref=e1461]: This use case describes how a consumer can provide their Account PAN as an additional form of identity verification for various customer service tasks.
+            - heading "Search by Full Account PAN" [level=3] [ref=e1463]: Search by Full Account PAN
+            - paragraph [ref=e1465]: MDES provides a mechanism to return a list of all tokens created for a given Account PAN as well as the status of each token. You can use the returned token information to cross reference against all the consumer profiles stored by your system to locate the relevant profile. This technique can be used as an additional identity verification step for a consumer.
+            - paragraph [ref=e1466]:
+              - strong [ref=e1467]: "Technical Details:"
+            - list [ref=e1468]:
+              - listitem [ref=e1469]: The consumer contacts your customer service team and provides their Account PAN. An example scenario would be that the consumer is locked out of their profile and cannot access their email to do a password reset.
+              - listitem [ref=e1470]: Your customer service representative requests additional information from the consumer, such as their full name.
+              - listitem [ref=e1471]:
+                - text: Make a
+                - strong [ref=e1472]: Search Tokens
+                - text: request using the full Account PAN. This request only accepts an Account PAN and, optionally, an expiry date. All other
+                - strong [ref=e1473]: fundingAccountInfo
+                - text: parameters are unsupported. The request is constructed in a similar way to a Tokenize request.
+              - listitem [ref=e1474]: "Receive a response containing a list of token objects that match to the Account PAN. For each object, the response contains a tokenUniqueReference value, the token status (INACTIVE, ACTIVE, SUSPENDED or DEACTIVATED), and the date and time that the token changed to the latest status (statusTimestamp). Suspended tokens have an additional field, suspendedBy, which identifies who suspended the token: either ISSUER (card issuer) or TOKEN_REQUESTOR (you). Consumer-initiated suspension is not applicable to this program."
+              - listitem [ref=e1475]:
+                - text: Cross reference the
+                - strong [ref=e1476]: tokenUniqueReference
+                - text: values with those associated with your consumer profiles to locate the relevant consumer.
+              - listitem [ref=e1477]: Verify the consumer’s identity using the information from MDES, the profile data in your system, and the information provided in step 2.
+              - listitem [ref=e1478]:
+                - text: Additionally, you can make a Get Token request with the
+                - strong [ref=e1479]: tokenUniqueReference
+                - text: to fetch further card details, such as card expiry date, to match against the information provided by the consumer.
+            - img [ref=e1487]:
+              - generic [ref=e1488]:
+                - generic [ref=e1492]: Cardholder
+                - generic [ref=e1496]: Merchant
+                - generic [ref=e1500]: OBO Token Requestor
+                - generic [ref=e1504]: MDES
+                - generic [ref=e1505]:
+                  - generic [ref=e1507]: Original PANs purged from
+                  - generic [ref=e1508]: system after Tokenization
+                - generic [ref=e1509]:
+                  - generic [ref=e1510]: Contact customer service
+                  - generic [ref=e1511]: "1"
+                - generic [ref=e1512]:
+                  - generic [ref=e1513]: Provide original PAN
+                  - generic [ref=e1514]: "2"
+                - generic [ref=e1515]:
+                  - generic [ref=e1516]: Search Payment Gateway Tokensfor this merchant (PAN)
+                  - generic [ref=e1517]: "3"
+                - generic [ref=e1518]:
+                  - generic [ref=e1519]: Search Tokens (PAN)
+                  - generic [ref=e1520]: "4"
+                - generic [ref=e1521]:
+                  - generic [ref=e1522]: (Token Status, Token Unique ReferenceLast 4 PAN/Token Mapping)
+                  - generic [ref=e1523]: "5"
+                - generic [ref=e1524]:
+                  - generic [ref=e1525]: Return matching Tokens
+                  - generic [ref=e1526]: "6"
+                - generic [ref=e1527]:
+                  - generic [ref=e1528]: Match returned data tocustomer profile
+                  - generic [ref=e1530]: "7"
+                - generic [ref=e1531]:
+                  - generic [ref=e1533]: Customer supplied PAN
+                  - generic [ref=e1534]: matches card details
+                - generic [ref=e1535]:
+                  - generic [ref=e1536]: Response
+                  - generic [ref=e1537]: "8"
+                - generic [ref=e1541]: Cardholder
+                - generic [ref=e1545]: Merchant
+                - generic [ref=e1549]: OBO Token Requestor
+                - generic [ref=e1553]: MDES
+            - paragraph [ref=e1554]:
+              - strong [ref=e1555]: API Flow for Customer Service Account PAN Lookup
+        - contentinfo [ref=e52]:
+          - generic [ref=e53]:
+            - link "Logo" [ref=e54] [cursor=pointer]:
+              - /url: /
+              - img "Logo" [ref=e55]
+            - generic [ref=e59]:
+              - list [ref=e61]:
+                - listitem [ref=e62]:
+                  - link "Terms of Use" [ref=e63] [cursor=pointer]:
+                    - /url: /terms-of-use
+                - listitem [ref=e64]:
+                  - link "Privacy Notice opens in a new tab" [ref=e65] [cursor=pointer]:
+                    - /url: https://www.mastercard.us/en-us/about-mastercard/what-we-do/privacy.html
+                    - text: Privacy Notice
+                    - img [ref=e66]
+                    - generic [ref=e68]: opens in a new tab
+                - listitem [ref=e69]:
+                  - link "Support" [ref=e70] [cursor=pointer]:
+                    - /url: /support
+                - listitem [ref=e71]:
+                  - link "Status opens in a new tab" [ref=e72] [cursor=pointer]:
+                    - /url: /api-status
+                    - text: Status
+                    - img [ref=e73]
+                    - generic [ref=e75]: opens in a new tab
+                - listitem [ref=e76]:
+                  - link "Forum opens in a new tab" [ref=e77] [cursor=pointer]:
+                    - /url: https://forum.developer.mastercard.com/s/
+                    - text: Forum
+                    - generic [ref=e78]: opens in a new tab
+                - listitem [ref=e79]:
+                  - link "Accessibility" [ref=e80] [cursor=pointer]:
+                    - /url: /platform/documentation/accessibility/
+                - listitem [ref=e81]:
+                  - link "llms.txt opens in a new tab" [ref=e82] [cursor=pointer]:
+                    - /url: /llms.txt
+                    - text: llms.txt
+                    - img [ref=e83]
+                    - generic [ref=e85]: opens in a new tab
+              - generic [ref=e86]: © 1994-2026. All rights reserved.
+    - button "Manage cookies" [ref=e1556] [cursor=pointer]
+  - region "Cookie banner" [active] [ref=e1558]:
+    - dialog "How we use cookies" [ref=e1559]:
+      - generic [ref=e1560]:
+        - generic [ref=e1561]:
+          - generic:
+            - heading "How we use cookies" [level=2] [ref=e1562]
+            - generic [ref=e1563]: We use cookies to improve the site, measure performance, understand our audience, enhance your experience and provide you with advertising based on your browsing activities and interests on this and other sites. You can always change your preferences or opt out at the bottom of the site. Please note some of the cookies we use are essential for the parts of the site to operate. See “Manage Cookies” for details.
+        - generic [ref=e1565]:
+          - button "Manage cookies" [ref=e1566] [cursor=pointer]
+          - generic [ref=e1567]:
+            - button "Reject all" [ref=e1568] [cursor=pointer]
+            - button "Accept cookies" [ref=e1569] [cursor=pointer]

@@ -60,7 +60,12 @@ export const GET: RequestHandler = async ({ params, url }) => {
 		);
 	}
 
-	const svg = slot === 'preview' ? cardPreviewSvg(variant) : cardSlotSvg(variant, slot);
+	// `?safeZone=true` overlays translucent rectangles showing the MDES
+	// composite-overlay regions (cobrand strip + brand-mark slot + padding).
+	// Only applies to the preview slot — uploadable slots must stay clean.
+	const safeZone = url.searchParams.get('safeZone') === 'true';
+	const svg =
+		slot === 'preview' ? cardPreviewSvg(variant, { safeZone }) : cardSlotSvg(variant, slot);
 
 	const format = (url.searchParams.get('format') ?? 'svg').toLowerCase();
 	if (format !== 'svg' && format !== 'png') {

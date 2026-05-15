@@ -7,12 +7,12 @@
  *
  * MDES requires four separate uploads per BIN:
  *
- * | Slot                  | Dimensions   | Format            |
- * | --------------------- | ------------ | ----------------- |
- * | Card Background       | 1536 × 969   | SVG (≤1MB) or PNG |
- * | App Icon              | 100 × 100    | PNG               |
- * | Cobrand Logo          | 1372 × 283   | SVG (≤1MB) or PNG |
- * | Issuer Logo           | 1372 × 283   | SVG (≤1MB) or PNG |
+ * | Slot                  | Dimensions   | Format                                           |
+ * | --------------------- | ------------ | ------------------------------------------------ |
+ * | Card Background       | 1536 × 969   | PNG (RGB) or PDF vector; SVG accepted in portal  |
+ * | App Icon              | 100 × 100    | PNG only — PDF not supported for the icon slot   |
+ * | Cobrand Logo          | 1372 × 283   | PNG (RGB + alpha) or PDF vector                  |
+ * | Issuer Logo           | 1372 × 283   | PNG (RGB + alpha) or PDF vector                  |
  *
  * Plus three colour fields configured separately in MC's UI:
  *
@@ -20,20 +20,92 @@
  * - PAN:              #FFFFFF
  * - Card Description: #EBEDE4
  *
- * PAN, MC mark, hologram, EMV chip, NFC indicator are rendered by Mastercard
- * — never in our uploaded assets.
+ * ────────────────────────────────────────────────────────────────────────
+ * RULES — what MUST NOT appear in any uploaded asset:
+ * ────────────────────────────────────────────────────────────────────────
  *
- * See `.knowledge/credit-card-art.md` for the full design notes.
+ *   ❌ PAN (card number)                — MC overlays at composite time
+ *   ❌ Cardholder name                  — MC overlays at composite time
+ *   ❌ Expiration date                  — MC overlays at composite time
+ *   ❌ CVC / CVV                        — not shown on digital cards period
+ *   ❌ EMV chip artwork                 — wallet renders its own
+ *   ❌ NFC / contactless symbol         — MC overlays
+ *   ❌ Mastercard brand mark (circles)  — MC supplies the brand logo (459×283)
+ *   ❌ Rounded corners on the source    — wallets round at composite time
+ *
+ * The brand mark composites at (995, 629) in the 1536×969 canvas. Keep
+ * critical content (wordmark, brand color highlights) out of the bottom-
+ * right 459×283 region or it gets covered. See CARD_LAYOUT.
+ *
+ * See `.knowledge/credit-card-art.md` for design notes and
+ * `.knowledge/mdes-asset-spec.md` for the verified spec audit.
  */
 
 import { wordmarkSvg } from './logo-sources';
 
-/** Canvas dimensions per MDES slot. */
+/** Canvas dimensions per MDES upload slot. */
 export const CARD_DIMENSIONS = {
 	background: { width: 1536, height: 969 },
 	appIcon: { width: 100, height: 100 },
 	cobrandLogo: { width: 1372, height: 283 },
 	issuerLogo: { width: 1372, height: 283 }
+} as const;
+
+/**
+ * MDES composite-image layout — where Mastercard places each logo on the
+ * 1536×969 background at render time. Values come directly from MC's docs
+ * at https://developer.mastercard.com/mdes-digital-enablement/documentation/
+ * use-cases/mdes-for-merchants-use-cases/#creating-a-combined-image-from-components
+ *
+ * Dimensions (per the MC spec diagram, captured at
+ * `.knowledge/cardart-source/mdes-layout-diagram.png`):
+ *
+ *   A — side padding             82 px
+ *   B — top/bottom padding       57 px
+ *   C — cobrand+issuer width    1372 px (= canvas - 2A)
+ *   D — logo-area height         283 px
+ *   E — brand-logo width         459 px
+ *
+ * Layout within the 1536×969 canvas:
+ *
+ *   ┌────────────────────────────────────────────────────────┐  ← 0,0
+ *   │ ↕B=57                                                  │
+ *   │ ┌──────────────────────────────────────────────────┐   │  ← 82,57
+ *   │ │↔A│ Co-brand Logo │           │ Issuer Logo │↔A│   │
+ *   │ │  │←──── C = 1372 (split: cobrand LEFT, issuer RIGHT)│
+ *   │ │D ↕                                                 │
+ *   │ └──────────────────────────────────────────────────┘   │  ← 82,57+283=340
+ *   │                                                        │
+ *   │  middle area — background visible, optional PAN/text   │
+ *   │                                                        │
+ *   │                       ┌─────────────────┐              │  ← 995,629
+ *   │                       │↔A│ Brand Logo │↔A│            │
+ *   │                       │  │←─ E = 459 ─→│  │            │
+ *   │                       │D ↕                            │
+ *   │                       └─────────────────┘              │  ← 1454,912
+ *   │ ↕B=57                                                  │
+ *   └────────────────────────────────────────────────────────┘  ← 1536,969
+ *
+ * Brand logo (the MC circles mark) is SUPPLIED BY MASTERCARD — we don't
+ * upload it. The slot is documented here so the live preview can mock
+ * its placement and our background designs reserve a safe zone for it.
+ */
+export const CARD_LAYOUT = {
+	canvas: { width: 1536, height: 969 }, // = CARD_DIMENSIONS.background; 63% ratio
+	sidePadding: 82, // A
+	topBottomPadding: 57, // B
+	logoArea: { width: 1372, height: 283 }, // C × D — cobrand + issuer band
+	brandLogo: { width: 459, height: 283 }, // E × D — MC's own mark
+	/**
+	 * Pre-computed positions within the canvas, top-left origin.
+	 * Use these to position assets in the live composite preview.
+	 */
+	positions: {
+		cobrandIssuerBand: { x: 82, y: 57 }, // top strip, full C wide
+		brandLogo: { x: 1536 - 82 - 459, y: 969 - 57 - 283 } // = (995, 629), bottom-right
+	},
+	/** Usable area between the padded edges. */
+	safeZone: { x: 82, y: 57, width: 1372, height: 855 }
 } as const;
 
 /** Slot name → required dimensions. */
@@ -187,44 +259,75 @@ export function cardIssuerLogoSvg(): string {
 
 /**
  * Composite preview — what the rendered card LOOKS like in Apple Pay /
- * Google Pay once MC overlays the PAN + their own marks.
+ * Google Pay once MC overlays the brand mark at composite time.
  *
- * Not uploaded anywhere — just the live preview. Renders the background,
- * overlays a wordmark approximation top-left, a placeholder PAN bottom-
- * left, and an MC logo bottom-right.
+ * Not uploaded anywhere — just the live preview. Honours the exact MDES
+ * layout from `CARD_LAYOUT`: cobrand-logo at the top-left of the
+ * top strip, optional issuer-logo top-right, optional PAN last-4 + product
+ * text in the middle, and the MC brand mark at bottom-right (459×283).
  *
- * This intentionally MIMICS MC's render so designers can see the final
- * card before submitting. Don't ship this composite as an MDES upload.
+ * `safeZone: true` overlays translucent rectangles showing the padding and
+ * brand-mark zone so brand designers can validate a new background design
+ * doesn't crash into any of MC's overlay regions.
  */
-export function cardPreviewSvg(variant: CardVariant): string {
-	const { width, height } = CARD_DIMENSIONS.background;
+export function cardPreviewSvg(
+	variant: CardVariant,
+	options: { safeZone?: boolean } = {}
+): string {
+	const { width, height } = CARD_LAYOUT.canvas;
+	const { sidePadding, topBottomPadding, logoArea, brandLogo, positions } = CARD_LAYOUT;
 	const bg = cardBackgroundSvg(variant);
-	// Strip outer svg wrappers from the inner inserts.
 	const bgInner = bg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
 
-	// Wordmark — top-left, ~22% width.
-	const wmW = width * 0.22;
-	const wmH = wmW * (90 / 426);
-	const wmX = width * 0.05;
-	const wmY = height * 0.08;
-	const wordmark = wordmarkSvg(variant.wordmarkFg, null, null, null);
-	const wmInner = wordmark.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
-	const wmGroup = `<g transform="translate(${wmX} ${wmY}) scale(${wmW / 426})">${wmInner}</g>`;
+	// ── Cobrand logo (our dash.fi wordmark) — sized to fit the top strip ─
+	// In the canonical MDES composite, cobrand sits at the LEFT of the
+	// 1372×283 top band. Our slot's full content fills 1372 wide, so when
+	// we ship cobrand-only (no issuer mark — issuer slot is a 1×1 transparent
+	// placeholder) the wordmark gets the full strip. Mirror that here.
+	const cobrand = cardCobrandLogoSvg(variant);
+	const cobrandInner = cobrand.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+	const cobrandGroup = `<g transform="translate(${positions.cobrandIssuerBand.x} ${positions.cobrandIssuerBand.y})">${cobrandInner}</g>`;
 
-	// PAN — placeholder •••• 1234 — bottom-left.
-	const panY = height * 0.84;
-	const panX = width * 0.05;
-	const panFontSize = height * 0.07;
-	const pan = `<text x="${panX}" y="${panY}" font-family="ui-monospace, 'PP Supply Mono', SFMono-Regular, Menlo, monospace" font-size="${panFontSize}" font-weight="400" fill="#FFFFFF" letter-spacing="0.05em">•••• 1234</text>`;
+	// ── Brand mark (Mastercard's two-circle mark) — 459×283 bottom-right ─
+	// Sized to fit the E×D region. Two overlapping circles, scaled so the
+	// pair fits within the 459×283 box.
+	const bmW = brandLogo.width;
+	const bmH = brandLogo.height;
+	const bmX = positions.brandLogo.x;
+	const bmY = positions.brandLogo.y;
+	// Two circles sized to bmH and overlapped by 35% of diameter — matches
+	// the proportions of MC's actual mark within an E×D bounding box.
+	const r = bmH / 2;
+	const overlap = bmH * 0.35;
+	const totalWidth = r * 2 + (r * 2 - overlap); // = 2r * 1.65
+	// Center the pair horizontally + vertically within the E×D box.
+	const cy = bmY + bmH / 2;
+	const startX = bmX + (bmW - totalWidth) / 2;
+	const cxRed = startX + r;
+	const cxAmber = startX + r * 2 + (r * 2 - overlap) - r;
+	const brandMark = `<g aria-hidden="true">
+		<circle cx="${cxRed}" cy="${cy}" r="${r}" fill="#EB001B"/>
+		<circle cx="${cxAmber}" cy="${cy}" r="${r}" fill="#F79E1B" opacity="0.85"/>
+	</g>`;
 
-	// Mastercard logo — bottom-right. Two overlapping circles (red + amber).
-	const mcSize = height * 0.18;
-	const mcCx = width - width * 0.08;
-	const mcCy = height - mcSize * 0.7;
-	const mcOverlap = mcSize * 0.35;
-	const mc = `<g><circle cx="${mcCx - mcSize / 2 + mcOverlap / 2}" cy="${mcCy}" r="${mcSize / 2}" fill="#EB001B"/><circle cx="${mcCx + mcSize / 2 - mcOverlap / 2}" cy="${mcCy}" r="${mcSize / 2}" fill="#F79E1B" opacity="0.85"/></g>`;
+	// ── Optional safe-zone overlay (dev/QA aid) ──────────────────────────
+	let overlay = '';
+	if (options.safeZone) {
+		// Hatch fill (semi-transparent) over each MC-overlay region. Helps
+		// designers see where critical content gets covered at composite time.
+		const stroke = '#EBFF00'; // yellow, high-contrast against any bg
+		const fill = 'rgba(235, 255, 0, 0.18)';
+		overlay = `<g aria-hidden="true">
+			<!-- Cobrand + issuer top strip -->
+			<rect x="${positions.cobrandIssuerBand.x}" y="${positions.cobrandIssuerBand.y}" width="${logoArea.width}" height="${logoArea.height}" fill="${fill}" stroke="${stroke}" stroke-width="3" stroke-dasharray="12 8"/>
+			<!-- Brand mark slot bottom-right -->
+			<rect x="${bmX}" y="${bmY}" width="${bmW}" height="${bmH}" fill="${fill}" stroke="${stroke}" stroke-width="3" stroke-dasharray="12 8"/>
+			<!-- Outer padding boundary (safe zone) -->
+			<rect x="${sidePadding}" y="${topBottomPadding}" width="${width - sidePadding * 2}" height="${height - topBottomPadding * 2}" fill="none" stroke="${stroke}" stroke-width="2" stroke-dasharray="4 6" opacity="0.6"/>
+		</g>`;
+	}
 
-	return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Dash.fi card preview">${bgInner}${wmGroup}${pan}${mc}</svg>`;
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Dash.fi card preview (composite mock)">${bgInner}${cobrandGroup}${brandMark}${overlay}</svg>`;
 }
 
 /** Resolve a slot id to its SVG string for a given variant. */
