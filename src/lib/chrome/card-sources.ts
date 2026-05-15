@@ -224,23 +224,38 @@ export function cardAppIconSvg(variant: CardVariant): string {
 }
 
 /**
- * Cobrand Logo — 1372×283. The Dash.fi wordmark sized to fit the MC
- * cobrand slot. Wordmark paths come from `logo-sources.ts` so colourway
- * stays in sync with /brand/logo.
+ * Cobrand Logo — 1372×283. The Dash.fi wordmark sized + positioned to
+ * match how cobrand logos actually appear on composited digital cards.
+ *
+ * **Sizing — why we don't fill the slot.** The 1372×283 slot is the
+ * MDES upload canvas, not the intended rendered size. Per the MDES
+ * layout diagram, when both cobrand AND issuer are present they share
+ * this band (cobrand-left, issuer-right) — so each is content-sized to
+ * roughly half. Even when shipping cobrand-only (our case — issuer is a
+ * 1×1 transparent placeholder), the wordmark should remain proportional
+ * to a real wallet-card cobrand (~25-30% of card width, ~7% of card
+ * height) so it doesn't dominate the composite.
+ *
+ * We target: wordmark height ≈ 96 px (about 1/3 of slot height, ~10%
+ * of card height), centered horizontally and vertically in the slot.
+ * The remaining slot area stays transparent so the background shows
+ * through after MC composites.
+ *
+ * Wordmark paths come from `logo-sources.ts` so colourway stays in sync
+ * with /brand/logo.
  */
 export function cardCobrandLogoSvg(variant: CardVariant): string {
 	const { width, height } = CARD_DIMENSIONS.cobrandLogo;
 	// Wordmark native viewBox is 0 0 426 90 (aspect 4.73:1).
-	// Cobrand slot is 1372:283 = 4.85:1 — nearly identical, so we centre
-	// the wordmark with minimal whitespace.
-	const scale = Math.min(width / 426, height / 90) * 0.92; // 8% margin
+	// Target ~72 px tall → ~340 px wide. ~22% of card width. Matches the
+	// proportions of cobrand logos on real Apple Pay / Google Pay renders.
+	const targetH = 72;
+	const scale = targetH / 90;
 	const scaledW = 426 * scale;
 	const scaledH = 90 * scale;
 	const tx = (width - scaledW) / 2;
 	const ty = (height - scaledH) / 2;
 	const wordmark = wordmarkSvg(variant.wordmarkFg, null, null, null);
-	// Embed the inner wordmark by stripping its outer <svg> wrapper and
-	// re-wrapping in a transform group.
 	const inner = wordmark.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
 	return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Dash.fi cobrand logo"><g transform="translate(${tx} ${ty}) scale(${scale})">${inner}</g></svg>`;
 }
