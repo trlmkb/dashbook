@@ -17,6 +17,17 @@ export const primaryNav: NavItem[] = [
 		description: 'Start here — what Dashbook is and where to find what you need.'
 	},
 	{
+		title: 'Use',
+		href: '/use',
+		description: 'How to use Dashbook — runbooks for engineers, designers, marketing, and the maintainer.',
+		children: [
+			{ title: 'Engineer', href: '/use/dev' },
+			{ title: 'Designer', href: '/use/designer' },
+			{ title: 'Marketing & sales', href: '/use/marketer' },
+			{ title: 'Maintainer', href: '/use/maintainer' }
+		]
+	},
+	{
 		title: 'Brand',
 		href: '/brand',
 		description: 'Logo, color, typography, voice, motion, photography, iconography.',
