@@ -1,10 +1,13 @@
 import type { ComponentSpec } from '../types.js';
 
 /**
- * Pill — rounded status/count chip with semantic types.
+ * Pill — small label that encodes semantic STATE.
  *
  * Five semantic types: base, info, success, warning, danger.
  * Info is brand-tinted; success/warning/danger use Tailwind palette tints.
+ *
+ * Pill encodes WHAT CONDITION something is in. For categorical / decorative
+ * labels (tier markers, counts, "NEW") use Badge instead.
  */
 export const pill: ComponentSpec = {
 	slug: 'pill',
@@ -13,9 +16,12 @@ export const pill: ComponentSpec = {
 	status: 'stable',
 	importPath: "import { Pill } from '@dashfi/svelte/ui/pill'",
 	description:
-		'Rounded label or count chip. Multiple semantic types: positive, negative, neutral, etc.',
+		'Small label that encodes semantic state. Five types map to intent (base / info / success / warning / danger) — use Pill for status ("Active", "Pending", "Failed", "Connected"). For categorical or decorative labels (DEBIT, 99+, NEW) use Badge.',
 
 	canonicalSource: 'libs/svelte-components/lib/src/lib/ui/pill/pill.svelte',
+
+	whenToUse:
+		'Use Pill for WHAT CONDITION / status something is in — "Active" / "Frozen" / "Pending" / "Failed", "Approved" / "Rejected" / "In review", "Connected" / "Disconnected" / "Needs update". Types map to semantic intent: base (neutral, no signal), info (informational, brand-tinted), success (positive outcome), warning (attention required, not failing yet), danger (error, critical state). For categorical / decorative labels (tier markers, counts, "NEW") use Badge instead. Pill encodes condition with semantic color; Badge encodes category with visual style.',
 
 	dimensions: [
 		{ name: 'Padding', value: '10px horizontal · 2px vertical', tw: 'px-2.5 py-0.5' },
@@ -110,7 +116,9 @@ export const pill: ComponentSpec = {
 		'No icon slot.',
 		'No <code>active</code> / <code>onClick</code> behaviour. Pills are <em>not</em> interactive — for clickable chips use Button with the appropriate styling.',
 		'No pill-shaped radius. The radius is <code>rounded-sm</code> (4px). For full-pill shape, build inline.',
-		'No focus or hover treatment. Decorative.'
+		'No focus or hover treatment. Decorative.',
+		'No <code>destructive</code> type. The error/critical tone is named <code>danger</code> — not <code>destructive</code>. (Destructive is a Button concept, for confirm-then-act actions.)',
+		'No category variants. Pill is semantic state only. For category / count / decoration ("DEBIT", "99+", "NEW") use Badge.'
 	],
 
 	props: [
@@ -158,6 +166,11 @@ export const pill: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.4.0',
+			date: '2026-05-28',
+			note: 'Badge/Pill taxonomy clarified. Pill is now the canonical home for semantic STATE — `base`, `info`, `success`, `warning`, `danger`. Badge keeps only categorical / decorative variants (default / brand / outline / secondary) and dropped its status variants entirely. The clean split: Pill encodes WHAT CONDITION something is in; Badge encodes WHAT something IS. See /components/badge for the counterpart.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',
