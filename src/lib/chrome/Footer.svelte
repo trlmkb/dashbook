@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="meta">
 			<Wordmark size="sm" />
-			<span class="badge">v0.9.0 · current</span>
+			<span class="badge">v1.0.0 · current</span>
 			<p class="caption">
 				<span class="font-mono font-semibold">dashbook</span> is the public brand
 				<br /> &amp; design system portal for Dash.fi

@@ -8,6 +8,15 @@ export type NavItem = {
 	href: string;
 	description?: string;
 	children?: NavItem[];
+	/**
+	 * `internal: true` means the route exists but should NOT be rendered as a
+	 * top-level nav link, footer link, audience tile, or ⌘K search result.
+	 * The route itself is gated by Vercel Deployment Protection (Team-only)
+	 * — see PLAN.md §11 for the dashboard config. Lookups that resolve
+	 * "what section am I on?" (Sidebar / InnerPage) still honour these
+	 * entries so authed team members get the right chrome.
+	 */
+	internal?: boolean;
 };
 
 export const primaryNav: NavItem[] = [
@@ -61,12 +70,14 @@ export const primaryNav: NavItem[] = [
 	{
 		title: 'Components',
 		href: '/components',
-		description: 'Live previews, props, code, accessibility — for every component.'
+		description: 'Live previews, props, code, accessibility — for every component.',
+		internal: true
 	},
 	{
 		title: 'Patterns',
 		href: '/patterns',
 		description: 'Page templates and recipes — card detail, KYC, transactions.',
+		internal: true,
 		children: [
 			{ title: 'Protected app shell', href: '/patterns/protected-app-shell' },
 			{ title: 'Auth split-screen', href: '/patterns/auth-split-screen' },
@@ -91,6 +102,7 @@ export const primaryNav: NavItem[] = [
 		title: 'Developers',
 		href: '/developers',
 		description: 'Install, theming, contribution guide, status board.',
+		internal: true,
 		children: [
 			{ title: 'Overview', href: '/developers' },
 			{ title: 'Figma library', href: '/developers/figma' },
@@ -120,9 +132,9 @@ export const audienceTiles: NavItem[] = [
 	},
 	{
 		title: 'For engineers',
-		href: '/components',
+		href: '/use/dev',
 		description:
-			'Every component, live, with copy-pasteable Svelte snippets, accessibility notes, and changelogs.'
+			'How to install the plugin, build a screen end-to-end, and port components to React, RN, or vanilla — plus the MCP server for LLM-driven work.'
 	},
 	{
 		title: 'For press & partners',

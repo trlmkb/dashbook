@@ -51,10 +51,73 @@
 				</p>
 			</div>
 		</li>
+		<li data-kind="major" id="v1-0-0">
+			<span class="when">2026-05-18</span>
+			<div class="what">
+				<span class="ver"><a href="#v1-0-0" class="ver-anchor">v1.0.0</a><span class="latest">Latest</span></span>
+				<p>
+					<strong>First declared-stable release.</strong> 60 components and 17 patterns
+					across 7 categories now ship with full anatomy (dimensions, tokens, variants,
+					composition rules, non-features, props, porting checklist). All 9 foundation
+					pages carry both light and dark hex values inline. Patterns now cover Shells,
+					Data, Forms, Confirmation, States, Layout, and Architecture — including
+					page-level scaffolds via the new Chrome category.
+				</p>
+				<p>
+					<strong>MCP server bumped to v0.3.0.</strong> 17 tools across <code>product_*</code>
+					and <code>marketing_*</code> namespaces, plus shared <code>version</code> +
+					<code>changelog</code>. New <code>product_get_logo</code> (thin proxy so agents
+					introspecting the product namespace still see the wordmark) and
+					<code>product_get_page_template</code> (composed scaffolds for auth-signin /
+					auth-signup / auth-2fa / auth-magic-link / auth-reset). Every
+					<code>product_*</code> tool description now carries a cross-namespace boundary
+					signal — agents see "wordmarks live in marketing_*" at tool-discovery time, not
+					just in skill prose. <code>marketing_get_card_art</code> and
+					<code>marketing_get_logo</code> accept <code>format: 'svg' | 'png'</code> (PNG is
+					base64-encoded for transport).
+				</p>
+				<p>
+					<strong>Distribution.</strong> Claude Code plugin live at
+					<code>trlmkb/dashbook</code> — install via
+					<code>/plugin marketplace add trlmkb/dashbook</code> +
+					<code>/plugin install dashbook@dashfi</code>. Cowork plugin distribution for
+					org-wide auto-install. claude.ai Connector for web users
+					(<code>https://dashbook.vercel.app/mcp</code>). New <code>/use</code> runbooks
+					— <code>/use/dev</code>, <code>/use/designer</code>, <code>/use/marketer</code>,
+					<code>/use/maintainer</code> — workflow-oriented per-audience how-to.
+				</p>
+				<p>
+					<strong>Static JSON + asset API.</strong> <code>/api/components.json</code>,
+					<code>/api/components/&lt;slug&gt;.json</code>,
+					<code>/api/foundations/{`{color,typography,spacing}`}.json</code> (tokens incl.
+					light + dark hex pairs and font webDelivery URLs),
+					<code>/api/logo/&lt;variant&gt;/&lt;preset&gt;?format=svg|png</code>, and
+					<code>/api/card/&lt;variant&gt;/&lt;slot&gt;?format=svg|png</code>. All
+					CORS-open, 24h cached, no auth.
+				</p>
+				<p>
+					<strong>Card art configurator</strong> at <code>/brand/card</code> — live
+					configurator for the canonical Jade card variant, spec-verified against
+					Mastercard's MDES layout (A=82, B=57, C=1372, D=283, E=459 — captured directly
+					from MC's developer docs via Playwright). One-click MDES bundle download packs
+					all 4 upload slots (SVG + PNG) + composite preview + README in a single zip,
+					replacing an 8-click process for brand-ops. <code>?safeZone=true</code> overlays
+					MC's overlay regions for design validation.
+				</p>
+				<p>
+					<strong>IA invariants locked in.</strong> Jade (<code>#2B605C</code>) is the
+					product brand; cobalt (<code>#354CEF</code>) is marketing-only (with one
+					exception: Button <code>secondary</code>). The skill prose ships an explicit
+					"Wordmark is single-source" invariant after a consumer agent shipped an invented
+					wordmark on a 2FA page. Boundary signals are baked into MCP tool descriptions so
+					the cross-namespace rule reaches agents at tool-discovery time.
+				</p>
+			</div>
+		</li>
 		<li data-kind="minor" id="v0-9-0">
 			<span class="when">2026-05-11</span>
 			<div class="what">
-				<span class="ver"><a href="#v0-9-0" class="ver-anchor">v0.9.0</a><span class="latest">Latest</span></span>
+				<span class="ver"><a href="#v0-9-0" class="ver-anchor">v0.9.0</a></span>
 				<p>
 					<strong>Press extras + Phase 8.</strong> The Press &amp; Partners page got a
 					<strong>Partner kit</strong> — three Powered-by-Dash badge variants (jade on

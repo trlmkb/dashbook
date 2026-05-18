@@ -3,12 +3,20 @@
 	import Search from '@lucide/svelte/icons/search';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import { primaryNav } from '../content/nav.js';
+	import { internalState } from '$lib/state/internal-state.svelte';
 
 	type Props = {
 		onOpenPalette: () => void;
 	};
 
 	let { onOpenPalette }: Props = $props();
+
+	// Filter rebuilds reactively when internalState.isInternal flips after
+	// hydration. Internal items stay hidden in the prerendered HTML and
+	// pop in on the client when the UI cookie is present.
+	const visibleNav = $derived(
+		primaryNav.slice(1).filter((item) => !item.internal || internalState.isInternal)
+	);
 
 	function isActive(href: string, current: string): boolean {
 		if (href === '/') return current === '/';
@@ -23,7 +31,7 @@
 		</a>
 
 		<nav class="nav" aria-label="Primary">
-			{#each primaryNav.slice(1) as item (item.href)}
+			{#each visibleNav as item (item.href)}
 				<a
 					href={item.href}
 					class="nav-item"

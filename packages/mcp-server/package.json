@@ -1,6 +1,6 @@
 {
 	"name": "@dashfi/mcp-server",
-	"version": "0.1.0",
+	"version": "0.3.0",
 	"description": "Dashbook MCP server — Dash.fi brand & design system as MCP tools (components, foundations, brand voice, logos, partner kits).",
 	"keywords": ["mcp", "dashfi", "dashbook", "design-system", "brand", "ai", "claude"],
 	"homepage": "https://dashbook.vercel.app/developers/mcp",

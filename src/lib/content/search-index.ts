@@ -1,9 +1,16 @@
 /**
- * Search index for the ⌘K palette. Aggregates every page worth surfacing
- * — primary nav, 60 components, 6 patterns, foundations + brand subpages —
- * into one flat array with a stable shape.
+ * Search index for the ⌘K palette. Aggregates every page worth surfacing.
  *
- * Build-time data only. Static so the palette renders instantly.
+ * Each entry has an `internal` flag. Public entries always show; internal
+ * entries only show when `internalState.isInternal === true` (set on
+ * hydration via the non-httpOnly `dashbook_internal_ui` cookie). See
+ * `src/lib/state/internal-state.svelte.ts`.
+ *
+ * Build-time data only. Static so the palette renders instantly. The
+ * internal slugs (`/components/<slug>`, `/patterns/<slug>`) are visible in
+ * the public bundle — that's a deliberate trade-off; the routes themselves
+ * are still server-side-gated. Route names aren't secret in any meaningful
+ * sense for a design system.
  */
 
 import { primaryNav } from './nav';
@@ -24,6 +31,8 @@ export type SearchEntry = {
 	section: SearchSection;
 	description?: string;
 	keywords?: string;
+	/** Internal entries only show in ⌘K when the visitor is signed in. */
+	internal?: boolean;
 };
 
 const navPages: SearchEntry[] = [];
@@ -32,12 +41,13 @@ const navFoundations: SearchEntry[] = [];
 const navDev: SearchEntry[] = [];
 
 for (const item of primaryNav) {
-	if (item.href === '/components' || item.href === '/patterns') continue;
+	const internal = item.internal === true;
 	const parentEntry: SearchEntry = {
 		title: item.title,
 		href: item.href,
 		section: 'Page',
-		description: item.description
+		description: item.description,
+		internal
 	};
 	navPages.push(parentEntry);
 
@@ -54,7 +64,8 @@ for (const item of primaryNav) {
 						: item.href === '/developers'
 							? 'Developer'
 							: 'Page',
-			description: item.description
+			description: item.description,
+			internal
 		};
 		if (item.href === '/brand') navBrand.push(entry);
 		else if (item.href === '/foundations') navFoundations.push(entry);
@@ -68,7 +79,8 @@ const componentEntries: SearchEntry[] = components.map((c) => ({
 	href: `/components/${c.slug}`,
 	section: 'Component',
 	description: c.description,
-	keywords: `${c.category} ${c.slug} ${c.importPath}`
+	keywords: `${c.category} ${c.slug} ${c.importPath}`,
+	internal: true
 }));
 
 const patternEntries: SearchEntry[] = patterns.map((p) => ({
@@ -76,7 +88,8 @@ const patternEntries: SearchEntry[] = patterns.map((p) => ({
 	href: `/patterns/${p.slug}`,
 	section: 'Pattern',
 	description: p.description,
-	keywords: `${p.category} ${p.slug} ${p.uses.join(' ')}`
+	keywords: `${p.category} ${p.slug} ${p.uses.join(' ')}`,
+	internal: true
 }));
 
 export const searchEntries: SearchEntry[] = [

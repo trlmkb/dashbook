@@ -1,13 +1,29 @@
 <script lang="ts">
 	import '../app.css';
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 	import Header from '$chrome/Header.svelte';
 	import Footer from '$chrome/Footer.svelte';
 	import CommandPalette from '$chrome/CommandPalette.svelte';
+	import { internalState } from '$lib/state/internal-state.svelte';
 
 	let { children } = $props();
 	let paletteOpen = $state(false);
 
+	// Read the UI-hint cookie once the client hydrates. If present, Header
+	// reveals the internal nav items and ⌘K starts indexing them. Server-side
+	// access is gated independently via `guardInternal()`.
+	onMount(() => {
+		internalState.refresh();
+	});
+
+	// Routes that render full-screen with no header/footer/palette chrome.
+	// Currently just the internal-section login screen.
+	const STANDALONE = ['/internal-login'];
+	const isStandalone = $derived(STANDALONE.includes(page.url.pathname));
+
 	function handleKey(e: KeyboardEvent) {
+		if (isStandalone) return;
 		if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
 			e.preventDefault();
 			paletteOpen = !paletteOpen;
@@ -17,15 +33,19 @@
 
 <svelte:window onkeydown={handleKey} />
 
-<Header onOpenPalette={() => (paletteOpen = true)} />
-
-<main>
+{#if isStandalone}
 	{@render children()}
-</main>
+{:else}
+	<Header onOpenPalette={() => (paletteOpen = true)} />
 
-<Footer />
+	<main>
+		{@render children()}
+	</main>
 
-<CommandPalette bind:open={paletteOpen} onClose={() => (paletteOpen = false)} />
+	<Footer />
+
+	<CommandPalette bind:open={paletteOpen} onClose={() => (paletteOpen = false)} />
+{/if}
 
 <style>
 	main {

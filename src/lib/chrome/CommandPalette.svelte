@@ -9,6 +9,13 @@
 		type SearchEntry,
 		type SearchSection
 	} from '$content/search-index';
+	import { internalState } from '$lib/state/internal-state.svelte';
+
+	// Hide internal entries until the visitor is signed in. The flag flips
+	// reactively on hydration via the UI-hint cookie (see internal-state).
+	const visibleEntries = $derived(
+		searchEntries.filter((e) => !e.internal || internalState.isInternal)
+	);
 
 	type Props = {
 		open: boolean;
@@ -26,14 +33,14 @@
 		const q = query.trim();
 		if (!q) {
 			// Empty query — show a curated default ordering by section
-			return [...searchEntries].sort((a, b) => {
+			return [...visibleEntries].sort((a, b) => {
 				const sa = sectionOrder.indexOf(a.section);
 				const sb = sectionOrder.indexOf(b.section);
 				if (sa !== sb) return sa - sb;
 				return a.title.localeCompare(b.title);
 			});
 		}
-		return searchEntries
+		return visibleEntries
 			.map((e) => ({ entry: e, score: scoreEntry(e, q) }))
 			.filter((r) => r.score > 0)
 			.sort((a, b) => b.score - a.score || a.entry.title.localeCompare(b.entry.title))
