@@ -118,6 +118,12 @@ export type ComponentSpec = {
 	variants?: VariantSpec[];
 	/** Optional size table — for components with multiple size affordances. */
 	sizes?: SizeSpec[];
+	/**
+	 * Optional "When to use" guidance — short prose that disambiguates this
+	 * component from neighbouring ones (e.g. Badge vs Pill, Dialog vs Drawer).
+	 * Rendered prominently on the docs page when present.
+	 */
+	whenToUse?: string;
 
 	// ── Composition / behaviour ──────────────────────────────────────────
 	/** Prose rules for how the component is composed — pairing with Label etc. */
