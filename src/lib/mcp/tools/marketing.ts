@@ -29,7 +29,12 @@ import {
 	brandVoice,
 	getPartnerKit,
 	listPartnerSlugs,
-	partnerKits
+	partnerKits,
+	allMarketingPatterns,
+	getMarketingPattern,
+	marketingFoundationMeta,
+	getMarketingFoundation,
+	marketingFoundationNames
 } from '../../specs/marketing/index.js';
 
 function json(value: unknown): { content: { type: 'text'; text: string }[] } {
@@ -55,6 +60,123 @@ const legalDisclosures: Record<DisclosureKind, string> = {
 };
 
 export function registerMarketingTools(server: McpServer): void {
+	// ── list_patterns ──────────────────────────────────────────────────
+	server.registerTool(
+		'marketing_list_patterns',
+		{
+			title: 'List Dash.fi marketing patterns',
+			description:
+				'Returns the catalogue of reusable marketing page patterns (heroes, layout frames, rhythm/connectors, content blocks, media/proof, CTAs, building blocks, gotchas). These are sourced from the dash.fi website (Astro + Tailwind v4 + React islands), NOT from @dashfi/svelte — for product UI components use product_list_components. Each entry has slug, name, category, status, source path, and the marketing_* tool id (if promoted). Use this to discover patterns before fetching one with marketing_get_pattern.',
+			inputSchema: {
+				category: z
+					.enum([
+						'Heroes',
+						'Layout frames',
+						'Rhythm & connectors',
+						'Content blocks',
+						'Media & proof',
+						'CTAs',
+						'Building blocks',
+						'Gotchas'
+					])
+					.optional()
+					.describe('Filter to one category. Omit for all.'),
+				status: z
+					.enum(['stable', 'beta', 'deprecated'])
+					.optional()
+					.describe('Filter by stability status.')
+			}
+		},
+		async ({ category, status }) => {
+			let entries = allMarketingPatterns.map((p) => ({
+				slug: p.slug,
+				name: p.name,
+				category: p.category,
+				status: p.status,
+				toolId: p.toolId ?? null,
+				source: p.source,
+				description: p.description
+			}));
+			if (category) entries = entries.filter((e) => e.category === category);
+			if (status) entries = entries.filter((e) => e.status === status);
+			return json({
+				count: entries.length,
+				patterns: entries,
+				docs: `${DOCS_BASE}/marketing`,
+				note: 'Marketing patterns are recipes from the dash.fi website (DOM + --m-* token roles + gotchas + props pulled from source), not published npm components. Fetch one with marketing_get_pattern({ slug }).'
+			});
+		}
+	);
+
+	// ── get_pattern ────────────────────────────────────────────────────
+	server.registerTool(
+		'marketing_get_pattern',
+		{
+			title: 'Get a marketing pattern recipe',
+			description:
+				'Returns the full structured spec for one marketing pattern: when to use, the build recipe, DOM sketch, the --m-* token roles it consumes, dimensions, variants, prop signatures, non-features, gotchas, motion, accessibility, a usage example, and a porting checklist. This is the contract for rebuilding the pattern on a marketing page in any stack. Use marketing_list_patterns to discover slugs; use marketing_get_foundation for the tokens/typography/layout/section/motion these build on.',
+			inputSchema: {
+				slug: z
+					.string()
+					.describe('Pattern slug — e.g. "slide-frame", "squircle-button", "feature-tabs". Use marketing_list_patterns to discover.')
+			}
+		},
+		async ({ slug }) => {
+			const spec = getMarketingPattern(slug);
+			if (!spec) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Marketing pattern "${slug}" not found. Call marketing_list_patterns to see available slugs.`
+						}
+					],
+					isError: true
+				};
+			}
+			return json({
+				...spec,
+				docs: `${DOCS_BASE}/marketing/patterns/${spec.slug}`,
+				note: 'Prop signatures are authoritative in the website source (see `source`). The recipe + tokensUsed + gotchas are the portable contract.'
+			});
+		}
+	);
+
+	// ── get_foundation ─────────────────────────────────────────────────
+	server.registerTool(
+		'marketing_get_foundation',
+		{
+			title: 'Get a marketing foundation (tokens, type, layout, section, motion)',
+			description:
+				'Returns structured data for one marketing foundation: tokens (the ~20-role surface palette + data-tone convention + attribute-flipped dark variant), typography (PP Supply Mono display + Bai Jamjuree body + the canonical copy unit), layout (container, full-bleed, alternating rows, mobile rule), section (the paper/cream/ink/cobalt band rhythm), or motion (reveal, ambient loops, anchors). These are the marketing counterpart to product_get_foundation. For raw palette hex see marketing_get_marketing_palette.',
+			inputSchema: {
+				name: z
+					.enum(['tokens', 'typography', 'layout', 'section', 'motion'])
+					.describe('Which marketing foundation to fetch.')
+			}
+		},
+		async ({ name }) => {
+			const foundation = getMarketingFoundation(name);
+			if (!foundation) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Unknown marketing foundation "${name}". Valid: ${marketingFoundationNames.join(', ')}.`
+						}
+					],
+					isError: true
+				};
+			}
+			return json({
+				name,
+				...foundation,
+				docs: `${DOCS_BASE}/marketing/foundations/${name}`,
+				note: 'The marketing role tokens resolve in src/app.css; flip a subtree dark with [data-marketing-dark]. Product surfaces use product_get_foundation instead.'
+			});
+		}
+	);
+
 	// ── get_brand_voice ────────────────────────────────────────────────
 	server.registerTool(
 		'marketing_get_brand_voice',
@@ -452,7 +574,9 @@ export function registerMarketingTools(server: McpServer): void {
 							'legal-disclosure',
 							'partner',
 							'partner-rule',
-							'badge-variant'
+							'badge-variant',
+							'pattern',
+							'foundation'
 						])
 					)
 					.optional()
@@ -469,7 +593,9 @@ export function registerMarketingTools(server: McpServer): void {
 				| 'legal-disclosure'
 				| 'partner'
 				| 'partner-rule'
-				| 'badge-variant';
+				| 'badge-variant'
+				| 'pattern'
+				| 'foundation';
 
 			type Candidate = {
 				kind: SearchKind;
@@ -481,6 +607,31 @@ export function registerMarketingTools(server: McpServer): void {
 			};
 
 			const candidates: Candidate[] = [];
+
+			// Marketing patterns
+			for (const p of allMarketingPatterns) {
+				candidates.push({
+					kind: 'pattern',
+					id: p.slug,
+					title: p.name,
+					snippet: `${p.category}${p.toolId ? ` · ${p.toolId}` : ''} — ${p.description}`,
+					ref: `marketing_get_pattern({ slug: "${p.slug}" })`,
+					haystack: `${p.slug} ${p.name} ${p.category} ${p.toolId ?? ''} ${p.description}`.toLowerCase()
+				});
+			}
+
+			// Marketing foundations
+			for (const fname of marketingFoundationNames) {
+				const meta = marketingFoundationMeta[fname];
+				candidates.push({
+					kind: 'foundation',
+					id: fname,
+					title: `${meta.name} (marketing)`,
+					snippet: meta.description,
+					ref: `marketing_get_foundation({ name: "${fname}" })`,
+					haystack: `${fname} ${meta.name} marketing foundation ${meta.description}`.toLowerCase()
+				});
+			}
 
 			// Voice principles
 			for (const p of brandVoice.principles) {
@@ -668,7 +819,9 @@ export function registerMarketingTools(server: McpServer): void {
 							'legal-disclosure',
 							'partner',
 							'partner-rule',
-							'badge-variant'
+							'badge-variant',
+							'pattern',
+							'foundation'
 						]
 			});
 		}

@@ -189,6 +189,7 @@
 		--dash-yellow-glow: rgba(235, 255, 0, 0.5);
 		--dash-jade: #2b605c;
 		--dash-jade-deep: #123b39;
+		--dash-jade-lifted: #5bb8b0;
 		--dash-ink: #25261d;
 		--dash-graphite: #505148;
 		--dash-graphite-soft: #80817a;
@@ -204,6 +205,32 @@
 		--m-jade-deep: var(--dash-jade-deep);
 		--m-near-black: var(--dash-ink);
 		--m-warm-fg: var(--dash-graphite);
+
+		/* Marketing semantic ROLE set — light defaults. Re-theme a whole surface
+		   by editing these; components reference roles, never raw hex. Flip a
+		   subtree to dark with [data-marketing-dark] (below). Mirror of
+		   `marketingRoles` in src/lib/tokens.ts — keep both in sync. */
+		--m-surface: #faf9f5;
+		--m-surface-2: #ffffff;
+		--m-card: #ffffff;
+		--m-fg-strong: #0f1412;
+		--m-fg-muted: #505148;
+		--m-fg-subtle: #80817a;
+		--m-border: rgba(37, 38, 29, 0.1);
+		--m-border-strong: rgba(37, 38, 29, 0.2);
+		--m-accent: var(--dash-jade);
+		--m-accent-deep: var(--dash-jade-deep);
+		--m-accent-soft: rgba(43, 96, 92, 0.1);
+		--m-accent-border: rgba(43, 96, 92, 0.28);
+		--m-positive: var(--dash-jade);
+		--m-positive-soft: rgba(43, 96, 92, 0.1);
+		--m-positive-border: rgba(43, 96, 92, 0.28);
+		--m-warn: #b5751a; /* provisional amber — reconcile with /shipping source */
+		--m-warn-soft: rgba(181, 117, 26, 0.1);
+		--m-warn-border: rgba(181, 117, 26, 0.3);
+		--m-negative: var(--dash-ink);
+		--m-negative-soft: rgba(37, 38, 29, 0.08);
+		--m-negative-border: rgba(37, 38, 29, 0.24);
 
 		/* Gradients — reference the base palette */
 		--gradient-jade: radial-gradient(
@@ -249,6 +276,34 @@
 		--ring: #5bb8b0;
 		--card: #0f1413;
 		--popover: #141a19;
+	}
+
+	/* Marketing dark variant — flips the --m-* role set on ANY subtree, decoupled
+	   from the product-wide html.dark theme. Drop [data-marketing-dark] on a
+	   section to render it as an ink band; the roles re-resolve, components follow.
+	   Mirror of the `dark` column of `marketingRoles` in src/lib/tokens.ts. */
+	[data-marketing-dark] {
+		--m-surface: #14181c;
+		--m-surface-2: rgba(234, 230, 219, 0.04);
+		--m-card: rgba(234, 230, 219, 0.05);
+		--m-fg-strong: #faf9f5;
+		--m-fg-muted: rgba(234, 230, 219, 0.66);
+		--m-fg-subtle: rgba(234, 230, 219, 0.4);
+		--m-border: rgba(234, 230, 219, 0.12);
+		--m-border-strong: rgba(234, 230, 219, 0.24);
+		--m-accent: var(--dash-jade-lifted);
+		--m-accent-deep: var(--dash-jade);
+		--m-accent-soft: rgba(91, 184, 176, 0.16);
+		--m-accent-border: rgba(91, 184, 176, 0.36);
+		--m-positive: var(--dash-jade-lifted);
+		--m-positive-soft: rgba(91, 184, 176, 0.16);
+		--m-positive-border: rgba(91, 184, 176, 0.36);
+		--m-warn: #e0a64d;
+		--m-warn-soft: rgba(224, 166, 77, 0.16);
+		--m-warn-border: rgba(224, 166, 77, 0.36);
+		--m-negative: #ebede4;
+		--m-negative-soft: rgba(235, 237, 228, 0.12);
+		--m-negative-border: rgba(235, 237, 228, 0.3);
 	}
 }
 

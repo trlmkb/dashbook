@@ -128,6 +128,8 @@
 				return 'Brand';
 			case 'Foundation':
 				return 'Foundations';
+			case 'Marketing':
+				return 'Marketing';
 			case 'Component':
 				return 'Components';
 			case 'Pattern':

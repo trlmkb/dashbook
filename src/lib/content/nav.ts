@@ -3,6 +3,8 @@
  * The Header, Sidebar, Cmd+K palette and footer all read from this.
  */
 
+import { marketingFoundationsContent, marketingPatternsContent } from './marketing.js';
+
 export type NavItem = {
 	title: string;
 	href: string;
@@ -65,6 +67,23 @@ export const primaryNav: NavItem[] = [
 			{ title: 'Accessibility', href: '/foundations/accessibility' },
 			{ title: 'Data viz', href: '/foundations/data-viz' },
 			{ title: 'Currency', href: '/foundations/currency' }
+		]
+	},
+	{
+		title: 'Marketing',
+		href: '/marketing',
+		description:
+			'Reusable marketing page patterns + foundations — heroes, layout frames, the shipping building blocks, tokens, type, motion.',
+		internal: true,
+		children: [
+			...marketingFoundationsContent.map((f) => ({
+				title: f.name,
+				href: `/marketing/foundations/${f.slug}`
+			})),
+			...marketingPatternsContent.map((p) => ({
+				title: p.name,
+				href: `/marketing/patterns/${p.slug}`
+			}))
 		]
 	},
 	{

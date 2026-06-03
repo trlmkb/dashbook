@@ -194,6 +194,13 @@ export const baseColors: ColorToken[] = [
 		role: 'Body text on light surfaces. Carries weight without aggression.'
 	},
 	{
+		name: 'dash-jade-lifted',
+		cssVar: '--dash-jade-lifted',
+		light: '#5BB8B0',
+		dark: '#5BB8B0',
+		role: 'Lifted jade — the accent on dark marketing surfaces (and product --brand in dark). Legible jade on near-black.'
+	},
+	{
 		name: 'dash-ink',
 		cssVar: '--dash-ink',
 		light: '#25261D',
@@ -293,6 +300,181 @@ export const marketingColors: ColorToken[] = [
 	}
 ];
 
+/**
+ * Marketing semantic ROLE set — the surface-theming layer.
+ *
+ * Promoted site-wide from the `/shipping` rebuild's per-surface token layer.
+ * Philosophy: re-theme a whole marketing surface by editing this short list of
+ * roles in one place; components reference roles (`--m-surface`, `--m-accent`,
+ * `--m-positive`…), never raw hex. Pair with a `data-tone="accent|positive|
+ * warn|negative"` attribute so one element styles four ways with no extra class.
+ *
+ * Dark variant: every role carries a `dark` value. A marketing surface goes dark
+ * by setting `[data-marketing-dark]` on any subtree (see `app.css`) — independent
+ * of the product-wide `html.dark` theme. Light→dark deltas worth knowing: accent
+ * jade #2B605C → lifted #5BB8B0; surface #FAF9F5 → #14181C; text ink → paper;
+ * borders rgba(37,38,29,.1) → rgba(234,230,219,.12).
+ *
+ * Color rules baked into the role choices: money/positive = jade; negative /
+ * violations = monochrome ink (never red); warn/caution = amber.
+ */
+export const marketingRoles: ColorToken[] = [
+	// ── Surfaces ──────────────────────────────────────────────────────
+	{
+		name: 'm-surface',
+		cssVar: '--m-surface',
+		light: '#FAF9F5',
+		dark: '#14181C',
+		role: 'Primary marketing surface — warm paper in light, near-black in dark. The page canvas.'
+	},
+	{
+		name: 'm-surface-2',
+		cssVar: '--m-surface-2',
+		light: '#FFFFFF',
+		dark: 'rgba(234, 230, 219, 0.04)',
+		role: 'Raised/inset surface one step off the canvas — white in light, faint warm wash in dark.'
+	},
+	{
+		name: 'm-card',
+		cssVar: '--m-card',
+		light: '#FFFFFF',
+		dark: 'rgba(234, 230, 219, 0.05)',
+		role: 'Card surface — sits on the canvas with a 1px --m-border and a faint lift shadow.'
+	},
+	// ── Foreground ────────────────────────────────────────────────────
+	{
+		name: 'm-fg-strong',
+		cssVar: '--m-fg-strong',
+		light: '#0F1412',
+		dark: '#FAF9F5',
+		role: 'Primary text + display headings — ink in light, paper in dark.'
+	},
+	{
+		name: 'm-fg-muted',
+		cssVar: '--m-fg-muted',
+		light: '#505148',
+		dark: 'rgba(234, 230, 219, 0.66)',
+		role: 'Body copy and secondary labels.'
+	},
+	{
+		name: 'm-fg-subtle',
+		cssVar: '--m-fg-subtle',
+		light: '#80817A',
+		dark: 'rgba(234, 230, 219, 0.40)',
+		role: 'Tertiary text — captions, disclaimers, eyebrow detail.'
+	},
+	// ── Borders ───────────────────────────────────────────────────────
+	{
+		name: 'm-border',
+		cssVar: '--m-border',
+		light: 'rgba(37, 38, 29, 0.10)',
+		dark: 'rgba(234, 230, 219, 0.12)',
+		role: 'Hairline — the default 1px stroke on cards, chips, dividers.'
+	},
+	{
+		name: 'm-border-strong',
+		cssVar: '--m-border-strong',
+		light: 'rgba(37, 38, 29, 0.20)',
+		dark: 'rgba(234, 230, 219, 0.24)',
+		role: 'Stronger hairline — hover borders, emphasized dividers.'
+	},
+	// ── Accent (jade) ─────────────────────────────────────────────────
+	{
+		name: 'm-accent',
+		cssVar: '--m-accent',
+		light: '#2B605C',
+		dark: '#5BB8B0',
+		role: 'The marketing accent — jade, lifting to #5BB8B0 in dark for legibility. data-tone="accent".'
+	},
+	{
+		name: 'm-accent-deep',
+		cssVar: '--m-accent-deep',
+		light: '#123B39',
+		dark: '#2B605C',
+		role: 'Pressed/deep accent — deep jade, used for hover and accent text on light.'
+	},
+	{
+		name: 'm-accent-soft',
+		cssVar: '--m-accent-soft',
+		light: 'rgba(43, 96, 92, 0.10)',
+		dark: 'rgba(91, 184, 176, 0.16)',
+		role: 'Soft accent tint — chip fills, highlighted rows, accent-toned backgrounds.'
+	},
+	{
+		name: 'm-accent-border',
+		cssVar: '--m-accent-border',
+		light: 'rgba(43, 96, 92, 0.28)',
+		dark: 'rgba(91, 184, 176, 0.36)',
+		role: 'Accent-toned 1px border for soft-filled accent elements.'
+	},
+	// ── Positive (money = jade) ───────────────────────────────────────
+	{
+		name: 'm-positive',
+		cssVar: '--m-positive',
+		light: '#2B605C',
+		dark: '#5BB8B0',
+		role: 'Money/positive — jade. Savings, gains, "included". data-tone="positive". Never green.'
+	},
+	{
+		name: 'm-positive-soft',
+		cssVar: '--m-positive-soft',
+		light: 'rgba(43, 96, 92, 0.10)',
+		dark: 'rgba(91, 184, 176, 0.16)',
+		role: 'Soft positive fill — positive chips, highlighted savings cells.'
+	},
+	{
+		name: 'm-positive-border',
+		cssVar: '--m-positive-border',
+		light: 'rgba(43, 96, 92, 0.28)',
+		dark: 'rgba(91, 184, 176, 0.36)',
+		role: 'Positive-toned border.'
+	},
+	// ── Warn (caution = amber) ────────────────────────────────────────
+	{
+		name: 'm-warn',
+		cssVar: '--m-warn',
+		light: '#B5751A',
+		dark: '#E0A64D',
+		role: 'Caution — amber. Sparing. data-tone="warn". PROVISIONAL hex — reconcile with the /shipping source.'
+	},
+	{
+		name: 'm-warn-soft',
+		cssVar: '--m-warn-soft',
+		light: 'rgba(181, 117, 26, 0.10)',
+		dark: 'rgba(224, 166, 77, 0.16)',
+		role: 'Soft amber fill for caution chips.'
+	},
+	{
+		name: 'm-warn-border',
+		cssVar: '--m-warn-border',
+		light: 'rgba(181, 117, 26, 0.30)',
+		dark: 'rgba(224, 166, 77, 0.36)',
+		role: 'Amber-toned border.'
+	},
+	// ── Negative (violations = monochrome ink, NEVER red) ─────────────
+	{
+		name: 'm-negative',
+		cssVar: '--m-negative',
+		light: '#25261D',
+		dark: '#EBEDE4',
+		role: 'Negative/violations — monochrome ink (paper in dark). Overcharges, declines. data-tone="negative". Never red.'
+	},
+	{
+		name: 'm-negative-soft',
+		cssVar: '--m-negative-soft',
+		light: 'rgba(37, 38, 29, 0.08)',
+		dark: 'rgba(235, 237, 228, 0.12)',
+		role: 'Soft ink fill for negative chips / flagged rows.'
+	},
+	{
+		name: 'm-negative-border',
+		cssVar: '--m-negative-border',
+		light: 'rgba(37, 38, 29, 0.24)',
+		dark: 'rgba(235, 237, 228, 0.30)',
+		role: 'Ink-toned border for negative elements.'
+	}
+];
+
 export const radii = {
 	none: '0',
 	sm: '4px',
@@ -322,6 +504,7 @@ export const tokens = {
 	productColors,
 	baseColors,
 	marketingColors,
+	marketingRoles,
 	radii,
 	shadows,
 	motion
