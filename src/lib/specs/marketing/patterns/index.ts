@@ -38,6 +38,18 @@ import { stepTimeline } from './step-timeline.js';
 import { platformBullets } from './platform-bullets.js';
 import { platformShowcase } from './platform-showcase.js';
 import { utilityTiles } from './utility-tiles.js';
+import { bigQuote } from './big-quote.js';
+import { marquee } from './marquee.js';
+import { statTrio } from './stat-trio.js';
+import { statStrip } from './stat-strip.js';
+import { testimonialCard } from './testimonial-card.js';
+import { caseStudyCard } from './case-study-card.js';
+import { logoRail } from './logo-rail.js';
+import { customerPlatformsRail } from './customer-platforms-rail.js';
+import { pinnedShowcase } from './pinned-showcase.js';
+import { dashfiWordmark } from './dashfi-wordmark.js';
+import { duotoneIcon } from './duotone-icon.js';
+import { liveWidget } from './live-widget.js';
 
 export type * from './types.js';
 
@@ -54,6 +66,10 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'two-col-slide': twoColSlide,
 	// Rhythm & connectors
 	'section-intro': sectionIntro,
+	'big-quote': bigQuote,
+	marquee,
+	'stat-trio': statTrio,
+	'stat-strip': statStrip,
 	// Content blocks
 	'feature-grid': featureGrid,
 	'feature-columns': featureColumns,
@@ -67,6 +83,12 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'feature-tabs': featureTabs,
 	// Media & proof
 	'product-shot': productShot,
+	'testimonial-card': testimonialCard,
+	'case-study-card': caseStudyCard,
+	'logo-rail': logoRail,
+	'customer-platforms-rail': customerPlatformsRail,
+	'pinned-showcase': pinnedShowcase,
+	'dashfi-wordmark': dashfiWordmark,
 	// CTAs
 	'split-cta': splitCta,
 	'cta-section': ctaSection,
@@ -75,6 +97,8 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	// Building blocks
 	'squircle-button': squircleButton,
 	chip,
+	'duotone-icon': duotoneIcon,
+	'live-widget': liveWidget,
 	// Gotchas
 	'astro-scoped-styles': astroScopedStyles,
 };
