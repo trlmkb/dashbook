@@ -69,15 +69,12 @@ spec's `sourceNote` once verified. Update the matching docs preview if the real 
 materially. Note: several specs are compositions with no single source component (most
 CTAs, the generic Hero) — those just need a sanity check, not a 1:1 match.
 
-### 3. Make `/marketing` public (pending one-liner — NOT yet on the branch)
-The section is currently `internal` (reachable by URL + sidebar, hidden from public top-nav
-and signed-out ⌘K). To publish it:
-- `src/lib/content/nav.ts` → remove `internal: true` from the `/marketing` primaryNav entry.
-- `src/lib/content/search-index.ts` → in the `marketingEntries` block, set the two
-  `internal: false` (foundations + patterns maps). (They may already read `false` if a prior
-  edit persisted — verify.)
-Recommend doing this AFTER reconciliation so the public version is the polished one.
-This only affects the preview/branch; production (main) updates when the PR merges.
+### 3. Make `/marketing` public — DONE (commit `1e6afa1`)
+Already shipped: `internal` removed from the `/marketing` nav entry and the
+`marketingEntries` in `search-index.ts` set to `internal: false`, so it shows in the public
+top-nav + signed-out ⌘K. Verified `pnpm build` → 44 routes. Only revisit if you want to gate
+it back to internal until reconciliation lands (re-add `internal: true` to the `/marketing`
+nav entry + flip the two search flags back to `true`).
 
 ---
 
@@ -131,5 +128,5 @@ MCP tools, the `/marketing` index, the sidebar, and the ⌘K Marketing section.
 > (1) find the real caution/amber token and replace the provisional `--m-warn` everywhere
 > listed in the handoff; (2) reconcile each `src/lib/specs/marketing/patterns/*.ts` spec's
 > `props`/`dom` against the real components at its `source` path, removing `sourceNote` once
-> verified; (3) when reconciliation is done, make `/marketing` public per the handoff.
+> verified. (`/marketing` is already public — commit `1e6afa1` — so no nav work needed.)
 > Gate on `pnpm check` (0 errors) + `pnpm build`; commit + push to the branch.
