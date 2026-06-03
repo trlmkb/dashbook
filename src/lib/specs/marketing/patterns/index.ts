@@ -24,22 +24,58 @@ import { splitCta } from './split-cta.js';
 import { ctaSection } from './cta-section.js';
 import { sectionCta } from './section-cta.js';
 import { homeFinalCta } from './home-final-cta.js';
+import { hero } from './hero.js';
+import { asymmetricProductHero } from './asymmetric-product-hero.js';
+import { productHero } from './product-hero.js';
+import { cosmicHero } from './cosmic-hero.js';
+import { twoColSlide } from './two-col-slide.js';
+import { featureGrid } from './feature-grid.js';
+import { featureColumns } from './feature-columns.js';
+import { featureList } from './feature-list.js';
+import { threeCardRow } from './three-card-row.js';
+import { numberedCardRow } from './numbered-card-row.js';
+import { stepTimeline } from './step-timeline.js';
+import { platformBullets } from './platform-bullets.js';
+import { platformShowcase } from './platform-showcase.js';
+import { utilityTiles } from './utility-tiles.js';
 
 export type * from './types.js';
 
 /** Every marketing pattern, keyed by slug. */
 export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
+	// Heroes
+	hero,
 	'centered-hero': centeredHero,
+	'asymmetric-product-hero': asymmetricProductHero,
+	'product-hero': productHero,
+	'cosmic-hero': cosmicHero,
+	// Layout frames
 	'slide-frame': slideFrame,
+	'two-col-slide': twoColSlide,
+	// Rhythm & connectors
 	'section-intro': sectionIntro,
+	// Content blocks
+	'feature-grid': featureGrid,
+	'feature-columns': featureColumns,
+	'feature-list': featureList,
+	'three-card-row': threeCardRow,
+	'numbered-card-row': numberedCardRow,
+	'step-timeline': stepTimeline,
+	'platform-bullets': platformBullets,
+	'platform-showcase': platformShowcase,
+	'utility-tiles': utilityTiles,
 	'feature-tabs': featureTabs,
+	// Media & proof
 	'product-shot': productShot,
-	'squircle-button': squircleButton,
-	chip,
+	// CTAs
 	'split-cta': splitCta,
 	'cta-section': ctaSection,
 	'section-cta': sectionCta,
 	'home-final-cta': homeFinalCta,
+	// Building blocks
+	'squircle-button': squircleButton,
+	chip,
+	// Gotchas
 	'astro-scoped-styles': astroScopedStyles,
 };
 
