@@ -20,6 +20,10 @@ import { productShot } from './product-shot.js';
 import { featureTabs } from './feature-tabs.js';
 import { centeredHero } from './centered-hero.js';
 import { astroScopedStyles } from './astro-scoped-styles.js';
+import { splitCta } from './split-cta.js';
+import { ctaSection } from './cta-section.js';
+import { sectionCta } from './section-cta.js';
+import { homeFinalCta } from './home-final-cta.js';
 
 export type * from './types.js';
 
@@ -32,6 +36,10 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'product-shot': productShot,
 	'squircle-button': squircleButton,
 	chip,
+	'split-cta': splitCta,
+	'cta-section': ctaSection,
+	'section-cta': sectionCta,
+	'home-final-cta': homeFinalCta,
 	'astro-scoped-styles': astroScopedStyles,
 };
 

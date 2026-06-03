@@ -61,5 +61,9 @@ export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	{ slug: 'product-shot', name: 'Scale-to-fit product shot', category: 'Media & proof', description: 'Product UI rebuilt as DOM, scaled to fit via a ResizeObserver.', toolId: 'marketing_product_shot' },
 	{ slug: 'squircle-button', name: 'Squircle button', category: 'Building blocks', description: '6px squircle CTA, no shadow, press-scale 0.97.', toolId: 'marketing_button' },
 	{ slug: 'chip', name: 'Chip', category: 'Building blocks', description: 'Soft-tinted pill tag; four tones via data-tone.', toolId: 'marketing_chip' },
+	{ slug: 'split-cta', name: 'SplitCTA', category: 'CTAs', description: 'Two-column conversion block: copy + action panel.' },
+	{ slug: 'cta-section', name: 'CTASection', category: 'CTAs', description: 'Centred full-width CTA band on an emphasis surface.' },
+	{ slug: 'section-cta', name: 'SectionCTA', category: 'CTAs', description: 'Lightweight inline end-of-section nudge.' },
+	{ slug: 'home-final-cta', name: 'HomeFinalCTA', category: 'CTAs', description: 'The oversized page closer on the ink band.' },
 	{ slug: 'astro-scoped-styles', name: 'Astro scoped styles + child components', category: 'Gotchas', description: 'Scoped CSS doesn\'t reach a child component root — put structural classes on a native element.' },
 ];
