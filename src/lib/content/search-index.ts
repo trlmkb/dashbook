@@ -105,7 +105,7 @@ const marketingEntries: SearchEntry[] = [
 			section: 'Marketing',
 			description: f.description,
 			keywords: `marketing foundation ${f.slug}`,
-			internal: true
+			internal: false
 		})
 	),
 	...marketingPatternsContent.map(
@@ -115,7 +115,7 @@ const marketingEntries: SearchEntry[] = [
 			section: 'Marketing',
 			description: p.description,
 			keywords: `marketing ${p.category} ${p.slug} ${p.toolId ?? ''}`,
-			internal: true
+			internal: false
 		})
 	)
 ];

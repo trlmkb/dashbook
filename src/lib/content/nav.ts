@@ -74,7 +74,6 @@ export const primaryNav: NavItem[] = [
 		href: '/marketing',
 		description:
 			'Reusable marketing page patterns + foundations — heroes, layout frames, the shipping building blocks, tokens, type, motion.',
-		internal: true,
 		children: [
 			...marketingFoundationsContent.map((f) => ({
 				title: f.name,
