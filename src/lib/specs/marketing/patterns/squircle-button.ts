@@ -14,10 +14,9 @@ export const squircleButton: MarketingPatternSpec = {
 	status: 'stable',
 	toolId: 'marketing_button',
 	description:
-		'The marketing CTA. A 6px squircle (`corner-shape: squircle`), no shadow, with an `active:scale(.97)` press. Accent (jade) primary, ink, and outline treatments.',
+		'The marketing CTA. A 6px squircle (`corner-shape: squircle`), no shadow, with an `active:scale(.98)` press. Accent (jade) primary, ink, and outline treatments.',
 
-	source: 'src/components/slide/* (button usage) — promoted from the shipping rebuild',
-	sourceNote: 'Exact class API lives in the website source; the recipe below is the contract.',
+	source: 'src/styles/global.css (squircle override on the CTA list, border-radius:6px !important) + src/components/primitives/Button.astro; /shipping CTAs .ship-*-primary/-secondary/-submit',
 
 	whenToUse:
 		'The single CTA style across marketing pages. Use the accent (jade) treatment for the primary action, ink for a high-contrast alternative, and outline for the secondary action beside a primary.',
@@ -25,7 +24,7 @@ export const squircleButton: MarketingPatternSpec = {
 	recipe: [
 		'`border-radius: 6px; corner-shape: squircle` — the squircle is a progressive enhancement; it degrades to a 6px rounded rect where unsupported and survives minification.',
 		'No box-shadow — the press-scale is the affordance.',
-		'`transition: transform 150ms; active { transform: scale(0.97); }`.',
+		'`transition: transform 150ms; active { transform: scale(0.98); }`.',
 		'Type: Bai Jamjuree, 14–15px, medium weight, `white-space: nowrap`.',
 		'Padding ~ 12px 20px (default). Inline icons 16px, `shrink-0`.',
 		'Colour by treatment: accent fills `--m-accent` with paper text; ink fills `--m-fg-strong`; outline is transparent + `--m-border-strong` + `--m-fg-strong` text.',
@@ -45,7 +44,7 @@ export const squircleButton: MarketingPatternSpec = {
 
 	dimensions: [
 		{ name: 'Radius', value: '6px', notes: '`corner-shape: squircle` where supported.' },
-		{ name: 'Press', value: 'scale 0.97', tw: 'active:scale-[0.97]', notes: 'The signature affordance.' },
+		{ name: 'Press', value: 'scale 0.98', tw: 'active:scale-[0.98]', notes: 'The signature affordance.' },
 		{ name: 'Transition', value: '150ms' },
 		{ name: 'Padding', value: '~12px 20px', notes: 'Default size.' },
 		{ name: 'Icon size', value: '16px', notes: 'shrink-0; icons compose inline.' },
@@ -75,7 +74,7 @@ export const squircleButton: MarketingPatternSpec = {
 		'Keep the press-scale on `transform` (compositor-friendly); animating width/padding causes layout jank.',
 	],
 
-	motion: ['`active { transform: scale(0.97) }` over 150ms. Under reduced motion, drop the scale.'],
+	motion: ['`active { transform: scale(0.98) }` over 150ms. Under reduced motion, drop the scale.'],
 
 	accessibility: [
 		'Render a real `<a>` (with href) or `<button>` — never a styled `<div>`.',
@@ -90,7 +89,7 @@ export const squircleButton: MarketingPatternSpec = {
     padding: 12px 20px; font-family: var(--font-sans); font-size: 15px; font-weight: 500;
     border-radius: 6px; corner-shape: squircle; white-space: nowrap;
     transition: transform 150ms var(--easing-out); text-decoration: none; }
-  .m-btn:active { transform: scale(0.97); }
+  .m-btn:active { transform: scale(0.98); }
   .m-btn[data-variant='accent'] { background: var(--m-accent); color: #fff; }
   .m-btn[data-variant='ink'] { background: var(--m-fg-strong); color: var(--m-surface); }
   .m-btn[data-variant='outline'] { background: transparent;
@@ -99,7 +98,7 @@ export const squircleButton: MarketingPatternSpec = {
 	exampleLang: 'html',
 
 	porting: [
-		'Radius 6px + corner-shape squircle (with fallback), no shadow, active scale 0.97 over 150ms.',
+		'Radius 6px + corner-shape squircle (with fallback), no shadow, active scale 0.98 over 150ms.',
 		'Three treatments map to three roles: accent fill, ink fill, outline border+text. Text is medium-weight sans.',
 	],
 

@@ -16,8 +16,7 @@ export const featureTabs: MarketingPatternSpec = {
 	description:
 		'Pill tabs that auto-rotate: the active tab\'s background fills left→right as a progress bar, advancing on a timer and locking on click. Deep-linkable via a global var + CustomEvent.',
 
-	source: 'src/components/slide/* + rhythm/* feature-tab island',
-	sourceNote: 'A React island (client:visible). Exact props live in the website source.',
+	source: 'src/components/shipping/ShipPillars.tsx (feature-tab island, client:visible) + shipping-audit.css .ship-pil-tab*',
 
 	whenToUse:
 		'When a feature section has 3–5 facets you want to showcase in sequence without demanding a click — the auto-rotate previews each, the progress fill signals timing, and a click lets the visitor take control.',

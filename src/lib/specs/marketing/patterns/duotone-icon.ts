@@ -17,16 +17,15 @@ export const duotoneIcon: MarketingPatternSpec = {
 	description:
 		'A two-layer icon: a filled silhouette at low opacity plus a stroked detail layer, both `currentColor`. The icon inherits its hue from the parent, and a per-item hue is allowed here — the only sanctioned multi-colour element.',
 
-	source: 'src/components/* (duotone icon usage) — promoted from the shipping rebuild',
-	sourceNote: 'The two-layer + currentColor contract is the recipe; exact glyph paths live in source.',
+	source: 'src/components/shipping/ShipPillars.tsx MODULE_ICONS (filled silhouette fill-opacity .18 + stroked detail, currentColor, per-module hue)',
 
 	whenToUse:
 		'Section and feature icons that want a touch of depth without going full multi-colour. Set the hue on the parent (or the svg itself) so a row of icons can each carry a different role colour — a box in accent, a doc in positive, a bolt in cobalt. Reach for a single-layer stroked icon when the glyph is too small for the fill to read (≤16px).',
 
 	recipe: [
-		'Draw two layers in one `<svg>`: a filled silhouette (`fill="currentColor"`, opacity ~0.16) and a stroked detail layer (`stroke="currentColor"`, `fill="none"`).',
+		'Draw two layers in one `<svg>`: a filled silhouette (`fill="currentColor"`, opacity ~0.18) and a stroked detail layer (`stroke="currentColor"`, `fill="none"`).',
 		'Both layers use `currentColor` — never a literal hue — so the icon inherits its colour from the parent and re-themes with the surface.',
-		'Per-item hue is allowed here and nowhere else: set `color: var(--m-accent | --m-positive | --m-cobalt | …)` on the svg (or its parent) and both layers follow.',
+		'Per-item hue is allowed here and nowhere else: set `color: var(--m-accent | --m-positive | --m-cobalt | …)` on the svg (or its parent) and both layers follow. The /shipping source (ShipPillars MODULE_ICONS) uses a small fixed palette of literal categorical hues for this — orange #c2410c, jade #2b605c, violet #6d4bd1, blue #1d6fb8.',
 		'Typical size 24px; stroke ~1.5 with round joins/caps so it reads at small sizes.',
 		'The fill is the silhouette mass; the stroke is the readable outline + interior detail. Keep them on the same 24×24 grid so they register.',
 		'Mark the icon `aria-hidden` when a text label sits beside it; otherwise give the svg a `role="img"` + title.',
@@ -34,7 +33,7 @@ export const duotoneIcon: MarketingPatternSpec = {
 
 	dom: `<svg class="m-duo" viewBox="0 0 24 24" width="24" height="24"
      style="color: var(--m-accent)" aria-hidden="true">
-  <path class="fill" fill="currentColor" fill-opacity="0.16" d="…silhouette…" />
+  <path class="fill" fill="currentColor" fill-opacity="0.18" d="…silhouette…" />
   <path class="detail" fill="none" stroke="currentColor"
         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="…detail…" />
 </svg>`,
@@ -48,7 +47,7 @@ export const duotoneIcon: MarketingPatternSpec = {
 	dimensions: [
 		{ name: 'Size', value: '24px', notes: 'Typical; both layers share the 24×24 grid.' },
 		{ name: 'Stroke', value: '~1.5', notes: 'Round joins + caps; the readable outline.' },
-		{ name: 'Fill opacity', value: '~0.16', notes: 'The low-opacity silhouette behind the stroke.' },
+		{ name: 'Fill opacity', value: '~0.18', notes: 'The low-opacity silhouette behind the stroke.' },
 		{ name: 'Layers', value: '2', notes: 'Filled silhouette + stroked detail, both currentColor.' },
 	],
 
@@ -84,7 +83,7 @@ export const duotoneIcon: MarketingPatternSpec = {
 
 	example: `<!-- per-item hue via color on the svg; both layers are currentColor -->
 <svg class="m-duo" viewBox="0 0 24 24" style="color: var(--m-accent)" aria-hidden="true">
-  <path fill="currentColor" fill-opacity="0.16" d="…silhouette…" />
+  <path fill="currentColor" fill-opacity="0.18" d="…silhouette…" />
   <path fill="none" stroke="currentColor" stroke-width="1.5"
         stroke-linecap="round" stroke-linejoin="round" d="…detail…" />
 </svg>

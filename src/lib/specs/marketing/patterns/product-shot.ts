@@ -14,10 +14,9 @@ export const productShot: MarketingPatternSpec = {
 	status: 'stable',
 	toolId: 'marketing_product_shot',
 	description:
-		'A product screenshot rebuilt as real DOM at a fixed natural width (e.g. 1180px), then scaled to the container via `transform: scale()` set by a ResizeObserver. Stays crisp at any size and recolours to the marketing accent.',
+		'A product screenshot rebuilt as real DOM at a fixed natural width (e.g. 1180px), then scaled to the container via `transform: scale()` recomputed on a window `resize` listener (the source) — or a ResizeObserver. Stays crisp at any size and recolours to the marketing accent.',
 
-	source: 'src/components/slide/ProductImage.astro + the rebuilt product UI it wraps',
-	sourceNote: 'The inner product UI is bespoke per shot; the scaling wrapper is the reusable part.',
+	source: 'src/components/shipping/ShipProductShots.astro (.ship-shot-fit scaler) + shots/ShipShot* (1180px rebuilt UI); also slide/ProductImage.astro',
 
 	whenToUse:
 		'When you want a pixel-crisp, recolourable, on-brand product visual instead of a flat PNG — hero shots, feature proof, "see it in the product" moments. Skip it for true photography (use a real <img>).',
@@ -25,7 +24,7 @@ export const productShot: MarketingPatternSpec = {
 	recipe: [
 		'Build the product UI as real DOM at a fixed natural width (e.g. 1180px) — the "inner".',
 		'Wrap it; set `transform: scale(clientWidth / 1180)` and `transform-origin: top left` on the inner.',
-		'Drive the scale with a ResizeObserver on the wrapper; recompute on `resize`, `load`, `fonts.ready`, and `astro:page-load`.',
+		'Drive the scale on a window resize listener (the /shipping ShipProductShots source uses this) — or a ResizeObserver on the wrapper for container-level robustness; recompute on `resize`, `load`, `fonts.ready`, and `astro:page-load`.',
 		'Set the wrapper height to `scaledInner.offsetHeight * scale` so it occupies the right space (the scaled child is out of normal flow for sizing).',
 		'Recolour embedded product UI to the marketing accent (`--m-accent`); KEEP semantic colours intact (severity, money).',
 	],
@@ -84,7 +83,7 @@ export const productShot: MarketingPatternSpec = {
     inner.style.transform = 'scale(' + scale + ')';
     wrap.style.height = inner.offsetHeight * scale + 'px';
   };
-  new ResizeObserver(fit).observe(wrap);
+  addEventListener('resize', fit);
   addEventListener('load', fit);
   document.fonts?.ready.then(fit);
   document.addEventListener('astro:page-load', fit);

@@ -433,22 +433,22 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-warn',
 		cssVar: '--m-warn',
-		light: '#B5751A',
-		dark: '#E0A64D',
-		role: 'Caution — amber. Sparing. data-tone="warn". PROVISIONAL hex — reconcile with the /shipping source.'
+		light: '#B86400',
+		dark: '#D99A3C',
+		role: 'Caution — amber #B86400, lifting to #D99A3C in dark. Sparing. data-tone="warn". Sourced from /shipping --ship-warn (= product --warning).'
 	},
 	{
 		name: 'm-warn-soft',
 		cssVar: '--m-warn-soft',
-		light: 'rgba(181, 117, 26, 0.10)',
-		dark: 'rgba(224, 166, 77, 0.16)',
+		light: 'rgba(184, 100, 0, 0.10)',
+		dark: 'rgba(217, 154, 60, 0.16)',
 		role: 'Soft amber fill for caution chips.'
 	},
 	{
 		name: 'm-warn-border',
 		cssVar: '--m-warn-border',
-		light: 'rgba(181, 117, 26, 0.30)',
-		dark: 'rgba(224, 166, 77, 0.36)',
+		light: 'rgba(184, 100, 0, 0.28)',
+		dark: 'rgba(217, 154, 60, 0.36)',
 		role: 'Amber-toned border.'
 	},
 	// ── Negative (violations = monochrome ink, NEVER red) ─────────────

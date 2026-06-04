@@ -18,8 +18,7 @@ export const liveWidget: MarketingPatternSpec = {
 	description:
 		'An interactive product-mock island styled entirely off `--m-*` tokens so it re-themes with the surface (including `[data-marketing-dark]`). All displayed figures — bars, counters, values — are derived from state; nothing is hardcoded to fake an update.',
 
-	source: 'src/components/slide/* live mocks (e.g. CarrierBrief, ContractAuditMock)',
-	sourceNote: 'Prop signatures pulled from the brief; verify against the website source. Production islands are React.',
+	source: '/shipping islands: ShipForensicWidget · ShipCalculator · ShipPillars feeds · ShipTrustBar (count-up); also slide/ CarrierBrief, ContractAuditMock',
 
 	whenToUse:
 		'When a section needs a small, believable slice of the product — a recovered-savings counter, an audit feed, a mini chart — that animates and reads as "live". CarrierBrief and ContractAuditMock are the reference instances. Reach for the scale-to-fit product shot instead when you want a static, pixel-crisp full screen rather than a moving widget.',

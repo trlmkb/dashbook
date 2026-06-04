@@ -15,8 +15,7 @@ export const chip: MarketingPatternSpec = {
 	description:
 		'A pill tag — `border-radius: 999px`, 1px border, soft-tinted background, mono-ish 12–13px. Styles four semantic ways via `data-tone`; a leading check icon reads as "included".',
 
-	source: 'src/components/slide/* + rhythm/* (chip usage) — promoted from the shipping rebuild',
-	sourceNote: 'The tone-attribute convention is the contract; exact markup lives in source.',
+	source: '/shipping chip usage: .ship-cardhero-points (leading dot) · .ship-calc-chip (data-tone) · .ship-shotrow-chip (leading check = "included")',
 
 	whenToUse:
 		'Tag inclusion ("included"), status, category, or a feature flag inline with copy or on a card. Use `data-tone` to carry meaning: accent for on-brand, positive for savings/included, warn for caution, negative for an overcharge/violation.',
@@ -24,7 +23,7 @@ export const chip: MarketingPatternSpec = {
 	recipe: [
 		'`border-radius: 999px`, `border: 1px solid`, soft-tinted background, 12–13px mono-ish type, inline-flex with a 6px gap.',
 		'Drive all four colourways from `data-tone` — read `--m-{tone}`, `--m-{tone}-soft` (fill), `--m-{tone}-border`.',
-		'Optional leading check icon (16px, `currentColor`) reads as "included".',
+		'Optional leading marker — a small dot (lighter tag) or a check icon (16px, `currentColor`) reads as "included".',
 		'Padding ~ 4px 10px; the icon and label sit on one baseline.',
 	],
 
@@ -50,7 +49,7 @@ export const chip: MarketingPatternSpec = {
 	variants: [
 		{ name: 'accent', description: 'On-brand tag.', tokens: [{ name: 'text', token: { cssVar: '--m-accent', light: '#2B605C', dark: '#5BB8B0' } }] },
 		{ name: 'positive', description: 'Savings / included — jade.', tokens: [{ name: 'text', token: { cssVar: '--m-positive', light: '#2B605C', dark: '#5BB8B0' } }] },
-		{ name: 'warn', description: 'Caution — amber. Sparing.', tokens: [{ name: 'text', token: { cssVar: '--m-warn', light: '#B5751A', dark: '#E0A64D' } }] },
+		{ name: 'warn', description: 'Caution — amber. Sparing.', tokens: [{ name: 'text', token: { cssVar: '--m-warn', light: '#B86400', dark: '#D99A3C' } }] },
 		{ name: 'negative', description: 'Overcharge / violation — monochrome ink. Never red.', tokens: [{ name: 'text', token: { cssVar: '--m-negative', light: '#25261D', dark: '#EBEDE4' } }] },
 	],
 

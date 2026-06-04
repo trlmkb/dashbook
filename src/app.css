@@ -225,9 +225,9 @@
 		--m-positive: var(--dash-jade);
 		--m-positive-soft: rgba(43, 96, 92, 0.1);
 		--m-positive-border: rgba(43, 96, 92, 0.28);
-		--m-warn: #b5751a; /* provisional amber — reconcile with /shipping source */
-		--m-warn-soft: rgba(181, 117, 26, 0.1);
-		--m-warn-border: rgba(181, 117, 26, 0.3);
+		--m-warn: #b86400; /* caution amber — real /shipping --ship-warn (= product --warning) */
+		--m-warn-soft: rgba(184, 100, 0, 0.1);
+		--m-warn-border: rgba(184, 100, 0, 0.28);
 		--m-negative: var(--dash-ink);
 		--m-negative-soft: rgba(37, 38, 29, 0.08);
 		--m-negative-border: rgba(37, 38, 29, 0.24);
@@ -298,9 +298,9 @@
 		--m-positive: var(--dash-jade-lifted);
 		--m-positive-soft: rgba(91, 184, 176, 0.16);
 		--m-positive-border: rgba(91, 184, 176, 0.36);
-		--m-warn: #e0a64d;
-		--m-warn-soft: rgba(224, 166, 77, 0.16);
-		--m-warn-border: rgba(224, 166, 77, 0.36);
+		--m-warn: #d99a3c;
+		--m-warn-soft: rgba(217, 154, 60, 0.16);
+		--m-warn-border: rgba(217, 154, 60, 0.36);
 		--m-negative: #ebede4;
 		--m-negative-soft: rgba(235, 237, 228, 0.12);
 		--m-negative-border: rgba(235, 237, 228, 0.3);
