@@ -3,8 +3,8 @@ import type { ComponentSpec } from '../types.js';
 /**
  * Switch — binary on/off control with four sizes.
  *
- * Track flips from --color-input to --color-primary on check. Thumb is
- * always --color-background (the surface colour).
+ * Track flips from --color-muted-foreground/30 to --color-primary on check.
+ * Thumb is always --color-background (the surface colour).
  */
 export const switchSpec: ComponentSpec = {
 	slug: 'switch',
@@ -40,7 +40,8 @@ export const switchSpec: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Track unchecked',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			notes: 'At 30% opacity (0.5.0, core #5116). Was --color-input — the new off-state reads more clearly.'
 		},
 		{
 			name: 'Track checked',
@@ -149,7 +150,7 @@ export const switchSpec: ComponentSpec = {
 	],
 
 	porting: [
-		'Track + thumb radii are both <code>rounded-full</code>. Thumb is the surface colour. Track flips from <code>--color-input</code> to <code>--color-primary</code> on check. Thumb translates by <code>(track_width − thumb_size − 2)</code>px (the 2 comes from the 2px transparent border).'
+		'Track + thumb radii are both <code>rounded-full</code>. Thumb is the surface colour. Track flips from <code>--color-muted-foreground</code> (30%) to <code>--color-primary</code> on check. Thumb translates by <code>(track_width − thumb_size − 2)</code>px (the 2 comes from the 2px transparent border).'
 	],
 
 	example: `<script lang="ts">
@@ -177,6 +178,11 @@ let notifications = $state(true);
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Unchecked track colour changed (lib 0.5.0, core #5116): off-state is now --color-muted-foreground at 30% (was --color-input) for a clearer affordance. Checked track (--color-primary), thumb, sizes, and radii unchanged.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

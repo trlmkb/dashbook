@@ -15,7 +15,7 @@ export const sheet: ComponentSpec = {
 	importPath:
 		"import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@dashfi/svelte/ui/sheet'",
 	description:
-		'Side drawer — slides in from any edge (top, right, bottom, left). 40% black overlay, absolute Close button in the corner. Built on bits-ui Dialog primitives.',
+		'Side drawer — slides in from any edge. Left/right are floating inset panels (12px gap from the viewport edges, fully rounded); top/bottom stay edge-flush. 40% black overlay, absolute Close button in the corner. Built on bits-ui Dialog primitives.',
 
 	canonicalSource: 'libs/svelte-components/lib/src/lib/ui/sheet/',
 
@@ -24,7 +24,7 @@ export const sheet: ComponentSpec = {
 			name: 'Content',
 			value: 'fixed, side-aware sizing',
 			tw: 'fixed z-50',
-			notes: 'Default <code>right</code> side is typically <code>w-3/4 sm:max-w-sm</code>. See <code>sheetVariants</code> in canonical for exact size matrix.'
+			notes: 'Left/right float inset — <code>inset-y-3 start-3</code>/<code>end-3</code> (12px gap), <code>rounded-2xl</code>, <code>w-3/4 sm:max-w-sm</code> (no longer full-height/flush). Top/bottom stay edge-flush <code>h-auto</code> with <code>rounded-b-2xl</code>/<code>rounded-t-2xl</code>. See <code>sheetVariants</code> in canonical for the exact matrix.'
 		},
 		{
 			name: 'Overlay',
@@ -54,10 +54,10 @@ export const sheet: ComponentSpec = {
 	],
 
 	variants: [
-		{ name: 'top', description: 'Slides in from the top edge.' },
-		{ name: 'right', description: 'Default. Slides in from the right edge.' },
-		{ name: 'bottom', description: 'Slides in from the bottom edge.' },
-		{ name: 'left', description: 'Slides in from the left edge.' }
+		{ name: 'top', description: 'Slides in from the top edge — edge-flush, rounded bottom.' },
+		{ name: 'right', description: 'Default. Floating inset panel from the right (12px gap, rounded-2xl).' },
+		{ name: 'bottom', description: 'Slides in from the bottom edge — edge-flush, rounded top.' },
+		{ name: 'left', description: 'Floating inset panel from the left (12px gap, rounded-2xl).' }
 	],
 
 	composition: [
@@ -130,7 +130,7 @@ export const sheet: ComponentSpec = {
 
 	porting: [
 		'Side-anchored modal panel, 40% black overlay, side-aware slide-in. Built on Dialog primitives — full focus trap + Esc handling.',
-		'Default <code>right</code> at <code>w-3/4 sm:max-w-sm</code>; mirror the side-variant matrix from the canonical when porting.'
+		'Left/right are floating inset panels (<code>inset-y-3 start-3</code>/<code>end-3</code>, <code>rounded-2xl</code>, <code>w-3/4 sm:max-w-sm</code>); top/bottom edge-flush. Mirror the side-variant matrix from the canonical when porting.'
 	],
 
 	example: `<script lang="ts">
@@ -159,6 +159,11 @@ export const sheet: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Left/right sheets restyled (lib 0.5.0, core #5116): now floating inset panels — inset-y-3 start-3/end-3 (12px gap from the viewport edges) with rounded-2xl on all corners, instead of the old flush full-height start-0/end-0 with a single rounded edge. Top/bottom unchanged (edge-flush, h-auto).'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

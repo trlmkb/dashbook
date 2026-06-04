@@ -27,6 +27,16 @@ export const sonner: ComponentSpec = {
 			value: 'sonner internal',
 			tw: 'toaster group',
 			notes: 'The <code>group</code> class enables dark-mode-aware inner styling.'
+		},
+		{
+			name: 'Radius',
+			value: 'rounded-xl',
+			notes: 'Toast surface is <code>rounded-xl</code> with a 1px <code>--color-border</code> (added in 0.5.0).'
+		},
+		{
+			name: 'Status tints',
+			value: 'error / success / warning / info',
+			notes: 'Baked per-status tints (0.5.0): error = <code>destructive/10</code> + <code>/40</code> border; success = <code>brand/10</code>; warning = <code>amber-500/10</code>; info = <code>sky-500/10</code>. Applied by default — not gated behind <code>richColors</code>.'
 		}
 	],
 
@@ -36,8 +46,8 @@ export const sonner: ComponentSpec = {
 			notes: 'Container has <code>class="toaster group"</code> — actual toast surfaces use sonner internal CSS but inherit theme via the group selector.'
 		},
 		{
-			name: 'Rich colors (opt-in)',
-			notes: '<code>richColors</code> = true uses saturated status tints (success green, error red). Default is monochrome.'
+			name: 'Status colours (default in 0.5.0)',
+			notes: 'The Toaster now bakes soft brand-aligned status tints by default — error = destructive, success = brand (jade), warning = amber-500, info = sky-500, all <code>rounded-xl</code>. The <code>richColors</code> prop still switches to the saturated sonner palette.'
 		}
 	],
 
@@ -137,6 +147,11 @@ export const sonner: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Restyled (lib 0.5.0, core #5116): toast surfaces are now rounded-xl with a 1px border, and the Toaster bakes soft semantic status tints by default — error (destructive/10 + /40 border), success (brand/10), warning (amber-500/10), info (sky-500/10). Previously toasts were monochrome unless richColors was set; the brand-aligned tints now apply out of the box.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

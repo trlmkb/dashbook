@@ -39,7 +39,12 @@ export const pill: ComponentSpec = {
 				'`--radius-sm`. *Not* pill-shaped despite the name — Pill takes its name from "status pill", not the geometry.'
 		},
 		{ name: 'Border', value: '1px', notes: 'Colour matches the type tone.' },
-		{ name: 'Display', value: 'inline <span>', notes: 'Renders inline.' }
+		{
+			name: 'Display',
+			value: 'inline-flex <span>',
+			tw: 'inline-flex w-fit items-center gap-1',
+			notes: 'inline-flex with items-center + gap-1 so a leading icon aligns with the label (0.5.0).'
+		}
 	],
 
 	tokens: [
@@ -107,13 +112,13 @@ export const pill: ComponentSpec = {
 
 	composition: [
 		'Render as <code>&lt;span&gt;</code>. Decorative — does not respond to interaction.',
-		'Content is either <code>text</code> (string prop, takes precedence) or <code>children</code> (snippet). Use <code>text</code> for short literals; <code>children</code> when wrapping is needed.',
+		'Content is either <code>text</code> (string prop, takes precedence) or <code>children</code> (snippet). Use <code>text</code> for short literals; <code>children</code> when wrapping or a leading icon is needed — the pill is inline-flex with gap-1 so an icon aligns with the label.',
 		'Inline with text — drop the Pill into a table cell, sentence, or list item. No surrounding wrapper needed.'
 	],
 
 	nonFeatures: [
 		'No size variants.',
-		'No icon slot.',
+		'No dedicated icon prop — put a leading icon in <code>children</code> (the layout is inline-flex with gap-1 so it aligns).',
 		'No <code>active</code> / <code>onClick</code> behaviour. Pills are <em>not</em> interactive — for clickable chips use Button with the appropriate styling.',
 		'No pill-shaped radius. The radius is <code>rounded-sm</code> (4px). For full-pill shape, build inline.',
 		'No focus or hover treatment. Decorative.',
@@ -143,6 +148,11 @@ export const pill: ComponentSpec = {
 			type: 'string',
 			default: "''",
 			description: 'Additional Tailwind classes appended to the root span.'
+		},
+		{
+			name: '...restProps',
+			type: 'HTMLAttributes<HTMLSpanElement>',
+			description: 'All native span attributes pass through to the rendered element (added in 0.5.0).'
 		}
 	],
 
@@ -166,6 +176,11 @@ export const pill: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Icon support (lib 0.5.0, core #5062): the pill is now inline-flex with items-center + gap-1 so a leading icon in children aligns with the label, and it spreads ...restProps (HTMLAttributes<HTMLSpanElement>) so native span attributes pass through. Types and tints unchanged.'
+		},
 		{
 			version: 'v0.4.0',
 			date: '2026-05-28',

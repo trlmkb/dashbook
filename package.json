@@ -15,7 +15,7 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
-		"@dashfi/svelte": "^0.4.0",
+		"@dashfi/svelte": "^0.5.0",
 		"@date-fns/utc": "^2.1.1",
 		"@internationalized/date": "^3.12.1",
 		"@lucide/svelte": "^0.577.0",
