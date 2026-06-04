@@ -8,7 +8,7 @@ export const alert: ComponentSpec = {
 	importPath:
 		"import { Alert, AlertTitle, AlertDescription } from '@dashfi/svelte/ui/alert'",
 	description:
-		'Inline contextual messaging — success, warning, error, info. Always paired with an icon and short copy. Border-left strip in the variant color.',
+		'Inline contextual messaging — success, warning, error, info. Always paired with an icon and short copy. Full 1px border in the variant colour (40% tint) on a soft tinted background, rounded-lg.',
 
 	canonicalSource: 'libs/svelte-components/lib/src/lib/ui/alert/',
 
@@ -21,15 +21,25 @@ export const alert: ComponentSpec = {
 				'grid-cols-[calc(var(--spacing)*5)_1fr] when an SVG is present. gap-y-1.5 (6px) row gap, gap-x-3 (12px) col gap when icon present.'
 		},
 		{
-			name: 'Border-left strip',
-			value: '3px',
-			tw: 'border-l-[3px]',
-			notes: 'The visual signature.'
+			name: 'Border',
+			value: '1px, all sides',
+			tw: 'rounded-lg border',
+			notes: 'Variant-coloured at 40% opacity (default = --color-border). Replaces the old 3px left strip.'
+		},
+		{
+			name: 'Radius',
+			value: '8px',
+			tw: 'rounded-lg'
+		},
+		{
+			name: 'Background',
+			value: 'soft variant tint',
+			notes: 'default bg-muted/40; status variants bg-<tone>/10.'
 		},
 		{
 			name: 'Padding',
-			value: '16px left, 10px vertical, 0 right',
-			tw: 'pl-4 py-2.5'
+			value: '16px horizontal, 12px vertical',
+			tw: 'px-4 py-3'
 		},
 		{ name: 'Type', value: '14px', tw: 'text-sm' },
 		{
@@ -54,7 +64,7 @@ export const alert: ComponentSpec = {
 		{
 			name: 'Root text',
 			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
-			notes: 'Variant only colors the border + icon.'
+			notes: 'Variant colours the border (40%), icon, text, and a soft background tint.'
 		}
 	],
 
@@ -136,8 +146,7 @@ export const alert: ComponentSpec = {
 
 	nonFeatures: [
 		'No close button. Compose at the call site if dismissal is needed.',
-		'No background fill — variants are border-left + icon tint only.',
-		'No radius. The shape is flat-edged.',
+		'No solid/filled variant — the background is a soft tint only (default /40 muted, status /10), never a saturated fill.',
 		'No <code>role</code> auto-set — pair with <code>role="alert"</code>/<code>"status"</code> at the call site per AT need.'
 	],
 
@@ -179,7 +188,7 @@ export const alert: ComponentSpec = {
 	],
 
 	porting: [
-		"Six variants, three-column-aware grid, 3px left border in the variant color. That's the whole contract."
+		"Six variants, three-column-aware grid, rounded-lg with a 1px variant-coloured border at 40% opacity on a soft tinted background. That's the whole contract."
 	],
 
 	example: `<script lang="ts">
@@ -207,6 +216,11 @@ export const alert: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Restyled (lib 0.5.0, core #5116): the 3px left-accent strip became a full 1px variant-coloured border at 40% opacity on a soft tinted background (default bg-muted/40, status bg-<tone>/10), rounded-lg, padding px-4 py-3. Background fill + radius are now part of the look — the prior "no fill / no radius" non-features no longer hold. Variant set unchanged (default/destructive/success/info/warning/brand).'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

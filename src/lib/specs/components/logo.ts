@@ -4,7 +4,7 @@ import type { ComponentSpec } from '../types.js';
  * Logo — three Dash.fi mark variants.
  *
  * Logo (full wordmark), LogoSmall (compact wordmark), LogoApp (square app icon).
- * Wordmarks use currentColor; LogoApp uses a baked cobalt-to-ink gradient.
+ * Wordmarks use currentColor; LogoApp uses a baked jade gradient.
  */
 export const logo: ComponentSpec = {
 	slug: 'logo',
@@ -46,7 +46,7 @@ export const logo: ComponentSpec = {
 		{
 			name: 'LogoApp gradient',
 			notes:
-				'Radial gradient from cobalt `#344BEE` (origin, ~27% stop) to ink `#262A36` (far edge) on the background rect. The "d" glyph is filled with mist `#E7E7F0`. These are baked hex values — not `currentColor`, not parametric.'
+				'Radial gradient from jade `#1A8577` (origin, ~27% stop) to deep jade `#123B39` (far edge) on the background rect. The "d" glyph is filled with mist `#E7E7F0`. These are baked hex values — not `currentColor`, not parametric.'
 		},
 		{
 			name: 'LogoApp.radius',
@@ -95,7 +95,7 @@ export const logo: ComponentSpec = {
 
 	porting: [
 		'The SVG paths are the contract — copy them verbatim. <code>currentColor</code> fill so the consumer controls the colour.',
-		"LogoApp's baked cobalt-to-ink gradient is the brand mark; don't reinterpret it locally."
+		"LogoApp's baked jade gradient is the brand mark; don't reinterpret it locally."
 	],
 
 	example: `<script lang="ts">
@@ -112,6 +112,11 @@ export const logo: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'LogoApp gradient recoloured (lib 0.5.0, core #5116): the radial gradient stops moved from cobalt #344BEE -> ink #262A36 to jade #1A8577 -> deep jade #123B39. The "d" glyph stays mist #E7E7F0; Logo / LogoSmall (currentColor wordmarks) unchanged.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

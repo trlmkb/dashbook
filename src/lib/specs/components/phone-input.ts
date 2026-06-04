@@ -27,8 +27,8 @@ export const phoneInput: ComponentSpec = {
 		{
 			name: 'Country Select trigger',
 			value: '36px tall, 128px wide',
-			tw: 'absolute inset-y-0 left-0 h-9 w-32 rounded-r-none bg-muted/50 hover:bg-muted/80',
-			notes: 'Right radius removed so it visually joins the input.'
+			tw: 'absolute inset-y-0 left-0 h-9 w-32 rounded-l-md rounded-r-none border-y-0 border-r border-l-0 border-input bg-transparent px-3 hover:bg-muted/50',
+			notes: 'Transparent with a right-border divider joining the input; rounded only on the left, hover tints muted/50, no focus ring (0.5.0). Was a muted/50 fill.'
 		},
 		{
 			name: 'Phone Input',
@@ -42,7 +42,7 @@ export const phoneInput: ComponentSpec = {
 		{
 			name: 'Country select background',
 			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
-			notes: '50% opacity at rest, 80% on hover.'
+			notes: 'Transparent at rest; --color-muted at 50% on hover (0.5.0). A 1px --color-input right-border divides it from the field. Was muted/50 at rest, /80 hover.'
 		},
 		{ name: 'Chevron + flag', notes: 'currentColor.' },
 		{
@@ -150,6 +150,11 @@ export const phoneInput: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0',
+			date: '2026-06-04',
+			note: 'Country-select trigger restyled (lib 0.5.0, core #5116): now transparent with a right-border divider (border-r border-input) + rounded-l-md + px-3 + no focus ring, instead of a muted/50 fill (hover /80). Functionality (E.164 binding, allowed-country filter) unchanged.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

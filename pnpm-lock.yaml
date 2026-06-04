@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@dashfi/svelte':
-        specifier: ^0.4.0
-        version: 0.4.0(f6168ffc2b899e1a241fb94a9e2e0b1d)
+        specifier: ^0.5.0
+        version: 0.5.0(f6168ffc2b899e1a241fb94a9e2e0b1d)
       '@date-fns/utc':
         specifier: ^2.1.1
         version: 2.1.1
@@ -148,8 +148,8 @@ packages:
     resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
     engines: {node: '>=6.9.0'}
 
-  '@dashfi/svelte@0.4.0':
-    resolution: {integrity: sha512-Wd5z1GSJqbqmpKFRI9F0N6NQEtuH9XofRaTBenoUJjwrN5Y7hS0kycdKBB01vNO7WMvVSCYpALcjZUek5eCzOg==}
+  '@dashfi/svelte@0.5.0':
+    resolution: {integrity: sha512-A/b4+4eDZ9r/VF46Z9LqYJt7SPnr8Gm7mAcoJSsTNZz5V1dWDCvnoxjfpT1sgf6ZYBO515LAO1IZ06CcV+OvFQ==}
     peerDependencies:
       '@date-fns/utc': ^2.1.1
       '@lucide/svelte': ^0.577.0
@@ -2545,7 +2545,7 @@ snapshots:
   '@babel/runtime@7.29.2':
     optional: true
 
-  '@dashfi/svelte@0.4.0(f6168ffc2b899e1a241fb94a9e2e0b1d)':
+  '@dashfi/svelte@0.5.0(f6168ffc2b899e1a241fb94a9e2e0b1d)':
     dependencies:
       '@date-fns/utc': 2.1.1
       '@lucide/svelte': 0.577.0(svelte@5.55.5(@typescript-eslint/types@8.59.2))

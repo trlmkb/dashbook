@@ -7,6 +7,9 @@
 	import { pill as spec } from '$specs/components/pill';
 	import { Pill } from '@dashfi/svelte/ui/pill';
 	import { Badge } from '@dashfi/svelte/ui/badge';
+	import CircleCheck from '@lucide/svelte/icons/circle-check';
+	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
+	import CircleX from '@lucide/svelte/icons/circle-x';
 </script>
 
 <svelte:head><title>Pill — Components — Dashbook</title></svelte:head>
@@ -32,6 +35,14 @@
 					<Pill type="success">Active</Pill>
 					<Pill type="warning">Review</Pill>
 					<Pill type="danger">Failed</Pill>
+				{/snippet}
+			</PreviewCanvas>
+
+			<PreviewCanvas caption="With a leading icon (0.5.0)" minHeight="120px">
+				{#snippet children(_m)}
+					<Pill type="success"><CircleCheck class="size-3" />Connected</Pill>
+					<Pill type="warning"><TriangleAlert class="size-3" />Review</Pill>
+					<Pill type="danger"><CircleX class="size-3" />Failed</Pill>
 				{/snippet}
 			</PreviewCanvas>
 
