@@ -16,11 +16,13 @@
 import { primaryNav } from './nav';
 import { components } from './components';
 import { patterns } from './patterns';
+import { marketingFoundationsContent, marketingPatternsContent } from './marketing';
 
 export type SearchSection =
 	| 'Page'
 	| 'Brand'
 	| 'Foundation'
+	| 'Marketing'
 	| 'Component'
 	| 'Pattern'
 	| 'Developer';
@@ -50,6 +52,9 @@ for (const item of primaryNav) {
 		internal
 	};
 	navPages.push(parentEntry);
+
+	// Marketing children are surfaced via dedicated entries below (richer keywords).
+	if (item.href === '/marketing') continue;
 
 	if (!item.children) continue;
 	for (const child of item.children) {
@@ -92,11 +97,35 @@ const patternEntries: SearchEntry[] = patterns.map((p) => ({
 	internal: true
 }));
 
+const marketingEntries: SearchEntry[] = [
+	...marketingFoundationsContent.map(
+		(f): SearchEntry => ({
+			title: `${f.name} (marketing)`,
+			href: `/marketing/foundations/${f.slug}`,
+			section: 'Marketing',
+			description: f.description,
+			keywords: `marketing foundation ${f.slug}`,
+			internal: false
+		})
+	),
+	...marketingPatternsContent.map(
+		(p): SearchEntry => ({
+			title: p.name,
+			href: `/marketing/patterns/${p.slug}`,
+			section: 'Marketing',
+			description: p.description,
+			keywords: `marketing ${p.category} ${p.slug} ${p.toolId ?? ''}`,
+			internal: false
+		})
+	)
+];
+
 export const searchEntries: SearchEntry[] = [
 	...navPages,
 	...navBrand,
 	...navFoundations,
 	...navDev,
+	...marketingEntries,
 	...componentEntries,
 	...patternEntries
 ];
@@ -134,6 +163,7 @@ export const sectionOrder: SearchSection[] = [
 	'Page',
 	'Brand',
 	'Foundation',
+	'Marketing',
 	'Component',
 	'Pattern',
 	'Developer'

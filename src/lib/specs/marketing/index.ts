@@ -14,6 +14,42 @@ export { brandVoice } from './voice.js';
 export { partnerKits } from './partners.js';
 export type * from './types.js';
 
+// ── Component & pattern library (marketing_*) ────────────────────────
+// The marketing counterpart to the product component/foundation specs.
+export {
+	marketingPatternSpecs,
+	allMarketingPatterns,
+	getMarketingPattern,
+	marketingPatternsByCategory,
+	marketingPatternCategoryOrder,
+	marketingPatternCount,
+} from './patterns/index.js';
+export type {
+	MarketingPatternSpec,
+	MarketingPatternCategory,
+	MarketingTokenUse,
+} from './patterns/index.js';
+
+export {
+	marketingFoundations,
+	marketingFoundationMeta,
+	marketingFoundationNames,
+	getMarketingFoundation,
+	marketingTokensFoundation,
+	marketingTypographyFoundation,
+	marketingLayoutFoundation,
+	marketingSectionFoundation,
+	marketingMotionFoundation,
+} from './foundations/index.js';
+export type {
+	MarketingFoundationName,
+	MarketingTokensFoundation,
+	MarketingTypographyFoundation,
+	MarketingLayoutFoundation,
+	MarketingSectionFoundation,
+	MarketingMotionFoundation,
+} from './foundations/index.js';
+
 /** Return the full brand-voice spec. */
 export function getVoice(): BrandVoiceSpec {
 	return brandVoice;
