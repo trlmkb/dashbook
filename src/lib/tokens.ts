@@ -330,7 +330,7 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-surface-2',
 		cssVar: '--m-surface-2',
-		light: '#FFFFFF',
+		light: '#EBEDE4',
 		dark: 'rgba(234, 230, 219, 0.04)',
 		role: 'Raised/inset surface one step off the canvas — white in light, faint warm wash in dark.'
 	},
@@ -338,14 +338,14 @@ export const marketingRoles: ColorToken[] = [
 		name: 'm-card',
 		cssVar: '--m-card',
 		light: '#FFFFFF',
-		dark: 'rgba(234, 230, 219, 0.05)',
+		dark: 'rgba(234, 230, 219, 0.04)',
 		role: 'Card surface — sits on the canvas with a 1px --m-border and a faint lift shadow.'
 	},
 	// ── Foreground ────────────────────────────────────────────────────
 	{
 		name: 'm-fg-strong',
 		cssVar: '--m-fg-strong',
-		light: '#0F1412',
+		light: '#25261D',
 		dark: '#FAF9F5',
 		role: 'Primary text + display headings — ink in light, paper in dark.'
 	},
@@ -359,7 +359,7 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-fg-subtle',
 		cssVar: '--m-fg-subtle',
-		light: '#80817A',
+		light: '#5D5F55',
 		dark: 'rgba(234, 230, 219, 0.40)',
 		role: 'Tertiary text — captions, disclaimers, eyebrow detail.'
 	},
@@ -396,15 +396,15 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-accent-soft',
 		cssVar: '--m-accent-soft',
-		light: 'rgba(43, 96, 92, 0.10)',
-		dark: 'rgba(91, 184, 176, 0.16)',
+		light: 'rgba(43, 96, 92, 0.08)',
+		dark: 'rgba(91, 184, 176, 0.14)',
 		role: 'Soft accent tint — chip fills, highlighted rows, accent-toned backgrounds.'
 	},
 	{
 		name: 'm-accent-border',
 		cssVar: '--m-accent-border',
 		light: 'rgba(43, 96, 92, 0.28)',
-		dark: 'rgba(91, 184, 176, 0.36)',
+		dark: 'rgba(91, 184, 176, 0.34)',
 		role: 'Accent-toned 1px border for soft-filled accent elements.'
 	},
 	// ── Positive (money = jade) ───────────────────────────────────────
@@ -418,15 +418,15 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-positive-soft',
 		cssVar: '--m-positive-soft',
-		light: 'rgba(43, 96, 92, 0.10)',
-		dark: 'rgba(91, 184, 176, 0.16)',
+		light: 'rgba(43, 96, 92, 0.08)',
+		dark: 'rgba(91, 184, 176, 0.12)',
 		role: 'Soft positive fill — positive chips, highlighted savings cells.'
 	},
 	{
 		name: 'm-positive-border',
 		cssVar: '--m-positive-border',
 		light: 'rgba(43, 96, 92, 0.28)',
-		dark: 'rgba(91, 184, 176, 0.36)',
+		dark: 'rgba(91, 184, 176, 0.32)',
 		role: 'Positive-toned border.'
 	},
 	// ── Warn (caution = amber) ────────────────────────────────────────
@@ -440,8 +440,8 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-warn-soft',
 		cssVar: '--m-warn-soft',
-		light: 'rgba(184, 100, 0, 0.10)',
-		dark: 'rgba(217, 154, 60, 0.16)',
+		light: 'rgba(184, 100, 0, 0.09)',
+		dark: 'rgba(217, 154, 60, 0.12)',
 		role: 'Soft amber fill for caution chips.'
 	},
 	{
@@ -462,15 +462,15 @@ export const marketingRoles: ColorToken[] = [
 	{
 		name: 'm-negative-soft',
 		cssVar: '--m-negative-soft',
-		light: 'rgba(37, 38, 29, 0.08)',
-		dark: 'rgba(235, 237, 228, 0.12)',
+		light: 'rgba(37, 38, 29, 0.06)',
+		dark: 'rgba(235, 237, 228, 0.08)',
 		role: 'Soft ink fill for negative chips / flagged rows.'
 	},
 	{
 		name: 'm-negative-border',
 		cssVar: '--m-negative-border',
-		light: 'rgba(37, 38, 29, 0.24)',
-		dark: 'rgba(235, 237, 228, 0.30)',
+		light: 'rgba(37, 38, 29, 0.20)',
+		dark: 'rgba(235, 237, 228, 0.20)',
 		role: 'Ink-toned border for negative elements.'
 	}
 ];
