@@ -14,7 +14,7 @@ export const marketingMotionFoundation: MarketingMotionFoundation = {
 			summary:
 				'The standard section entrance. An IntersectionObserver toggles `data-reveal` → `data-revealed`; an optional `delay` staggers siblings.',
 			recipe:
-				'[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity/transform 600ms var(--easing-out); } [data-revealed] { opacity: 1; transform: none; } JS adds [data-revealed] on intersection; stagger via per-item delay.',
+				"[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity/transform 900ms var(--ease-out); } [data-reveal][data-revealed='true'] { opacity: 1; transform: none; } JS adds [data-revealed='true'] on intersection; stagger via per-item delay.",
 			reducedMotion: 'Render in the final state (opacity 1, no transform); skip the transition.',
 		},
 		{

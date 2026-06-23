@@ -37,7 +37,7 @@ export const marketingTypographyFoundation: MarketingTypographyFoundation = {
 			weight: '200',
 			size: 'clamp(2.5rem, 6vw, 4.5rem)',
 			lineHeight: '~1.0',
-			letterSpacing: '-0.02em',
+			letterSpacing: '-0.03em',
 			textTransform: 'uppercase',
 			usage: 'Section + hero headings. Ultralight, uppercase, tight tracking. The trailing phrase often sits in an accent span.',
 			sample: 'BUILT FOR GROWTH',
@@ -45,7 +45,7 @@ export const marketingTypographyFoundation: MarketingTypographyFoundation = {
 		{
 			name: 'eyebrow',
 			family: 'mono',
-			weight: '400',
+			weight: '600',
 			size: '10–12px',
 			letterSpacing: '0.16–0.2em',
 			textTransform: 'uppercase',
@@ -55,7 +55,7 @@ export const marketingTypographyFoundation: MarketingTypographyFoundation = {
 		{
 			name: 'body',
 			family: 'sans',
-			weight: '400',
+			weight: '500',
 			size: '14–17px',
 			lineHeight: '1.55–1.65',
 			usage: 'Paragraphs, lists, UI copy.',
