@@ -51,6 +51,9 @@ import { dashfiWordmark } from './dashfi-wordmark.js';
 import { duotoneIcon } from './duotone-icon.js';
 import { liveWidget } from './live-widget.js';
 import { darkCtaBand } from './dark-cta-band.js';
+import { faqAccordion } from './faq-accordion.js';
+import { trustStatBand } from './trust-stat-band.js';
+import { calculatorIsland } from './calculator-island.js';
 
 export type * from './types.js';
 
@@ -82,7 +85,10 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'platform-showcase': platformShowcase,
 	'utility-tiles': utilityTiles,
 	'feature-tabs': featureTabs,
+	'faq-accordion': faqAccordion,
+	'calculator-island': calculatorIsland,
 	// Media & proof
+	'trust-stat-band': trustStatBand,
 	'product-shot': productShot,
 	'testimonial-card': testimonialCard,
 	'case-study-card': caseStudyCard,
