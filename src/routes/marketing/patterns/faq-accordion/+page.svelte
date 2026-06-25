@@ -37,7 +37,7 @@
 		margin: 0 auto;
 	}
 	.row + .row {
-		border-top: 1px solid var(--m-hairline, rgba(15, 20, 18, 0.08));
+		border-top: 1px solid var(--m-border, rgba(15, 20, 18, 0.08));
 	}
 	.q {
 		display: flex;

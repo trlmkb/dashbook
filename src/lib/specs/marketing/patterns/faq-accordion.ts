@@ -22,7 +22,7 @@ export const faqAccordion: MarketingPatternSpec = {
 		'Reach for FaqAccordion at the foot of a marketing or product page to answer the recurring objections before the final CTA. Pair it with FAQPage structured data so the same questions are eligible for FAQ rich results. For a single highlighted statement use BigQuote, not an accordion.',
 
 	recipe: [
-		'Render a vertical list, each row divided by a top/bottom hairline — `divide-y` with `--m-hairline` (≈ rgba(15,20,18,0.08); the paper-alpha hairline on dark).',
+		'Render a vertical list, each row divided by a top/bottom hairline — `divide-y` with `--m-border` (≈ rgba(15,20,18,0.08); the paper-alpha hairline on dark).',
 		'Each row is a full-width `<button aria-expanded>` so the whole header is the hit target — question text left, toggle right.',
 		'Prefix the question with a mono "Q." marker: 11px, weight 500, uppercase, ~0.22em tracking, in `--m-accent` at ~0.72 (mint on dark). The question itself is `--m-fg-strong`, ~17px, semibold.',
 		'Toggle is a mono "+" at ~20px extralight in `--m-fg-muted`; rotate it 45° to an "×" when open over 220ms `cubic-bezier(0.2,0.8,0.2,1)`.',
@@ -45,7 +45,7 @@ export const faqAccordion: MarketingPatternSpec = {
 </div>`,
 
 	tokensUsed: [
-		{ part: 'row divider', role: '--m-hairline', notes: 'Top/bottom hairline between rows.' },
+		{ part: 'row divider', role: '--m-border', notes: 'Top/bottom hairline between rows.' },
 		{ part: 'Q. / A. marker', role: '--m-accent', notes: 'At ~0.72 alpha; lifts to mint #5BB8B0 on dark.' },
 		{ part: 'question', role: '--m-fg-strong' },
 		{ part: 'toggle (+)', role: '--m-fg-muted', notes: 'Rotates 45° when open.' },
@@ -105,7 +105,7 @@ export const faqAccordion: MarketingPatternSpec = {
 
 <style>
   .faq { border-top: 0; }
-  .faq-row + .faq-row { border-top: 1px solid var(--m-hairline); }
+  .faq-row + .faq-row { border-top: 1px solid var(--m-border); }
   .faq-q { display: flex; width: 100%; gap: 24px; justify-content: space-between;
     padding: 24px 0; background: none; border: 0; text-align: left; cursor: pointer; }
   .q-text { display: flex; gap: 16px; color: var(--m-fg-strong);

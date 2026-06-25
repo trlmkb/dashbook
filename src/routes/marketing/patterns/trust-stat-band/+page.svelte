@@ -105,7 +105,7 @@
 		justify-content: space-between;
 		gap: 16px;
 		padding-top: 20px;
-		border-top: 1px solid var(--m-hairline, rgba(15, 20, 18, 0.08));
+		border-top: 1px solid var(--m-border, rgba(15, 20, 18, 0.08));
 	}
 	.carriers {
 		display: flex;
