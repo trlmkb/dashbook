@@ -12,23 +12,18 @@
  */
 
 import type { MarketingPatternSpec, MarketingPatternCategory } from './types.js';
-import { slideFrame } from './slide-frame.js';
 import { sectionIntro } from './section-intro.js';
 import { squircleButton } from './squircle-button.js';
 import { chip } from './chip.js';
 import { productShot } from './product-shot.js';
 import { featureTabs } from './feature-tabs.js';
-import { centeredHero } from './centered-hero.js';
 import { astroScopedStyles } from './astro-scoped-styles.js';
 import { splitCta } from './split-cta.js';
-import { ctaSection } from './cta-section.js';
 import { sectionCta } from './section-cta.js';
 import { homeFinalCta } from './home-final-cta.js';
 import { hero } from './hero.js';
-import { asymmetricProductHero } from './asymmetric-product-hero.js';
 import { productHero } from './product-hero.js';
 import { cosmicHero } from './cosmic-hero.js';
-import { twoColSlide } from './two-col-slide.js';
 import { featureGrid } from './feature-grid.js';
 import { featureColumns } from './feature-columns.js';
 import { featureList } from './feature-list.js';
@@ -41,7 +36,6 @@ import { utilityTiles } from './utility-tiles.js';
 import { bigQuote } from './big-quote.js';
 import { marquee } from './marquee.js';
 import { statTrio } from './stat-trio.js';
-import { statStrip } from './stat-strip.js';
 import { testimonialCard } from './testimonial-card.js';
 import { caseStudyCard } from './case-study-card.js';
 import { logoRail } from './logo-rail.js';
@@ -61,19 +55,13 @@ export type * from './types.js';
 export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	// Heroes
 	hero,
-	'centered-hero': centeredHero,
-	'asymmetric-product-hero': asymmetricProductHero,
 	'product-hero': productHero,
 	'cosmic-hero': cosmicHero,
-	// Layout frames
-	'slide-frame': slideFrame,
-	'two-col-slide': twoColSlide,
 	// Rhythm & connectors
 	'section-intro': sectionIntro,
 	'big-quote': bigQuote,
 	marquee,
 	'stat-trio': statTrio,
-	'stat-strip': statStrip,
 	// Content blocks
 	'feature-grid': featureGrid,
 	'feature-columns': featureColumns,
@@ -98,7 +86,6 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'dashfi-wordmark': dashfiWordmark,
 	// CTAs
 	'split-cta': splitCta,
-	'cta-section': ctaSection,
 	'section-cta': sectionCta,
 	'home-final-cta': homeFinalCta,
 	'dark-cta-band': darkCtaBand,
@@ -122,7 +109,6 @@ export function getMarketingPattern(slug: string): MarketingPatternSpec | undefi
 /** Display order for categories on the index page + sidebar. */
 export const marketingPatternCategoryOrder: MarketingPatternCategory[] = [
 	'Heroes',
-	'Layout frames',
 	'Rhythm & connectors',
 	'Content blocks',
 	'Media & proof',

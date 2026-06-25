@@ -1,24 +1,54 @@
 <script lang="ts">
 	import MarketingPatternLayout from '$chrome/MarketingPatternLayout.svelte';
 	import { testimonialCard as spec } from '$specs/marketing/patterns/testimonial-card';
+
+	const quotes = [
+		{ quote: 'Dash.fi found refunds three carriers had quietly written off.', name: 'Maya Rivera', role: 'VP Logistics, Northwind' },
+		{ quote: 'We recovered $300M+ in overcharges without opening a single dispute ourselves.', name: 'Dana Ortiz', role: 'VP Finance, Northwind Freight' },
+		{ quote: 'The audit paid for the platform in the first month. Then it kept going.', name: 'Sam Okafor', role: 'Controller, Boxable' },
+	];
+
+	let index = $state(0);
+	let paused = $state(false);
+
+	$effect(() => {
+		if (paused) return;
+		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const id = setInterval(() => { index = (index + 1) % quotes.length; }, reduce ? 6000 : 3800);
+		return () => clearInterval(id);
+	});
+
+	const active = $derived(quotes[index]);
 </script>
 
 <MarketingPatternLayout {spec}>
 	{#snippet preview()}
 		<div class="demo">
-			<figure class="testimonial-card">
-				<span class="mark" aria-hidden="true">&ldquo;</span>
-				<blockquote>
-					Dash.fi found refunds three of our carriers had quietly written off. We had no idea the
-					money was even there.
-				</blockquote>
-				<figcaption>
-					<span class="avatar" aria-hidden="true">MR</span>
-					<span class="who">
-						<b>Maya Rivera</b>
-						<span>VP Logistics, Northwind Freight</span>
-					</span>
+			<figure
+				class="qc"
+				onmouseenter={() => (paused = true)}
+				onmouseleave={() => (paused = false)}
+				onfocusin={() => (paused = true)}
+				onfocusout={() => (paused = false)}
+			>
+				{#key index}
+					<blockquote class="qc-quote">{active.quote}</blockquote>
+				{/key}
+				<figcaption class="qc-cap">
+					<span class="qc-name">{active.name}</span>
+					<span class="qc-role">{active.role}</span>
 				</figcaption>
+				<div class="qc-dots">
+					{#each quotes as q, i (q.name)}
+						<button
+							class="qc-dot"
+							class:on={i === index}
+							aria-current={i === index}
+							aria-label={`Show quote ${i + 1}`}
+							onclick={() => (index = i)}
+						></button>
+					{/each}
+				</div>
 			</figure>
 		</div>
 	{/snippet}
@@ -28,67 +58,73 @@
 	.demo {
 		background: var(--m-surface);
 		border: 1px solid var(--m-border);
-		padding: 40px;
+		padding: clamp(40px, 7vw, 72px) 32px;
 	}
-	.testimonial-card {
-		position: relative;
-		max-width: 460px;
+	.qc {
+		max-width: 32ch;
 		margin: 0 auto;
-		background: var(--m-card);
-		border: 1px solid var(--m-border);
-		border-radius: 16px;
-		corner-shape: squircle;
-		padding: 28px;
-		box-shadow: 0 26px 56px -38px rgba(15, 20, 18, 0.42);
+		text-align: center;
 	}
-	.mark {
-		position: absolute;
-		top: 4px;
-		left: 18px;
+	.qc-quote {
+		margin: 0;
 		font-family: var(--font-display);
-		font-size: 72px;
-		line-height: 1;
-		color: var(--m-accent-soft);
-	}
-	.testimonial-card blockquote {
-		position: relative;
-		margin: 0 0 22px;
-		font-size: 19px;
-		line-height: 1.5;
+		font-weight: 200;
+		font-size: clamp(22px, 3vw, 32px);
+		line-height: 1.3;
+		letter-spacing: -0.01em;
 		color: var(--m-fg-strong);
-		max-width: 42ch;
+		animation: qc-in 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 	}
-	.testimonial-card figcaption {
-		display: flex;
-		align-items: center;
-		gap: 12px;
+	@keyframes qc-in {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
 	}
-	.avatar {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		flex-shrink: 0;
-		border-radius: 999px;
-		background: var(--m-accent-soft);
-		border: 1px solid var(--m-accent-border);
-		font-family: var(--font-mono);
-		font-size: 13px;
-		letter-spacing: 0.04em;
-		color: var(--m-accent);
-	}
-	.who {
+	.qc-cap {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
+		margin-top: 24px;
 	}
-	.who b {
-		font-weight: 400;
+	.qc-name {
 		color: var(--m-fg-strong);
+		font-weight: 600;
+		font-size: 15px;
 	}
-	.who span {
-		font-size: 13px;
+	.qc-role {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
 		color: var(--m-fg-muted);
+	}
+	.qc-dots {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 24px;
+	}
+	.qc-dot {
+		width: 7px;
+		height: 7px;
+		padding: 0;
+		border: 0;
+		border-radius: 999px;
+		background: var(--m-border-strong, rgba(15, 20, 18, 0.16));
+		cursor: pointer;
+		transition: width 200ms ease, background 200ms ease;
+	}
+	.qc-dot.on {
+		width: 22px;
+		background: var(--m-accent, #2b605c);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.qc-quote {
+			animation: none;
+		}
+		.qc-dot {
+			transition: none;
+		}
 	}
 </style>

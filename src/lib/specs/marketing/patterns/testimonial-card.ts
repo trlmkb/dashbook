@@ -1,118 +1,118 @@
 import type { MarketingPatternSpec } from './types.js';
 
 /**
- * TestimonialCard — a single customer quote on the card surface.
+ * TestimonialCarousel — one rotating customer quote at a time.
  *
- * A quote in strong ink, an optional oversized decorative quote-mark, and an
- * attribution line (name + title + company in muted text), with an optional
- * avatar or logo. Card surface, 1px hairline, soft lift shadow.
+ * A single large quote that auto-advances through a set, with a word-by-word
+ * reveal on each change, pause-on-hover, and a name + role attribution. The
+ * live realisation is ShipQuoteCarousel (an island), not a static card.
  */
 export const testimonialCard: MarketingPatternSpec = {
 	slug: 'testimonial-card',
-	name: 'TestimonialCard',
+	name: 'TestimonialCarousel',
 	category: 'Media & proof',
 	status: 'stable',
 	description:
-		'A single customer quote on the card surface — the quote in `--m-fg-strong`, an optional oversized decorative quote-mark, and an attribution line (name + title + company in `--m-fg-muted`), with an optional avatar or logo. Card surface, 1px hairline, soft lift shadow.',
+		'One customer quote at a time, auto-rotating through a set — a large blockquote that reveals word-by-word on each change, pauses on hover, and shows a name + role attribution. Realised on the live site as the ShipQuoteCarousel island.',
 
-	source: 'src/components/slide/TestimonialCard.astro',
-	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
+	source: 'src/components/widgets/ShipQuoteCarousel.tsx',
+	sourceNote: 'A client island: `quotes: { quote, name, role? }[]` rotate on an interval (pausing on hover); each change re-runs a per-word reveal. Replaces the old static slide/TestimonialCard.astro.',
 
 	whenToUse:
-		'Reach for TestimonialCard when you want one customer voice carrying a section — a pull quote with a face and a name. Use BigQuote for a single oversized rhythm-band quote with no card frame, and CaseStudyCard when the proof is a metric rather than a sentence.',
+		'Reach for TestimonialCarousel to let a few customer voices share one slot — a rotating pull quote rather than a wall of cards. Use BigQuote for a single fixed oversized quote with no rotation, and CaseStudyCard when the proof is a metric rather than a sentence.',
 
 	recipe: [
-		'Card shell: `background: var(--m-card)`, `border: 1px solid var(--m-border)`, `border-radius: 14–16px`, ~28px padding, and the soft lift shadow `0 26px 56px -38px rgba(15, 20, 18, 0.42)`.',
-		'Optional decorative quote-mark: an oversized glyph in `--m-accent-soft`, set `aria-hidden` and positioned behind or above the quote so it never reads as text.',
-		'Quote: a `<blockquote>` in `--m-fg-strong`, ~18–20px, line-height ~1.5, sized to roughly 42ch so the line breaks read as a pull quote.',
-		'Attribution: a `<figcaption>` with the name in `--m-fg-strong` and the title plus company in `--m-fg-muted`, on one or two lines.',
-		'Optional avatar or company logo: a small round avatar (40px) or a muted logo to the left of the attribution; keep it decorative when the name already carries the meaning.',
-		'Wrap the card in the standard reveal target for the fade-rise entrance.',
+		'Render one quote at a time as a large `<blockquote>` in `--m-fg-strong`, sized as a pull quote (display/serif-free, ~clamp(22–32px), generous line-height).',
+		'Animate each change with a per-word reveal: split the quote into words and stagger them in (an in/out phase class drives opacity/translate), so the new quote types in rather than hard-cuts.',
+		'Auto-advance on a fixed interval; **pause while hovered/focused** and resume on leave. Loop back to the first after the last.',
+		'Attribution below: the name in `--m-fg-strong`, the role/company in `--m-fg-muted` (mono eyebrow scale).',
+		'Optional position dots beneath; the active dot uses `--m-accent`. Dots are controls, not just decoration.',
+		'Respect `prefers-reduced-motion`: drop the word reveal (show the quote at once) and, ideally, the auto-advance — or advance without animation.',
 	],
 
-	dom: `<figure class="testimonial-card">
-  <span class="mark" aria-hidden="true">&ldquo;</span>
-  <blockquote>Dash.fi found refunds three carriers had quietly written off.</blockquote>
+	dom: `<figure class="quote-carousel" data-paused="false">
+  <blockquote class="quote">
+    <span class="word">Dash.fi</span> <span class="word">found</span> <span class="word">refunds…</span>
+  </blockquote>
   <figcaption>
-    <img class="avatar" src="/avatars/rivera.jpg" alt="" />
-    <span class="who"><b>Maya Rivera</b><span>VP Logistics, Northwind</span></span>
+    <span class="name">Maya Rivera</span>
+    <span class="role">VP Logistics, Northwind</span>
   </figcaption>
+  <div class="dots"><button aria-current="true"></button><button></button></div>
 </figure>`,
 
 	tokensUsed: [
-		{ part: 'card surface', role: '--m-card' },
-		{ part: 'card border', role: '--m-border', notes: 'The default 1px hairline.' },
 		{ part: 'quote', role: '--m-fg-strong' },
-		{ part: 'attribution', role: '--m-fg-muted', notes: 'Name lifts to --m-fg-strong; title + company stay muted.' },
-		{ part: 'decorative quote-mark', role: '--m-accent-soft', notes: 'Oversized glyph; aria-hidden.' },
+		{ part: 'name', role: '--m-fg-strong' },
+		{ part: 'role / company', role: '--m-fg-muted' },
+		{ part: 'active dot', role: '--m-accent', notes: 'Inactive dots use --m-border-strong.' },
 	],
 
 	dimensions: [
-		{ name: 'Card radius', value: '14–16px' },
-		{ name: 'Card border', value: '1px' },
-		{ name: 'Card padding', value: '~28px' },
-		{ name: 'Quote size', value: '18–20px', notes: 'Pull-quote weight; ~42ch measure.' },
-		{ name: 'Avatar', value: '40px', notes: 'Round; optional. Decorative when the name carries meaning.' },
-		{ name: 'Lift shadow', value: '0 26px 56px -38px rgba(15, 20, 18, 0.42)', notes: 'Faint lift — long blur, negative spread.' },
+		{ name: 'Shown at once', value: '1 quote' },
+		{ name: 'Quote size', value: 'clamp(22–32px), pull-quote weight' },
+		{ name: 'Reveal', value: 'per-word stagger on each change' },
+		{ name: 'Advance', value: 'fixed interval (intervalMs), pause on hover/focus' },
+		{ name: 'Attribution', value: 'name (strong) + role (muted)' },
 	],
 
 	variants: [
-		{ name: 'with avatar', description: 'Attribution leads with a round customer avatar.' },
-		{ name: 'with logo', description: 'Attribution leads with a muted company logo instead of an avatar.' },
-		{ name: 'quote only', description: 'No avatar or logo — quote plus a name-and-title attribution.' },
+		{ name: 'auto-rotating', description: 'Default — advances on an interval, pausing on hover.' },
+		{ name: 'with dots', description: 'Position dots double as manual controls.' },
+		{ name: 'single', description: 'One quote → no rotation (behaves like a fixed pull quote).' },
 	],
 
 	props: [
-		{ name: 'quote', type: 'string', required: true, description: 'The testimonial text; rendered inside the blockquote.' },
-		{ name: 'author', type: '{ name: string; title?: string; company?: string; avatar?: string }', required: true, description: 'Attribution — name in strong ink, title and company muted, optional avatar URL.' },
-		{ name: 'showMark', type: 'boolean', default: 'true', description: 'Show the oversized decorative quote-mark.' },
+		{ name: 'quotes', type: '{ quote: string; name: string; role?: string }[]', required: true, description: 'The set to rotate through; one shown at a time.' },
+		{ name: 'intervalMs', type: 'number', description: 'Auto-advance interval; pauses on hover/focus.' },
 	],
 
 	nonFeatures: [
-		'Not a carousel — one card is one quote; rotating testimonials is a separate slider concern.',
-		'No star ratings — the quote and attribution carry the trust signal, not a rating widget.',
-		'No accent-coloured quote text — the quote stays in `--m-fg-strong`; only the decorative mark is tinted.',
+		'Not a wall of cards — exactly one quote is visible; the others rotate through the same slot.',
+		'No avatars or decorative quote-marks — the quote + name/role carry it (this is the carousel, not the old static card).',
+		'No star ratings — the words and attribution are the trust signal.',
+		'No accent-coloured quote text — the quote stays `--m-fg-strong`; only the active dot is tinted.',
 	],
 
 	gotchas: [
-		'Mark the oversized quote-mark `aria-hidden` and keep real quotation marks out of the visible text, or a screen reader announces the glyph as content.',
-		'Give a decorative avatar an empty `alt` so it is skipped; only write alt text when the image is the sole carrier of the company identity.',
+		'Pause on hover/focus or the quote moves out from under someone reading it.',
+		'The full current quote text must be present in the DOM (the per-word spans are presentational) so assistive tech and crawlers read the whole quote.',
+		'Under reduced-motion, skip the word reveal (and ideally the auto-advance) — a staggered type-in is motion.',
 	],
 
 	accessibility: [
-		'Use a `<figure>` with a `<blockquote>` and a `<figcaption>` so the quote and its attribution are programmatically linked.',
-		'The decorative quote-mark is `aria-hidden`; the attribution is plain text, never colour-coded alone.',
+		'Use a `<figure>` + `<blockquote>` + `<figcaption>`; the visible quote is real text, not built only from animated spans.',
+		'If dots are interactive, they are `<button>`s with the active one marked (`aria-current`); the carousel is operable and pausable by keyboard.',
+		'Attribution is plain text — name and role, never colour-coded alone.',
 	],
 
-	example: `<figure class="testimonial-card">
-  <span class="mark" aria-hidden="true">&ldquo;</span>
-  <blockquote>Dash.fi found refunds three carriers had quietly written off.</blockquote>
-  <figcaption>
-    <img class="avatar" src="/avatars/rivera.jpg" alt="" />
-    <span class="who"><b>Maya Rivera</b><span>VP Logistics, Northwind</span></span>
+	example: `<figure class="qc">
+  <blockquote class="qc-quote">Dash.fi found refunds three carriers had quietly written off.</blockquote>
+  <figcaption class="qc-cap">
+    <span class="qc-name">Maya Rivera</span>
+    <span class="qc-role">VP Logistics, Northwind</span>
   </figcaption>
 </figure>
 
 <style>
-  .testimonial-card { position: relative; background: var(--m-card);
-    border: 1px solid var(--m-border); border-radius: 16px; padding: 28px;
-    box-shadow: 0 26px 56px -38px rgba(15, 20, 18, 0.42); }
-  .mark { position: absolute; top: 8px; left: 20px; font-size: 64px;
-    line-height: 1; color: var(--m-accent-soft); }
-  .testimonial-card blockquote { position: relative; margin: 0 0 20px;
-    font-size: 19px; line-height: 1.5; color: var(--m-fg-strong); max-width: 42ch; }
-  .testimonial-card figcaption { display: flex; align-items: center; gap: 12px; }
-  .avatar { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; }
-  .who { display: flex; flex-direction: column; }
-  .who b { color: var(--m-fg-strong); }
-  .who span { color: var(--m-fg-muted); font-size: 13px; }
+  .qc { text-align: center; }
+  .qc-quote { margin: 0 auto; max-width: 26ch; font-family: var(--font-display);
+    font-weight: 200; font-size: clamp(22px, 3vw, 32px); line-height: 1.3;
+    color: var(--m-fg-strong); }
+  .qc-cap { display: flex; flex-direction: column; gap: 2px; margin-top: 20px; }
+  .qc-name { color: var(--m-fg-strong); font-weight: 600; }
+  .qc-role { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--m-fg-muted); }
 </style>`,
 	exampleLang: 'html',
 
 	porting: [
-		'A `<figure>` on the shared card recipe: a quote in fg-strong, an attribution with the name in fg-strong and title + company in fg-muted.',
-		'The oversized quote-mark is a decorative `--m-accent-soft` glyph (aria-hidden); the avatar is optional and decorative.',
+		'A single-quote slot that auto-advances through `quotes` (pausing on hover), re-running a per-word reveal on each change; attribution is name (strong) + role (muted).',
+		'Hydrate as a client island; keep the current quote as real text and honor reduced-motion.',
 	],
 
-	changelog: [{ version: 'v0.1.0', date: '2026-06-03', note: 'First documented in Dashbook.' }],
+	changelog: [
+		{ version: 'v0.1.0', date: '2026-06-03', note: 'First documented in Dashbook (static TestimonialCard).' },
+		{ version: 'v0.2.0', date: '2026-06-26', note: 'Re-pointed to the live ShipQuoteCarousel — now a rotating, word-revealing quote carousel, not a static card.' },
+	],
 };
