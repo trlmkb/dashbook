@@ -50,6 +50,7 @@ import { pinnedShowcase } from './pinned-showcase.js';
 import { dashfiWordmark } from './dashfi-wordmark.js';
 import { duotoneIcon } from './duotone-icon.js';
 import { liveWidget } from './live-widget.js';
+import { darkCtaBand } from './dark-cta-band.js';
 
 export type * from './types.js';
 
@@ -94,6 +95,7 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'cta-section': ctaSection,
 	'section-cta': sectionCta,
 	'home-final-cta': homeFinalCta,
+	'dark-cta-band': darkCtaBand,
 	// Building blocks
 	'squircle-button': squircleButton,
 	chip,
