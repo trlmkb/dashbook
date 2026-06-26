@@ -118,7 +118,7 @@ export function registerMarketingTools(server: McpServer): void {
 			inputSchema: {
 				slug: z
 					.string()
-					.describe('Pattern slug — e.g. "slide-frame", "squircle-button", "feature-tabs". Use marketing_list_patterns to discover.')
+					.describe('Pattern slug — e.g. "dark-cta-band", "squircle-button", "feature-tabs". Use marketing_list_patterns to discover.')
 			}
 		},
 		async ({ slug }) => {

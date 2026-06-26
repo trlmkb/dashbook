@@ -40,6 +40,9 @@
 				<strong>Each pattern is a recipe, not an import.</strong> A pattern page gives you the DOM shape, the token used per part, dimensions, gotchas, and prop signatures — enough to rebuild it faithfully in any stack.
 			</li>
 			<li>
+				<strong>Surfaces &amp; bleed live in Foundations.</strong> Band tones (paper, <strong>cream/beige</strong>, ink) are in <strong>Section rhythm</strong>; the <strong>full-bleed-to-edge</strong> recipe and the container measure are in <strong>Layout</strong> (both in the Foundations list below). Patterns sit on top of those.
+			</li>
+			<li>
 				<strong>Query it from your editor.</strong> Everything here is also exposed over MCP — use the <code>marketing_*</code> tools (<code>list</code>, <code>search</code>, <code>get</code>) to pull a spec without leaving your agent.
 			</li>
 		</ul>

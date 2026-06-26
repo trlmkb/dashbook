@@ -3,9 +3,9 @@ import type { MarketingPatternSpec } from './types.js';
 /**
  * Hero — the base hero primitive.
  *
- * The flexible page opener that CenteredHero, ProductHero, and the others
- * specialize: eyebrow → display heading (accent span) → lede → CTA pair,
- * start-aligned by default.
+ * The flexible page opener that ProductHero, CosmicHero, MetricsHero, and
+ * ProductWindowHero specialize: eyebrow → display heading (accent span) →
+ * lede → CTA pair, start-aligned by default.
  */
 export const hero: MarketingPatternSpec = {
 	slug: 'hero',
@@ -13,23 +13,23 @@ export const hero: MarketingPatternSpec = {
 	category: 'Heroes',
 	status: 'stable',
 	description:
-		'The base hero primitive — eyebrow, display heading with an accent phrase, lede, and a CTA pair, start-aligned by default. CenteredHero, ProductHero, AsymmetricProductHero, and CosmicHero are specializations.',
+		'The base hero primitive — eyebrow, display heading with an accent phrase, lede, and a CTA pair, start-aligned by default. ProductHero, CosmicHero, MetricsHero, and ProductWindowHero are specializations.',
 
 	source: 'src/components/slide/Hero.astro',
 	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
 
 	whenToUse:
-		'The default flexible opener — reach for it when you want a copy-led hero with no required product visual. Use CenteredHero for a centred variant, ProductHero/AsymmetricProductHero when a product shot leads, CosmicHero for a dark ambient opener.',
+		'The default flexible opener — reach for it when you want a copy-led hero with no required product visual. Use ProductHero or ProductWindowHero when a product visual leads, MetricsHero when a metrics panel proves the claim, CosmicHero for a dark ambient opener.',
 
 	recipe: [
-		'Wrap in a SlideFrame (`paper` or `ink`).',
+		'Place on a section band (`paper` or `ink`, per the Section-rhythm foundation).',
 		'Render the canonical copy unit start-aligned: eyebrow → display heading (one accent span) → lede (~50ch).',
 		'A CTA pair below: accent squircle primary + outline secondary.',
 		'Leave a slot below/beside for optional media (a product shot) — the specializations fill it.',
 		'Reveal-stagger eyebrow → heading → lede → CTAs.',
 	],
 
-	dom: `<SlideFrame background="paper">
+	dom: `<section class="m-band" data-band="paper">
   <header class="hero" data-reveal>
     <p class="eyebrow">Shipping</p>
     <h1 class="display">Spend less on <span class="accent">every parcel</span></h1>
@@ -40,10 +40,10 @@ export const hero: MarketingPatternSpec = {
     </div>
     <slot name="media" />
   </header>
-</SlideFrame>`,
+</section>`,
 
 	tokensUsed: [
-		{ part: 'band', role: '--m-surface / --m-near-black', notes: 'Via SlideFrame.' },
+		{ part: 'band', role: '--m-surface / --m-near-black', notes: 'Set by the section band.' },
 		{ part: 'heading', role: '--m-fg-strong' },
 		{ part: 'accent span', role: '--m-accent' },
 		{ part: 'lede', role: '--m-fg-muted' },
@@ -58,7 +58,7 @@ export const hero: MarketingPatternSpec = {
 
 	variants: [
 		{ name: 'start', description: 'Left-aligned copy (default).' },
-		{ name: 'center', description: 'Centred — see CenteredHero.' },
+		{ name: 'center', description: 'Centred copy variant via `align: center`.' },
 	],
 
 	props: [
@@ -84,7 +84,7 @@ export const hero: MarketingPatternSpec = {
 
 	accessibility: ['The hero heading is the page <h1> — exactly one per page. Primary CTA precedes secondary in the DOM.'],
 
-	example: `<SlideFrame background="paper">
+	example: `<section class="m-band" data-band="paper">
   <header class="hero" data-reveal>
     <p class="eyebrow">Shipping</p>
     <h1 class="display">Spend less on <span class="accent">every parcel</span></h1>
@@ -94,10 +94,10 @@ export const hero: MarketingPatternSpec = {
       <a class="m-btn" data-variant="outline" href="/how">How it works</a>
     </div>
   </header>
-</SlideFrame>`,
+</section>`,
 	exampleLang: 'astro',
 
-	porting: ['A copy unit + CTA pair inside a band, with an optional media slot. Compose from section-intro + squircle-button + slide-frame.'],
+	porting: ['A copy unit + CTA pair on a section band, with an optional media slot. Compose from section-intro + squircle-button on a Section-rhythm band.'],
 
 	changelog: [{ version: 'v0.1.0', date: '2026-06-03', note: 'First documented in Dashbook.' }],
 };

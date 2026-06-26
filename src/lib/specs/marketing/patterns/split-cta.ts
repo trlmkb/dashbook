@@ -18,17 +18,17 @@ export const splitCta: MarketingPatternSpec = {
 	sourceNote: 'Prop names pulled from the brief; verify against the website source.',
 
 	whenToUse:
-		'A mid-page CTA with room for one supporting line and a couple of reassurances. Use CTASection for a centred full-width band, HomeFinalCTA for the oversized page closer, SectionCTA for a lightweight inline nudge.',
+		'A mid-page CTA with room for one supporting line and a couple of reassurances. Use DarkCtaBand for the jade-glow closing band, HomeFinalCTA for the oversized page closer, SectionCTA for a lightweight inline nudge.',
 
 	recipe: [
-		'Two-column grid inside a SlideFrame (`cream` or `ink`); copy left, action panel right. Add a `reverse` to swap sides.',
+		'Two-column grid on a section band (`cream` or `ink`); copy left, action panel right. Add a `reverse` to swap sides.',
 		'Copy column: the canonical copy unit (eyebrow → heading with accent span → one-line lede).',
 		'Action column: a primary accent squircle button + a secondary outline button, stacked or inline.',
 		'Optional: a row of positive-tone chips below the buttons reading as reassurances ("No setup fee", "14-day pilot").',
 		'On mobile, collapse to one column with `minmax(0, 1fr)`; action panel drops below the copy.',
 	],
 
-	dom: `<SlideFrame background="cream">
+	dom: `<section class="m-band" data-band="cream">
   <div class="split-cta">
     <div class="copy"><!-- eyebrow + heading + lede --></div>
     <div class="action">
@@ -36,7 +36,7 @@ export const splitCta: MarketingPatternSpec = {
       <a class="m-btn" data-variant="outline">Talk to us</a>
     </div>
   </div>
-</SlideFrame>`,
+</section>`,
 
 	tokensUsed: [
 		{ part: 'band', role: '--m-cream / --m-near-black' },
@@ -59,7 +59,7 @@ export const splitCta: MarketingPatternSpec = {
 
 	props: [
 		{ name: 'reverse', type: 'boolean', default: 'false', description: 'Swap the copy / action columns.' },
-		{ name: 'background', type: "'cream' | 'ink'", default: "'cream'", description: 'Band (via SlideFrame).' },
+		{ name: 'background', type: "'cream' | 'ink'", default: "'cream'", description: 'Band (via the section band).' },
 	],
 
 	nonFeatures: [
@@ -76,7 +76,7 @@ export const splitCta: MarketingPatternSpec = {
 
 	accessibility: ['DOM order = primary CTA before secondary; one section heading.'],
 
-	example: `<SlideFrame background="cream">
+	example: `<section class="m-band" data-band="cream">
   <div class="split-cta">
     <header class="copy">
       <p class="eyebrow">Get started</p>
@@ -88,7 +88,7 @@ export const splitCta: MarketingPatternSpec = {
       <a class="m-btn" data-variant="outline" href="/contact">Talk to us</a>
     </div>
   </div>
-</SlideFrame>`,
+</section>`,
 	exampleLang: 'astro',
 
 	porting: [

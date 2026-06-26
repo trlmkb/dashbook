@@ -70,7 +70,7 @@ export type MarketingPatternSpec = {
 	tokensUsed: MarketingTokenUse[];
 	/** Fixed dimensions (radius, sizes, spacing). Reuses the product shape. */
 	dimensions?: DimensionEntry[];
-	/** Visual variants (e.g. SlideFrame backgrounds). Reuses the product shape. */
+	/** Visual variants (e.g. section band backgrounds). Reuses the product shape. */
 	variants?: VariantSpec[];
 
 	// ── Contract ─────────────────────────────────────────────────────────

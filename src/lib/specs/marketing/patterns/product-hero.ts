@@ -12,27 +12,27 @@ export const productHero: MarketingPatternSpec = {
 	category: 'Heroes',
 	status: 'stable',
 	description:
-		'A product-forward opener: a centred copy unit with a framed, contained scale-to-fit product shot directly below. Stays on the content grid (no edge bleed) — the contained counterpart to AsymmetricProductHero.',
+		'A product-forward opener: a centred copy unit with a framed, contained scale-to-fit product shot directly below. Stays on the content grid (no edge bleed) — the contained counterpart to a full-bleed media treatment (see FullBleedSection).',
 
 	source: 'src/components/slide/ProductHero.astro / ProductHero',
 	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
 
 	whenToUse:
-		'When you want the product visible up front but contained and centred (a framed screenshot under the headline). Use AsymmetricProductHero for an expansive edge-bleeding shot, Hero/CenteredHero when there is no hero visual.',
+		'When you want the product visible up front but contained and centred (a framed screenshot under the headline). Use FullBleedSection for an expansive edge-bleeding shot, Hero when there is no hero visual.',
 
 	recipe: [
-		'A SlideFrame (`paper` or `ink`) with a centred copy unit (eyebrow → heading → lede → CTA pair).',
+		'A section band (`paper` or `ink`) with a centred copy unit (eyebrow → heading → lede → CTA pair).',
 		'Below the copy, a framed scale-to-fit product shot constrained to the content max — a card surface with a 1px border and the soft lift shadow.',
 		'Recolour the embedded product UI to `--m-accent`; keep semantic colours (money, severity).',
 		'Mobile: the shot stays within the column (already constrained); ensure its inner uses the scale-to-fit transform.',
 	],
 
-	dom: `<SlideFrame background="paper">
+	dom: `<section class="m-band" data-band="paper">
   <header class="product-hero">
     <div class="copy"><!-- centred copy unit + CTAs --></div>
     <div class="shot" data-product-shot><!-- contained product UI --></div>
   </header>
-</SlideFrame>`,
+</section>`,
 
 	tokensUsed: [
 		{ part: 'band', role: '--m-surface / --m-near-black' },
@@ -53,7 +53,7 @@ export const productHero: MarketingPatternSpec = {
 	],
 
 	nonFeatures: [
-		'No edge bleed — that is AsymmetricProductHero.',
+		'No edge bleed — for edge-bleeding media use FullBleedSection.',
 		'Not a flat <img> — the shot is the scale-to-fit DOM pattern.',
 	],
 
@@ -66,7 +66,7 @@ export const productHero: MarketingPatternSpec = {
 
 	accessibility: ['Hero heading is the page <h1>; give the shot a text alternative.'],
 
-	example: `<SlideFrame background="paper">
+	example: `<section class="m-band" data-band="paper">
   <header class="product-hero">
     <div class="copy">
       <p class="eyebrow">Shipping</p>
@@ -76,7 +76,7 @@ export const productHero: MarketingPatternSpec = {
     </div>
     <div class="shot" data-product-shot>…contained product UI…</div>
   </header>
-</SlideFrame>`,
+</section>`,
 	exampleLang: 'astro',
 
 	porting: ['Centred copy unit + a contained framed product shot. Compose from section-intro + squircle-button + product-shot; the frame is a card surface with the lift shadow.'],

@@ -48,6 +48,9 @@ import { darkCtaBand } from './dark-cta-band.js';
 import { faqAccordion } from './faq-accordion.js';
 import { trustStatBand } from './trust-stat-band.js';
 import { calculatorIsland } from './calculator-island.js';
+import { metricsHero } from './metrics-hero.js';
+import { productWindowHero } from './product-window-hero.js';
+import { fullBleedSection } from './full-bleed-section.js';
 
 export type * from './types.js';
 
@@ -55,8 +58,12 @@ export type * from './types.js';
 export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	// Heroes
 	hero,
+	'metrics-hero': metricsHero,
+	'product-window-hero': productWindowHero,
 	'product-hero': productHero,
 	'cosmic-hero': cosmicHero,
+	// Layout frames
+	'full-bleed-section': fullBleedSection,
 	// Rhythm & connectors
 	'section-intro': sectionIntro,
 	'big-quote': bigQuote,
@@ -109,6 +116,7 @@ export function getMarketingPattern(slug: string): MarketingPatternSpec | undefi
 /** Display order for categories on the index page + sidebar. */
 export const marketingPatternCategoryOrder: MarketingPatternCategory[] = [
 	'Heroes',
+	'Layout frames',
 	'Rhythm & connectors',
 	'Content blocks',
 	'Media & proof',

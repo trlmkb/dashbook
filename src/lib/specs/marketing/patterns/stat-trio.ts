@@ -4,7 +4,7 @@ import type { MarketingPatternSpec } from './types.js';
  * StatTrio — three big stats in a row.
  *
  * Three equal cells, each a large mono tabular-nums value over an uppercase mono
- * label. The on-canvas version of the proof beat; StatStrip is its full-width
+ * label. The on-canvas version of the proof beat; TrustStatBand is its full-width
  * banded sibling.
  */
 export const statTrio: MarketingPatternSpec = {
@@ -19,7 +19,7 @@ export const statTrio: MarketingPatternSpec = {
 	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
 
 	whenToUse:
-		'Use a StatTrio as a compact proof beat inside a section on the page canvas — three headline numbers that anchor a claim. Reach for StatStrip when you want the same numbers as a full-width banded strip (often on ink or cobalt) with 3–5 stats and hairline dividers.',
+		'Use a StatTrio as a compact proof beat inside a section on the page canvas — three headline numbers that anchor a claim. Reach for TrustStatBand when you want a full-width banded proof row — a lead counter, supporting pillars, and hairline dividers.',
 
 	recipe: [
 		'Lay out three equal cells: `grid-template-columns: repeat(3, minmax(0, 1fr))` with a column gap.',
@@ -71,7 +71,7 @@ export const statTrio: MarketingPatternSpec = {
 
 	nonFeatures: [
 		'Not a chart — three discrete numbers, no bars, axes, or trend lines.',
-		'Not a flexible grid — this is exactly three stats; for a full-width 3–5 stat band use StatStrip.',
+		'Not a flexible grid — this is exactly three stats; for a full-width banded proof row use TrustStatBand.',
 		'No count-up by default — the figures are static editorial values, not animated odometers (and never under reduced motion).',
 	],
 

@@ -56,19 +56,17 @@ export const marketingFoundationsContent: MarketingFoundationEntry[] = [
 export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	// Heroes
 	{ slug: 'hero', name: 'Hero', category: 'Heroes', description: 'The base hero primitive — eyebrow, display heading, lede, CTA pair; start-aligned.' },
-	{ slug: 'centered-hero', name: 'CenteredHero', category: 'Heroes', description: 'The default page-opening hero — centred copy unit, CTA pair, optional product shot.' },
-	{ slug: 'asymmetric-product-hero', name: 'AsymmetricProductHero', category: 'Heroes', description: 'Copy beside a large product shot that bleeds off the viewport edge.' },
+	{ slug: 'metrics-hero', name: 'MetricsHero', category: 'Heroes', description: 'The product-page opener — copy beside a product mock frame holding a few live metric tiles.' },
+	{ slug: 'product-window-hero', name: 'ProductWindowHero', category: 'Heroes', description: 'A hero visual that is a faithful product-UI window, auto-cycling through real product screens.' },
 	{ slug: 'product-hero', name: 'ProductHero', category: 'Heroes', description: 'Copy with a contained, framed scale-to-fit product shot.' },
 	{ slug: 'cosmic-hero', name: 'CosmicHero', category: 'Heroes', description: 'A high-drama dark opener with an ambient drifting accent glow.' },
 	// Layout frames
-	{ slug: 'slide-frame', name: 'SlideFrame', category: 'Layout frames', description: 'The full-width section band — paper · cream · ink · cobalt.' },
-	{ slug: 'two-col-slide', name: 'TwoColSlide', category: 'Layout frames', description: 'An even two-column copy↔media frame with a reverse prop.' },
+	{ slug: 'full-bleed-section', name: 'FullBleedSection', category: 'Layout frames', description: 'A full-width section where media bleeds to the viewport edge while copy stays on the container measure; sides alternate.' },
 	// Rhythm & connectors
 	{ slug: 'section-intro', name: 'Section intro (eyebrow + copy unit)', category: 'Rhythm & connectors', description: 'Eyebrow → display heading (accent span) → body. The most-repeated section header.' },
 	{ slug: 'big-quote', name: 'BigQuote', category: 'Rhythm & connectors', description: 'An oversized pull-quote that fills a band — large quote, attribution, optional accent quote-mark.' },
 	{ slug: 'marquee', name: 'Marquee', category: 'Rhythm & connectors', description: 'A horizontally scrolling, infinitely-looping row of logos or phrases; pauses on hover, stops under reduced motion.' },
 	{ slug: 'stat-trio', name: 'StatTrio', category: 'Rhythm & connectors', description: 'Three big stats in a row — a large tabular value plus an uppercase mono label each.' },
-	{ slug: 'stat-strip', name: 'StatStrip', category: 'Rhythm & connectors', description: 'A full-width strip of 3–5 stats on an emphasis band — value + label per stat, hairline dividers. The banded StatTrio.' },
 	// Content blocks
 	{ slug: 'feature-grid', name: 'FeatureGrid', category: 'Content blocks', description: 'A responsive 2–3-column grid of feature cells — icon, title, and blurb.' },
 	{ slug: 'feature-columns', name: 'FeatureColumns', category: 'Content blocks', description: '2–4 equal feature columns without card chrome — icon, heading, text.' },
@@ -80,19 +78,22 @@ export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	{ slug: 'platform-showcase', name: 'PlatformShowcase', category: 'Content blocks', description: 'A copy unit paired with a product visual; two-column, alternating-row friendly.' },
 	{ slug: 'utility-tiles', name: 'UtilityTiles', category: 'Content blocks', description: 'A dense auto-fit grid of small utility tiles — icon, label, optional sublabel.' },
 	{ slug: 'feature-tabs', name: 'Feature tabs', category: 'Content blocks', description: 'Auto-rotating pill tabs with a left→right progress fill.', toolId: 'marketing_feature_tabs' },
+	{ slug: 'faq-accordion', name: 'FaqAccordion', category: 'Content blocks', description: 'A single-open Q/A disclosure list with a rotating + toggle; the on-page source for FAQPage JSON-LD.' },
+	{ slug: 'calculator-island', name: 'CalculatorIsland', category: 'Content blocks', description: 'A slider-driven estimator — one range input drives a live result, with a --m-slider-pct track fill.' },
 	// Media & proof
 	{ slug: 'product-shot', name: 'Scale-to-fit product shot', category: 'Media & proof', description: 'Product UI rebuilt as DOM, scaled to fit via a ResizeObserver.', toolId: 'marketing_product_shot' },
-	{ slug: 'testimonial-card', name: 'TestimonialCard', category: 'Media & proof', description: 'A customer quote card — quote, optional quote-mark, and attribution with an optional avatar or logo.' },
-	{ slug: 'case-study-card', name: 'CaseStudyCard', category: 'Media & proof', description: 'A card linking to a case study — one headline metric, a one-line result, and a read-the-story link.' },
+	{ slug: 'trust-stat-band', name: 'TrustStatBand', category: 'Media & proof', description: 'The proof band — one rolling lead counter, supporting pillar stats, a carrier strip, and a live dot.' },
+	{ slug: 'testimonial-card', name: 'TestimonialCarousel', category: 'Media & proof', description: 'One customer quote at a time, auto-rotating with a per-word reveal and a name + role (the ShipQuoteCarousel).' },
+	{ slug: 'case-study-card', name: 'CaseStudyCard', category: 'Media & proof', description: 'A dark-by-default multi-stat proof card (primary + supporting stats, CountUp); non-linking; tone variants.' },
 	{ slug: 'logo-rail', name: 'LogoRail', category: 'Media & proof', description: "An evenly-spaced rail of muted monochrome customer logos with an optional “Trusted by” eyebrow." },
 	{ slug: 'customer-platforms-rail', name: 'CustomerPlatformsRail', category: 'Media & proof', description: 'A muted rail of the platforms and integrations customers connect — logo plus optional label per item.' },
 	{ slug: 'pinned-showcase', name: 'PinnedShowcase', category: 'Media & proof', description: 'A sticky product visual stays in view while a column of steps scrolls past; the active step drives the visual.' },
 	{ slug: 'dashfi-wordmark', name: 'DashfiWordmark', category: 'Media & proof', description: 'Inline use of the single-source Dash.fi wordmark — colourways per band, sizing, clear-space; fetched, never redrawn.' },
 	// CTAs
 	{ slug: 'split-cta', name: 'SplitCTA', category: 'CTAs', description: 'Two-column conversion block: copy + action panel.' },
-	{ slug: 'cta-section', name: 'CTASection', category: 'CTAs', description: 'Centred full-width CTA band on an emphasis surface.' },
 	{ slug: 'section-cta', name: 'SectionCTA', category: 'CTAs', description: 'Lightweight inline end-of-section nudge.' },
 	{ slug: 'home-final-cta', name: 'HomeFinalCTA', category: 'CTAs', description: 'The oversized page closer on the ink band.' },
+	{ slug: 'dark-cta-band', name: 'DarkCtaBand', category: 'CTAs', description: 'The jade-glow closing band — deep-jade radial into near-black teal, mint accent, light-beige primary button.' },
 	// Building blocks
 	{ slug: 'squircle-button', name: 'Squircle button', category: 'Building blocks', description: '6px squircle CTA, no shadow, press-scale 0.97.', toolId: 'marketing_button' },
 	{ slug: 'chip', name: 'Chip', category: 'Building blocks', description: 'Soft-tinted pill tag; four tones via data-tone.', toolId: 'marketing_chip' },

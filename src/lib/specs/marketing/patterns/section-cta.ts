@@ -12,13 +12,13 @@ export const sectionCta: MarketingPatternSpec = {
 	category: 'CTAs',
 	status: 'stable',
 	description:
-		'A lightweight inline CTA that closes a content section: one line of copy + a single link or button, on the current surface (no band change). The quiet counterpart to CTASection.',
+		'A lightweight inline CTA that closes a content section: one line of copy + a single link or button, on the current surface (no band change). The quiet counterpart to the dark closing CTA band.',
 
 	source: 'src/components/sections/SectionCTA.astro',
 	sourceNote: 'Verify exact prop names against the website source.',
 
 	whenToUse:
-		'A low-emphasis nudge at the end of a content section — "see how it works", "read the case study". When you want a CTA without interrupting the section rhythm with a full band. Escalate to CTASection / HomeFinalCTA for real conversion moments.',
+		'A low-emphasis nudge at the end of a content section — "see how it works", "read the case study". When you want a CTA without interrupting the section rhythm with a full band. Escalate to SplitCTA / HomeFinalCTA for real conversion moments.',
 
 	recipe: [
 		'A single row at the end of a section: a short prompt + one squircle button (accent or outline) or an underlined link.',
@@ -42,7 +42,7 @@ export const sectionCta: MarketingPatternSpec = {
 	],
 
 	nonFeatures: [
-		'No band of its own — if you want a surface change, use CTASection.',
+		'No band of its own — if you want a surface change, use SplitCTA or the dark closing band.',
 		'No heading — it is a one-line nudge, not a section.',
 	],
 

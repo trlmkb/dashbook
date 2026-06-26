@@ -18,22 +18,22 @@ export const homeFinalCta: MarketingPatternSpec = {
 	sourceNote: 'Verify exact prop names against the website source.',
 
 	whenToUse:
-		'The very last section of a homepage or long landing page — the maximum-emphasis closer. One per page. Use CTASection for mid-page CTAs.',
+		'The very last section of a homepage or long landing page — the maximum-emphasis closer. One per page. Use SplitCTA for mid-page CTAs.',
 
 	recipe: [
-		'A SlideFrame `ink` with the largest vertical padding on the page — this is the closing beat.',
+		'A section band (`ink`) with the largest vertical padding on the page — this is the closing beat.',
 		'An oversized centred display heading (push the clamp() max higher than a normal section), with one accent phrase.',
 		'A single primary accent squircle button (optionally one outline secondary). No more.',
 		'Optionally a single reassurance line below in `--m-fg-subtle`.',
 	],
 
-	dom: `<SlideFrame background="ink">
+	dom: `<section class="m-band" data-band="ink">
   <div class="home-final-cta">
     <h2 class="display-xl">Spend less on <span class="accent">everything you ship</span></h2>
     <a class="m-btn" data-variant="accent">Start a pilot</a>
     <p class="reassure">No setup fee. Cancel anytime.</p>
   </div>
-</SlideFrame>`,
+</section>`,
 
 	tokensUsed: [
 		{ part: 'band', role: '--m-near-black' },
@@ -67,16 +67,16 @@ export const homeFinalCta: MarketingPatternSpec = {
 
 	accessibility: ['Single heading; if two CTAs, primary precedes secondary in the DOM.'],
 
-	example: `<SlideFrame background="ink">
+	example: `<section class="m-band" data-band="ink">
   <div class="home-final-cta">
     <h2 class="display-xl">Spend less on <span class="accent">everything you ship</span></h2>
     <a class="m-btn" data-variant="accent" href="/start">Start a pilot</a>
     <p class="reassure">No setup fee. Cancel anytime.</p>
   </div>
-</SlideFrame>`,
+</section>`,
 	exampleLang: 'astro',
 
-	porting: ['Oversized centred heading + single CTA on the ink band, max page padding. Reuse squircle-button + slide-frame.'],
+	porting: ['Oversized centred heading + single CTA on the ink band, max page padding. Reuse squircle-button on a Section-rhythm ink band.'],
 
 	changelog: [{ version: 'v0.1.0', date: '2026-06-03', note: 'First documented in Dashbook.' }],
 };

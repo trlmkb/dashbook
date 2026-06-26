@@ -18,17 +18,17 @@ export const cosmicHero: MarketingPatternSpec = {
 	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
 
 	whenToUse:
-		'The statement opener for a homepage or campaign page where atmosphere matters. Use sparingly — one per site flow. Use Hero/CenteredHero for calmer openers, ProductHero when the product should lead.',
+		'The statement opener for a homepage or campaign page where atmosphere matters. Use sparingly — one per site flow. Use Hero for calmer openers, ProductHero when the product should lead.',
 
 	recipe: [
-		'A SlideFrame `ink` (sets `data-marketing-dark`) with a decorative backdrop layer behind the content.',
+		'A section band (`ink`, which sets `[data-marketing-dark]`) with a decorative backdrop layer behind the content.',
 		'Backdrop: a soft radial accent glow (`--m-accent` at low alpha) that drifts on a slow ambient loop; keep amplitude small and desync if multiple.',
 		'Foreground: a centred oversized display heading (one accent phrase) + a single primary CTA.',
 		'Backdrop is decorative and `aria-hidden`; content sits above it with `position: relative`.',
 		'Under `prefers-reduced-motion: reduce`, hold the glow static (no drift).',
 	],
 
-	dom: `<SlideFrame background="ink">
+	dom: `<section class="m-band" data-band="ink">
   <div class="cosmic">
     <div class="backdrop" aria-hidden="true"></div>
     <div class="content">
@@ -36,7 +36,7 @@ export const cosmicHero: MarketingPatternSpec = {
       <a class="m-btn" data-variant="accent">Start a pilot</a>
     </div>
   </div>
-</SlideFrame>`,
+</section>`,
 
 	tokensUsed: [
 		{ part: 'band', role: '--m-near-black' },
@@ -74,7 +74,7 @@ export const cosmicHero: MarketingPatternSpec = {
 
 	accessibility: ['Hero heading is the page <h1>. Backdrop is decorative (aria-hidden). Contrast of heading/CTA over the glow stays ≥ 4.5:1.'],
 
-	example: `<SlideFrame background="ink">
+	example: `<section class="m-band" data-band="ink">
   <div class="cosmic">
     <div class="backdrop" aria-hidden="true"></div>
     <div class="content">
@@ -82,7 +82,7 @@ export const cosmicHero: MarketingPatternSpec = {
       <a class="m-btn" data-variant="accent" href="/start">Start a pilot</a>
     </div>
   </div>
-</SlideFrame>`,
+</section>`,
 	exampleLang: 'astro',
 
 	porting: [
