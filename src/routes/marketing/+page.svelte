@@ -27,6 +27,24 @@
 		<span class="muted">The marketing counterpart to the product component library. Query via the <code>marketing_*</code> MCP tools.</span>
 	</div>
 
+	<section class="howto">
+		<div class="section-header">How to use these docs</div>
+		<ul class="howto-list">
+			<li>
+				<strong>Jade is the brand.</strong> Jade (<code>#2B605C</code>) carries the accent across the light paper + cream bands, with a dark band for emphasis. Cobalt is demoted and barely used — reach for it almost never.
+			</li>
+			<li>
+				<strong>Colour via <code>--m-*</code> roles.</strong> Recipes never hard-code hex — they use the marketing token roles (<code>--m-fg</code>, <code>--m-accent</code>, <code>--m-card</code>, …). Start at Foundations → Tokens to see the full set.
+			</li>
+			<li>
+				<strong>Each pattern is a recipe, not an import.</strong> A pattern page gives you the DOM shape, the token used per part, dimensions, gotchas, and prop signatures — enough to rebuild it faithfully in any stack.
+			</li>
+			<li>
+				<strong>Query it from your editor.</strong> Everything here is also exposed over MCP — use the <code>marketing_*</code> tools (<code>list</code>, <code>search</code>, <code>get</code>) to pull a spec without leaving your agent.
+			</li>
+		</ul>
+	</section>
+
 	<section class="cat">
 		<div class="section-header">Foundations</div>
 		<ul class="list">
@@ -88,6 +106,36 @@
 		font-family: var(--font-mono);
 		font-size: 12px;
 		background: var(--bg-muted);
+		padding: 1px 5px;
+	}
+	.howto {
+		margin-bottom: 48px;
+		padding: 24px 26px;
+		border: 1px solid var(--border);
+		border-left: 3px solid var(--brand);
+		background: var(--bg-muted);
+	}
+	.howto-list {
+		list-style: none;
+		margin: 14px 0 0;
+		padding: 0;
+		display: grid;
+		gap: 12px;
+	}
+	.howto-list li {
+		font-size: 13.5px;
+		line-height: 1.55;
+		color: var(--fg-muted);
+		max-width: 78ch;
+	}
+	.howto-list strong {
+		color: var(--fg);
+		font-weight: 600;
+	}
+	.howto-list code {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		background: var(--bg);
 		padding: 1px 5px;
 	}
 	.cat {

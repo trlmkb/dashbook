@@ -24,14 +24,14 @@
 	<PageHeader
 		label="Marketing / Foundations"
 		title="Section rhythm."
-		lede="Marketing pages read as a sequence of full-width bands. Alternate light surfaces, drop a dark band for emphasis, and use cobalt sparingly."
+		lede="Marketing pages read as a sequence of full-width bands. Alternate light surfaces and drop a dark band for emphasis. Jade is the brand colour; cobalt is demoted and barely used."
 	/>
 
 	<Section label="Bands">
 		<div class="bands">
 			{#each f.bands as b (b.name)}
-				<div class="band" style:background={swatch[b.name]} style:color={fg[b.name]}>
-					<span class="b-name">{b.name}</span>
+				<div class="band" class:rare={b.name === 'cobalt'} style:background={swatch[b.name]} style:color={fg[b.name]}>
+					<span class="b-name">{b.name}{#if b.name === 'cobalt'}<span class="rare-tag">rare</span>{/if}</span>
 					<span class="b-meta">{b.surface}</span>
 					<span class="b-use">{b.usage}</span>
 				</div>
@@ -60,11 +60,26 @@
 		gap: 4px;
 		padding: 22px 28px;
 	}
+	.band.rare {
+		padding-block: 13px;
+		opacity: 0.92;
+	}
 	.b-name {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
 		font-family: var(--font-mono);
 		font-size: 12px;
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
+	}
+	.rare-tag {
+		font-size: 9px;
+		letter-spacing: 0.14em;
+		padding: 2px 6px;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		opacity: 0.7;
 	}
 	.b-meta {
 		font-family: var(--font-mono);

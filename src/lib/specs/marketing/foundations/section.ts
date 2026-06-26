@@ -30,7 +30,7 @@ export const marketingSectionFoundation: MarketingSectionFoundation = {
 			name: 'cobalt',
 			surface: '--m-cobalt (#354CEF)',
 			fg: 'cream / white',
-			usage: 'The marketing data-accent band. Sparing — a single high-energy section, never two adjacent.',
+			usage: 'Demoted, barely used. Jade is the brand colour — cobalt is a rare legacy data-accent, reached for almost never. At most one small moment per page, never two adjacent. When in doubt, use the ink band instead.',
 		},
 	],
 
@@ -38,7 +38,7 @@ export const marketingSectionFoundation: MarketingSectionFoundation = {
 		'Alternate paper ↔ cream across consecutive light sections — never two identical backgrounds adjacent.',
 		'Drop an ink (dark) band between light sections for emphasis; it resets the eye and spotlights one idea.',
 		'A SlideFrame `background` variant (paper · cream · ink · cobalt) sets the band; the dark variant flips `--m-*` roles via `[data-marketing-dark]`.',
-		'Cobalt is high-energy — at most one cobalt band per page, never adjacent to another saturated band.',
+		'Jade is the brand colour — it carries the accent across every light band. Cobalt is demoted and barely used; if you reach for it at all, it is one small moment per page, never adjacent to another saturated band.',
 		'Keep vertical rhythm consistent: bands share a section padding scale; only the background changes.',
 	],
 };
