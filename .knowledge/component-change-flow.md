@@ -18,18 +18,39 @@ both PRs merged in core + dashbook
 
 ---
 
-## The map — who consumes what
+## The three repos
+
+| Repo | Local path | GitHub | Stack | Role |
+|---|---|---|---|---|
+| **core** | `~/dev/dash/core` | `FunnelDash/core` | Nx monorepo · Go + SvelteKit · AWS Lambda | Backend services + `dashfi-ui` product app + **`@dashfi/svelte`** (the published component lib, at `libs/svelte-components/lib/`) |
+| **www.dash.fi** | `~/dev/dash/www.dash.fi` | `trlmkb/dashfi` | Astro 6 + React islands + Tailwind v4 + TinaCMS | The public marketing website (live dash.fi) |
+| **dashbook** | `~/dev/dashbook` | `trlmkb/dashbook` | SvelteKit + Vercel | Design-system portal + MCP server. Documents **both** sides. |
+
+> Note: several stale duplicate checkouts exist on disk (`core too`, `core three`, `core-brand`, `www.dash.fi - standalone pages`). Canonical paths are the ones above.
+
+## The map — who consumes what (PRODUCT side)
 
 | Surface | Where | Consumes lib via |
 |---|---|---|
 | **`@dashfi/svelte` (the lib)** | `~/dev/dash/core/libs/svelte-components/lib/` | itself — source-of-truth |
 | **dashfi-ui** (production app) | `~/dev/dash/core/packages/dashfi-ui/app/` | `workspace:` link → auto-updates on lib edit |
-| **dashbook** (the design system portal at dashbook.vercel.app) | `~/dev/dashbook/` (separate repo) | npm package → manual version bump |
+| **dashbook** (docs the product side) | `~/dev/dashbook/` (separate repo) | npm package → manual version bump |
 | **Storybook for the lib** | `~/dev/dash/core/libs/svelte-components/lib/.storybook/` | same workspace link |
 
 **Why two-repo + npm-bridge for dashbook**: dashbook is a separate Vercel deploy outside the monorepo. It can't workspace-link into core. So lib changes ride to dashbook through an npm publish.
 
 **Key insight**: dashfi-ui sees lib changes immediately (workspace). dashbook needs a published version + dep bump. So `pnpm publish` is the chokepoint.
+
+## The marketing flow is the MIRROR of the product flow
+
+Product components live in code (`@dashfi/svelte`) and dashbook documents them. **Marketing is the opposite**: the source of truth is `www.dash.fi`'s actual Astro source (the `--m-*` / `--ship-*` tokens, the `Ship*` / marketing components), and dashbook **reverse-documents** them as recipes (DOM shape + token roles + gotchas + prop signatures pulled from source), NOT as importable components.
+
+```
+PRODUCT:   edit lib  →  publish npm  →  dashbook documents it
+MARKETING: ship on www.dash.fi  →  dashbook reverse-documents it (website leads, dashbook follows)
+```
+
+So when reconciling marketing specs, read `~/dev/dash/www.dash.fi` source directly — that's ground truth. The marketing `marketing_*` MCP tools serve these reverse-documented recipes. (See PLAN.md §9 "source reconciliation vs /shipping flagship" for a worked example.)
 
 ---
 
