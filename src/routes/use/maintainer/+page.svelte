@@ -119,8 +119,13 @@ core/libs/svelte-components/lib/package.json   "version": "x.y.z"
 #   1. Edit claude-plugin/ — SKILL.md, commands/*.md.
 #   2. Bump claude-plugin/.claude-plugin/plugin.json "version".  ← the signal; don't skip.
 #   3. Merge to main on trlmkb/dashbook.
-#   4. claude.ai admin → Plugins (Cowork) re-pulls from GitHub
-#      (auto on its sync cadence; or click Re-sync to force).
+#   4. claude.ai admin → Plugins (Cowork) re-pulls from GitHub automatically —
+#      there is NO manual sync button. The command list refreshes on the next
+#      pull; the plugin CARD (name, description, version shown in admin) is keyed
+#      to the "version" field in .claude-plugin/marketplace.json (the root
+#      marketplace manifest — NOT claude-plugin/.claude-plugin/plugin.json), so
+#      bump BOTH versions or the card shows stale metadata. To force a refresh:
+#      remove + re-add the org marketplace in admin.
 #   5. Members get it on their NEXT Claude Code session. No per-user install.
 
 # Connector (claude.ai web users)
