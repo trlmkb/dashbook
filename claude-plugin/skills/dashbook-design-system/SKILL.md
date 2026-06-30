@@ -152,3 +152,27 @@ page-shell, wordmark, auth-footer, and partner-cobrand entries (these proxy
 the `marketing_*` namespace under `product_*`-prefixed names so chrome work
 shows up in any product-namespace introspection). See
 `product_list_components` for the current catalogue.
+
+## Slash commands
+
+This plugin ships nine slash commands. Use them when the user's intent maps
+cleanly to a single MCP call — they're thin wrappers that take an argument,
+call the right tool, and format the result.
+
+**Product** (work on dashfi-ui-style UI):
+
+- `/dashbook-component <slug>` — anatomy for one component
+- `/dashbook-port <slug> <stack>` — emit a component in React / RN / vanilla / etc.
+
+**Marketing** (work on the public dash.fi site, launch copy, partner materials):
+
+- `/dashbook-marketing-pattern <slug>` — anatomy for one marketing pattern (hero, stat-trio, feature-list, faq-accordion, etc.)
+- `/dashbook-marketing-foundation <slug>` — marketing color / typography / spacing / motion / section foundation (the `--m-*` token surface)
+- `/dashbook-marketing-asset <kind> [variant]` — logo / card art / palette
+- `/dashbook-partner-kit [partner]` — partner co-branding rules + legal disclosure
+- `/dashbook-legal <kind>` — verbatim compliance copy (FDIC, partner-bank, MSB, etc.)
+- `/dashbook-marketing-search <query>` — full-text search across the marketing surface
+- `/dashbook-voice` — brand voice rules for drafting copy
+
+Any of these can also be invoked by name from natural-language prompts —
+the commands exist so users don't have to remember the MCP tool names.
