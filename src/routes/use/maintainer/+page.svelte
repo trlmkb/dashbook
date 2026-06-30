@@ -104,24 +104,36 @@ core/libs/svelte-components/lib/package.json   "version": "x.y.z"
 # 0.1.0 (additive features) or 1.0.0 (declared stable). NOT in this repo —
 # that lives in core. Sync via the migration branch.`;
 
-	const cofuncSetup = `# Cowork plugin (org-wide auto-install for Claude Code)
-# One-time setup; updates propagate automatically when the marketplace.json
-# in this repo changes.
+	const cofuncSetup = `# TWO UPDATE CHANNELS — they propagate very differently. The common trap is
+# assuming an edited skill reaches everyone instantly. It doesn't; the MCP
+# tools the skill talks about do.
 
-# 1. Push any change to the dashbook plugin source:
-#       claude-plugin/.claude-plugin/plugin.json
-#       claude-plugin/.claude-plugin/marketplace.json
-#       claude-plugin/skills/dashbook-design-system/SKILL.md
-#       claude-plugin/commands/*.md
-# 2. Verify the change is reflected at trlmkb/dashbook on GitHub.
-# 3. claude.ai admin → Plugins re-pulls automatically; members get the
-#    update on next Claude Code session.
+# ── Channel A: MCP tools + JSON API + /llms.txt  (AUTOMATIC) ──
+# Anything the deploy serves: /mcp tools, /api/* JSON, /llms.txt, all src/.
+#   Merge to main → Vercel auto-deploys → live for ALL clients (Claude Code
+#   plugin, claude.ai Connector, Desktop) on their next call.
+#   No version bump, no admin action, no re-install.
+
+# ── Channel B: skill prose + slash commands  (ORG-WIDE, needs a step) ──
+# Ships INSIDE the plugin, pulled from the trlmkb/dashbook GitHub repo.
+#   1. Edit claude-plugin/ — SKILL.md, commands/*.md.
+#   2. Bump claude-plugin/.claude-plugin/plugin.json "version".  ← the signal; don't skip.
+#   3. Merge to main on trlmkb/dashbook.
+#   4. claude.ai admin → Plugins (Cowork) re-pulls from GitHub
+#      (auto on its sync cadence; or click Re-sync to force).
+#   5. Members get it on their NEXT Claude Code session. No per-user install.
 
 # Connector (claude.ai web users)
-# Setup: claude.ai admin → Organization settings → Connectors → Add → Custom → Web
-# URL:   https://dashbook.vercel.app/mcp
-# No further action — tool catalogue updates automatically as the MCP server
-# at /mcp endpoints change on each Vercel deploy.`;
+#   admin → Organization settings → Connectors → Add → Custom → Web
+#   URL: https://dashbook.vercel.app/mcp
+#   Gets Channel A (MCP tools) automatically. Does NOT get Channel B —
+#   slash commands are a Claude Code convenience; web users invoke the tools
+#   directly or via the skill.
+
+# VERIFY
+#   Channel A:  curl https://dashbook.vercel.app/api/marketing/patterns.json   (instant after deploy)
+#   Channel B:  fresh Claude Code session → new /dashbook-* commands appear,
+#               skill shows the bumped version.`;
 
 	const reporterFlow = `# When someone files a bug or sends feedback:
 
@@ -241,14 +253,15 @@ core/libs/svelte-components/lib/package.json   "version": "x.y.z"
 	</Section>
 
 	<Section
-		label="8. Cowork plugin + claude.ai Connector"
-		note="Two distinct distribution paths for the same MCP server."
+		label="8. Landing updates org-wide — the two channels"
+		note="The one thing to internalize about distribution: MCP tools / JSON / data update automatically on deploy (Channel A); the skill + slash commands ship in the plugin and reach the org via a Cowork re-pull from GitHub (Channel B). Knowing which channel a change rides decides whether you need to bump a version + confirm the sync."
 	>
 		<CodeSnippet code={cofuncSetup} language="bash" />
 		<p class="note">
-			Both layers update automatically. You don't push to claude.ai manually — the Cowork integration
-			watches the GitHub repo, the Connector hits the live MCP URL on every session. No release
-			ceremony.
+			Rule of thumb: changed something under <code>src/</code> (tools, JSON, pages, <code>/llms.txt</code>)?
+			Channel A — just merge and it deploys. Changed something under <code>claude-plugin/</code>
+			(skill prose, slash commands)? Channel B — bump <code>plugin.json</code> version, merge, and the
+			org picks it up on the next Cowork sync.
 		</p>
 	</Section>
 
