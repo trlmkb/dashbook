@@ -1,0 +1,33 @@
+# Dashbook — Dash.fi brand & design system
+
+> The source of truth for how Dash.fi looks and sounds: components, design tokens, brand voice, logos, card art, partner kits, legal disclosures, and reusable marketing page patterns — for designers, engineers, marketing, and partners.
+
+Dashbook has two namespaces. Product is UI you build into the app — components, foundations, tokens — shipped from the `@dashfi/svelte` library. Marketing is the public website surface — page patterns, marketing tokens, brand assets — documented as recipes from the dash.fi site. Most data is reachable three ways: the MCP server (best for agents), a plain HTTP JSON API (any client, no MCP needed), and human-readable pages.
+
+## Model Context Protocol (best for agents)
+
+- [MCP server](https://dashbook.vercel.app/mcp): Streamable HTTP endpoint. `product_*` tools cover components, foundations, tokens, and porting; `marketing_*` tools cover page patterns, marketing foundations, brand voice, logos, card art, partner kits, and legal disclosures. Point any MCP-aware client here.
+- [MCP setup and tool list](https://dashbook.vercel.app/developers/mcp): how to connect Claude Code, claude.ai, Claude Desktop, and other clients.
+
+## JSON API (no MCP required — CORS-open, 24-hour cache)
+
+- [Component catalogue](https://dashbook.vercel.app/api/components.json): every component with slug, category, status.
+- [Component anatomy](https://dashbook.vercel.app/api/components/button.json): full spec for one component — swap the slug.
+- [Product foundations](https://dashbook.vercel.app/api/foundations/color.json): also `typography.json` and `spacing.json`.
+- [Marketing pattern catalogue](https://dashbook.vercel.app/api/marketing/patterns.json): every marketing page pattern.
+- [Marketing pattern recipe](https://dashbook.vercel.app/api/marketing/patterns/hero.json): full recipe for one pattern — swap the slug.
+- [Marketing foundations](https://dashbook.vercel.app/api/marketing/foundations.json): tokens, typography, layout, section rhythm, motion.
+
+## Brand assets
+
+- [Logo](https://dashbook.vercel.app/api/logo/wordmark/jade?format=svg): wordmark or app icon, any colorway preset, SVG or PNG. Always fetch the wordmark — never reconstruct it.
+- [Card art](https://dashbook.vercel.app/api/card/jade/preview): Mastercard MDES card-art slots.
+
+## Pages
+
+- [Brand](https://dashbook.vercel.app/brand): logo, color, typography, voice, motion, photography, iconography.
+- [Brand voice](https://dashbook.vercel.app/brand/voice): the tone rules — sentence case, no exclamation marks, no emoji, numerals not words. Apply to any Dash.fi copy.
+- [Foundations](https://dashbook.vercel.app/foundations): tokens, spacing, radius, elevation, accessibility, data viz, currency.
+- [Marketing](https://dashbook.vercel.app/marketing): reusable landing-page sections and the marketing token set.
+- [Press and partners](https://dashbook.vercel.app/press): brand kit, partner lockups, legal disclosures.
+- [Install and connect](https://dashbook.vercel.app/developers/install): every way to consume Dashbook — plugin, connector, MCP clients, direct fetch.
