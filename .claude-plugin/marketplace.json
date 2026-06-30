@@ -10,13 +10,13 @@
 		{
 			"name": "dashbook",
 			"source": "./claude-plugin",
-			"description": "Dashbook — Dash.fi's brand & design system. Adds the dashbook-design-system skill, registers the hosted Dashbook MCP server, and ships three slash commands for fetching component anatomy, porting components to other stacks, and pulling the brand voice rules.",
-			"version": "0.1.0",
+			"description": "Dashbook — Dash.fi's brand & design system. Adds the dashbook-design-system skill, registers the hosted Dashbook MCP server (components, foundations, brand voice, logos, partner kits, marketing patterns), and ships nine slash commands across the product and marketing namespaces.",
+			"version": "0.2.0",
 			"author": {
 				"name": "Dash.fi",
 				"email": "hi@dash.fi"
 			},
-			"keywords": ["dashfi", "design-system", "brand", "components", "mcp", "tokens"],
+			"keywords": ["dashfi", "design-system", "brand", "components", "marketing", "mcp", "tokens"],
 			"homepage": "https://dashbook.vercel.app/developers/mcp"
 		}
 	]
