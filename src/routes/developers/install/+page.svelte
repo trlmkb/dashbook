@@ -348,6 +348,18 @@ curl -sS 'https://dashbook.vercel.app/api/foundations/color.json'`;
 				<strong>Foundation JSON</strong> —
 				<code>GET https://dashbook.vercel.app/api/foundations/&#123;color,typography,spacing&#125;.json</code>.
 			</li>
+			<li>
+				<strong>Marketing pattern catalogue + recipe JSON</strong> —
+				<code>GET https://dashbook.vercel.app/api/marketing/patterns.json</code> for the
+				catalogue, <code>/api/marketing/patterns/&lt;slug&gt;.json</code> for one pattern's
+				full recipe (e.g. <code>hero</code>, <code>stat-trio</code>). Same data the
+				<code>marketing_list_patterns</code> / <code>marketing_get_pattern</code> MCP tools return.
+			</li>
+			<li>
+				<strong>Marketing foundation JSON</strong> —
+				<code>GET https://dashbook.vercel.app/api/marketing/foundations.json</code> +
+				<code>/api/marketing/foundations/&#123;tokens,typography,layout,section,motion&#125;.json</code>.
+			</li>
 		</ul>
 		<div class="setup-head">Try it</div>
 		<CodeSnippet code={directAssetsCurl} language="bash" />
