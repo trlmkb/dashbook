@@ -380,7 +380,7 @@ Drafting pages render a "Drafting" dashed-border notice and a single-paragraph r
 
 | Phase             | Owner                        | Scope                                                                                                   |
 | ----------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **7 — Figma library** | **External Claude Code instance** (in flight, separate auth) | Authoring the actual Figma library file per `FIGMA_HANDOFF.md`. Code-agent prep is done in this repo; the build itself is happening in a parallel session bound to the dashfi-team Figma account. Will land alongside the production deploy as part of v1.0. |
+| **7 — Figma library** | **This session** (Figma file `91csAF1OGUmCZROdZlCRSv`, dashfi-team auth via `use_figma`) | **Phases 1–3 + all 8 doc pages + Code Connect built 2026-06-30→07-01. Only remaining: publish the library (Figma-UI action) + Code Connect activation (needs Org/Enterprise plan).** **Phase 3 (components):** canonical 10 built as 11 variant sets + 50 stub cards on the Components page; Code Connect templates at `figma/code-connect/`. See §10 for the full build log.** **Phase 1 (Foundations):** 3 variable collections — Base palette (14 primitives, 1 mode), Product semantic (14 roles × Light/Dark), Marketing (31 vars × Light/Dark) = **59 variables** with explicit scopes + WEB `var(--*)` code syntax + aliasing matching `app.css`; plus **8 text styles**. **Phase 2 (file structure):** the full **8-page IA** (Cover · Brand · Foundations · Components · Patterns · Resources · Press & Partners · Changelog); **Cover** built (embedded real dash.fi wordmark SVG + DASHBOOK display title + version/date/link, all colours bound); **Foundations** built (Colour section = all 59 swatches with fills bound to their variables + hex on Base palette; Typography specimen = all 8 styles with live samples). **All remaining doc pages built 2026-07-01:** Brand (logo · base-palette strip · type specimen · voice with 4 principles + rule chips + good/avoid · motion easings + duration bars · photography placeholder · iconography with lucide note + 6 line icons), Patterns (6 composed recipes — transaction list, metric card, settings section, destructive confirmation, empty state, card detail), Press & Partners (logo frames light/dark + app · media contacts · 4 verbatim legal disclosures · partner co-branding with 3 badge variants + do/don't + partner chips), Changelog (dated release notes v1.0.0→earlier), Resources (designer checklist + status legend + link cards). Font: brand `PP Supply Mono` absent from Figma → **IBM Plex Mono** (200→ExtraLight/400→Regular/500→Medium), `Bai Jamjuree` native; **no font upload** (team on Figma Professional) — decision locked. Marketing = current 30-role set, not the handoff's stale 10. **Components (Phase 3) deferred** to later one-at-a-time sessions. State ledger: `/tmp/dsb-state-ds-figma-20260627.json`. |
 | **v1.0 — Brand-app production** | dashfi team       | Execute the migration spec at `core/docs/superpowers/specs/2026-05-12-brand-source-of-truth-design.md`. Phases 0–4: copy → lift-and-shift inside core → IA + auth → MCP + skill + new surfaces → DNS cutover. Includes compliance review of the legal copy on `/press`. `DEPLOY.md` in this repo is now obsolete. |
 | **`@dashfi/svelte` next publish — packaging cleanup** | core / lib team | `v0.0.1` works but has three known packaging bugs; dashbook works around them with explicit transitives in `package.json`. Full notes + verification recipe at `.knowledge/dashfi-svelte-packaging-followups.md`. Summary: (1) move `svelte-radix`, `svelte-tel-input`, `formsnap`, `@internationalized/date` from `devDependencies` to `peerDependencies`; (2) filter `.stories.svelte`, `@faker-js/faker`, `@storybook/*` references out of the published `dist/`; (3) fix `sideEffects` glob from `lib/ui/**/*.css` to `dist/ui/**/*.css` so tree-shakers preserve component CSS. |
 | **MCP server Phase 2** | dashbook / brand team | Foundations deep-extract beyond `tokens.ts` (typography type scale, spacing scale). **Brand voice + partner kit + marketing search wired 2026-05-13** (see Done table). Still pending: `marketing_get_partner_kit` per-partner **asset bundles** (lockup SVG + partner logo URLs — partner-ops owned), auth gating for partner-specific assets (FDIC partner data, exec bios — public assets stay public), end-to-end test from Claude Desktop + Claude Code against the live remote URL. |
@@ -403,29 +403,43 @@ Type-check is now **0 errors** (was 20). Production build passes; the only remai
 
 ---
 
-## 10. Figma Plan — parallel agent
+## 10. Figma Plan — build log
 
-### Lanes
+**Live file:** `91csAF1OGUmCZROdZlCRSv` (authored in-session via the Figma `use_figma` plugin API, dashfi-team auth). Supersedes the old parallel-agent plan and its placeholder file key `sN3gd41e7FhsyoQ7WqJu0j`.
 
-| Lane        | Owns                                                                              |
-| ----------- | --------------------------------------------------------------------------------- |
-| Code agent  | All `dashbook/` + lib changes                                                     |
-| Figma agent | Dashbook Figma file (`sN3gd41e7FhsyoQ7WqJu0j`). Mirrors brief. Never writes back. |
-| You         | Decisions, sign-off                                                               |
+### Status by phase
 
-### Handoff brief contents
+| Phase | What | Status |
+| ----- | ---- | ------ |
+| 1 — Foundations | 3 collections / 59 variables + 8 text styles | ✅ built + validated 2026-06-30 |
+| 2 — File structure | **All 8 pages built with real content** — Cover · Brand · Foundations · Components · Patterns · Resources · Press & Partners · Changelog (no stubs remain) | ✅ built + validated 2026-06-30→07-01 |
+| — Doc pages | Brand (logo/palette/type/voice/motion/photography/iconography) · Patterns (6 composed recipes) · Press & Partners (logos/contacts/legal/co-branding) · Changelog (dated notes) | ✅ built + validated 2026-07-01 |
+| 3 — Components (product) | **57 of 60 built as real variable-wired Figma components** (10 Core variant sets + 47 promoted; omitted data-table/flow-lines/magnetic-hover) | ✅ built + validated 2026-07-01 |
+| 3b — Components (marketing) | **30 marketing components on a new Marketing page**, wired to the `--m-*` collection (Heroes, Rhythm, Content blocks, Media & proof, CTAs, Building blocks) | ✅ built + validated 2026-07-01 |
+| 4 — Token SSOT pipeline | **DTCG source `tokens/dashbook.tokens.json` → `pnpm tokens` (zero-dep generator) → CSS (`src/lib/generated/tokens.css`, imported by app.css) + typed `tokens.ts` + Figma payload + `figma-apply.gen.js`.** app.css refactored to consume the generated token layer (hand-written blocks removed). Figma reconciler run: 97 unchanged, 7 drifts fixed, 0 missing. No Tokens Studio. | ✅ built + verified 2026-07-01 (build compiles tokens into bundle; `pnpm check` 0 errors) |
+| 4b — Token follow-ups | **Tailwind `@theme`** now generated (`theme.css`, imported by app.css — build confirms utilities generate); **8 text styles** now source-driven (`figma-text-styles.gen.js`, reconcile 8/8 in sync). **Core lib** (`@dashfi/svelte`): HSL reference emitted (`lib-tokens.reference.css`); full wire-up is the `packages/brand` migration — reviewed core change, **not done here** (see note). | ✅ @theme + text styles done 2026-07-01; core lib = reference + path |
+| — `packages/brand` migration | Point core lib `global.css` at the generated HSL tokens; extend source with lib-only roles (success/warning/sidebar/card-surface); reconcile `primary` ink-vs-black + `destructive` orange-vs-black divergences; build + publish lib; verify app.dash | ⏸ team-level, decision-gated (unchanged "big rock") |
+| — Code Connect | `@dashfi/svelte` import + prop mappings for the canonical 10 | ✅ templates authored (`figma/code-connect/`) — ⚠️ not publishable until plan upgrade (see note) |
+| — Publish library | Publish to team library | ⏸ Figma-UI action (Plugin API can't); works on Professional within the team |
 
-1. 13 base hex tokens → Figma primitive variables
-2. Product semantic tokens × light/dark modes → alias variables in 2-mode collection
-3. 10 marketing aliases → alias variables (single mode)
-4. 8 typography styles → text styles
-5. 58 component variant definitions → component variants
-6. 8-page IA → Figma page structure
-7. Code Connect templates → `@dashfi/svelte` imports
+### What got built in Phase 3 (components)
 
-### Figma file pages
+- **Canonical 10** as Figma component sets with derived variant properties (curated matrices, not full cartesian products — judgement call to avoid 600+ Button variants):
+  Button (Variant 7 × State 3 = 21) · Badge (Variant 4) · Input (State 5) · Switch (State 4 × Focus 2 = 8) · Checkbox (State 4 × Focus 2 = 8) · Alert (Type 4 × Icon 2 = 8, incl. the yellow-on-ink warning special-case) · Tabs trigger (State 4, + composed TabsList example) · Select (trigger State 5 + item State 4 + composed open panel with `--shadow-md`) · Dialog (Size 3, shadow + footer buttons) · Card (Has header × Has footer = 4). Every fill bound to a variable; text on the 8 styles or Bai Jamjuree Medium for button/label weight.
+- **50 stub cards** for the non-canonical components, grouped Inputs/Display/Feedback/Navigation/Data, each with name + status pill (Stable/Beta) + import path + placeholder.
+- **Code Connect**: `figma/code-connect/dashbook.figma.ts` (one `figma.connect()` block per canonical component, node-ID-accurate, mapping Figma variant props → `@dashfi/svelte` props) + `figma/code-connect/README.md`. **Gate:** Code Connect needs Figma Org/Enterprise + a published library; the team is on Professional, so these are authored-but-unpublished templates.
+- **Not done (needs the Figma UI / a plan change):** publishing the file as a team library; activating Code Connect.
 
-Cover · Brand · Foundations · Components · Patterns · Resources · Press & Partners · Changelog
+### What got built in Phase 1 (vs the original FIGMA_HANDOFF.md brief)
+
+1. Base palette — **14** primitives (handoff said 13; `dash/jade-lifted` was added since). Single "Default" mode. Scopes `[]`/FILL as appropriate, WEB `var(--dash-*)`.
+2. Product semantic — **14** roles × **Light/Dark** modes, aliased to Base palette where the CSS aliases (e.g. `fg`→jade-deep/white). WEB `var(--*)`.
+3. Marketing — **31** vars × **Light/Dark** (10 palette aliases identical in both modes + 21 semantic roles that flip per `[data-marketing-dark]`). **This is the current 30-role set**, not the handoff's stale 10 aliases. WEB `var(--m-*)`.
+4. Text styles — **8** (`Title case / Variant` grouping). Brand `PP Supply Mono` → **IBM Plex Mono** fallback (absent from Figma org); `Bai Jamjuree` native. Text styles carry typography only — color is bound on specimen nodes in Phase 2.
+
+### Figma file pages (planned IA for Phase 2)
+
+Cover · Getting Started · Foundations · Components · Patterns · Resources · Press & Partners · Changelog
 
 ---
 
