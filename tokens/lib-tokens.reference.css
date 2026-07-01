@@ -1,0 +1,56 @@
+/* GENERATED reference (HSL) for @dashfi/svelte's global.css token block — from tokens/dashbook.tokens.json.
+   Covers the roles that derive from Dashbook tokens. The lib ALSO defines success/warning/sidebar-*/
+   card-surface-* (not sourced here yet) and uses primary=ink / destructive=orange (already matched here).
+   This is a REFERENCE for the packages/brand migration — wiring the lib to consume it is a reviewed core change. */
+@layer base {
+	:root {
+		--background: 47 47% 96%;
+		--foreground: 177 53% 15%;
+		--card: 47 47% 96%;
+		--card-foreground: 177 53% 15%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 177 53% 15%;
+		--primary: 67 13% 13%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 50 24% 90%;
+		--secondary-foreground: 177 53% 15%;
+		--muted: 50 24% 90%;
+		--muted-foreground: 180 4% 45%;
+		--accent: 50 24% 90%;
+		--accent-foreground: 177 53% 15%;
+		--destructive: 15 100% 50%;
+		--destructive-foreground: 0 0% 100%;
+		--brand: 175 38% 27%;
+		--brand-foreground: 0 0% 100%;
+		--cobalt: 233 85% 57%;
+		--cobalt-foreground: 0 0% 100%;
+		--border: 50 21% 89%;
+		--input: 174 7% 73%;
+		--ring: 175 38% 27%;
+	}
+	.dark {
+		--background: 168 14% 7%;
+		--foreground: 0 0% 100%;
+		--card: 168 14% 7%;
+		--card-foreground: 0 0% 100%;
+		--popover: 170 13% 9%;
+		--popover-foreground: 0 0% 100%;
+		--primary: 0 0% 100%;
+		--primary-foreground: 0 0% 0%;
+		--secondary: 170 11% 11%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: 170 11% 11%;
+		--muted-foreground: 175 5% 57%;
+		--accent: 170 11% 11%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 15 100% 50%;
+		--destructive-foreground: 0 0% 100%;
+		--brand: 175 40% 54%;
+		--brand-foreground: 0 0% 100%;
+		--cobalt: 233 85% 57%;
+		--cobalt-foreground: 0 0% 100%;
+		--border: 175 15% 14%;
+		--input: 175 15% 14%;
+		--ring: 175 40% 54%;
+	}
+}
