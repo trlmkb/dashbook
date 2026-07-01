@@ -45,8 +45,12 @@
       "dark": "#1f2a29"
     },
     "primary": {
-      "light": "#000000",
-      "dark": "#ffffff"
+      "light": {
+        "ref": "dash-ink"
+      },
+      "dark": {
+        "ref": "dash-white"
+      }
     },
     "primary-fg": {
       "light": "#ffffff",
@@ -65,8 +69,8 @@
       "dark": "#ffffff"
     },
     "destructive": {
-      "light": "#000000",
-      "dark": "#ffffff"
+      "light": "#ff4000",
+      "dark": "#ff4000"
     },
     "ring": {
       "light": {

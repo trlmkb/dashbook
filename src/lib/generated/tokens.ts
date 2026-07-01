@@ -23,11 +23,11 @@ export const generatedTokens = {
 		'fg-muted': "#6e7878",
 		'border': "#e8e6dc",
 		'input-border': "#b6c0bf",
-		'primary': "#000000",
+		'primary': "#25261d",
 		'primary-fg': "#ffffff",
 		'brand': "#2b605c",
 		'brand-fg': "#ffffff",
-		'destructive': "#000000",
+		'destructive': "#ff4000",
 		'ring': "#2b605c",
 		'card': "#faf8f1",
 		'popover': "#ffffff"
@@ -42,7 +42,7 @@ export const generatedTokens = {
 		'primary-fg': "#000000",
 		'brand': "#5bb8b0",
 		'brand-fg': "#ffffff",
-		'destructive': "#ffffff",
+		'destructive': "#ff4000",
 		'ring': "#5bb8b0",
 		'card': "#0f1413",
 		'popover': "#141a19"

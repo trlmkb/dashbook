@@ -1,120 +1,136 @@
 # Brand design-token single-source-of-truth — migration spec
 
-Status: **draft for team sign-off. No code changes yet.**
-Author aid: this pairs with [`brand-book-migration-analysis.md`](./brand-book-migration-analysis.md)
-(the dashbook→core **app** move — deploy shape decided: adapter-node → Docker → ECR
-→ Lambda → CloudFront, target `core/packages/brand/`). That analysis references a
-`core/docs/superpowers/specs/2026-05-12-brand-source-of-truth-design.md` which **does
-not exist** in core (the whole `docs/superpowers/specs/` path is absent). This
-document fills that gap for the **token dimension** — the piece the app-move analysis
-doesn't cover.
+Status: **draft for team sign-off. No app-move code yet** (a small dashbook mirror
+correction has already shipped — see §6).
+Pairs with [`brand-book-migration-analysis.md`](./brand-book-migration-analysis.md)
+(the dashbook→core **app** move — decided: adapter-node → Docker → ECR → Lambda →
+CloudFront, target `core/packages/brand/`). That analysis covers hosting; this doc
+covers **tokens**, which it didn't. (The `2026-05-12-brand-source-of-truth-design.md`
+it references was never written — `core/docs/superpowers/specs/` doesn't exist.)
 
-## 1. Goal
+## 1. Authority model (the important part)
 
-One token definition → **Figma variables + text styles · CSS custom properties ·
-Tailwind theme · the `@dashfi/svelte` component lib · docs/MCP**. Edit once, propagate
-everywhere. Kill the current multi-way drift.
+There are **two design systems, each owned by its own surface**:
 
-## 2. Current state — the drift
+| Design system | Source of truth | Format today |
+| --- | --- | --- |
+| **Product / app** | **`core`** — the `@dashfi/svelte` lib (`libs/svelte-components/lib/src/lib/styles/global.css`). What renders app.dash. | HSL triplets, shadcn role names, Tailwind v3 preset |
+| **Marketing** | **the website** — the dash.fi Astro site. | `--m-*` roles / Tailwind v4 |
 
-The same brand colours are hand-maintained in **five** places, in three formats and
-two Tailwind conventions:
+Everything else is **downstream / a mirror**, not a source:
 
-| Representation | Where | Format / names | Consumed by |
-| --- | --- | --- | --- |
-| Token layer | dashbook `src/lib/generated/tokens.css` (now generated) | hex, `--dash-*` / `--*` / `--m-*` | dashbook CSS |
-| Tailwind `@theme` | dashbook `src/lib/generated/theme.css` (now generated) | hex, `--color-*` (Tailwind **v4**) | dashbook utilities |
-| Figma variables + text styles | Figma `91csAF1OGUmCZROdZlCRSv` | 0–1 colour + aliases | designers |
-| Lib tokens | core `libs/svelte-components/lib/src/lib/styles/global.css` | **HSL triplets**, shadcn names (`--background`…), Tailwind **v3** preset | `@dashfi/svelte`, app.dash, Storybook |
-| TS token map | dashbook `src/lib/tokens.ts` (hand-maintained) | TS objects | dashbook JSON API / MCP / foundations |
+- **Dashbook** = the brand book + docs + Figma handoff. It *mirrors* both systems and
+  generates the Figma library. It must **not define token values** — where it has,
+  it has drifted (see §6).
+- **Figma** = a mirror too: product variables trace to core's product tokens,
+  marketing variables to the website's.
 
-As of PR #13 the first three now regenerate from `tokens/dashbook.tokens.json`. The
-**lib tokens** and the **TS map** do not — they're the remaining drift.
+The goal of this migration: make each source authoritative and have dashbook + Figma
+**generate from upstream**, so a change to core (product) or the website (marketing)
+propagates to CSS, the lib theme, docs, and Figma — with no hand-maintained copies.
 
-### Known divergences (must be decided, §4)
-- `primary`: **ink `#25261d`** in `@theme` + the lib, but **black `#000`** in the token layer.
-- `destructive`: **orange `#ff4000`** in `@theme` + the lib, but **black/white** in the token layer.
-- Format: hex (dashbook) vs HSL triplet (lib).
-- Names: `--bg`/`--fg` (dashbook) vs `--background`/`--foreground` (lib).
-- Tailwind: v4 `@theme` (dashbook) vs v3 `preset + hsl(var())` (lib).
-- Roles the lib has that the source doesn't: `success`, `warning`, `sidebar-*`, `card-surface-*`, `secondary`, `yellow`.
+## 2. Current drift
+
+Same brand colours were hand-maintained in several places, in 3 formats / 2 Tailwind
+conventions:
+
+| Representation | Where | Role in the corrected model |
+| --- | --- | --- |
+| Lib tokens (HSL) | core `libs/svelte-components/lib/.../global.css` | **product source** ✅ |
+| Marketing tokens | dash.fi website (Astro) | **marketing source** ✅ |
+| dashbook token layer (`--dash-*`/`--*`/`--m-*`) | dashbook `src/lib/generated/tokens.css` (now generated) | **mirror** (was hand-authored; now generated) |
+| dashbook `@theme` (`--color-*`) | dashbook `src/lib/generated/theme.css` (now generated) | **mirror** |
+| Figma variables + text styles | Figma `91csAF1OGUmCZROdZlCRSv` | **mirror** |
+| TS token map | dashbook `src/lib/tokens.ts` (hand-maintained) | **mirror** (JSON API/MCP still read it — Phase 0 gap) |
 
 ## 3. Target architecture
 
-A small shared package — **`core/packages/brand/tokens`** — holds the DTCG source +
-the zero-dep generator. The generator emits **per-consumer** artifacts so no consumer
-has to change format or Tailwind version:
-
 ```
-core/packages/brand/tokens/
-  dashbook.tokens.json      ← the ONE source (DTCG, {light,dark}, {base.*} refs)
-  build-tokens.mjs          ← generator (zero deps)
-  dist/
-    tokens.css   theme.css  ← hex, Tailwind v4     → dashbook / brand app
-    lib.css                 ← HSL, shadcn names, v3 → @dashfi/svelte global.css
-    tokens.ts               ← typed map            → docs / MCP / foundations
-    figma-apply.gen.js       figma-text-styles.gen.js → Figma (paste into use_figma)
+core: product token source ─┐                     website: marketing token source ─┐
+  (formalized out of the     │                       (dash.fi Astro)                │
+   lib's global.css into      │                                                     │
+   packages/brand/tokens)     │                                                     │
+        │ generate            │                                                     │ recipes / tokens
+        ├─ HSL  → @dashfi/svelte global.css (the lib itself)                        │
+        ├─ CSS/TS/Tailwind → product consumers                                      │
+        └─ Figma payload → product variables                                        └─ Figma marketing variables + dashbook --m-* mirror
 ```
 
-- **Lib** (`@dashfi/svelte`): its `global.css` `@import`s (or is generated from) `lib.css`.
-- **Apps** (dashbook, future brand app): import `tokens.css` + `theme.css`.
-- **Figma**: synced via the two appliers (no paid tooling; Variables REST API is Enterprise-only).
-- Everything **workspace-linked** (`workspace:*`) once in core → one PR closes lib + consumers.
+- **Product**: the source moves *up* into core (a `packages/brand/tokens` package, or
+  the lib's own token module). The lib, dashbook, and Figma all consume its generated
+  output. This is the "move to core" that matters for tokens.
+- **Marketing**: the source stays in the **website**. Dashbook's `--m-*` and Figma's
+  marketing variables mirror it. If marketing is to be single-sourced too, that work
+  lives in the website repo — out of scope here.
+- **Dashbook**: keeps the zero-dep generator (already built) but as a **mirror/Figma
+  generator** fed from upstream — it stops being where product/marketing values are decided.
 
-This is **decoupled from the full app move**: the token package can land and wire the
-lib *before* dashbook itself relocates. That's the recommended first slice.
+## 4. The generator (already exists, reusable)
 
-## 4. Decisions required (team-level)
+`tokens/dashbook.tokens.json` + `scripts/build-tokens.mjs` (shipped in dashbook) already
+emit CSS (token layer + `@theme`), HSL (`lib-tokens.reference.css`), TS, and two Figma
+appliers. This is the engine; the migration is about **relocating the authoritative
+inputs upstream** and pointing consumers at them — not rebuilding tooling.
 
-1. **`primary` = ink or black?** Recommend **ink** — the lib and `@theme` already agree; the token-layer black is the outlier. Lets the lib + dashbook share one product-semantic set.
-2. **`destructive` = orange or black?** Recommend **orange** (`#ff4000`) — same reasoning.
-3. **Adopt the lib-only roles into the source?** (`success`, `warning`, `sidebar-*`, `card-surface-*`, `secondary`, `yellow`.) Recommend **yes** — otherwise they stay hand-maintained and drift returns.
-4. **Keep both name sets** (`--bg` *and* `--background`) generated from one source, or unify? Recommend **keep both** initially (zero churn); unify later if desired.
-5. **Source location:** `core/packages/brand/tokens` (recommend) vs keep in dashbook and publish `@dashfi/brand-tokens`. In-core is cleaner once the app move happens.
+## 5. Phased plan
 
-## 5. Phased plan (low-risk, incremental)
+- **Phase 0 — correct the dashbook mirror (partly done, §6).** Also: point dashbook's
+  JSON API / MCP / foundations at the generated `tokens.ts` (retire hand-maintained
+  `src/lib/tokens.ts`). Dashbook-only.
+- **Phase 1 — product source into core.** Extract `core/packages/brand/tokens` from the
+  lib's `global.css` (+ the zero-dep generator). The lib consumes its own generated HSL;
+  add lib-only roles (`success`, `warning`, `sidebar-*`, `card-surface-*`). `workspace:*`.
+  Land as a **zero-value-change reconcile** first (match current lib values), verify
+  Storybook + app.dash, then publish.
+- **Phase 2 — dashbook + Figma consume core.** Dashbook's product/`@theme` groups derive
+  from core's generated output instead of being hand-authored; Figma product variables
+  sync from the same. Marketing continues to mirror the website.
+- **Phase 3 (optional) — single-source marketing in the website.** Own work in the
+  website repo; dashbook + Figma keep mirroring.
+- **Phase 4 — full dashbook→core app move** per `brand-book-migration-analysis.md`.
 
-- **Phase 0 — dashbook-only, now, no core.** Point the JSON API / MCP / foundations at
-  the generated `tokens.ts` (retire the hand-maintained `src/lib/tokens.ts` exports).
-  Closes the last dashbook-internal gap; independent of everything below.
-- **Phase 1 — extract `core/packages/brand/tokens`.** Move source + generator into core
-  as an Nx project; emit all artifacts incl. the HSL `lib.css`. No app move, no lib change yet.
-- **Phase 2 — wire the lib.** Point `libs/svelte-components/lib/src/lib/styles/global.css`
-  at the generated HSL block; resolve divergences per decisions 1–3. `workspace:*`.
-  Build + Storybook + **verify app.dash** before publish. (Can start as a *zero-value-change*
-  reconcile — generate to the lib's current values — then flip the divergences deliberately.)
-- **Phase 3 — dashbook consumes the shared package.** `workspace:*` (if in core) or the
-  published token package (if still standalone).
-- **Phase 4 — full dashbook → core app move.** Per `brand-book-migration-analysis.md`
-  (adapter-node/Docker/ECR/Lambda/CloudFront). Tokens are already shared by now.
-- **Figma** stays synced from the shared source at every phase (appliers).
+Recommended near-term: **Phase 0 + Phase 1** — establishes the product source in core
+without the production-risky app relocation.
 
-Recommended near-term slice: **Phase 0 + 1 + 2** — gets the SSOT across core + lib + Figma
-without the production-risky app relocation. Decisions 1–3 gate Phase 2.
+## 6. Corrections applied (not decisions) — 2026-07-01
 
-## 6. Risks & mitigations
+The dashbook token layer diverged from core on two roles and was simply **wrong** (it
+even contradicted the Figma handoff it claimed to mirror). Corrected to match core:
 
-- **Publishing the lib touches live app.dash.** → Land Phase 2 as a zero-value-change
-  reconcile first (match current lib values), verify Storybook + app.dash, *then* apply
-  the divergence decisions as a separate, reviewed change.
-- **Tailwind v3 (lib) vs v4 (dashbook).** → Generator emits both formats; no forced upgrade.
-- **hex→HSL rounding drift.** → Pin the lib's existing HSL triplets in the source rather
-  than recomputing, or accept ≤1% and verify visually.
-- **Nx build/cache + workspace deps.** → Mirror `dashfi-ui` / `brand-book` conventions.
-- **MCP/foundations output changes shape** when moving off `src/lib/tokens.ts`. → Keep the
-  same export names/shape from the generated module; snapshot-test the JSON API.
+- `primary`: `#000000` (black) → **ink** (`{base.dash-ink}` / white in dark) — matches
+  the lib + `@theme` + the handoff's default button.
+- `destructive`: `#000000` (black) → **orange `#ff4000`** — matches the lib + `@theme` + handoff.
 
-## 7. Verification checklist (per phase)
+Applied in `tokens/dashbook.tokens.json`, regenerated, and synced to Figma (product
+`primary` → alias to `dash/ink`, `destructive` → orange). Now dashbook mirror == core.
 
-- [ ] Change `base.dash-jade` → regenerate → diff appears in `tokens.css`, `theme.css`, `lib.css`, `tokens.ts`, and (after applier) Figma.
-- [ ] Lib Storybook renders unchanged (Phase 2 zero-change reconcile) / per decisions (after flip).
-- [ ] app.dash renders unchanged (or per decisions).
-- [ ] dashbook renders unchanged; `pnpm build` + `pnpm check` clean.
-- [ ] Figma reconcile reports only the expected diffs.
+> **Note on naming:** `primary` here is the shadcn *action* role (the default button),
+> **not** "the primary brand colour." Jade is the **brand** colour (`brand`/`ring`/`accent`
+> roles) and is consistent everywhere — no drift, never in question.
+
+**The one genuine open product question** (owned by core, not dashbook): should the
+*default action button* be **jade** rather than the dark neutral? Today the system
+deliberately keeps default = dark, brand = jade. Changing it is a core-side design call.
+
+## 7. Risks & mitigations
+
+- **Publishing the lib touches live app.dash** → land Phase 1 as a zero-value-change
+  reconcile, verify Storybook + app.dash, then apply any intended changes separately.
+- **Tailwind v3 (lib) vs v4 (dashbook)** → generator emits both formats; no forced upgrade.
+- **hex→HSL rounding** → pin the lib's existing HSL triplets in the source rather than recomputing.
+- **Nx build/cache + workspace deps** → mirror `dashfi-ui` / `brand-book` conventions.
+- **JSON API/MCP output shape** when retiring `src/lib/tokens.ts` → keep export names/shape; snapshot-test.
+
+## 8. Verification checklist (per phase)
+
+- [ ] Change `base.dash-jade` upstream → regenerate → diff appears in every consumer (CSS, HSL, TS, Figma).
+- [ ] Lib Storybook + app.dash render unchanged on a zero-value-change reconcile.
+- [ ] dashbook `pnpm build` + `pnpm check` clean.
+- [ ] Figma reconcile reports only expected diffs.
 - [ ] JSON API `/api/foundations/color.json` shape unchanged (Phase 0).
 
-## 8. Non-goals
+## 9. Non-goals
 
-- The app deploy / DNS / Lambda migration — owned by `brand-book-migration-analysis.md`.
-- Figma library **publish** + **Code Connect activation** — plan-gated (needs Org/Enterprise; team is on Professional).
-- Reconciling Tailwind v3→v4 in the lib — out of scope; the generator bridges both.
+- App deploy / DNS / Lambda migration — owned by `brand-book-migration-analysis.md`.
+- Marketing single-sourcing internals — owned by the website repo.
+- Figma library **publish** + **Code Connect** — plan-gated (needs Org/Enterprise; team is on Professional).

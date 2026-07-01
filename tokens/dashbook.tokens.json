@@ -25,11 +25,11 @@
     "fg-muted": { "$type": "color", "$value": { "light": "#6e7878", "dark": "#8b9695" } },
     "border": { "$type": "color", "$value": { "light": "#e8e6dc", "dark": "#1f2a29" } },
     "input-border": { "$type": "color", "$value": { "light": "#b6c0bf", "dark": "#1f2a29" } },
-    "primary": { "$type": "color", "$value": { "light": "#000000", "dark": "#ffffff" } },
+    "primary": { "$type": "color", "$value": { "light": "{base.dash-ink}", "dark": "{base.dash-white}" } },
     "primary-fg": { "$type": "color", "$value": { "light": "#ffffff", "dark": "#000000" } },
     "brand": { "$type": "color", "$value": { "light": "{base.dash-jade}", "dark": "{base.dash-jade-lifted}" } },
     "brand-fg": { "$type": "color", "$value": { "light": "#ffffff", "dark": "#ffffff" } },
-    "destructive": { "$type": "color", "$value": { "light": "#000000", "dark": "#ffffff" } },
+    "destructive": { "$type": "color", "$value": { "light": "#ff4000", "dark": "#ff4000" } },
     "ring": { "$type": "color", "$value": { "light": "{base.dash-jade}", "dark": "{base.dash-jade-lifted}" } },
     "card": { "$type": "color", "$value": { "light": "#faf8f1", "dark": "#0f1413" } },
     "popover": { "$type": "color", "$value": { "light": "#ffffff", "dark": "#141a19" } }

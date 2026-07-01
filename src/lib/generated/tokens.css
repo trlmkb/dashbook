@@ -8,11 +8,11 @@
 		--fg-muted: #6e7878;
 		--border: #e8e6dc;
 		--input-border: #b6c0bf;
-		--primary: #000000;
+		--primary: var(--dash-ink);
 		--primary-fg: #ffffff;
 		--brand: var(--dash-jade);
 		--brand-fg: #ffffff;
-		--destructive: #000000;
+		--destructive: #ff4000;
 		--ring: var(--dash-jade);
 		--card: #faf8f1;
 		--popover: #ffffff;
@@ -89,11 +89,11 @@
 		--fg-muted: #8b9695;
 		--border: #1f2a29;
 		--input-border: #1f2a29;
-		--primary: #ffffff;
+		--primary: var(--dash-white);
 		--primary-fg: #000000;
 		--brand: var(--dash-jade-lifted);
 		--brand-fg: #ffffff;
-		--destructive: #ffffff;
+		--destructive: #ff4000;
 		--ring: var(--dash-jade-lifted);
 		--card: #0f1413;
 		--popover: #141a19;
