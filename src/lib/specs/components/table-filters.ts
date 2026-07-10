@@ -18,6 +18,9 @@ export const tableFilters: ComponentSpec = {
 
 	canonicalSource: 'libs/svelte-components/lib/src/lib/ui/table-filters/',
 
+	whenToUse:
+		'Reach for these primitives when composing a filter row above a plain Table by hand. If you are already on EnhancedTable, prefer its built-in FilterConfig/FilterValues props instead — EnhancedTable renders and wires the same filter shapes internally, with column-aware state already handled; hand-composing SearchFilter/SelectFilter alongside it duplicates that wiring.',
+
 	dimensions: [
 		{
 			name: 'FilterPanel',

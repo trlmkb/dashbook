@@ -19,13 +19,22 @@
 	status={spec.status}
 >
 	{#snippet preview()}
-		<PreviewCanvas minHeight="200px">
-			{#snippet children(_m)}
-				<div style:width="100%" style:max-width="600px">
-					<SearchFilter bind:value={search} placeholder="Search transactions" />
-				</div>
-			{/snippet}
-		</PreviewCanvas>
+		<div class="preview-stack">
+			{#if spec.whenToUse}
+				<section class="when-to-use">
+					<h3>When to use</h3>
+					<p>{spec.whenToUse}</p>
+				</section>
+			{/if}
+
+			<PreviewCanvas minHeight="200px">
+				{#snippet children(_m)}
+					<div style:width="100%" style:max-width="600px">
+						<SearchFilter bind:value={search} placeholder="Search transactions" />
+					</div>
+				{/snippet}
+			</PreviewCanvas>
+		</div>
 	{/snippet}
 
 	{#snippet code()}
