@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { latestRelease } from '$content/releases';
+
 	type Filter = 'all' | 'major' | 'roadmap';
 	let filter = $state<Filter>('all');
 
@@ -52,9 +54,13 @@
 			</div>
 		</li>
 		<li data-kind="major" id="v1-0-0">
-			<span class="when">2026-05-18</span>
+			<span class="when">{latestRelease.date}</span>
 			<div class="what">
-				<span class="ver"><a href="#v1-0-0" class="ver-anchor">v1.0.0</a><span class="latest">Latest</span></span>
+				<span class="ver"
+					><a href="#v1-0-0" class="ver-anchor">{latestRelease.ver}</a><span class="latest"
+						>Latest</span
+					></span
+				>
 				<p>
 					<strong>First declared-stable release.</strong> 60 components and 17 patterns
 					across 7 categories now ship with full anatomy (dimensions, tokens, variants,
