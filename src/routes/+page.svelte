@@ -157,7 +157,7 @@
 		</div>
 		<a class="dogfood-link" href="/components">
 			Browse all {totalComponents} components
-			<ArrowUpRight size={14} strokeWidth={1.5} />
+			<ArrowUpRight size={14} strokeWidth={1.5} class="link-arrow" />
 		</a>
 	</div>
 </section>
@@ -189,7 +189,7 @@
 	</ul>
 	<a class="recent-more" href="/changelog">
 		Full changelog
-		<ArrowUpRight size={14} strokeWidth={1.5} />
+		<ArrowUpRight size={14} strokeWidth={1.5} class="link-arrow" />
 	</a>
 </section>
 
@@ -374,10 +374,23 @@
 		background: var(--bg);
 		text-decoration: none;
 		color: var(--fg);
-		transition: background-color 150ms;
+		box-shadow: inset 0 0 0 0 transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			box-shadow var(--dur-fast) var(--easing-default);
 	}
 	.num-cell:hover {
 		background: var(--bg-muted);
+		box-shadow: var(--shadow-md);
+	}
+	.num-cell:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: -2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.num-cell {
+			transition: none;
+		}
 	}
 	.num {
 		font-family: var(--font-display);
@@ -534,6 +547,21 @@
 	.dogfood-link:hover {
 		color: var(--brand);
 	}
+	.dogfood-link:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	.dogfood-link :global(.link-arrow) {
+		transition: transform var(--dur-fast) var(--easing-out);
+	}
+	.dogfood-link:hover :global(.link-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.dogfood-link :global(.link-arrow) {
+			transition: none;
+		}
+	}
 
 	/* --- Tiles (audience) ---------------------------------------------- */
 	.tiles {
@@ -557,11 +585,19 @@
 		background: var(--bg);
 		text-decoration: none;
 		color: var(--fg);
-		transition: background-color 150ms;
+		box-shadow: inset 0 0 0 0 transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			box-shadow var(--dur-fast) var(--easing-default);
 		min-height: 200px;
 	}
 	.tile:hover {
 		background: var(--bg-muted);
+		box-shadow: var(--shadow-md);
+	}
+	.tile:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: -2px;
 	}
 	.tile-head {
 		display: flex;
@@ -578,9 +614,19 @@
 	}
 	.tile :global(svg) {
 		color: var(--fg-muted);
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.tile:hover :global(svg) {
 		color: var(--brand);
+	}
+	.tile:hover :global(.tile-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tile,
+		.tile :global(svg) {
+			transition: none;
+		}
 	}
 	.tile-desc {
 		font-size: 17px;
@@ -626,9 +672,19 @@
 		gap: 4px;
 		color: var(--fg);
 		text-decoration: none;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	.what:hover {
 		color: var(--brand);
+	}
+	.what:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.what {
+			transition: none;
+		}
 	}
 	.r-ver {
 		font-family: var(--font-mono);
@@ -658,9 +714,26 @@
 		color: var(--fg-muted);
 		text-decoration: none;
 		margin-top: 8px;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	.recent-more:hover {
 		color: var(--brand);
+	}
+	.recent-more:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	.recent-more :global(.link-arrow) {
+		transition: transform var(--dur-fast) var(--easing-out);
+	}
+	.recent-more:hover :global(.link-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.recent-more,
+		.recent-more :global(.link-arrow) {
+			transition: none;
+		}
 	}
 
 	@media (max-width: 720px) {
