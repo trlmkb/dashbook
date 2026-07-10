@@ -60,6 +60,16 @@ export const stepTimeline: MarketingPatternSpec = {
 	variants: [
 		{ name: 'vertical', description: 'Default — nodes stacked, connector runs top to bottom, copy beside each node.' },
 		{ name: 'horizontal', description: 'Nodes in a row, connector runs left to right, copy below each node. Collapses back to vertical on mobile.' },
+		{
+			name: 'compare',
+			description:
+				'Two parallel tracks — "the old way" vs "the new way" — sharing one connector spine, each step-pair contrasted side by side. Seen on /rewards and /carrier-contract-management to set up a before/after argument rather than a single sequential process.',
+		},
+		{
+			name: 'pipeline status',
+			description:
+				'Nodes represent named pipeline states (Draft → Submitted → Acknowledged → Accepted) rather than generic numbered steps — the /ai-spend-audit instance. The current state\'s node is filled/accent, completed states are checked, and future states are muted; no numbers are shown, only state labels.',
+		},
 	],
 
 	props: [

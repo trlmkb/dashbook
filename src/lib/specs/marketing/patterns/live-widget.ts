@@ -59,6 +59,20 @@ export const liveWidget: MarketingPatternSpec = {
 		{ name: 'Count-up', value: '~800–1200ms', notes: 'Disabled under reduced motion.' },
 	],
 
+	variants: [
+		{ name: 'savings feed', description: 'The default shape — a value + bar/counter feed (CarrierBrief, ContractAuditMock).' },
+		{
+			name: 'term-selector',
+			description:
+				'A Net-1 → Net-60 term picker (a segmented control or slider) drives the recomputed figures live — the /corporate-card instance. The term choice is the only input; every displayed number (rate, float, savings) re-derives from it.',
+		},
+		{
+			name: 'tier-slider',
+			description:
+				'A single slider (spend tier or cashback tier) recomputes the reward/cashback figure as it drags — the /meta-cashback instance. Same one-source-of-truth rule applies: the slider value is state, the displayed figure is derived, never a lookup table of pre-rendered strings.',
+		},
+	],
+
 	props: [
 		{ name: 'data', type: 'Array<{ label; value }>', required: true, description: 'The source figures; every bar/counter derives from this. Signature pulled from the brief — verify against the website source.' },
 		{ name: 'tone', type: "'positive' | 'negative' | 'accent'", default: "'positive'", description: 'Semantic colourway for the money figure (positive = jade, negative = ink).' },

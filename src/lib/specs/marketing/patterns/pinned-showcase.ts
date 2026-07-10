@@ -17,7 +17,8 @@ export const pinnedShowcase: MarketingPatternSpec = {
 		'A scroll-pinned showcase: a sticky product visual stays in view (`position: sticky`) while a column of copy or steps scrolls past it. An IntersectionObserver marks the active step as it enters, and the active step drives what the pinned visual shows.',
 
 	source: 'src/components/rhythm/PinnedShowcase.astro',
-	sourceNote: 'Prop signatures pulled from the brief; verify against the website source.',
+	sourceNote:
+		'Prop signatures pulled from the brief; verify against the website source. No live usage on dash.fi as of 2026-07 — kept as a documented pattern for a future feature deep-dive page.',
 
 	whenToUse:
 		'When one product visual should narrate several steps — a feature deep-dive or "how it works" where you want the screen to stay put while the explanation scrolls past it and the visual changes to match the active step. Use StepTimeline for a plain sequential list with no pinned visual, and the scale-to-fit product shot for a single static visual.',

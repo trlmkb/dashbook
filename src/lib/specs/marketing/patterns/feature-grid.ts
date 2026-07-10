@@ -55,6 +55,15 @@ export const featureGrid: MarketingPatternSpec = {
 		{ name: 'Blurb measure', value: '~38ch', notes: 'Keeps cell copy to 2–3 lines.' },
 	],
 
+	variants: [
+		{ name: 'default', description: '3 → 2 → 1 responsive feature grid, equal-weight cells.' },
+		{
+			name: '4-up audience-segment cards',
+			description:
+				'Four equal cards, each addressed to a distinct audience segment (e.g. finance teams, ops teams, agencies, franchises) rather than four capabilities of one product — seen on /partner and /growthnetwork. Each card typically adds a segment-specific CTA in addition to the icon/title/blurb triad.',
+		},
+	],
+
 	props: [
 		{ name: 'items', type: 'Array<{ icon; title; blurb }>', required: true, description: 'The feature cells in order.' },
 		{ name: 'columns', type: '2 | 3', default: '3', description: 'Max columns on the widest breakpoint.' },

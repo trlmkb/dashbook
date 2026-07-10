@@ -68,6 +68,11 @@ export const caseStudyCard: MarketingPatternSpec = {
 		{ name: 'default', description: 'Eyebrow + title + stat grid (+ optional description / strategies).' },
 		{ name: 'hero-stat', description: 'Leads with an oversized primary stat for a single dominant number.' },
 		{ name: 'tone: ink / jade / paper', description: 'Dark emphasis (ink/jade) or in-section light (paper).' },
+		{
+			name: 'confidence-score + strategy-bullets',
+			description:
+				'Adds a small confidence-score readout (e.g. "94% match confidence") alongside the strategy list, framing the result as model output rather than only a narrative outcome — seen on /parcel-audit and /parcel-analytics. The score renders as a plain mono percentage, not a gauge or progress ring.',
+		},
 	],
 
 	props: [

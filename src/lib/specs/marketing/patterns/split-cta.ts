@@ -55,6 +55,11 @@ export const splitCta: MarketingPatternSpec = {
 	variants: [
 		{ name: 'default', description: 'Copy left, action right.' },
 		{ name: 'reverse', description: 'Action left, copy right (alternate the rhythm).' },
+		{
+			name: 'dual-peer-CTA-boxes',
+			description:
+				'Both columns become equal-weight action panels (e.g. "Talk to sales" / "Start free audit") instead of one copy column plus one action column — neither box is visually subordinate. Seen across the /parcel-audit family where the page ends with two, not one, next steps of comparable weight.',
+		},
 	],
 
 	props: [
