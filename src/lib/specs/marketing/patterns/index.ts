@@ -48,6 +48,11 @@ import { darkCtaBand } from './dark-cta-band.js';
 import { faqAccordion } from './faq-accordion.js';
 import { trustStatBand } from './trust-stat-band.js';
 import { calculatorIsland } from './calculator-island.js';
+import { comparisonTable } from './comparison-table.js';
+import { dataTableBand } from './data-table-band.js';
+import { chartBand } from './chart-band.js';
+import { actionPlan } from './action-plan.js';
+import { formCapture } from './form-capture.js';
 
 export type * from './types.js';
 
@@ -75,6 +80,8 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'feature-tabs': featureTabs,
 	'faq-accordion': faqAccordion,
 	'calculator-island': calculatorIsland,
+	'comparison-table': comparisonTable,
+	'action-plan': actionPlan,
 	// Media & proof
 	'trust-stat-band': trustStatBand,
 	'product-shot': productShot,
@@ -84,11 +91,14 @@ export const marketingPatternSpecs: Record<string, MarketingPatternSpec> = {
 	'customer-platforms-rail': customerPlatformsRail,
 	'pinned-showcase': pinnedShowcase,
 	'dashfi-wordmark': dashfiWordmark,
+	'data-table-band': dataTableBand,
+	'chart-band': chartBand,
 	// CTAs
 	'split-cta': splitCta,
 	'section-cta': sectionCta,
 	'home-final-cta': homeFinalCta,
 	'dark-cta-band': darkCtaBand,
+	'form-capture': formCapture,
 	// Building blocks
 	'squircle-button': squircleButton,
 	chip,
