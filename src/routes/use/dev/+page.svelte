@@ -60,7 +60,7 @@ curl 'https://dashbook.vercel.app/api/logo/wordmark/jade?format=svg&size=400'  #
 			<code>dashbook://components</code>, <code>dashbook://components/&#123;slug&#125;</code>, and
 			<code>dashbook://foundations/&#123;slug&#125;</code> — same data, resources/list + resources/read.
 			Full connector setup (Claude Code CLI, claude.ai custom connector, discovery via llms.txt / the
-			ARD manifest) is at <a href="/developers/mcp">/developers/mcp</a>.
+			ARD manifest) is documented at <code>/developers/mcp</code>.
 		</p>
 	</Section>
 
