@@ -1,12 +1,10 @@
 ---
 name: dashbook-design-system
-description: |
-  Use when building Dash.fi product UI, drafting Dash.fi marketing materials, or
-  referencing Dash.fi brand assets. Activates on keywords: "Dash.fi", "dashbook",
-  "jade brand", "dash card", "AdPay agent", "AP agent", "shipping agent",
-  "tokens agent", "partner co-branding", "Dash.fi launch email". Routes the
-  agent to the right Dashbook MCP namespace (product vs marketing) and the
-  canonical anatomy pages.
+description: Use when building Dash.fi product UI, drafting Dash.fi marketing materials, or referencing Dash.fi brand assets. Routes the agent to the right Dashbook MCP namespace (product vs marketing) and the canonical anatomy pages.
+when_to_use: |
+  Activates on keywords: "Dash.fi", "dashbook", "jade brand", "dash card",
+  "AdPay agent", "AP agent", "shipping agent", "tokens agent", "partner
+  co-branding", "Dash.fi launch email".
 ---
 
 # Dashbook design system
