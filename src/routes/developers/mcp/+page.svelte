@@ -81,9 +81,16 @@ email with the partner-bank disclosure."
 		{ name: 'product_get_token', ns: 'product', description: 'Resolve a single token to its hex (light + dark).' },
 		{ name: 'product_search', ns: 'product', description: 'Fuzzy search across all components.' },
 		{ name: 'product_port_to', ns: 'product', description: 'Stack-specific porting checklist for a component.' },
+		{ name: 'product_get_logo', ns: 'product', description: 'Wordmark / app icon SVG — thin proxy over marketing_get_logo for product-namespace discovery.' },
+		{ name: 'product_get_page_template', ns: 'product', description: 'Composed auth-page scaffold — chrome, layout, copy tokens, required components.' },
+		{ name: 'marketing_list_patterns', ns: 'marketing', description: 'Catalogue of reusable dash.fi marketing page patterns.' },
+		{ name: 'marketing_get_pattern', ns: 'marketing', description: 'Full recipe for one marketing pattern — DOM sketch, tokens, gotchas, props.' },
+		{ name: 'marketing_get_foundation', ns: 'marketing', description: 'Marketing tokens / typography / layout / section / motion foundation data.' },
 		{ name: 'marketing_get_brand_voice', ns: 'marketing', description: 'Tone / sentence-case / numerics rules.' },
 		{ name: 'marketing_get_logo', ns: 'marketing', description: 'Wordmark + app icon SVG. Returns both URL and inline content.' },
 		{ name: 'marketing_list_logo_presets', ns: 'marketing', description: 'Available colorway presets for wordmark + app icon.' },
+		{ name: 'marketing_list_card_variants', ns: 'marketing', description: 'Catalogue of Dash.fi credit-card art variants.' },
+		{ name: 'marketing_get_card_art', ns: 'marketing', description: 'One Mastercard MDES asset slot for one card variant.' },
 		{ name: 'marketing_get_marketing_palette', ns: 'marketing', description: 'Cobalt-based marketing palette.' },
 		{ name: 'marketing_get_legal_disclosure', ns: 'marketing', description: 'FDIC / partner-bank / card-issuer disclosure text.' },
 		{ name: 'marketing_get_partner_kit', ns: 'marketing', description: 'Partner co-branding rules.' },
@@ -91,6 +98,19 @@ email with the partner-bank disclosure."
 		{ name: 'version', ns: 'shared', description: 'MCP server + docs site version.' },
 		{ name: 'changelog', ns: 'shared', description: 'Recent design-system changes.' }
 	];
+
+	const resourceList: { uri: string; description: string }[] = [
+		{ uri: 'dashbook://components', description: 'Component catalogue — mirrors product_list_components.' },
+		{ uri: 'dashbook://components/{slug}', description: "One component's full anatomy — mirrors product_get_component." },
+		{ uri: 'dashbook://foundations/{slug}', description: 'One product foundation — mirrors product_get_foundation.' }
+	];
+
+	const connectorCli = `# Claude Code — add as a connector
+claude mcp add --transport http dashbook ${remoteUrl}`;
+
+	const discoverySurfaces = `# Machine-readable discovery surfaces
+${remoteUrl.replace('/mcp', '/llms.txt')}                 # llms.txt index
+${remoteUrl.replace('/mcp', '/.well-known/ai-catalog.json')}  # ARD manifest`;
 </script>
 
 <svelte:head>
@@ -158,8 +178,29 @@ email with the partner-bank disclosure."
 	</Section>
 
 	<Section
+		label="Add as a connector"
+		note="claude.ai and Claude Code both support adding a remote MCP server as a first-class connector, no plugin required."
+	>
+		<div class="setup-head">Claude Code CLI</div>
+		<CodeSnippet code={connectorCli} language="bash" />
+		<div class="setup-head">claude.ai (individual — Pro/Max)</div>
+		<p>Customize → Connectors → "+" → Add custom connector → paste <code>{remoteUrl}</code>.</p>
+		<div class="setup-head">claude.ai (Team/Enterprise)</div>
+		<p>
+			An owner configures it once at Organization settings → Connectors → Add → Custom → Web;
+			members then connect it from Customize → Connectors.
+		</p>
+		<div class="setup-head">Discovery surfaces</div>
+		<CodeSnippet code={discoverySurfaces} language="bash" />
+		<p>
+			ARD-aware agent clients can also discover this endpoint automatically from
+			<code>/.well-known/ai-catalog.json</code> — no manual connector setup needed.
+		</p>
+	</Section>
+
+	<Section
 		label="Tools"
-		note="15 tools total. Prefix tells you the namespace at a glance."
+		note="{toolList.length} tools total. Prefix tells you the namespace at a glance."
 	>
 		<div class="tool-table">
 			{#each ['product', 'marketing', 'shared'] as ns (ns)}
@@ -170,6 +211,20 @@ email with the partner-bank disclosure."
 						<span>{t.description}</span>
 					</div>
 				{/each}
+			{/each}
+		</div>
+	</Section>
+
+	<Section
+		label="Resources"
+		note="MCP resources for clients that browse a catalogue instead of calling a tool — resources/list + resources/read. Same underlying data as the matching tools."
+	>
+		<div class="tool-table">
+			{#each resourceList as r (r.uri)}
+				<div class="tool-row">
+					<code>{r.uri}</code>
+					<span>{r.description}</span>
+				</div>
 			{/each}
 		</div>
 	</Section>
@@ -219,20 +274,22 @@ email with the partner-bank disclosure."
 				<strong>Tokens</strong> — <code>src/lib/tokens.ts</code> (colors, radii, shadows, motion).
 			</li>
 			<li>
-				<strong>MCP wiring</strong> — <code>src/lib/mcp/server.ts</code> + <code>tools/&#123;product,marketing,shared&#125;.ts</code>.
+				<strong>MCP wiring</strong> — <code>src/lib/mcp/server.ts</code> + <code>tools/&#123;product,marketing,shared&#125;.ts</code>
+				+ <code>resources.ts</code> (dashbook:// resources) + <code>schemas.ts</code> (output schemas).
 			</li>
-			<li><strong>Endpoint</strong> — <code>src/routes/mcp/+server.ts</code>.</li>
+			<li>
+				<strong>Endpoint</strong> — <code>src/routes/mcp/+server.ts</code> (origin validation in
+				<code>src/lib/mcp/origin.ts</code>).
+			</li>
 		</ul>
 	</Section>
 
 	<Section
 		label="Coming soon"
-		note="Phase 2 items — slated for the next sprint."
+		note="Remaining backlog — see PLAN.md for the full list."
 	>
 		<ul class="docs-list">
-			<li>Per-partner asset bundles + co-branding lockup rules in <code>marketing_get_partner_kit</code>.</li>
-			<li>Full marketing search across voice / palette / disclosures.</li>
-			<li>Foundations deep-extract — typography type scale + spacing scale beyond what's in <code>tokens.ts</code>.</li>
+			<li>Per-partner asset bundles (lockup SVG, partner logo) in <code>marketing_get_partner_kit</code> — asset URLs still pending Partner Operations.</li>
 			<li>
 				Auth gating for partner-specific assets (FDIC partner data, exec bios, etc.). Public
 				surfaces stay public.

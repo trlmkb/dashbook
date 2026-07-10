@@ -55,6 +55,13 @@ curl 'https://dashbook.vercel.app/api/logo/wordmark/jade?format=svg&size=400'  #
 			The skill activates automatically on Dash.fi keywords. If you're hitting it manually, prefix
 			your request with "Use the Dashbook product design system" so the agent loads context.
 		</p>
+		<p class="next">
+			Clients that browse a catalogue instead of calling tools can also read MCP resources —
+			<code>dashbook://components</code>, <code>dashbook://components/&#123;slug&#125;</code>, and
+			<code>dashbook://foundations/&#123;slug&#125;</code> — same data, resources/list + resources/read.
+			Full connector setup (Claude Code CLI, claude.ai custom connector, discovery via llms.txt / the
+			ARD manifest) is at <a href="/developers/mcp">/developers/mcp</a>.
+		</p>
 	</Section>
 
 	<Section

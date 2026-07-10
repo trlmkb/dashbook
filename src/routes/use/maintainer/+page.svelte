@@ -86,17 +86,22 @@ pnpm dev
 # visit /foundations/color to confirm the token surfaces with the new value
 # visit /foundations/typography or /spacing as relevant`;
 
-	const versionBumpFlow = `# Three independent versioned things:
+	const versionBumpFlow = `# Four independent versioned things:
 
 # Dashbook portal (this repo)
 package.json   "version": "x.y.z"
-# Bump on release-worthy changes. Currently 0.9.0; bump to 1.0.0 for the
-# first declared-stable release.
+# Bump on release-worthy changes. Currently 1.0.0 (first declared-stable release).
+
+# Claude plugin manifest (Channel B — see §8)
+claude-plugin/.claude-plugin/plugin.json   "version": "x.y.z"
+.claude-plugin/marketplace.json   plugins[].version   "x.y.z"
+# Bump BOTH together on skill/command/MCP-server-entry changes — the admin
+# card reads marketplace.json, not plugin.json. Currently 0.3.0.
 
 # @dashfi/mcp-server (the npm CLI proxy)
 packages/mcp-server/package.json   "version": "x.y.z"
-# Bump on additive features (new tools) or breaking changes (tool signature
-# changes). Currently 0.2.0.
+# Bump on additive features (new tools, new resources) or breaking changes
+# (tool signature changes). Currently 0.3.0.
 
 # @dashfi/svelte (the lib, in core monorepo)
 core/libs/svelte-components/lib/package.json   "version": "x.y.z"
@@ -268,6 +273,17 @@ core/libs/svelte-components/lib/package.json   "version": "x.y.z"
 			(skill prose, slash commands)? Channel B — bump <code>plugin.json</code> version, merge, and the
 			org picks it up on the next Cowork sync.
 		</p>
+		<p class="note">
+			<strong>Release-the-plugin checklist</strong> (Channel B, every time the plugin surface changes —
+			skill, commands, or the MCP server entry it registers):
+		</p>
+		<ul class="docs-list">
+			<li>Bump <code>claude-plugin/.claude-plugin/plugin.json</code> "version".</li>
+			<li>Bump the matching plugin entry's "version" in <code>.claude-plugin/marketplace.json</code> — the admin card reads this file, not <code>plugin.json</code>.</li>
+			<li>Run <code>claude plugin validate claude-plugin --strict</code> (or validate the JSON shape by hand against <a href="https://code.claude.com/docs/en/plugin-marketplaces.md">code.claude.com/docs/en/plugin-marketplaces.md</a> if the CLI isn't available).</li>
+			<li>Update <code>claude-plugin/README.md</code> version/tool/command references.</li>
+			<li>Merge to <code>main</code> — Vercel deploys Channel A immediately; Channel B needs the org's next Cowork re-pull (no manual sync button).</li>
+		</ul>
 	</Section>
 
 	<Section
