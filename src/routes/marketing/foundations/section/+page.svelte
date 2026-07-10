@@ -46,6 +46,26 @@
 			{/each}
 		</ul>
 	</Section>
+
+	<Section label="Site IA note">
+		<div class="ia-note">
+			<p>
+				The current top-level dash.fi information architecture groups its product-audit pages
+				into an "Audit agents" nav family rather than listing them as flat, unrelated pages:
+				<strong>shipping</strong> (parcel audit / carrier contract management / parcel
+				analytics), <strong>ad-pay</strong> (AdPay agent), and <strong>ai-spend-audit</strong>.
+				Each family shares the proof-section vocabulary documented here — TrustStatBand /
+				ChartBand / DataTableBand / ActionPlan — even though the underlying data differs (parcel
+				overcharges vs ad-spend anomalies vs contract line items).
+			</p>
+			<p>
+				When building a new page inside one of these families, reach for the same proof-band
+				sequence (stat → chart or table → action plan → CTA) rather than inventing a bespoke
+				layout — the shared shape is what makes the "Audit agents" grouping legible as one
+				product line in the nav, not three unrelated tools.
+			</p>
+		</div>
+	</Section>
 </InnerPage>
 
 <style>
@@ -91,5 +111,21 @@
 		line-height: 1.45;
 		opacity: 0.85;
 		max-width: 60ch;
+	}
+	.ia-note {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		max-width: 68ch;
+	}
+	.ia-note p {
+		margin: 0;
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--m-fg-muted, var(--fg-muted));
+	}
+	.ia-note strong {
+		color: var(--m-fg-strong, var(--fg));
+		font-weight: 600;
 	}
 </style>
