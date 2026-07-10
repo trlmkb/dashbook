@@ -76,7 +76,7 @@ export const patterns: PatternEntry[] = [
 		slug: 'workflow-data-table-page',
 		name: 'Workflow data table page',
 		description:
-			'Header + filters + table + row actions + bulk-action bar. The default shape for any "list of work items" route (invoices, disputes, reconciliations).',
+			'Header + filters + table + row actions + bulk-action bar. The default shape for any "list of work items" route (invoices, disputes, reconciliations). See Bulk action bar for the dedicated selection-toolbar pattern — DropdownMenu + Button alone don\'t cover the async-run + progress + toast contract.',
 		category: 'Data',
 		uses: [
 			'SearchFilter',
@@ -95,6 +95,30 @@ export const patterns: PatternEntry[] = [
 			'Metric tiles row + recent activity + quick actions. The home of every authenticated section — overview before drill-in.',
 		category: 'Data',
 		uses: ['Pill', 'Table', 'Button']
+	},
+	{
+		slug: 'bulk-action-bar',
+		name: 'Bulk action bar',
+		description:
+			'The sticky selection toolbar that appears once ≥1 row is checked. Count + clear on the left, an async BulkRunner-driven action group on the right, a busy/progress state that disables the group and reports a toast when the run finishes.',
+		category: 'Data',
+		uses: ['Button', 'Loader', 'toast']
+	},
+	{
+		slug: 'card-gallery',
+		name: 'Card gallery',
+		description:
+			'Grid↔list toggle over a set of issued cards, with a cardholder combobox facet, status chips, and per-card freeze/edit/duplicate/archive actions. The overview shape for any "collection of visual objects" surface.',
+		category: 'Data',
+		uses: ['ToggleGroup', 'Command', 'Popover', 'Select', 'Input', 'Pagination']
+	},
+	{
+		slug: 'notification-inbox',
+		name: 'Notification inbox',
+		description:
+			'Today / Yesterday / This week / This month / Older grouping over a flat notification feed, with a date-range Select filter and click-to-mark-read. The canonical shape for any chronological, groupable feed.',
+		category: 'Data',
+		uses: ['Select', 'Separator', 'Pill']
 	},
 
 	// Forms
@@ -119,9 +143,25 @@ export const patterns: PatternEntry[] = [
 		slug: 'multi-step-onboarding',
 		name: 'Multi-step onboarding flow',
 		description:
-			'Linear stepper with persistent state, back/next controls, per-step validation, and a review step before submit. The apply flow uses this; KYC/KYB uses this.',
+			'Linear stepper with persistent state, back/next controls, per-step validation, and a review step before submit. The apply flow uses this; KYC/KYB uses this. When NOT to use: a modal-scoped flow (add funds, a dialog wizard) — reach for In-dialog stepper instead; it trades the persisted-route stepper for a direction-aware fly transition inside one Dialog.',
 		category: 'Forms',
 		uses: ['Button', 'Input', 'Label', '+layout.server.ts']
+	},
+	{
+		slug: 'in-dialog-stepper',
+		name: 'In-dialog stepper',
+		description:
+			'A stepper that lives entirely inside one Dialog — a `steps` array of `{ component, props }`, current index in local state, direction-aware `fly` transition on step change. Used for add-funds, wire details, and other modal-scoped multi-step flows that don\'t warrant their own route.',
+		category: 'Forms',
+		uses: ['Dialog', 'Skeleton']
+	},
+	{
+		slug: 'bulk-import-wizard',
+		name: 'Bulk import wizard',
+		description:
+			'Template → upload → map columns → process, in one Dialog with a left step-rail. Drag-and-drop or click-to-browse CSV upload, auto-detected column mapping against required fields, a LinearLoader-driven processing state, and a "keep working" escape hatch so the import runs in the background.',
+		category: 'Forms',
+		uses: ['Dialog', 'Select', 'LinearLoader', 'Pill', 'Alert']
 	},
 
 	// Confirmation
@@ -132,6 +172,14 @@ export const patterns: PatternEntry[] = [
 			'Two-step gate for irreversible actions — close card, revoke virtual, terminate user. AlertDialog with a single destructive primary.',
 		category: 'Confirmation',
 		uses: ['Button', 'AlertDialog']
+	},
+	{
+		slug: 'secret-reveal',
+		name: 'Secret reveal',
+		description:
+			'Reveal-once semantics for API keys and webhook secrets — a Dialog that opens already showing the value, with an explicit "won\'t be shown again" warning and a copy-to-clipboard field. There is no re-open; the value must be regenerated to be seen twice.',
+		category: 'Confirmation',
+		uses: ['Dialog', 'Button']
 	},
 
 	// States
@@ -157,9 +205,36 @@ export const patterns: PatternEntry[] = [
 		slug: 'card-detail',
 		name: 'Card detail',
 		description:
-			'Two-column issued-card summary. Status pill, limit progress, controls on the right. Pattern for any "thing" detail page.',
+			'Two-column issued-card summary. Status pill, limit progress, controls on the right. Pattern for any "thing" detail page. Note: this is a simplified excerpt — the production card-management surface adds freeze/edit/duplicate/archive actions, a transaction feed, and permission-gated controls not reproduced here.',
 		category: 'Layout',
 		uses: ['Card', 'Pill', 'Progress', 'Switch', 'Button', 'Separator']
+	},
+	{
+		slug: 'statement-archive',
+		name: 'Statement archive',
+		description:
+			'Year pager over monthly statement rows, each opening a preview modal (PDF/CSV export). The shape for any "archive of periodic documents" surface — statements, tax forms, annual reports.',
+		category: 'Data',
+		uses: ['Button', 'Dialog', 'Pill'],
+		draft: true
+	},
+	{
+		slug: 'role-permission-matrix',
+		name: 'Role permission matrix',
+		description:
+			'Master-detail: role list on the left, a permission checkbox grid on the right, collapsing to a Select-driven single-column view on mobile. For any many-roles × many-capabilities admin surface.',
+		category: 'Forms',
+		uses: ['Select', 'Checkbox', 'Separator'],
+		draft: true
+	},
+	{
+		slug: 'product-catalog',
+		name: 'Product catalog',
+		description:
+			'Enable/disable rows for a set of offerable products, each with an off-ramp confirmation dialog and an expandable pricing table. For admin surfaces that toggle product availability rather than edit records.',
+		category: 'Layout',
+		uses: ['Switch', 'AlertDialog', 'Table'],
+		draft: true
 	},
 
 	// Architecture — cross-cutting page-level techniques
