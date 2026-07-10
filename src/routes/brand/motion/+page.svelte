@@ -4,12 +4,47 @@
 	import Section from '$chrome/Section.svelte';
 	import MotionPreview from '$chrome/MotionPreview.svelte';
 	import DoDontGrid from '$chrome/DoDontGrid.svelte';
+	import CopyValue from '$chrome/CopyValue.svelte';
 
 	let pressed = $state(false);
 	function pressOnce() {
 		pressed = true;
 		setTimeout(() => (pressed = false), 100);
 	}
+
+	// v1.1 facelift — named recipes added across the portal chrome.
+	const recipes = [
+		{
+			name: 'reveal-on-scroll',
+			duration: '300ms (--dur-normal)',
+			easing: '--easing-out',
+			role: 'Fade + 8px rise, once, on first viewport entry. `.db-reveal` + `use:reveal` action.'
+		},
+		{
+			name: 'view transition',
+			duration: '90ms out · 150ms in',
+			easing: '--easing-in / --easing-out',
+			role: 'Cross-fade + 4px rise between routes via `document.startViewTransition`.'
+		},
+		{
+			name: 'copy-confirm',
+			duration: '150ms (--dur-fast)',
+			easing: '--easing-out',
+			role: 'Icon swaps to a check with a fade, label flips to "copied", reverts after ~1.2s.'
+		},
+		{
+			name: 'hover lift',
+			duration: '150ms (--dur-fast)',
+			easing: '--easing-default',
+			role: 'Card/tile border + shadow-md on hover — no transform, just weight.'
+		},
+		{
+			name: 'nav indicator',
+			duration: '150ms (--dur-fast)',
+			easing: '--easing-out',
+			role: 'Underline or left-rail mark scales in from 0 on the active item.'
+		}
+	];
 
 	const dos = [
 		{ kind: 'do' as const, text: 'Use the per-character clipped slide-up for hero headings — it is the brand\'s signature motion.' },
@@ -148,6 +183,54 @@
 
 	<Section label="Do · Don't">
 		<DoDontGrid items={dos} />
+	</Section>
+
+	<Section
+		label="Recipes — v1.1 facelift"
+		note="Named interaction recipes added across the portal chrome and landing page. Same three easings, same four durations — no new motion primitives."
+	>
+		<table class="durations">
+			<thead>
+				<tr>
+					<th>Recipe</th>
+					<th>Duration</th>
+					<th>Easing</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each recipes as r (r.name)}
+					<tr>
+						<td class="d-name">{r.name}</td>
+						<td class="d-val tabular-nums">{r.duration}</td>
+						<td class="d-val">{r.easing}</td>
+						<td class="d-role">{r.role}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</Section>
+
+	<Section
+		label="Reveal on scroll"
+		note="Sections fade in + rise 8px once, the first time they cross 15% of the viewport. Reduced motion: sections render fully visible, no animation."
+	>
+		<MotionPreview label="Replay reveal" caption="fade + 8px rise · 300ms · easing-out">
+			{#snippet children(_k: number)}
+				<div class="reveal-demo db-reveal is-visible">Section content</div>
+			{/snippet}
+		</MotionPreview>
+	</Section>
+
+	<Section
+		label="Copy confirm"
+		note="Copy actions swap their icon to a check with a short fade and add a 'copied' label, then revert after ~1.2s."
+	>
+		<MotionPreview label="Replay copy" caption="icon fade · 150ms · reverts after 1.2s">
+			{#snippet children(_k: number)}
+				<CopyValue value="#2B605C" label="Jade" />
+			{/snippet}
+		</MotionPreview>
 	</Section>
 </InnerPage>
 
@@ -346,6 +429,13 @@
 		width: 120px;
 	}
 	.d-role {
+		color: var(--fg-muted);
+	}
+	.reveal-demo {
+		padding: 24px 32px;
+		border: 1px solid var(--border);
+		font-family: var(--font-mono);
+		font-size: 13px;
 		color: var(--fg-muted);
 	}
 </style>

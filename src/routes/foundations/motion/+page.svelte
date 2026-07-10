@@ -81,6 +81,9 @@
 			</li>
 			<li><strong>Token names mirror CSS vars.</strong> Use <code>var(--dur-fast)</code> in Svelte
 				styles, not literal <code>150ms</code>.</li>
+			<li><strong>v1.1 recipes.</strong> reveal-on-scroll, view transitions, copy-confirm, hover
+				lift, and nav indicator all compose from these same tokens — see
+				<a href="/brand/motion">Brand / Motion</a> for the full recipe table and live demos.</li>
 		</ul>
 	</Section>
 
@@ -201,6 +204,10 @@
 		font-size: 0.95em;
 		background: var(--bg-muted);
 		padding: 1px 6px;
+	}
+	.rules a {
+		color: var(--brand);
+		text-decoration: underline;
 	}
 
 	.see-brand {
