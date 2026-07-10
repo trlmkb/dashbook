@@ -495,6 +495,14 @@ Vercel's built-in Deployment Protection (Vercel Authentication / Password Protec
 - Storybook deep-link strategy
 - Per-region/locale component variants (Wise pattern)
 - Trust artifacts page (SOC 2, PCI, security.txt)
+- `@dashfi/svelte` version reconciliation — dashbook pins `^0.5.0`, the lib's
+  own `package.json` says `0.4.0` (workspace consumers unaffected; verify the
+  published npm registry contents match before treating either number as
+  authoritative).
+- FDIC deposit-insurance copy on `/financial-accounts` should be diffed
+  verbatim against the legal-disclosure library (`marketing_get_legal_disclosure`)
+  — flagged for compliance review; do not change legal copy without that
+  review.
 
 ---
 

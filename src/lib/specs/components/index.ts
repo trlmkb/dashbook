@@ -1,5 +1,5 @@
 /**
- * Component spec registry — single source of truth for all 60 components.
+ * Component spec registry — single source of truth for all 61 components.
  *
  * Imported by:
  * - Docs pages (`src/routes/components/<slug>/+page.svelte`) — render anatomy
@@ -63,6 +63,7 @@ import { scrollArea } from './scroll-area.js';
 import { select } from './select.js';
 import { separator } from './separator.js';
 import { sheet } from './sheet.js';
+import { sidebar } from './sidebar.js';
 import { skeleton } from './skeleton.js';
 import { sonner } from './sonner.js';
 import { spinner } from './spinner.js';
@@ -130,6 +131,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 	select,
 	separator,
 	sheet,
+	sidebar,
 	skeleton,
 	sonner,
 	spinner,

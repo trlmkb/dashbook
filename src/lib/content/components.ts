@@ -301,11 +301,22 @@ export const components: ComponentEntry[] = [
 	{
 		slug: 'pagination',
 		name: 'Pagination',
-		description: 'Paged navigation for long lists. First / prev / pages / next / last.',
+		description:
+			'Paged navigation for long lists. First / prev / pages / next / last. A PaginationWrapper convenience component (page/pageSize binding + page-size Select) also exists in the lib for the common "table with a page-size picker" case.',
 		category: 'Navigation',
 		status: 'beta',
 		importPath:
 			"import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@dashfi/svelte/ui/pagination'"
+	},
+	{
+		slug: 'sidebar',
+		name: 'Sidebar',
+		description:
+			'The authenticated-app navigation shell — collapsible (icon / offcanvas), auto-swaps to a Sheet on mobile, keyboard shortcut (Cmd/Ctrl+B). Family of 20+ sub-components: Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu, SidebarGroup, SidebarHeader/Footer/Rail/Separator/Input.',
+		category: 'Navigation',
+		status: 'beta',
+		importPath:
+			"import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu } from '@dashfi/svelte/ui/sidebar'"
 	},
 	{
 		slug: 'dropdown-menu',
