@@ -14,6 +14,7 @@
 import type { RequestHandler } from './$types';
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
 import { createDashbookMcpServer } from '$lib/mcp/server.js';
+import { isAllowedOrigin } from '$lib/mcp/origin.js';
 
 const corsHeaders: Record<string, string> = {
 	'Access-Control-Allow-Origin': '*',
@@ -23,6 +24,14 @@ const corsHeaders: Record<string, string> = {
 };
 
 async function handle(request: Request): Promise<Response> {
+	const origin = request.headers.get('Origin');
+	if (!isAllowedOrigin(origin)) {
+		return new Response('Forbidden — origin not allowed.', {
+			status: 403,
+			headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+		});
+	}
+
 	const server = createDashbookMcpServer();
 	const transport = new WebStandardStreamableHTTPServerTransport({});
 	await server.connect(transport);
