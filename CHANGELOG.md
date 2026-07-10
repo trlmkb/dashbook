@@ -35,11 +35,13 @@ primitives, no spring, no bounce — and is gated behind
   `/brand/motion`; a pointer to it from `/foundations/motion`.
 
 ### Fixed
-- The homepage hero version pill, the "Recent" band, the changelog page's
-  "Latest" badge, and the Footer version badge all hardcoded their own
-  version strings and had drifted (`v0.9.0` on the homepage while the
-  site was already `v1.0.0`). All four now read from a single
-  `src/lib/content/releases.ts` module.
+- The homepage hero version pill, the "Recent" band, and the Footer
+  version badge all hardcoded their own version strings and had drifted
+  (`v0.9.0` on the homepage while the site was already `v1.0.0`). All
+  three now read from a single `src/lib/content/releases.ts` module,
+  which is also the declared first stop when cutting a release — the
+  changelog page's rich prose entries stay hardcoded by design, with a
+  release checklist comment linking the two.
 
 ## [1.0.0] — 2026-05-18
 
