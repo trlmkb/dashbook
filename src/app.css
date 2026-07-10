@@ -545,3 +545,21 @@
 		animation: none !important;
 	}
 }
+
+::view-transition-old(root) {
+	animation: 90ms var(--easing-in) both db-vt-out;
+}
+::view-transition-new(root) {
+	animation: 150ms var(--easing-out) both db-vt-in;
+}
+@keyframes db-vt-out {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes db-vt-in {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+}
