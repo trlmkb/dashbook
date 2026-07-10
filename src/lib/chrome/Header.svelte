@@ -11,6 +11,14 @@
 
 	let { onOpenPalette }: Props = $props();
 
+	// Condensed header state — hairline border + solid backdrop fade in once
+	// the user scrolls past a small threshold, so the transition never fires
+	// on trivial reflow/resize noise.
+	let scrolled = $state(false);
+	function handleScroll() {
+		scrolled = window.scrollY > 8;
+	}
+
 	// Filter rebuilds reactively when internalState.isInternal flips after
 	// hydration. Internal items stay hidden in the prerendered HTML and
 	// pop in on the client when the UI cookie is present.
@@ -24,7 +32,9 @@
 	}
 </script>
 
-<header class="header">
+<svelte:window onscroll={handleScroll} />
+
+<header class="header" data-scrolled={scrolled}>
 	<div class="row">
 		<a href="/" class="brand" aria-label="Dashbook home">
 			<span class="dashbook">dashbook</span>
@@ -58,10 +68,25 @@
 		position: sticky;
 		top: 0;
 		z-index: 40;
+		background: transparent;
+		backdrop-filter: blur(0);
+		-webkit-backdrop-filter: blur(0);
+		border-bottom: 1px solid transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			border-color var(--dur-fast) var(--easing-default),
+			backdrop-filter var(--dur-fast) var(--easing-default);
+	}
+	.header[data-scrolled='true'] {
 		background: color-mix(in srgb, var(--bg) 85%, transparent);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--border);
+		border-bottom-color: var(--border);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.header {
+			transition: none;
+		}
 	}
 	.row {
 		display: flex;
@@ -91,6 +116,7 @@
 		flex: 1;
 	}
 	.nav-item {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
 		padding: 6px 10px;
@@ -100,13 +126,34 @@
 		color: var(--fg-muted);
 		text-decoration: none;
 		border-radius: 4px;
-		transition: color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
+	}
+	.nav-item::after {
+		content: '';
+		position: absolute;
+		left: 10px;
+		right: 10px;
+		bottom: 2px;
+		height: 1px;
+		background: var(--fg);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.nav-item:hover {
 		color: var(--fg);
 	}
 	.nav-item.active {
 		color: var(--fg);
+	}
+	.nav-item.active::after {
+		transform: scaleX(1);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.nav-item,
+		.nav-item::after {
+			transition: none;
+		}
 	}
 	.actions {
 		display: flex;
