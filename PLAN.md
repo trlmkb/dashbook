@@ -175,9 +175,9 @@ Utilities: `logo-sources.ts` (inlined wordmark + app-icon SVG generators), `shik
 | 1   | `/`            | Overview         | Hero + 3 audience tiles + recent updates                                                      | ✅    |
 | 2   | `/brand`       | Brand            | Logo (incl. AssetConfigurator) · Color · Typography · Voice · Motion · Photography · Iconography | ✅    |
 | 3   | `/foundations` | Foundations      | All 9 subpages live: Color · Typography · Spacing · Radius · Elevation · Motion · Accessibility · Data viz · Currency | ✅    |
-| 4   | `/components`  | Components       | **60** live previews; each with Preview / Code / Docs / Anatomy / Accessibility / Changelog tabs | ✅    |
-| 5   | `/patterns`    | Patterns         | 6 recipes (Data · Forms · Confirmation · States · Layout) with Preview / Code / Rationale / Variations | ✅    |
-| 6   | `/developers`  | Developers       | Install (pnpm/npm/yarn/bun tabs) · Quick start · Tailwind setup (v3 + v4) · Theming (3-tier) · 60-component stability matrix · Contributing · GitHub/Figma/Storybook link cards | ✅    |
+| 4   | `/components`  | Components       | **61** live previews; each with Preview / Code / Docs / Anatomy / Accessibility / Changelog tabs | ✅    |
+| 5   | `/patterns`    | Patterns         | 23 full-depth + 3 draft patterns across 7 categories (Shells · Data · Forms · Confirmation · States · Layout · Architecture) with Preview / Code / Rationale / Variations | ✅    |
+| 6   | `/developers`  | Developers       | Install (pnpm/npm/yarn/bun tabs) · Quick start · Tailwind setup (v3 + v4) · Theming (3-tier) · 61-component stability matrix · Contributing · GitHub/Figma/Storybook link cards | ✅    |
 | 7   | `/press`       | Press & Partners | AssetConfigurator (wordmark + app-icon) · Partner kit (3 Powered-by-Dash badge variants · 2 customer lockup examples · 8 do/don't co-branding rules) · Media contacts · Legal disclosures (real dash.fi data) | ✅    |
 | 8   | `/changelog`   | Changelog        | Dated release notes through v0.7.0                                                            | ✅    |
 
