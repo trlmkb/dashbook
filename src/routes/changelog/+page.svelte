@@ -1,5 +1,15 @@
 <script lang="ts">
-	import { latestRelease } from '$content/releases';
+	// RELEASE CHECKLIST — when cutting a new version:
+	// 1. Declare it in src/lib/content/releases.ts (top of the array). That
+	//    module is the single source for the homepage hero pill, the
+	//    homepage "Recent" band, and the Footer version badge.
+	// 2. Add the full entry <li> below (hardcoded prose — the bodies are
+	//    rich, heterogeneous markup and deliberately NOT data-driven), move
+	//    the "Latest" badge to it, and match its id/date/version to the
+	//    releases.ts entry.
+	// Partially wiring this page to releases.ts was tried and reverted — it
+	// hid drift instead of preventing it (anchor ids + prose stayed
+	// hardcoded while version/date moved).
 
 	type Filter = 'all' | 'major' | 'roadmap';
 	let filter = $state<Filter>('all');
@@ -54,13 +64,9 @@
 			</div>
 		</li>
 		<li data-kind="major" id="v1-0-0">
-			<span class="when">{latestRelease.date}</span>
+			<span class="when">2026-05-18</span>
 			<div class="what">
-				<span class="ver"
-					><a href="#v1-0-0" class="ver-anchor">{latestRelease.ver}</a><span class="latest"
-						>Latest</span
-					></span
-				>
+				<span class="ver"><a href="#v1-0-0" class="ver-anchor">v1.0.0</a><span class="latest">Latest</span></span>
 				<p>
 					<strong>First declared-stable release.</strong> 60 components and 17 patterns
 					across 7 categories now ship with full anatomy (dimensions, tokens, variants,

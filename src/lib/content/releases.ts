@@ -5,11 +5,12 @@ export type Release = {
 	href: string;
 };
 
-// Homepage-friendly release summaries — short, hand-curated, distinct from
-// the full changelog prose. Source of truth for release notes stays
-// src/routes/changelog/+page.svelte; this list mirrors its most recent
-// entries so the version pill and the "Recent" band never drift from the
-// actual latest release. Keep in sync when adding a changelog entry.
+// THE single place a new version is declared. Drives the homepage hero
+// pill, the homepage "Recent" band, and the Footer version badge. The
+// full release notes live as hardcoded prose on
+// src/routes/changelog/+page.svelte (see the release checklist comment at
+// the top of that file) — when cutting a release, add the entry here
+// FIRST, then write the changelog <li> with a matching version/date/id.
 export const releases: Release[] = [
 	{
 		ver: 'v1.0.0',

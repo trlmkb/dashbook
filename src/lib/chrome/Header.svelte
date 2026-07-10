@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Search from '@lucide/svelte/icons/search';
 	import ThemeToggle from './ThemeToggle.svelte';
@@ -18,6 +19,11 @@
 	function handleScroll() {
 		scrolled = window.scrollY > 8;
 	}
+
+	// Sync once on mount — back/forward navigation restores scroll position
+	// without firing a scroll event, so the condensed state must be derived
+	// from the restored scrollY, not just from future scrolls.
+	onMount(handleScroll);
 
 	// Filter rebuilds reactively when internalState.isInternal flips after
 	// hydration. Internal items stay hidden in the prerendered HTML and
