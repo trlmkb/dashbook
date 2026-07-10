@@ -149,6 +149,10 @@
 	.nav-item.active::after {
 		transform: scaleX(1);
 	}
+	.nav-item:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
 	@media (prefers-reduced-motion: reduce) {
 		.nav-item,
 		.nav-item::after {
@@ -172,11 +176,21 @@
 		border-radius: 6px;
 		font-family: var(--font-sans);
 		font-size: 12px;
-		transition: border-color 150ms;
+		transition: border-color var(--dur-fast) var(--easing-default);
 	}
 	.search-trigger:hover {
 		border-color: var(--input-border);
 		color: var(--fg);
+	}
+	.search-trigger:focus-visible,
+	.brand:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.search-trigger {
+			transition: none;
+		}
 	}
 	.search-label {
 		display: inline-block;

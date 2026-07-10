@@ -14,7 +14,7 @@
 	let { name, format, size, href, preview, downloadName }: Props = $props();
 </script>
 
-<a class="asset" {href} download={downloadName ?? true}>
+<a class="asset db-press" {href} download={downloadName ?? true}>
 	<div class="preview">
 		{#if preview}{@render preview()}{/if}
 	</div>
@@ -37,10 +37,22 @@
 		text-decoration: none;
 		color: var(--fg);
 		border: 1px solid var(--border);
-		transition: border-color 150ms;
+		transition:
+			border-color var(--dur-fast) var(--easing-default),
+			box-shadow var(--dur-fast) var(--easing-default);
 	}
 	.asset:hover {
 		border-color: var(--input-border);
+		box-shadow: var(--shadow-md);
+	}
+	.asset:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.asset {
+			transition: none;
+		}
 	}
 	.preview {
 		display: flex;
