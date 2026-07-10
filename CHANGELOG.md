@@ -5,6 +5,40 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
+## [Unreleased]
+
+### Added — Pattern extraction R3 (product app + dash.fi sweeps)
+- 6 new full-depth product patterns (17 → 23): Bulk action bar, Bulk import
+  wizard, In-dialog stepper, Card gallery, Secret reveal, Notification
+  inbox — grounded in the dashfi-ui product-app source.
+- 3 new draft product patterns: Statement archive, Role permission matrix,
+  Product catalog.
+- New Sidebar component (60 → 61) — the authenticated-app navigation shell
+  family (Sidebar, SidebarProvider, SidebarInset, SidebarTrigger,
+  SidebarMenu, SidebarGroup, SidebarHeader/Footer/Rail/Separator/Input),
+  previously referenced by the Protected app shell pattern but undocumented.
+- 5 new marketing patterns (36 → 41): ComparisonTable, DataTableBand,
+  ChartBand, ActionPlan, FormCapture — grounded in live dash.fi evidence
+  (home, /corporate-card, /rewards, /shipping, /parcel-audit,
+  /parcel-analytics, /ai-spend-audit, /carrier-contract-management,
+  /growthnetwork, /partner).
+- New variants documented: step-timeline (compare, pipeline status),
+  live-widget (term-selector, tier-slider), split-cta
+  (dual-peer-CTA-boxes), feature-grid (4-up audience-segment),
+  case-study-card (confidence-score + strategy-bullets).
+
+### Fixed — drift corrections
+- `content/marketing.ts` reconciled against the real marketing pattern spec
+  registry: removed 6 phantom slugs with no backing spec, added 4
+  previously-undocumented specs (dark-cta-band, faq-accordion,
+  trust-stat-band, calculator-island). ⌘K now indexes exactly the shipped
+  pattern set.
+- workflow-data-table-page, multi-step-onboarding, table-filters, and
+  card-detail docs updated to cross-link the new patterns / note scope
+  limitations.
+- pinned-showcase and cosmic-hero flagged with a "no live usage on dash.fi
+  as of 2026-07" source note.
+
 ## [1.0.0] — 2026-05-18
 
 First declared-stable release. Everything below is live at

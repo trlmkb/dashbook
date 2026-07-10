@@ -44,7 +44,7 @@
 					</tbody>
 				</table>
 			</div>
-			<a href="#" class="more">+ 340 more findings</a>
+			<button type="button" class="more">+ 340 more findings</button>
 		</div>
 	{/snippet}
 </MarketingPatternLayout>
@@ -123,6 +123,12 @@
 		border: 1px solid var(--m-positive-border);
 	}
 	.more {
+		align-self: flex-start;
+		font: inherit;
+		background: none;
+		border: 0;
+		padding: 0;
+		cursor: pointer;
 		font-size: 13px;
 		color: var(--m-fg-muted);
 		text-decoration: underline;

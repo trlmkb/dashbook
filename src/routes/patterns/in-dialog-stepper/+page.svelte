@@ -70,7 +70,7 @@
 
 <PatternLayout
 	name="In-dialog stepper"
-	description="A stepper that lives entirely inside one Dialog — a steps array of { component, props }, current index in local state, direction-aware fly transition on step change. Used for add-funds, wire details, and other modal-scoped multi-step flows that don't warrant their own route."
+	description="A stepper that lives entirely inside one Dialog — a steps array of component/props pairs, current index in local state, direction-aware fly transition on step change. Used for add-funds, wire details, and other modal-scoped multi-step flows that don't warrant their own route."
 	uses={['Dialog', 'Skeleton']}
 >
 	{#snippet preview()}
