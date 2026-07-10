@@ -24,6 +24,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { registerProductTools } from './tools/product.js';
 import { registerMarketingTools } from './tools/marketing.js';
 import { registerSharedTools } from './tools/shared.js';
+import { registerDashbookResources } from './resources.js';
 
 export const SERVER_NAME = 'dashbook';
 export const SERVER_VERSION = '0.1.0';
@@ -33,7 +34,7 @@ export function createDashbookMcpServer(): McpServer {
 	const server = new McpServer(
 		{ name: SERVER_NAME, version: SERVER_VERSION },
 		{
-			capabilities: { tools: {}, resources: {}, prompts: {} },
+			capabilities: { tools: {}, resources: {} },
 			instructions: [
 				'The Dashbook MCP exposes Dash.fi\'s brand & design system.',
 				'',

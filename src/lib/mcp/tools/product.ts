@@ -25,6 +25,11 @@ import {
 	appIconSvg,
 	appIconPresets
 } from '$chrome/logo-sources.js';
+import {
+	productGetComponentOutputSchema,
+	productGetTokenOutputSchema,
+	productListComponentsOutputSchema
+} from '../schemas.js';
 
 /**
  * Boundary signal — what this namespace explicitly does NOT contain.
@@ -41,9 +46,81 @@ function json(value: unknown): { content: { type: 'text'; text: string }[] } {
 	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }] };
 }
 
+/**
+ * Same as `json`, plus `structuredContent` — required by the SDK whenever a
+ * tool declares an `outputSchema` (see `../schemas.ts`).
+ */
+function jsonWithSchema(value: Record<string, unknown>): {
+	content: { type: 'text'; text: string }[];
+	structuredContent: Record<string, unknown>;
+} {
+	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }], structuredContent: value };
+}
+
 /** Strip the "import { X } from 'Y'" wrapper down to just "Y". */
 function importPathOnly(importPath: string): string {
 	return importPath.replace(/^import .+ from '/, '').replace(/'$/, '');
+}
+
+export type ProductFoundationName = 'color' | 'typography' | 'spacing' | 'radius' | 'motion' | 'shadows';
+
+/**
+ * Resolve one product foundation to its structured data.
+ *
+ * Single source of truth for `product_get_foundation` (the tool) and the
+ * `dashbook://foundations/{slug}` MCP resource — both call this instead of
+ * duplicating the per-foundation data + rules.
+ */
+export function getProductFoundationData(name: ProductFoundationName): Record<string, unknown> {
+	switch (name) {
+		case 'color':
+			return {
+				product: productColors,
+				base: baseColors,
+				marketing: marketingColors,
+				rules: [
+					'Brand accent is single-use. Never combine product jade with marketing cobalt in the same surface.',
+					'Destructive is monochrome — black on light, white on dark. Never red.',
+					'Yellow is highlight only. One element per slide; never a primary surface.'
+				]
+			};
+		case 'radius':
+			return {
+				scale: radii,
+				rules: [
+					'Default radius is 0 (square) — components opt into rounding explicitly.',
+					'`md` (6px) covers buttons + cards; `lg` (8px) covers card surfaces.',
+					'`full` (9999px) for round avatars, dots, indicators.'
+				]
+			};
+		case 'motion':
+			return {
+				durations: motionTokens,
+				rules: [
+					'`fast` (120ms) for hover / focus state transitions.',
+					'`base` (200ms) for layout shifts, card expansions.',
+					'`slow` for explicit emphasis only — sparing.'
+				]
+			};
+		case 'shadows':
+			return {
+				scale: shadows,
+				rules: [
+					'Two-step elevation. `sm` for raised surfaces, `md` for popovers/modals.',
+					'Jade-tinted at low opacity — never default Material-style black shadows.'
+				]
+			};
+		case 'typography':
+			return {
+				...typographyFoundation,
+				note: 'See https://dashbook.vercel.app/foundations/typography for the rendered docs.'
+			};
+		case 'spacing':
+			return {
+				...spacingFoundation,
+				note: 'See https://dashbook.vercel.app/foundations/spacing for the rendered docs.'
+			};
+	}
 }
 
 export function registerProductTools(server: McpServer): void {
@@ -64,7 +141,8 @@ export function registerProductTools(server: McpServer): void {
 					.enum(['stable', 'beta', 'deprecated'])
 					.optional()
 					.describe('Filter by stability status.')
-			}
+			},
+			outputSchema: productListComponentsOutputSchema
 		},
 		async ({ category, status }) => {
 			let entries = allComponentSpecs.map((s) => ({
@@ -77,7 +155,7 @@ export function registerProductTools(server: McpServer): void {
 			}));
 			if (category) entries = entries.filter((e) => e.category === category);
 			if (status) entries = entries.filter((e) => e.status === status);
-			return json({ count: entries.length, components: entries });
+			return jsonWithSchema({ count: entries.length, components: entries });
 		}
 	);
 
@@ -93,7 +171,8 @@ export function registerProductTools(server: McpServer): void {
 				slug: z
 					.string()
 					.describe('Component slug — e.g. "button", "input", "radio-group". Use `product_list_components` to discover.')
-			}
+			},
+			outputSchema: productGetComponentOutputSchema
 		},
 		async ({ slug }) => {
 			const spec = getComponentSpec(slug);
@@ -108,7 +187,7 @@ export function registerProductTools(server: McpServer): void {
 					isError: true
 				};
 			}
-			return json(spec);
+			return jsonWithSchema(spec);
 		}
 	);
 
@@ -126,57 +205,7 @@ export function registerProductTools(server: McpServer): void {
 					.describe('Which foundation to fetch.')
 			}
 		},
-		async ({ name }) => {
-			switch (name) {
-				case 'color':
-					return json({
-						product: productColors,
-						base: baseColors,
-						marketing: marketingColors,
-						rules: [
-							'Brand accent is single-use. Never combine product jade with marketing cobalt in the same surface.',
-							'Destructive is monochrome — black on light, white on dark. Never red.',
-							'Yellow is highlight only. One element per slide; never a primary surface.'
-						]
-					});
-				case 'radius':
-					return json({
-						scale: radii,
-						rules: [
-							'Default radius is 0 (square) — components opt into rounding explicitly.',
-							'`md` (6px) covers buttons + cards; `lg` (8px) covers card surfaces.',
-							'`full` (9999px) for round avatars, dots, indicators.'
-						]
-					});
-				case 'motion':
-					return json({
-						durations: motionTokens,
-						rules: [
-							'`fast` (120ms) for hover / focus state transitions.',
-							'`base` (200ms) for layout shifts, card expansions.',
-							'`slow` for explicit emphasis only — sparing.'
-						]
-					});
-				case 'shadows':
-					return json({
-						scale: shadows,
-						rules: [
-							'Two-step elevation. `sm` for raised surfaces, `md` for popovers/modals.',
-							'Jade-tinted at low opacity — never default Material-style black shadows.'
-						]
-					});
-				case 'typography':
-					return json({
-						...typographyFoundation,
-						note: 'See https://dashbook.vercel.app/foundations/typography for the rendered docs.'
-					});
-				case 'spacing':
-					return json({
-						...spacingFoundation,
-						note: 'See https://dashbook.vercel.app/foundations/spacing for the rendered docs.'
-					});
-			}
-		}
+		async ({ name }) => json(getProductFoundationData(name))
 	);
 
 	// ── get_token ──────────────────────────────────────────────────────
@@ -189,7 +218,8 @@ export function registerProductTools(server: McpServer): void {
 				PRODUCT_NON_FEATURES,
 			inputSchema: {
 				name: z.string().describe('Token name or CSS var — e.g. "brand", "--input-border", "--m-cobalt".')
-			}
+			},
+			outputSchema: productGetTokenOutputSchema
 		},
 		async ({ name }) => {
 			const normalised = name.replace(/^--/, '');
@@ -209,7 +239,7 @@ export function registerProductTools(server: McpServer): void {
 					isError: true
 				};
 			}
-			return json(match);
+			return jsonWithSchema(match);
 		}
 	);
 
