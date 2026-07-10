@@ -1,7 +1,8 @@
 {
 	"$schema": "https://json.schemastore.org/claude-plugin.json",
 	"name": "dashbook",
-	"version": "0.2.0",
+	"displayName": "Dashbook — Dash.fi design system",
+	"version": "0.3.0",
 	"description": "Dashbook — Dash.fi's brand & design system, as a Claude plugin. Adds the dashbook-design-system skill, registers the hosted Dashbook MCP server (60 components, foundations, brand voice, logos, partner kits, marketing patterns), and ships nine slash commands across the product and marketing namespaces.",
 	"author": {
 		"name": "Dash.fi",
