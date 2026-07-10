@@ -54,6 +54,7 @@ export function createDashbookMcpServer(): McpServer {
 	registerProductTools(server);
 	registerMarketingTools(server);
 	registerSharedTools(server);
+	registerDashbookResources(server);
 
 	return server;
 }
