@@ -12,7 +12,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write \"src/**/*.{svelte,ts,css,md}\"",
 		"format:check": "prettier --check \"src/**/*.{svelte,ts,css,md}\"",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"test": "vitest run",
+		"spec-audit": "vite-node -c vitest.config.ts scripts/spec-audit/cli.ts"
 	},
 	"dependencies": {
 		"@dashfi/svelte": "^0.5.0",
@@ -58,6 +60,7 @@
 		"tailwindcss": "^4.1.11",
 		"typescript": "^5.6.2",
 		"typescript-eslint": "^8.58.1",
-		"vite": "^6.3.5"
+		"vite": "^6.3.5",
+		"vitest": "^4.1.10"
 	}
 }
