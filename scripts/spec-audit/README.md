@@ -1,60 +1,89 @@
 # spec-audit — spec ↔ lib drift engine
 
-Derives the **mechanical** subfields of each component spec (resolved token hex,
-geometry, sizes, prop/variant signatures) from `@dashfi/svelte` source and flags
-where the specs have drifted. Design: [`docs/superpowers/specs/2026-07-13-spec-lib-drift-engine-design.md`](../../docs/superpowers/specs/2026-07-13-spec-lib-drift-engine-design.md).
+Checks Dashbook's component specs and product foundation against the rendered
+source shipped by `@dashfi/svelte`. It updates only mechanically safe resolved
+token values; prose, token-part selection, variant ordering, and other curated
+fields remain human-owned.
+
+Design: [`docs/superpowers/specs/2026-07-13-spec-lib-drift-engine-design.md`](../../docs/superpowers/specs/2026-07-13-spec-lib-drift-engine-design.md).
 
 ## Run
 
 ```bash
-pnpm test          # engine unit tests (vitest)
-pnpm spec-audit    # drift report against the current lib + specs
-pnpm spec-audit --json > report.json
+pnpm spec-audit             # human-readable report; stale values fail
+pnpm spec-audit --write     # rewrite stale light/dark TokenRef values
+pnpm spec-audit --json      # machine-readable report
+pnpm spec-audit --strict    # also fail advisory coverage/trace gaps
 ```
 
-Migration-neutral via one env knob:
+The default source root is the pinned package consumed by this repository:
+`node_modules/@dashfi/svelte/dist`. The runner is path-configurable for the
+planned move into the core Nx workspace:
 
 ```bash
-# today (standalone): defaults to node_modules/@dashfi/svelte/dist
-# after the move to core/packages/brand:
 DASHBOOK_LIB_ROOT=../../libs/svelte-components/lib/src/lib pnpm spec-audit
 ```
 
-Exit code is nonzero when any drift is found — the future CI gate (dormant until
-the engine lives in core alongside the lib).
+The package path and Nx project name are deliberately not encoded here; the
+later migration only needs to supply the sibling library root.
 
-## What's implemented (this PR)
+## What is enforced
 
-- **`resolver.ts`** — class→token→hex + geometry. Parses the lib theme sheet
-  (`:root` light / `.dark` dark), converts HSL triples to the **rendered** hex,
-  and compares with a per-channel tolerance so the lib's HSL rounding is not
-  reported as false drift. Declines gradients / arbitrary palette values (they
-  stay prose). Fully unit-tested.
-- **`tv-extractor.ts`** — parses `tailwind-variants` configs (TS compiler API)
-  from `index.ts` **and** `<script module>`; multiple blocks per component.
-- **`spec-reader.ts`** — statically reads the token hex a spec currently records
-  (no app import).
-- **`audit.ts`** — pure diff: expected (from lib) vs recorded (from spec) →
-  `ok` / `drift` / `missing`.
-- **`cli.ts`** — runs the tv() tier end-to-end and prints the report.
+- Every resolved `TokenRef.light` / `TokenRef.dark` value in every shared
+  component spec discovered from the library is compared with the theme that
+  actually renders.
+- The product foundation values exposed by `product_get_foundation` are checked
+  against that same theme.
+- `--write` canonicalizes those light/dark string literals to the rendered
+  values and preserves the surrounding spec structure and authored prose.
+- The normal exit code is nonzero only for stale resolved values. This is the
+  safe CI gate available before the repositories are colocated.
 
-Coverage today: the **tv() tier** (badge, button, alert, item, empty, toggle,
-switch, sheet). Everything else reports as `unsupported` — it needs the
-extractors below.
+## What is reported for review
 
-## Tracked follow-ups (remaining scope)
+The source reader recursively scans `.svelte`, `.ts`, `.js`, and `.css` files,
+including static class literals, `tv()` configs, class maps, and conditional
+branches. It reports two additional kinds of evidence:
 
-Per the design doc, still to build:
+- source theme tokens used by a component but not selected for its curated
+  `tokens[]` table;
+- literal `dimensions[].tw` classes that are not visible in that component's
+  own source, commonly because the appearance is inherited from Button, Input,
+  Popover, Table, or another shared primitive.
 
-- **static-cn extractor** — first string-literal class on a component/sub-part
-  root (Svelte 4 + 5). Biggest surface-area win: all inline-static components +
-  every composite's per-slot rows.
-- **class-map extractor** — `switch` / object maps (pill, sonner, merchant-logo).
-- **cn-conditional extractor** — `cond === 'x' && '…'` branches (tabs, scroll-area, navigation).
-- **`buttonVariants` cross-ref resolver** — pagination, calendar, date-range-selector, tel-input.
-- **Subfield 3-way merge + `--write` / `--write-semi`** — apply fixes in place,
-  preserving prose/ordering (currently the engine only reports).
-- **Full 62-spec reconciliation** — Auto write, Semi confirm, Manual verify.
-- **Foundations stretch** — reuse the resolver for `product_get_foundation` drift.
-- **Verify-only guardrails** — hard-code the trap list (code-block, flow-lines,
-  tabs indicator, sidebar, variant ordering, nonFeatures, curated prop subsets).
+Those findings are advisory by default. Automatically adding token rows would
+invent part names and editorial scope, while treating inherited classes as
+wrong would create false positives. `--strict` is available for focused cleanup
+and for the future dependency-aware gate.
+
+## Implementation
+
+- `resolver.ts` parses light/dark theme variables, resolves Tailwind color
+  utilities, converts HSL triples to rendered hex, and tolerates harmless HSL
+  round-trip differences.
+- `source-reader.ts` inventories component source, literal classes, and theme
+  token usage across the full published library.
+- `tv-extractor.ts` retains structured `tailwind-variants` extraction for
+  deeper variant analysis.
+- `spec-reader.ts` reads dimensions and token references and performs narrow,
+  source-preserving token rewrites.
+- `audit.ts` is the pure resolved-value comparison layer.
+- `cli.ts` discovers the library and registered specs, checks the foundation,
+  prints text or JSON, applies `--write`, and owns exit-code policy.
+
+The one-time reconciliation in this PR audited 61 registered shared components,
+added the missing PaginationWrapper spec, and left Sidebar to the already-open
+Sidebar spec PR. It canonicalized 151 resolved token occurrences plus several verified
+anatomy mismatches in Card, Loader, MultiSelect, PhoneInput, DateRangeSelector,
+DropdownMenu, Calendar, Command, Tooltip, EnhancedTable, and Pagination.
+
+## Follow-ups after this PR
+
+- Merge/rebase the Sidebar spec from its existing PR, then require a complete
+  library-to-registry inventory.
+- Add dependency-aware class tracing so inherited Button/Input/Popover/Table
+  geometry can move from advisory to enforceable.
+- Promote reviewed source-token coverage rows without auto-inventing curation.
+- Add structured prop/variant/geometry comparison where the source has a safe
+  AST representation.
+- Install the gate on shared-library PRs after the planned Nx move into core.

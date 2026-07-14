@@ -40,7 +40,7 @@ export const avatar: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Fallback background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' }
 		},
 		{
 			name: 'Fallback text',

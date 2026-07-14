@@ -1,8 +1,8 @@
 # Spec ↔ lib drift engine — design
 
-> Status: **draft for review** · Date: 2026-07-13 · Scope: dashbook (standalone today, `core/packages/brand` later)
+> Status: **implemented and reconciled** · Designed: 2026-07-13 · Implemented: 2026-07-14 · Scope: dashbook standalone; migration-neutral for the planned core Nx move
 >
-> Companion tracks (NOT this lift): handoff-routing fix (next lift), migration to `core` (lift #2).
+> This lift also closed the adjacent handoff-routing gap. It does **not** perform the core migration.
 
 ---
 
@@ -32,8 +32,7 @@ The root cause is structural: **the spec is a separate representation of the lib
 
 **Non-goals (explicit)**
 
-- Does **not** perform the migration to `core/packages/brand` — that is a separate large lift (#2). This engine is *designed to move into it*, not to do it.
-- Does **not** build the handoff-routing fix (MCP "this is Badge — import it, don't reimplement" markers + receiving-repo skills). That is the immediately-following lift, and it depends on the specs being trustworthy first.
+- Does **not** perform the migration into the core Nx workspace — that remains a separate large lift. This engine is *designed to move with it*, not to do it.
 - Does **not** wire core CI (can't until the migration lands) — but the engine is built CI-ready (JSON report + nonzero exit on drift).
 - Does **not** touch the 4 open PRs.
 
@@ -41,7 +40,7 @@ The root cause is structural: **the spec is a separate representation of the lib
 
 The drift problem exists *because* specs and lib live apart. The migration to `core` shrinks that gap; this engine is a mitigation that works in both worlds and gets stronger in the monorepo:
 
-| | Standalone (today) | In-repo (`packages/brand`, lift #2) |
+| | Standalone (today) | In the core Nx workspace (later lift) |
 |---|---|---|
 | Lib it compares against | Pinned **published** `@dashfi/svelte` (0.5.0) in `node_modules` | Live lib **HEAD** — sibling `libs/svelte-components/lib/src/lib/ui/` |
 | When drift is caught | Only on dep bump — can be weeks late | The moment a lib PR changes a component |
@@ -161,6 +160,23 @@ Flipping the root (and the `.ts` vs `.js` preference) is config-only.
 
 Run the engine across all 62 components → produce the drift report → fix Auto by regeneration, Semi by confirm-then-write, Manual by hand → commit. This *is* the "audit Foundation vs actual component" that motivated the lift, and it leaves the reusable engine behind.
 
+### Implementation result (2026-07-14)
+
+The implementation deliberately narrowed automatic mutation to the field that
+can be proven safe across the entire catalogue: resolved light/dark `TokenRef`
+values. The full source reader still inventories literal classes and token use,
+but coverage and inherited-geometry findings remain advisory unless `--strict`
+is requested. This avoids inventing token-part curation or misclassifying a
+Button/Popover/Table dependency as drift.
+
+The one-time pass audited the product foundation and 61 registered shared
+components, canonicalized 151 resolved token occurrences, manually reconciled verified
+anatomy mismatches, and added PaginationWrapper. Sidebar remains owned by the
+already-open Sidebar spec PR. The adjacent handoff-routing work also landed in
+this lift: MCP/JSON responses now include machine-readable implementation and
+reuse metadata, while the receiving skills require exact shared imports for
+Svelte and route other stacks through the porting tool.
+
 ## 7. Testing
 
 - **Extractor unit tests** — feed each extractor a known source fixture (a `tv()` config; a static-`cn` root; pill's `switch`) and assert the extracted structure.
@@ -187,5 +203,5 @@ A path-configurable Node + TypeScript CLI in dashbook (proposed `scripts/spec-au
 ## 11. Sequencing
 
 1. **This lift** — the drift/generator engine + one-time audit (this doc).
-2. **Next lift** — handoff-routing fix (MCP "this is a real component, import it" markers + core/dash.fi skills), now safe because specs are trustworthy.
-3. **Lift #2** — migrate dashbook into `core/packages/brand`; the engine moves with it and gains the lib-PR merge gate.
+2. **Included in this lift** — handoff-routing metadata and receiving-skill guidance.
+3. **Next large lift** — migrate dashbook into the core Nx workspace; the engine moves with it and gains the lib-PR merge gate.

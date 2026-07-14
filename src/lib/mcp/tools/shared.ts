@@ -42,6 +42,10 @@ export function registerSharedTools(server: McpServer): void {
 				docs: `${DOCS_BASE}/changelog`,
 				recent: [
 					{
+						date: '2026-07-14',
+						note: 'Full spec-to-library reconciliation: resolved product tokens now match the rendered shared theme; verified component anatomy drift was corrected; handoff responses now require exact shared imports in Svelte.'
+					},
+					{
 						date: '2026-05-13',
 						note: 'Full-library v0.3.2 anatomy regeneration against the EN-XX/design-vnext--sidebar-feature branch. Input became underline-only; Button secondary became cobalt; Card became zero-chrome.'
 					},

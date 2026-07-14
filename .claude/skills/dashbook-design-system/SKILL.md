@@ -38,13 +38,32 @@ brand and design system is exposed via **two surfaces**:
 
 ## Recommended workflow
 
+### Design handoff contract
+
+Treat Claude Design output as a visual proposal, not a new component implementation.
+Before writing code, identify the target stack and inspect each Dashbook component's
+`implementation` metadata:
+
+- **Svelte / SvelteKit:** when `reusePolicy` is `required-in-svelte`, use the exact
+  `implementation.importStatement`. Do not translate the generated HTML/CSS, copy
+  anatomy classes into a local component, or rebuild the component from a screenshot.
+- **React / React Native / Vue / plain HTML:** call `product_port_to`; the Svelte
+  package is not a cross-framework runtime.
+- **Astro:** reuse the shared Svelte component only when the project enables Svelte
+  and already consumes `@dashfi/svelte`; otherwise use the non-Svelte porting path.
+
+After handoff, scan the generated code for local buttons, inputs, badges, dialogs,
+cards, and other shapes that duplicate a listed shared component. Replace those
+approximations with shared imports while preserving page-specific composition and
+business logic.
+
 1. If the user's request involves Dash.fi UI work, ask once whether to load the
    **product** or **marketing** context (or assume based on the task).
 2. Call `product_list_components` (or `product_search`) to find the right
    component. Don't guess slugs.
-3. Call `product_get_component({ slug })` to fetch the full anatomy. The
-   returned JSON has `dimensions`, `tokens`, `variants`, `sizes`, `composition`,
-   `nonFeatures`, `props`, `example`, and `porting`. Build to those exact values.
+3. Call `product_get_component({ slug })` to fetch the full anatomy and
+   `implementation` routing. In Svelte, import the production component; use the
+   anatomy to verify the result, not to recreate it.
 4. For a non-Svelte stack, also call `product_port_to({ slug, stack })` to get
    the stack-specific snippet template.
 5. For tokens used outside a specific component (page background, type, etc.),
@@ -52,10 +71,11 @@ brand and design system is exposed via **two surfaces**:
 
 ## Brand rules — invariants
 
-- **Brand accent is jade `#2B605C`** on product surfaces. Cobalt `#354CEF` is
+- **Brand accent is `--color-brand`** on product surfaces (currently rendered by
+  the shared lib as `#2B5F5B` light / `#46B9AF` dark). Cobalt is
   marketing-only **except** Button `secondary` which is cobalt on the vnext
   branch. When in doubt call `product_get_token({ name: 'brand' })`.
-- **Destructive is monochrome.** Black on light, white on dark. Never red.
+- **Destructive is orange `#FF4000`** in both modes in the shared library.
 - **Typography**: PP Supply Mono for display / labels / data values. Bai
   Jamjuree for body and UI. PP Supply Mono Ultralight (weight 200) for big
   display headings — uppercase, tight tracking.
@@ -73,6 +93,6 @@ same structured data the MCP returns.
 
 ## Component count + scope
 
-Today: 60 components across 6 categories (Inputs, Display, Feedback,
-Navigation, Layout, Data). See `product_list_components` for the current
-catalogue.
+The catalogue evolves with the shared library. Use `product_list_components`
+for the current components and categories rather than relying on a hard-coded
+count.

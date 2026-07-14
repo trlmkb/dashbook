@@ -29,7 +29,7 @@ export const skeleton: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 			notes: '`bg-muted`.'
 		}
 	],

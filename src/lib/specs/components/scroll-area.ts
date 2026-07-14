@@ -45,11 +45,11 @@ export const scrollArea: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Thumb',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'Focus ring',
-			token: { cssVar: '--color-ring', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' },
 			notes: 'Jade in light, lifted jade in dark.'
 		}
 	],

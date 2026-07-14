@@ -66,20 +66,20 @@ export const alertDialog: ComponentSpec = {
 		},
 		{
 			name: 'AlertDialogContent surface (bg)',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' }
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' }
 		},
 		{
 			name: 'AlertDialogContent surface (border)',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'AlertDialogTitle',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes: '`text-lg font-semibold` (18px).'
 		},
 		{
 			name: 'AlertDialogDescription',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: '`text-sm` (14px).'
 		},
 		{

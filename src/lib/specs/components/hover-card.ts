@@ -34,15 +34,15 @@ export const hoverCard: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Background',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' }
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' }
 		},
 		{
 			name: 'Text',
-			token: { cssVar: '--color-popover-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-popover-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Border',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 			notes: '1px <code>border-border</code>.'
 		}
 	],

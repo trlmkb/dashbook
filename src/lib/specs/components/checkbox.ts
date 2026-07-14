@@ -58,7 +58,7 @@ export const checkbox: ComponentSpec = {
 		},
 		{
 			name: 'Checked',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' },
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' },
 			notes:
 				'bg `--color-primary` via `data-[state=checked]:bg-primary`, glyph `--color-primary-foreground` (light `#ffffff`, dark `#000000`).'
 		},
@@ -68,7 +68,7 @@ export const checkbox: ComponentSpec = {
 		},
 		{
 			name: 'Focus ring',
-			token: { cssVar: '--color-ring', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' },
 			notes:
 				'1px (`focus-visible:ring-1`) with `focus-visible:outline-none` on the native outline. Keyboard focus only.'
 		},

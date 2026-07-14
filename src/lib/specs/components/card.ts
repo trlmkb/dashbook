@@ -1,11 +1,10 @@
 import type { ComponentSpec } from '../types.js';
 
 /**
- * Card — vertical content group with internal rhythm.
+ * Card — elevated surface with internal rhythm.
  *
- * Spacing primitive on this branch — no border, no background, no shadow,
- * no radius. Card, CardHeader, CardTitle, CardDescription, CardContent,
- * CardFooter as separate sibling parts.
+ * Card, CardHeader, CardTitle, CardDescription, CardContent, and CardFooter
+ * remain separate sibling parts; the root owns surface + spacing.
  */
 export const card: ComponentSpec = {
 	slug: 'card',
@@ -22,9 +21,9 @@ export const card: ComponentSpec = {
 	dimensions: [
 		{
 			name: 'Card (root)',
-			value: 'flex flex-col, gap 32px, padding 32px',
-			tw: 'flex flex-col gap-8 p-8',
-			notes: 'No border, no radius, no shadow, no background.'
+			value: 'elevated surface; flex column, 32px gap and padding, 12px radius',
+			tw: 'bg-card text-card-foreground flex flex-col gap-8 rounded-xl p-8 shadow-sm',
+			notes: 'No border. Surface separation comes from the card token, radius, and shadow.'
 		},
 		{
 			name: 'CardHeader',
@@ -59,13 +58,18 @@ export const card: ComponentSpec = {
 
 	tokens: [
 		{
+			name: 'Card surface',
+			token: { cssVar: '--color-card', light: '#faf9f5', dark: '#0f1412' },
+			notes: '`bg-card`; rounded-xl with shadow-sm, no border.'
+		},
+		{
 			name: 'Card text',
-			token: { cssVar: '--color-card-foreground', light: '#123b39', dark: '#ffffff' },
-			notes: 'No background, no border, no shadow — Card reads against whatever surface it sits on.'
+			token: { cssVar: '--color-card-foreground', light: '#123b38', dark: '#ffffff' },
+			notes: '`text-card-foreground` on the root.'
 		},
 		{
 			name: 'CardDescription text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{ name: 'CardTitle text', notes: 'Inherits `--color-card-foreground`.' }
 	],
@@ -73,11 +77,11 @@ export const card: ComponentSpec = {
 	composition: [
 		'The canonical composition is <code>Card &gt; CardHeader{CardTitle + CardDescription} + CardContent + CardFooter</code>. Each subpart is a separate sibling.',
 		'The 32px <code>gap-8</code> on Card carries the rhythm between parts — sub-parts do not add their own vertical margins.',
-		'For card-shaped surfaces in surrounding chrome (table rows, settings sections), use <code>Card</code> alone and let the parent surface provide any background or border treatment.'
+		'Use <code>Card</code> alone for the canonical elevated surface; override via <code>class</code> only when a product pattern explicitly needs a flatter treatment.'
 	],
 
 	nonFeatures: [
-		'No border, no background, no rounded corners, no shadow on this branch. If you need a bordered surface, wrap Card in an outer container that provides those.',
+		'No border. The canonical surface uses <code>bg-card rounded-xl shadow-sm</code>.',
 		'No padding prop. <code>p-8</code> (32px) is baked into Card root; sub-parts use the parent\'s gap rhythm.',
 		'No <code>variant</code> prop. Card is a single opinionated treatment.',
 		'No click handler. Wrap the entire Card in <code>&lt;a&gt;</code> or <code>&lt;button&gt;</code> at the call site if it needs to be activatable.',
@@ -116,7 +120,7 @@ export const card: ComponentSpec = {
 	],
 
 	porting: [
-		'Card on this branch is a <strong>spacing primitive</strong>: 32px padding, 32px gap, no surface decoration. The visual weight comes from the typography (Title at <code>text-lg font-medium</code>) and the muted Description.'
+		'Card is an <strong>elevated surface</strong>: <code>--color-card</code> background, 12px radius, shadow-sm, 32px padding, and 32px gap. It has no border.'
 	],
 
 	example: `<script lang="ts">
@@ -145,6 +149,11 @@ export const card: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled against the shipped shared component: the root now includes bg-card, text-card-foreground, rounded-xl, and shadow-sm. The older spacing-only anatomy omitted the production surface treatment.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

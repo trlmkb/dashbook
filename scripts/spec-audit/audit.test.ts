@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { expectedTokensFromTv, compareTokenMaps } from './audit.js';
+import { auditRecordedTokenValues, expectedTokensFromTv, compareTokenMaps } from './audit.js';
 import { parseTokenSheet } from './resolver.js';
 import type { TvBlock } from './tv-extractor.js';
 
@@ -28,6 +28,18 @@ describe('expectedTokensFromTv', () => {
 		expect(exp.has('--color-brand')).toBe(true);
 		// non-token utilities never appear
 		expect(exp.has('--color-brand-foreground')).toBe(false); // brand-foreground not in sheet
+	});
+});
+
+describe('auditRecordedTokenValues', () => {
+	test('checks recorded values even when no component extractor discovered the token', () => {
+		const findings = auditRecordedTokenValues(
+			new Map([['--color-primary-foreground', { light: '#ffffff', dark: '#ffffff' }]]),
+			sheet
+		);
+		expect(findings).toEqual([
+			expect.objectContaining({ cssVar: '--color-primary-foreground', verdict: 'drift' })
+		]);
 	});
 });
 

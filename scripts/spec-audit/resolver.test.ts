@@ -70,10 +70,16 @@ describe('resolveUtility', () => {
 		expect(resolveUtility('border-brand', sheet)?.cssVar).toBe('--color-brand');
 	});
 
+	test('resolves utilities behind Tailwind state modifiers', () => {
+		expect(resolveUtility('hover:bg-brand', sheet)?.cssVar).toBe('--color-brand');
+		expect(resolveUtility('data-[state=open]:text-primary', sheet)?.cssVar).toBe('--color-primary');
+	});
+
 	test('returns null for a non-token utility (should stay prose)', () => {
 		expect(resolveUtility('bg-transparent', sheet)).toBeNull();
 		expect(resolveUtility('shadow-sm', sheet)).toBeNull();
 		expect(resolveUtility('bg-amber-500', sheet)).toBeNull();
+		expect(resolveUtility('bg-brand/10', sheet)).toBeNull();
 	});
 });
 

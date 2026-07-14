@@ -31,25 +31,25 @@ export const toggle: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Hover background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' }
 		},
 		{
 			name: 'Pressed background',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: '<code>data-[state=on]</code>.'
 		},
 		{
 			name: 'Pressed text',
-			token: { cssVar: '--color-accent-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-accent-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Outline border',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: 'Outline variant only.'
 		},
 		{
 			name: 'Focus ring',
-			token: { cssVar: '--color-ring', light: '#2b605c', dark: '#5bb8b0' }
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' }
 		},
 		{ name: 'Disabled', notes: '<code>opacity-50</code> + <code>pointer-events-none</code>.' }
 	],
@@ -62,12 +62,12 @@ export const toggle: ComponentSpec = {
 				{ name: 'Background (rest)', notes: 'transparent (<code>bg-transparent</code>).' },
 				{
 					name: 'Hover',
-					token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+					token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 					notes: 'Hover text uses <code>--color-muted-foreground</code>.'
 				},
 				{
 					name: 'Pressed',
-					token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+					token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 					notes: 'Text becomes <code>--color-accent-foreground</code>.'
 				}
 			]
@@ -78,12 +78,12 @@ export const toggle: ComponentSpec = {
 			tokens: [
 				{
 					name: 'Border',
-					token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+					token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 					notes: '<code>border-input border</code>, <code>bg-transparent</code>, <code>shadow-sm</code>.'
 				},
 				{
 					name: 'Hover',
-					token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+					token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 					notes: 'Hover text <code>--color-accent-foreground</code>.'
 				}
 			]

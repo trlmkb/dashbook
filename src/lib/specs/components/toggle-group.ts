@@ -35,12 +35,12 @@ export const toggleGroup: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Pressed background',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Identical to a lone Toggle.'
 		},
 		{
 			name: 'Pressed text',
-			token: { cssVar: '--color-accent-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-accent-foreground', light: '#123b38', dark: '#ffffff' }
 		}
 	],
 

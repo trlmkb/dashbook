@@ -14,7 +14,7 @@
 		"format:check": "prettier --check \"src/**/*.{svelte,ts,css,md}\"",
 		"lint": "eslint .",
 		"test": "vitest run",
-		"spec-audit": "vite-node -c vitest.config.ts scripts/spec-audit/cli.ts"
+		"spec-audit": "node --import tsx scripts/spec-audit/cli.ts"
 	},
 	"dependencies": {
 		"@dashfi/svelte": "^0.5.0",
@@ -58,6 +58,7 @@
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.8",
 		"tailwindcss": "^4.1.11",
+		"tsx": "^4.23.1",
 		"typescript": "^5.6.2",
 		"typescript-eslint": "^8.58.1",
 		"vite": "^6.3.5",

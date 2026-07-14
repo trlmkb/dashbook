@@ -26,8 +26,8 @@ export const dateRangeSelector: ComponentSpec = {
 		},
 		{
 			name: 'Popover content',
-			value: '16px padding, 12px radius, large shadow',
-			tw: 'rounded-xl p-4 shadow-lg',
+			value: '12px padding, 12px radius, large shadow',
+			tw: 'rounded-xl p-3 shadow-lg',
 			notes: 'Houses the preset column + RangeCalendar.'
 		},
 		{
@@ -45,16 +45,16 @@ export const dateRangeSelector: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Popover surface',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' }
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' }
 		},
 		{
 			name: 'Trigger border (Button outline)',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: 'Inherits Button outline tokens.'
 		},
 		{
 			name: 'Preset hover (Button ghost)',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' }
 		}
 	],
 

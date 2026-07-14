@@ -13,13 +13,9 @@
 
 import type { RequestHandler } from './$types';
 import { allComponentSpecs } from '$lib/specs/components';
+import { getComponentImplementation, importPathOnly } from '$lib/specs/implementation';
 
 const ONE_DAY = 60 * 60 * 24;
-
-/** Strip the "import { X } from 'Y'" wrapper down to just "Y". */
-function importPathOnly(importPath: string): string {
-	return importPath.replace(/^import .+ from '/, '').replace(/'$/, '');
-}
 
 export const GET: RequestHandler = async () => {
 	const components = allComponentSpecs.map((s) => ({
@@ -28,7 +24,8 @@ export const GET: RequestHandler = async () => {
 		category: s.category,
 		status: s.status,
 		importPath: importPathOnly(s.importPath),
-		description: s.description
+		description: s.description,
+		implementation: getComponentImplementation(s)
 	}));
 
 	const payload = {

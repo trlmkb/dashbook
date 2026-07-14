@@ -38,17 +38,17 @@ export const input: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Border (bottom only)',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: '1px `border-b`. No top / left / right border.'
 		},
 		{ name: 'Background', notes: 'transparent (`bg-transparent`). Inherits surface.' },
 		{
 			name: 'Placeholder',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Focus border',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes:
 				'Bottom border darkens via `focus-visible:border-foreground`. No ring, no outline — `outline-none` is intentional. The thicker line IS the focus indicator.'
 		},

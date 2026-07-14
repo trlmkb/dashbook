@@ -6,7 +6,7 @@
  * Colour comparison uses `hexWithinTolerance` so the lib's HSL rounding is not
  * reported as drift (see resolver.ts).
  */
-import { resolveUtility, hexWithinTolerance, type TokenSheet } from './resolver.js';
+import { resolveUtility, resolveCssVar, hexWithinTolerance, type TokenSheet } from './resolver.js';
 import type { TvBlock } from './tv-extractor.js';
 import type { RecordedRef } from './spec-reader.js';
 
@@ -54,9 +54,26 @@ export function compareTokenMaps(
 			findings.push({ cssVar, verdict: 'missing', expected: exp });
 			continue;
 		}
-		const same =
-			hexWithinTolerance(exp.light, rec.light) && hexWithinTolerance(exp.dark, rec.dark);
+		const same = hexWithinTolerance(exp.light, rec.light) && hexWithinTolerance(exp.dark, rec.dark);
 		findings.push({ cssVar, verdict: same ? 'ok' : 'drift', expected: exp, recorded: rec });
 	}
 	return findings;
+}
+
+/**
+ * Validate every resolved hex recorded by a spec, whether or not the token was
+ * discovered by a particular source extractor. This is the broad, safe tier:
+ * all component specs use the same lib theme sheet, so stale resolved values
+ * can be detected and rewritten without interpreting component structure.
+ */
+export function auditRecordedTokenValues(
+	recorded: Map<string, RecordedRef>,
+	sheet: TokenSheet
+): TokenFinding[] {
+	const expected: TokenMap = new Map();
+	for (const cssVar of recorded.keys()) {
+		const resolved = resolveCssVar(cssVar, sheet);
+		if (resolved) expected.set(cssVar, { light: resolved.light, dark: resolved.dark });
+	}
+	return compareTokenMaps(expected, recorded);
 }

@@ -1,8 +1,9 @@
 /**
  * Canonical token export for Dashbook.
  *
- * Source of truth: /Users/zy/dev/dash/dash-fi-app-ds/project/colors_and_type.css
- * Mirrored by:    /Users/zy/dev/dashbook/src/app.css
+ * Product token source of truth: @dashfi/svelte/dist/styles/global.css.
+ * The spec-audit guardrail refreshes the resolved values below from that sheet.
+ * Marketing/base tokens remain Dashbook-owned brand primitives.
  *
  * Any time a token changes, both this file and `app.css` must be updated together.
  */
@@ -21,99 +22,99 @@ export const productColors: ColorToken[] = [
 	{
 		name: 'bg',
 		cssVar: '--bg',
-		light: '#FAF8F1',
-		dark: '#0F1413',
+		light: '#faf9f5',
+		dark: '#0f1412',
 		role: 'Page background — warm cream in light, near-black in dark.'
 	},
 	{
 		name: 'bg-muted',
 		cssVar: '--bg-muted',
-		light: '#ECEAE0',
-		dark: '#181E1D',
+		light: '#f1efea',
+		dark: '#191f1d',
 		role: 'Hover, subtle fills. One step down from page background.'
 	},
 	{
 		name: 'fg',
 		cssVar: '--fg',
-		light: '#123B39',
-		dark: '#FFFFFF',
+		light: '#123b38',
+		dark: '#ffffff',
 		role: 'Primary text. Deep jade in light, white in dark.'
 	},
 	{
 		name: 'fg-muted',
 		cssVar: '--fg-muted',
-		light: '#6E7878',
-		dark: '#8B9695',
+		light: '#6e8180',
+		dark: '#819896',
 		role: 'Captions, secondary labels, deactivated text.'
 	},
 	{
 		name: 'border',
 		cssVar: '--border',
-		light: '#E8E6DC',
-		dark: '#1F2A29',
+		light: '#ebeae5',
+		dark: '#1e2928',
 		role: 'Hairline borders. The only stroke weight in the system: 1px.'
 	},
 	{
 		name: 'input-border',
 		cssVar: '--input-border',
-		light: '#B6C0BF',
-		dark: '#1F2A29',
+		light: '#c0cecd',
+		dark: '#1e2928',
 		role: 'Form fields — slightly stronger than --border for affordance.'
 	},
 	{
 		name: 'primary',
 		cssVar: '--primary',
-		light: '#000000',
-		dark: '#FFFFFF',
+		light: '#24251d',
+		dark: '#ffffff',
 		role: 'Primary action surface (e.g. main button). Inverted in dark mode.'
 	},
 	{
 		name: 'primary-fg',
 		cssVar: '--primary-fg',
-		light: '#FFFFFF',
+		light: '#ffffff',
 		dark: '#000000',
 		role: 'Foreground for primary surfaces.'
 	},
 	{
 		name: 'brand',
 		cssVar: '--brand',
-		light: '#2B605C',
-		dark: '#5BB8B0',
+		light: '#2b5f5b',
+		dark: '#46b9af',
 		role: 'The single brand accent — deep jade. Lifts in dark for legibility.'
 	},
 	{
 		name: 'brand-fg',
 		cssVar: '--brand-fg',
-		light: '#FFFFFF',
-		dark: '#FFFFFF',
+		light: '#ffffff',
+		dark: '#000000',
 		role: 'Foreground when over the brand color.'
 	},
 	{
 		name: 'destructive',
 		cssVar: '--destructive',
-		light: '#000000',
-		dark: '#FFFFFF',
-		role: 'Destructive actions — monochrome, no red. Trust signal.'
+		light: '#ff4000',
+		dark: '#ff4000',
+		role: 'Destructive actions — bright orange in both modes.'
 	},
 	{
 		name: 'ring',
 		cssVar: '--ring',
-		light: '#2B605C',
-		dark: '#5BB8B0',
+		light: '#2b5f5b',
+		dark: '#46b9af',
 		role: 'Focus ring — same as brand.'
 	},
 	{
 		name: 'card',
 		cssVar: '--card',
-		light: '#FAF8F1',
-		dark: '#0F1413',
+		light: '#faf9f5',
+		dark: '#0f1412',
 		role: 'Card surface — same as page background by default (border-only cards).'
 	},
 	{
 		name: 'popover',
 		cssVar: '--popover',
-		light: '#FFFFFF',
-		dark: '#141A19',
+		light: '#ffffff',
+		dark: '#161d1a',
 		role: 'Floating surfaces — popover, tooltip, dropdown menus.'
 	}
 ];

@@ -48,7 +48,7 @@ export const label: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Colour',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: 'The label is intentionally quieter than the input value.'
 		},
 		{

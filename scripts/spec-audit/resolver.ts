@@ -92,7 +92,7 @@ export function parseTokenSheet(css: string): TokenSheet {
 }
 
 /** Render a raw declared value (HSL triple or hex) to hex; null if not a flat colour. */
-function renderValue(raw: string): string | null {
+export function renderValue(raw: string): string | null {
 	if (/^#[0-9a-fA-F]{3,8}$/.test(raw)) return raw.toLowerCase();
 	if (HSL_TRIPLE.test(raw)) return hslTripleToHex(raw);
 	return null; // gradients, rgba(), var() chains — decline, keep as prose
@@ -124,15 +124,31 @@ const COLOUR_PREFIXES = [
  * utilities, gradients). Returning null is deliberate — those stay prose.
  */
 export function resolveUtility(className: string, sheet: TokenSheet): TokenRef | null {
-	const prefix = COLOUR_PREFIXES.find((p) => className.startsWith(`${p}-`));
+	// Strip Tailwind modifiers (`hover:`, `data-[state=open]:`) and important
+	// markers. Alpha utilities deliberately stay verify-only: flattening
+	// `bg-brand/10` to the opaque brand hex would be a confident wrong answer.
+	const utility = className.split(':').at(-1)?.replace(/^!/, '') ?? className;
+	if (utility.includes('/')) return null;
+	const prefix = COLOUR_PREFIXES.find((p) => utility.startsWith(`${p}-`));
 	if (!prefix) return null;
-	const token = className.slice(prefix.length + 1);
+	const token = utility.slice(prefix.length + 1);
 	const entry = sheet[token];
 	if (!entry) return null;
 	const light = renderValue(entry.light);
 	const dark = renderValue(entry.dark);
 	if (light === null || dark === null) return null;
 	return { cssVar: `--color-${token}`, light, dark };
+}
+
+/** Resolve one CSS variable recorded by a spec against the lib token sheet. */
+export function resolveCssVar(cssVar: string, sheet: TokenSheet): TokenRef | null {
+	const token = cssVar.replace(/^--color-/, '').replace(/^--/, '');
+	const entry = sheet[token];
+	if (!entry) return null;
+	const light = renderValue(entry.light);
+	const dark = renderValue(entry.dark);
+	if (light === null || dark === null) return null;
+	return { cssVar, light, dark };
 }
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -144,11 +160,7 @@ function hexToRgb(hex: string): [number, number, number] {
 					.map((c) => c + c)
 					.join('')
 			: h;
-	return [
-		parseInt(n.slice(0, 2), 16),
-		parseInt(n.slice(2, 4), 16),
-		parseInt(n.slice(4, 6), 16)
-	];
+	return [parseInt(n.slice(0, 2), 16), parseInt(n.slice(2, 4), 16), parseInt(n.slice(4, 6), 16)];
 }
 
 /**

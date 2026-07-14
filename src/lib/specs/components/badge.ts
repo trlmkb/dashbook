@@ -79,26 +79,26 @@ export const badge: ComponentSpec = {
 			name: 'default',
 			description: 'Ink-filled chip. The strongest visual emphasis.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' } },
+				{ name: 'bg', token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' } },
 				{
 					name: 'text',
 					token: { cssVar: '--color-primary-foreground', light: '#ffffff', dark: '#000000' }
 				},
-				{ name: 'border', token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' } }
+				{ name: 'border', token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' } }
 			]
 		},
 		{
 			name: 'brand',
 			description: 'Jade-filled chip. Use for product brand emphasis on category labels.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' } },
+				{ name: 'bg', token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' } },
 				{
 					name: 'text',
 					token: { cssVar: '--color-brand-foreground', light: '#ffffff', dark: '#000000' },
 					notes:
 						'Dark text on lighter-jade dark-mode background — white-on-light-jade was sub-WCAG.'
 				},
-				{ name: 'border', token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' } }
+				{ name: 'border', token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' } }
 			]
 		},
 		{
@@ -106,12 +106,12 @@ export const badge: ComponentSpec = {
 			description:
 				'Cobalt-filled chip. Marketing-leaning / alternate brand emphasis. Distinct from `brand` (jade) — pick `secondary` when you want a deliberately different brand voice, e.g. partner-co-branded or marketing surfaces.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-cobalt', light: '#354cef', dark: '#354cef' } },
+				{ name: 'bg', token: { cssVar: '--color-cobalt', light: '#344aef', dark: '#344aef' } },
 				{
 					name: 'text',
 					token: { cssVar: '--color-cobalt-foreground', light: '#ffffff', dark: '#ffffff' }
 				},
-				{ name: 'border', token: { cssVar: '--color-cobalt', light: '#354cef', dark: '#354cef' } }
+				{ name: 'border', token: { cssVar: '--color-cobalt', light: '#344aef', dark: '#344aef' } }
 			]
 		},
 		{
@@ -119,13 +119,13 @@ export const badge: ComponentSpec = {
 			description:
 				'Yellow-filled chip. Sparing — use only when the badge needs to grab attention (e.g. limited-time promo, hard-to-miss notice). Heavily-used yellow loses its sparing-ness.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-yellow', light: '#ebff00', dark: '#ebff00' } },
+				{ name: 'bg', token: { cssVar: '--color-yellow', light: '#eaff00', dark: '#eaff00' } },
 				{
 					name: 'text',
-					token: { cssVar: '--color-yellow-foreground', light: '#181f1b', dark: '#181f1b' },
+					token: { cssVar: '--color-yellow-foreground', light: '#191f1d', dark: '#191f1d' },
 					notes: 'Ink — white-on-yellow is unreadable.'
 				},
-				{ name: 'border', token: { cssVar: '--color-yellow', light: '#ebff00', dark: '#ebff00' } }
+				{ name: 'border', token: { cssVar: '--color-yellow', light: '#eaff00', dark: '#eaff00' } }
 			]
 		},
 		{
@@ -135,9 +135,9 @@ export const badge: ComponentSpec = {
 				{ name: 'bg', notes: 'transparent.' },
 				{
 					name: 'text',
-					token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+					token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 				},
-				{ name: 'border', token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' } }
+				{ name: 'border', token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' } }
 			]
 		}
 	],
