@@ -5,8 +5,9 @@
 > build) are the gate; these cases validate the *behavior that matters* — no
 > token drift, and agents reusing shared components instead of rebuilding them.
 >
-> Rollback floor: git tag `prod-checkpoint-2026-07-16` (`1d21d9f`) · Vercel prod
-> deploy `dpl_498wyWA1BMbM7ypPPp1wHrvs9zuT`.
+> Rollback floor: a pinned git tag on the last known-good `main`, and the
+> matching Vercel production deployment. (Exact tag + deployment ID live in the
+> private ops notes, not in this public repo.)
 
 ---
 
@@ -106,7 +107,7 @@ Run against the PR preview `/mcp` (or `DASHBOOK_MCP_URL=<preview>/mcp`).
 - Expect: green.
 
 **F2 — rollback drill (know it cold before you need it)**
-- Do (dry, don't execute unless failing): in Vercel, confirm `dpl_498wyWA1BMbM7ypPPp1wHrvs9zuT` is promotable; confirm `git revert` of the merge is clean against tag `prod-checkpoint-2026-07-16`.
+- Do (dry, don't execute unless failing): in Vercel, confirm the prior production deployment is promotable; confirm `git revert` of the merge is clean against the pinned rollback tag. (Exact IDs are in the private ops notes.)
 - Expect: a one-click re-promote path and a clean revert exist.
 
 ---
