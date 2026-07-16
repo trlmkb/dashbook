@@ -33,7 +33,9 @@ export const GET: RequestHandler = async ({ url }) => {
 		},
 		authentication: { type: 'none' },
 		capabilities: { tools: true, resources: true, prompts: false },
-		documentation: `${base}/developers/mcp`
+		// Public docs — /developers/mcp is behind the internal-login wall, so a
+		// public discovery artifact must not dead-end anonymous agents there.
+		documentation: `${base}/use/dev`
 	};
 	return new Response(JSON.stringify(card, null, 2), {
 		status: 200,
