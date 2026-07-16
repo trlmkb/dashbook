@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Search from '@lucide/svelte/icons/search';
 	import ThemeToggle from './ThemeToggle.svelte';
@@ -10,6 +11,19 @@
 	};
 
 	let { onOpenPalette }: Props = $props();
+
+	// Condensed header state — hairline border + solid backdrop fade in once
+	// the user scrolls past a small threshold, so the transition never fires
+	// on trivial reflow/resize noise.
+	let scrolled = $state(false);
+	function handleScroll() {
+		scrolled = window.scrollY > 8;
+	}
+
+	// Sync once on mount — back/forward navigation restores scroll position
+	// without firing a scroll event, so the condensed state must be derived
+	// from the restored scrollY, not just from future scrolls.
+	onMount(handleScroll);
 
 	// Filter rebuilds reactively when internalState.isInternal flips after
 	// hydration. Internal items stay hidden in the prerendered HTML and
@@ -24,7 +38,9 @@
 	}
 </script>
 
-<header class="header">
+<svelte:window onscroll={handleScroll} />
+
+<header class="header" data-scrolled={scrolled}>
 	<div class="row">
 		<a href="/" class="brand" aria-label="Dashbook home">
 			<span class="dashbook">dashbook</span>
@@ -58,10 +74,25 @@
 		position: sticky;
 		top: 0;
 		z-index: 40;
+		background: transparent;
+		backdrop-filter: blur(0);
+		-webkit-backdrop-filter: blur(0);
+		border-bottom: 1px solid transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			border-color var(--dur-fast) var(--easing-default),
+			backdrop-filter var(--dur-fast) var(--easing-default);
+	}
+	.header[data-scrolled='true'] {
 		background: color-mix(in srgb, var(--bg) 85%, transparent);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--border);
+		border-bottom-color: var(--border);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.header {
+			transition: none;
+		}
 	}
 	.row {
 		display: flex;
@@ -91,6 +122,7 @@
 		flex: 1;
 	}
 	.nav-item {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
 		padding: 6px 10px;
@@ -100,13 +132,38 @@
 		color: var(--fg-muted);
 		text-decoration: none;
 		border-radius: 4px;
-		transition: color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
+	}
+	.nav-item::after {
+		content: '';
+		position: absolute;
+		left: 10px;
+		right: 10px;
+		bottom: 2px;
+		height: 1px;
+		background: var(--fg);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.nav-item:hover {
 		color: var(--fg);
 	}
 	.nav-item.active {
 		color: var(--fg);
+	}
+	.nav-item.active::after {
+		transform: scaleX(1);
+	}
+	.nav-item:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.nav-item,
+		.nav-item::after {
+			transition: none;
+		}
 	}
 	.actions {
 		display: flex;
@@ -125,11 +182,21 @@
 		border-radius: 6px;
 		font-family: var(--font-sans);
 		font-size: 12px;
-		transition: border-color 150ms;
+		transition: border-color var(--dur-fast) var(--easing-default);
 	}
 	.search-trigger:hover {
 		border-color: var(--input-border);
 		color: var(--fg);
+	}
+	.search-trigger:focus-visible,
+	.brand:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.search-trigger {
+			transition: none;
+		}
 	}
 	.search-label {
 		display: inline-block;

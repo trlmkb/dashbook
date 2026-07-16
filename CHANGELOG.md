@@ -5,6 +5,44 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
+## [1.3.0] — 2026-07-16
+
+UI/UX facelift — the first of four independent PRs from the god-tier
+facelift session (see `docs/superpowers/specs/2026-07-11-god-tier-facelift-design.md`).
+Scope: portal chrome + landing page + shared layouts. Everything below
+uses the existing three easings and four durations — no new motion
+primitives, no spring, no bounce — and is gated behind
+`prefers-reduced-motion`.
+
+### Added — motion
+- Shared reveal-on-scroll and count-up Svelte actions
+  (`src/lib/utils/motion.ts`) plus `.db-reveal` / `.db-press` CSS
+  utilities in `app.css`.
+- View transitions between routes (`onNavigate` +
+  `document.startViewTransition`), 90ms out / 150ms in crossfade.
+- Sticky, scroll-condensed header with an animated active-nav underline.
+- Per-character clipped slide-up on the landing-page display heading;
+  700ms count-up on the numbers band; staggered section reveals; palette
+  swatch hover polish.
+- Command palette entrance animation (fade + scale/translate) and a
+  token-driven selection-highlight transition.
+- Copy-confirm icon cross-fade with a "copied" label; theme toggle icon
+  rotate/fade swap; card and tile hover lift (border + shadow); arrow-nudge
+  on external/internal link icons; tabs and sidebar active-item indicators
+  rebuilt as animated (previously static); `:focus-visible` rings added
+  where missing across the chrome.
+- New "Recipes — v1.1 facelift" table and two live demos on
+  `/brand/motion`; a pointer to it from `/foundations/motion`.
+
+### Fixed
+- The homepage hero version pill, the "Recent" band, and the Footer
+  version badge all hardcoded their own version strings and had drifted
+  (`v0.9.0` on the homepage while the site was already `v1.0.0`). All
+  three now read from a single `src/lib/content/releases.ts` module,
+  which is also the declared first stop when cutting a release — the
+  changelog page's rich prose entries stay hardcoded by design, with a
+  release checklist comment linking the two.
+
 ## [1.2.0] — 2026-07-16
 
 ### Added — Claude Code integration refresh (plugin v0.4.0, MCP server v0.5.0)

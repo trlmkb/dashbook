@@ -27,7 +27,7 @@
 
 <button
 	type="button"
-	class="copy {className}"
+	class="copy db-press {className}"
 	onclick={copy}
 	aria-label={label ? `Copy ${label}` : 'Copy value'}
 	title={copied ? 'Copied' : `Copy ${value}`}
@@ -35,9 +35,10 @@
 	<span class="value tabular-nums">{value}</span>
 	<span class="icon" aria-hidden="true">
 		{#if copied}
-			<Check size={12} strokeWidth={1.5} />
+			<Check size={12} strokeWidth={1.5} class="icon-swap" />
+			<span class="label">copied</span>
 		{:else}
-			<Copy size={12} strokeWidth={1.5} />
+			<Copy size={12} strokeWidth={1.5} class="icon-swap" />
 		{/if}
 	</span>
 </button>
@@ -52,8 +53,8 @@
 		background: transparent;
 		cursor: pointer;
 		transition:
-			border-color 150ms,
-			background 150ms;
+			border-color var(--dur-fast) var(--easing-default),
+			background var(--dur-fast) var(--easing-default);
 		border-radius: 4px;
 		font-family: var(--font-mono);
 		font-size: 11px;
@@ -64,17 +65,35 @@
 		border-color: var(--input-border);
 		background: var(--bg-muted);
 	}
-	.copy:active {
-		transform: scale(0.97);
-	}
 	.value {
 		font-family: var(--font-mono);
 	}
 	.icon {
 		display: inline-flex;
+		align-items: center;
+		gap: 4px;
 		opacity: 0.5;
 	}
 	.copy:hover .icon {
 		opacity: 1;
+	}
+	.icon :global(.icon-swap) {
+		animation: icon-fade-in var(--dur-fast) var(--easing-out) both;
+	}
+	.label {
+		font-family: var(--font-mono);
+		font-size: 10px;
+	}
+	@keyframes icon-fade-in {
+		from {
+			opacity: 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.copy,
+		.icon :global(.icon-swap) {
+			animation: none;
+			transition: none;
+		}
 	}
 </style>

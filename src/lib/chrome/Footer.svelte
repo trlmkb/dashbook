@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { footerLinks } from '../content/nav.js';
+	import { latestRelease } from '../content/releases.js';
 	import Wordmark from './Wordmark.svelte';
 </script>
 
@@ -7,7 +8,7 @@
 	<div class="row">
 		<div class="meta">
 			<Wordmark size="sm" />
-			<span class="badge">v1.0.0 · current</span>
+			<span class="badge">{latestRelease.ver} · current</span>
 			<p class="caption">
 				<span class="font-mono font-semibold">dashbook</span> is the public brand
 				<br /> &amp; design system portal for Dash.fi
@@ -97,10 +98,19 @@
 		font-size: 13px;
 		color: var(--fg);
 		text-decoration: none;
-		transition: color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	a:hover {
 		color: var(--brand);
+	}
+	a:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		a {
+			transition: none;
+		}
 	}
 	.legal {
 		margin-top: 48px;

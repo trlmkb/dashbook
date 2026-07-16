@@ -55,7 +55,7 @@
 		border: 0;
 		color: var(--fg-muted);
 		cursor: pointer;
-		transition: color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	.tab:hover {
 		color: var(--fg);
@@ -63,7 +63,7 @@
 	.tab.active {
 		color: var(--fg);
 	}
-	.tab.active::after {
+	.tab::after {
 		content: '';
 		position: absolute;
 		left: 0;
@@ -71,6 +71,21 @@
 		bottom: -1px;
 		height: 1px;
 		background: var(--brand);
+		transform: scaleX(0);
+		transition: transform var(--dur-fast) var(--easing-out);
+	}
+	.tab.active::after {
+		transform: scaleX(1);
+	}
+	.tab:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: -2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tab,
+		.tab::after {
+			transition: none;
+		}
 	}
 	.panel {
 		padding: 32px 0 0;

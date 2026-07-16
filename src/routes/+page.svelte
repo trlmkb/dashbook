@@ -3,9 +3,11 @@
 	import { audienceTiles } from '$content/nav';
 	import { components } from '$content/components';
 	import { patterns } from '$content/patterns';
+	import { releases, latestRelease } from '$content/releases';
 	import LogoMark from '$chrome/LogoMark.svelte';
 	import { Button } from '@dashfi/svelte/ui/button';
 	import { Pill } from '@dashfi/svelte/ui/pill';
+	import { reveal, countUp } from '$lib/utils/motion';
 
 	const stableCount = components.filter((c) => c.status === 'stable').length;
 	const totalComponents = components.length;
@@ -13,30 +15,13 @@
 	const foundationCount = 9; // /foundations/{color, typography, spacing, radius, elevation, motion, accessibility, data-viz, currency}
 	const brandSubpageCount = 7; // /brand/{logo, color, typography, voice, motion, photography, iconography}
 
-	// Top 3 recent versions — hand-curated to stay terse on the landing
-	const recent: { ver: string; date: string; summary: string; href: string }[] = [
-		{
-			ver: 'v0.9.0',
-			date: '2026-05-11',
-			summary:
-				'Press Partner kit · ⌘K full-content search · changelog filters · PreviewCanvas Auto mode · Vercel deploy prep.',
-			href: '/changelog#v0-9-0'
-		},
-		{
-			ver: 'v0.8.0',
-			date: '2026-05-11',
-			summary:
-				'Foundations completed (4 new subpages) · Developers rewritten for the Nx monorepo · lib-wide orange shift · Figma handoff doc.',
-			href: '/changelog#v0-8-0'
-		},
-		{
-			ver: 'v0.7.0',
-			date: '2026-05-11',
-			summary:
-				'Patterns library live — 6 recipes with Rationale + Variations. New PatternLayout chrome.',
-			href: '/changelog#v0-7-0'
-		}
-	];
+	// Top 3 recent versions for the landing page — sourced from
+	// src/lib/content/releases.ts so this list (and the hero version pill)
+	// can never drift from the actual latest changelog entry.
+	const recent = releases;
+
+	// "brand & design system" rendered as one clipped char-stagger line.
+	const headingChars = 'brand & design system'.split('');
 
 	// Brand palette strip — order intentional (hero → marketing → ink → cream → yellow accent)
 	const palette: { name: string; hex: string; role: string }[] = [
@@ -57,14 +42,20 @@
 	<div class="hero-row">
 		<div class="hero-text">
 			<div class="version-row">
-				<span class="ver-pill">v0.9.0</span>
-				<span class="ver-meta">2026-05-11 · current</span>
+				<span class="ver-pill">{latestRelease.ver}</span>
+				<span class="ver-meta">{latestRelease.date} · current</span>
 			</div>
 			<h1 class="display-mark" aria-label="Dash.fi brand and design system">
-				<span class="line">
-					<span class="word">brand</span>
-					<span class="amp">&amp;</span>
-					<span class="word">design system</span>
+				<span class="line char-line" aria-hidden="true">
+					{#each headingChars as ch, i (i)}
+						<span class="char-mask">
+							<span
+								class="char"
+								class:amp={ch === '&'}
+								style:animation-delay={`${i * 30}ms`}>{ch === ' ' ? ' ' : ch}</span
+							>
+						</span>
+					{/each}
 				</span>
 				<span class="line line-mark">
 					<span class="for">for</span>
@@ -91,41 +82,51 @@
 	</div>
 </section>
 
-<section class="numbers" aria-label="System scale">
-	<a class="num-cell" href="/components">
-		<span class="num tabular-nums">{totalComponents}</span>
+<section class="numbers db-reveal" aria-label="System scale" use:reveal>
+	<a class="num-cell db-press" href="/components">
+		<span class="num tabular-nums" use:countUp={{ to: totalComponents }}>{totalComponents}</span>
 		<span class="num-label">components</span>
 		<span class="num-meta">{stableCount} stable</span>
 	</a>
-	<a class="num-cell" href="/patterns">
-		<span class="num tabular-nums">{patternCount}</span>
+	<a class="num-cell db-press" href="/patterns">
+		<span class="num tabular-nums" use:countUp={{ to: patternCount }}>{patternCount}</span>
 		<span class="num-label">patterns</span>
 		<span class="num-meta">recipes for real screens</span>
 	</a>
-	<a class="num-cell" href="/foundations">
-		<span class="num tabular-nums">{foundationCount}</span>
+	<a class="num-cell db-press" href="/foundations">
+		<span class="num tabular-nums" use:countUp={{ to: foundationCount }}>{foundationCount}</span>
 		<span class="num-label">foundations</span>
 		<span class="num-meta">tokens · type · motion</span>
 	</a>
-	<a class="num-cell" href="/brand">
-		<span class="num tabular-nums">{brandSubpageCount}</span>
+	<a class="num-cell db-press" href="/brand">
+		<span class="num tabular-nums" use:countUp={{ to: brandSubpageCount }}>{brandSubpageCount}</span
+		>
 		<span class="num-label">brand surfaces</span>
 		<span class="num-meta">voice · motion · logo</span>
 	</a>
 </section>
 
-<section class="palette" aria-label="Brand palette">
+<section class="palette db-reveal" aria-label="Brand palette" use:reveal={{ delay: 40 }}>
 	<div class="section-header">Palette</div>
 	<div class="palette-strip">
 		{#each palette as p (p.name)}
 			<a class="swatch" href="/foundations/color" style:background={p.hex}>
-				<span class="swatch-name" data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}>
+				<span
+					class="swatch-name"
+					data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}
+				>
 					{p.name}
 				</span>
-				<span class="swatch-hex tabular-nums" data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}>
+				<span
+					class="swatch-hex tabular-nums"
+					data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}
+				>
 					{p.hex}
 				</span>
-				<span class="swatch-role" data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}>
+				<span
+					class="swatch-role"
+					data-bright={p.name === 'Cream' || p.name === 'Yellow' ? 'true' : 'false'}
+				>
 					{p.role}
 				</span>
 			</a>
@@ -133,7 +134,7 @@
 	</div>
 </section>
 
-<section class="dogfood" aria-label="Built with these components">
+<section class="dogfood db-reveal" aria-label="Built with these components" use:reveal={{ delay: 80 }}>
 	<div class="section-header">Built with these</div>
 	<p class="dogfood-lede">
 		Every preview on Dashbook renders the live <code>@dashfi/svelte</code> component. If the lib
@@ -156,24 +157,24 @@
 		</div>
 		<a class="dogfood-link" href="/components">
 			Browse all {totalComponents} components
-			<ArrowUpRight size={14} strokeWidth={1.5} />
+			<ArrowUpRight size={14} strokeWidth={1.5} class="link-arrow" />
 		</a>
 	</div>
 </section>
 
-<section class="tiles" aria-label="Audience entry points">
+<section class="tiles db-reveal" aria-label="Audience entry points" use:reveal={{ delay: 120 }}>
 	{#each audienceTiles as tile (tile.href)}
-		<a class="tile" href={tile.href}>
+		<a class="tile db-press" href={tile.href}>
 			<div class="tile-head">
 				<span class="tile-title">{tile.title}</span>
-				<ArrowUpRight size={16} strokeWidth={1.5} />
+				<ArrowUpRight size={16} strokeWidth={1.5} class="tile-arrow" />
 			</div>
 			<p class="tile-desc">{tile.description}</p>
 		</a>
 	{/each}
 </section>
 
-<section class="recent">
+<section class="recent db-reveal" use:reveal={{ delay: 160 }}>
 	<div class="section-header">Recent</div>
 	<ul class="updates">
 		{#each recent as r (r.ver)}
@@ -188,7 +189,7 @@
 	</ul>
 	<a class="recent-more" href="/changelog">
 		Full changelog
-		<ArrowUpRight size={14} strokeWidth={1.5} />
+		<ArrowUpRight size={14} strokeWidth={1.5} class="link-arrow" />
 	</a>
 </section>
 
@@ -245,15 +246,14 @@
 	}
 	.line {
 		display: block;
+	}
+	.line-mark {
 		opacity: 0;
 		transform: translateY(0.4em);
-		animation: rise 700ms var(--easing-out) forwards;
-	}
-	.line:nth-child(2) {
-		animation-delay: 180ms;
+		animation: rise 700ms var(--easing-out) 180ms forwards;
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.line {
+		.line-mark {
 			animation: none;
 			opacity: 1;
 			transform: none;
@@ -265,14 +265,23 @@
 			transform: translateY(0);
 		}
 	}
-	.word {
+	.char-mask {
 		display: inline-block;
+		overflow: hidden;
+		vertical-align: top;
 	}
-	.amp {
+	.char {
 		display: inline-block;
+		animation: db-char-up 600ms var(--easing-out) both;
+	}
+	.char.amp {
 		color: var(--brand);
 		font-weight: 200;
-		margin: 0 0.1em;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.char {
+			animation: none;
+		}
 	}
 	.line-mark {
 		display: flex;
@@ -365,10 +374,23 @@
 		background: var(--bg);
 		text-decoration: none;
 		color: var(--fg);
-		transition: background-color 150ms;
+		box-shadow: inset 0 0 0 0 transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			box-shadow var(--dur-fast) var(--easing-default);
 	}
 	.num-cell:hover {
 		background: var(--bg-muted);
+		box-shadow: var(--shadow-md);
+	}
+	.num-cell:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: -2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.num-cell {
+			transition: none;
+		}
 	}
 	.num {
 		font-family: var(--font-display);
@@ -422,10 +444,27 @@
 		padding: 16px 18px;
 		text-decoration: none;
 		color: #ffffff;
-		transition: transform 200ms var(--easing-out);
+		box-shadow: inset 0 0 0 1px transparent;
+		transition:
+			box-shadow var(--dur-fast) var(--easing-out),
+			transform var(--dur-fast) var(--easing-out);
 	}
 	.swatch:hover {
 		transform: translateY(-2px);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+	}
+	.swatch:hover .swatch-hex {
+		opacity: 1;
+	}
+	.swatch-hex {
+		opacity: 0.85;
+		transition: opacity var(--dur-fast) var(--easing-out);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.swatch,
+		.swatch-hex {
+			transition: none;
+		}
 	}
 	.swatch-name {
 		font-family: var(--font-mono);
@@ -508,6 +547,21 @@
 	.dogfood-link:hover {
 		color: var(--brand);
 	}
+	.dogfood-link:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	.dogfood-link :global(.link-arrow) {
+		transition: transform var(--dur-fast) var(--easing-out);
+	}
+	.dogfood-link:hover :global(.link-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.dogfood-link :global(.link-arrow) {
+			transition: none;
+		}
+	}
 
 	/* --- Tiles (audience) ---------------------------------------------- */
 	.tiles {
@@ -531,11 +585,19 @@
 		background: var(--bg);
 		text-decoration: none;
 		color: var(--fg);
-		transition: background-color 150ms;
+		box-shadow: inset 0 0 0 0 transparent;
+		transition:
+			background-color var(--dur-fast) var(--easing-default),
+			box-shadow var(--dur-fast) var(--easing-default);
 		min-height: 200px;
 	}
 	.tile:hover {
 		background: var(--bg-muted);
+		box-shadow: var(--shadow-md);
+	}
+	.tile:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: -2px;
 	}
 	.tile-head {
 		display: flex;
@@ -552,9 +614,19 @@
 	}
 	.tile :global(svg) {
 		color: var(--fg-muted);
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.tile:hover :global(svg) {
 		color: var(--brand);
+	}
+	.tile:hover :global(.tile-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tile,
+		.tile :global(svg) {
+			transition: none;
+		}
 	}
 	.tile-desc {
 		font-size: 17px;
@@ -600,9 +672,19 @@
 		gap: 4px;
 		color: var(--fg);
 		text-decoration: none;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	.what:hover {
 		color: var(--brand);
+	}
+	.what:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.what {
+			transition: none;
+		}
 	}
 	.r-ver {
 		font-family: var(--font-mono);
@@ -632,9 +714,26 @@
 		color: var(--fg-muted);
 		text-decoration: none;
 		margin-top: 8px;
+		transition: color var(--dur-fast) var(--easing-default);
 	}
 	.recent-more:hover {
 		color: var(--brand);
+	}
+	.recent-more:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	.recent-more :global(.link-arrow) {
+		transition: transform var(--dur-fast) var(--easing-out);
+	}
+	.recent-more:hover :global(.link-arrow) {
+		transform: translate(2px, -2px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.recent-more,
+		.recent-more :global(.link-arrow) {
+			transition: none;
+		}
 	}
 
 	@media (max-width: 720px) {
