@@ -188,6 +188,36 @@ project name and destination. Do not infer that copying files into the old
 scaffold completes the migration; the scaffold is materially behind current
 Dashbook and does not contain the MCP/API/runtime surface.
 
+### 4.0 Public vs internal-gated surface
+
+Dashbook's surface is split by an **internal auth wall**
+(`src/lib/server/internal-auth.ts` — shared passphrase + HMAC-signed cookie,
+env `DASHBOOK_INTERNAL_PASSPHRASE` / `DASHBOOK_INTERNAL_SECRET`; not identity
+auth). A per-tree `+layout.server.ts` calls `guardInternal()`, redirecting
+anonymous visitors to `/internal-login?return=<path>`.
+
+| Surface                                                                                              | Access                                                            |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Agent + data surface** — `/mcp`, `/api/*`, `/.well-known/*` (ARD, server card), `/llms.txt`        | **Public, no auth** (CORS-open). This is the primary consumption path. |
+| Public human pages — `/`, `/brand/*`, `/marketing/*`, `/foundations/*`, `/use/*`, `/press`, `/changelog` | Public                                                          |
+| **Internal-gated human pages** — `/components/*`, `/patterns/*`, `/developers/*`                     | Behind `/internal-login` (team passphrase)                       |
+
+Consequences to keep in mind:
+
+- The MCP server and JSON API are **public and unauthenticated** — so the
+  server card's `authentication: none` is correct, and agent consumers never
+  hit the wall.
+- **Verification of gated pages requires the passphrase.** A browser/HTTP smoke
+  without the cookie redirects `/components|/patterns|/developers` to
+  `/internal-login`; "pages render" checks (D1) must authenticate first, or
+  they only prove the public subset.
+- **Public discovery artifacts should link to public URLs.** The ARD manifest
+  and server card currently advertise `/developers/mcp` (gated) as their
+  documentation URL — an anonymous discoverer lands on the login wall. Either
+  repoint documentation to a public page or make the MCP-docs page public.
+- The migration (§13.4) must preserve this boundary (or replace it with an
+  equivalent), not silently drop or expose the gated routes.
+
 ### 4.1 Product data flow today
 
 ```mermaid
