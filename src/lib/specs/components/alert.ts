@@ -63,7 +63,7 @@ export const alert: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Root text',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes: 'Variant colours the border (40%), icon, text, and a soft background tint.'
 		}
 	],
@@ -75,12 +75,12 @@ export const alert: ComponentSpec = {
 			tokens: [
 				{
 					name: 'Border + text/icon',
-					token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+					token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 					notes: 'Text + icon also use --color-muted-foreground.'
 				},
 				{
 					name: 'Text/icon',
-					token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+					token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 				}
 			]
 		},
@@ -90,8 +90,8 @@ export const alert: ComponentSpec = {
 			tokens: [
 				{
 					name: 'Border + icon',
-					token: { cssVar: '--color-destructive', light: '#000000', dark: '#ffffff' },
-					notes: 'Monochrome.'
+					token: { cssVar: '--color-destructive', light: '#ff4000', dark: '#ff4000' },
+					notes: 'Bright orange in both modes.'
 				}
 			]
 		},
@@ -101,7 +101,7 @@ export const alert: ComponentSpec = {
 			tokens: [
 				{
 					name: 'Border + icon',
-					token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' },
+					token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' },
 					notes: 'Jade brand colour.'
 				}
 			]
@@ -132,7 +132,7 @@ export const alert: ComponentSpec = {
 			tokens: [
 				{
 					name: 'Border + icon',
-					token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' }
+					token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' }
 				}
 			]
 		}

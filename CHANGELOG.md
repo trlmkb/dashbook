@@ -5,7 +5,7 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
-## [1.1.0] — unreleased
+## [1.3.0] — 2026-07-16
 
 UI/UX facelift — the first of four independent PRs from the god-tier
 facelift session (see `docs/superpowers/specs/2026-07-11-god-tier-facelift-design.md`).
@@ -42,6 +42,67 @@ primitives, no spring, no bounce — and is gated behind
   which is also the declared first stop when cutting a release — the
   changelog page's rich prose entries stay hardcoded by design, with a
   release checklist comment linking the two.
+
+## [1.2.0] — 2026-07-16
+
+### Added — Claude Code integration refresh (plugin v0.4.0, MCP server v0.5.0)
+- ARD discovery manifest at `/.well-known/ai-catalog.json` (draft Agentic
+  Resource Discovery spec) pointing at the MCP server card, JSON API,
+  llms.txt, and docs site. The `application/mcp-server-card+json` entry
+  resolves to a server-card document, not the execution endpoint.
+- MCP resources: `dashbook://components`, `dashbook://components/{slug}`,
+  `dashbook://foundations/{slug}` — same data as the matching product_* tools,
+  for clients that browse a catalogue instead of calling a tool. The component
+  resources carry the same `implementation` handoff routing as the tools and
+  JSON API (§8.3 parity).
+- `outputSchema` (structured content) on product_get_component (incl. the
+  `implementation` field), product_get_token, product_list_components,
+  marketing_get_pattern, and marketing_get_marketing_palette.
+- Origin validation on the public `/mcp` endpoint — allows the request's
+  actual same origin plus a configurable trusted-client allowlist; DNS-
+  rebinding future-proofing, not an auth boundary.
+- Plugin manifest: `displayName`, version 0.4.0; marketplace listing gained
+  `category` and `tags`.
+- SKILL.md: trigger keywords moved to `when_to_use` frontmatter.
+- `/developers/mcp`: "Add as a connector" section (Claude Code CLI,
+  claude.ai custom connector, ARD/llms.txt discovery) and a Resources list.
+
+### Removed
+- Dropped the `prompts` MCP capability flag — the server had declared it
+  without ever registering a prompt.
+
+## [1.1.0] — 2026-07-16
+
+Spec↔lib drift audit and machine-readable Design → Code handoff routing.
+Bumps the MCP server to **v0.4.0** and the Claude plugin to **v0.3.0** — a
+contract change, so consumers should refresh the plugin to pick it up.
+
+### Added — Drift audit
+- `pnpm spec-audit` — a reusable runner that compares each Dashbook component
+  spec's recorded light/dark token values against the pinned `@dashfi/svelte`
+  theme. `--write` reconciles Dashbook (never upstream), `--json` emits a
+  machine-readable report, `--strict` makes advisory coverage/trace gaps
+  gating. The audit is asymmetric: it corrects Dashbook, not the library.
+- Result on this release: 0 stale resolved values. Source-token coverage gaps
+  and untraced dimension classes are reported as advisory.
+
+### Added — Design → Code handoff routing (MCP server v0.4.0)
+- Every component response now carries a machine-readable `implementation`
+  object. Shared `@dashfi/svelte` components route to
+  `kind: "shared-svelte-component"` / `reusePolicy: "required-in-svelte"` with
+  the exact `importStatement` and a `handoffDirective` telling Svelte/SvelteKit
+  receivers to import the shared component rather than recreate it from anatomy
+  HTML/CSS or screenshots. Non-Svelte receivers get a `nonSvelteFallback`
+  pointing at `product_port_to`. Dashbook-only scaffolds route to
+  `kind: "dashbook-scaffold"` / `reusePolicy: "reference-guidance"`.
+- The same routing is emitted by `product_get_component`,
+  `product_list_components`, `/api/components.json`, and
+  `/api/components/<slug>.json` from one shared enrichment path.
+- Receiving-skill guidance updated to teach the import-vs-port decision.
+
+### Fixed
+- Token drift reconciled against the pinned library (e.g. Button
+  `--color-brand-foreground` dark resolves to `#000000`).
 
 ## [1.0.0] — 2026-05-18
 

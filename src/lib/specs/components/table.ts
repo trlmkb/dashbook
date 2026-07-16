@@ -51,21 +51,21 @@ export const table: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Row separator',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 			notes: 'Rendered at 50% opacity via border-border/50.'
 		},
 		{
 			name: 'Header text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Hover cell background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Rendered at 30% opacity via bg-muted/30.'
 		},
 		{
 			name: 'Selected row background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Triggered by data-state="selected" on TableRow.'
 		}
 	],

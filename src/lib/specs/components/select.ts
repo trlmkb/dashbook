@@ -62,27 +62,27 @@ export const select: ComponentSpec = {
 		},
 		{
 			name: 'Trigger bottom-border',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' }
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' }
 		},
 		{
 			name: 'Trigger placeholder',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: 'Via `data-placeholder:text-muted-foreground` when no value set.'
 		},
 		{
 			name: 'Trigger focus',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes: 'Bottom-border switches via `focus:border-foreground`; native outline removed. No ring.'
 		},
 		{ name: 'Trigger disabled', notes: '`opacity-40` + `cursor-not-allowed`.' },
 		{
 			name: 'Content surface',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' },
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' },
 			notes: 'Brighter than `--color-background` for menu separation. Text `--color-popover-foreground`.'
 		},
 		{
 			name: 'Item highlighted',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'On highlight (keyboard or hover) via `data-highlighted`; text `--color-accent-foreground`.'
 		},
 		{ name: 'Disabled item', notes: '`opacity-50` + `pointer-events-none` via `data-disabled`.' },

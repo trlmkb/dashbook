@@ -13,6 +13,27 @@ export type Release = {
 // FIRST, then write the changelog <li> with a matching version/date/id.
 export const releases: Release[] = [
 	{
+		ver: 'v1.3.0',
+		date: '2026-07-16',
+		summary:
+			'UI/UX facelift — reveal-on-scroll + count-up motion, route view transitions, scroll-condensed header, command-palette polish. Reduced-motion gated.',
+		href: '/changelog#v1-3-0'
+	},
+	{
+		ver: 'v1.2.0',
+		date: '2026-07-16',
+		summary:
+			'Claude Code integration refresh — MCP resources + output schemas + implementation routing, ARD server card, same-origin validation. Plugin v0.4.0.',
+		href: '/changelog#v1-2-0'
+	},
+	{
+		ver: 'v1.1.0',
+		date: '2026-07-16',
+		summary:
+			'Spec↔lib drift audit + machine-readable Design→Code handoff routing. MCP server v0.4.0, plugin v0.3.0.',
+		href: '/changelog#v1-1-0'
+	},
+	{
 		ver: 'v1.0.0',
 		date: '2026-05-18',
 		summary:

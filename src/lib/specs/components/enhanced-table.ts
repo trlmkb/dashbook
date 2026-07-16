@@ -50,9 +50,9 @@ export const enhancedTable: ComponentSpec = {
 		},
 		{
 			name: 'ExpandButton',
-			value: 'per-row chevron for expandable rows',
-			tw: 'size-icon',
-			notes: 'Renders only when expandableRows is true.'
+			value: '32×32 per-row chevron for expandable rows',
+			tw: 'h-8 w-8 p-0',
+			notes: 'Ghost Button with size="sm" plus an explicit 32px square override. Renders only when expandableRows is true.'
 		},
 		{
 			name: 'Per-column controls',
@@ -68,7 +68,7 @@ export const enhancedTable: ComponentSpec = {
 		},
 		{
 			name: 'Sort indicator (active)',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Sort indicator (inactive)',
@@ -76,7 +76,7 @@ export const enhancedTable: ComponentSpec = {
 		},
 		{
 			name: 'Row separator',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 			notes: 'Rendered at 50% opacity (inherited from Table).'
 		}
 	],
@@ -275,6 +275,11 @@ export const enhancedTable: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Corrected the ExpandButton trace to the shipped h-8 w-8 p-0 override instead of the non-literal size-icon shorthand.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

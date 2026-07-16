@@ -36,9 +36,24 @@ import {
 	getMarketingFoundation,
 	marketingFoundationNames
 } from '../../specs/marketing/index.js';
+import {
+	marketingGetPatternOutputSchema,
+	marketingGetMarketingPaletteOutputSchema
+} from '../schemas.js';
 
 function json(value: unknown): { content: { type: 'text'; text: string }[] } {
 	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }] };
+}
+
+/**
+ * Same as `json`, plus `structuredContent` — required by the SDK whenever a
+ * tool declares an `outputSchema` (see `../schemas.ts`).
+ */
+function jsonWithSchema(value: Record<string, unknown>): {
+	content: { type: 'text'; text: string }[];
+	structuredContent: Record<string, unknown>;
+} {
+	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }], structuredContent: value };
 }
 
 const DOCS_BASE = 'https://dashbook.vercel.app';
@@ -119,7 +134,8 @@ export function registerMarketingTools(server: McpServer): void {
 				slug: z
 					.string()
 					.describe('Pattern slug — e.g. "slide-frame", "squircle-button", "feature-tabs". Use marketing_list_patterns to discover.')
-			}
+			},
+			outputSchema: marketingGetPatternOutputSchema
 		},
 		async ({ slug }) => {
 			const spec = getMarketingPattern(slug);
@@ -134,7 +150,7 @@ export function registerMarketingTools(server: McpServer): void {
 					isError: true
 				};
 			}
-			return json({
+			return jsonWithSchema({
 				...spec,
 				docs: `${DOCS_BASE}/marketing/patterns/${spec.slug}`,
 				note: 'Prop signatures are authoritative in the website source (see `source`). The recipe + tokensUsed + gotchas are the portable contract.'
@@ -457,10 +473,11 @@ export function registerMarketingTools(server: McpServer): void {
 			title: 'Marketing color palette',
 			description:
 				'Returns the marketing-only palette — cobalt, periwinkle, mist, cream, yellow. These are reserved for marketing surfaces (announcements, decks, billboards). Product UI uses the jade brand from `product_get_foundation`.',
-			inputSchema: {}
+			inputSchema: {},
+			outputSchema: marketingGetMarketingPaletteOutputSchema
 		},
 		async () => {
-			return json({
+			return jsonWithSchema({
 				palette: marketingColors,
 				base: baseColors,
 				rules: [

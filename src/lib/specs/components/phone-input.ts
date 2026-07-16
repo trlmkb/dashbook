@@ -32,28 +32,32 @@ export const phoneInput: ComponentSpec = {
 		},
 		{
 			name: 'Phone Input',
-			value: '40px underline-only Input',
-			tw: 'h-10 border-b px-0 py-2',
-			notes: 'Left padding clears the country select.'
+			value: '36px full-border field, 6px radius, 12px horizontal padding',
+			tw: 'h-9 w-full rounded-md border px-3 py-1 pl-36 shadow-sm',
+			notes: 'Left padding clears the country select; invalid input adds the library error border class.'
 		}
 	],
 
 	tokens: [
 		{
 			name: 'Country select background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Transparent at rest; --color-muted at 50% on hover (0.5.0). A 1px --color-input right-border divides it from the field. Was muted/50 at rest, /80 hover.'
 		},
 		{ name: 'Chevron + flag', notes: 'currentColor.' },
 		{
-			name: 'Phone field underline',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
-			notes: 'Inherits from Input.'
+			name: 'Phone field border',
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
+			notes: 'Full 1px border.'
 		},
 		{
-			name: 'Phone field focus',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
-			notes: 'Bottom border darkens on focus — same as Input.'
+			name: 'Phone field placeholder',
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
+		},
+		{
+			name: 'Phone field focus ring',
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' },
+			notes: '1px focus-visible ring.'
 		}
 	],
 
@@ -150,6 +154,11 @@ export const phoneInput: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled the phone field itself: it is h-9 with a full rounded border, shadow-sm, and 1px focus ring. The prior underline-only Input description was stale.'
+		},
 		{
 			version: 'v0.5.0',
 			date: '2026-06-04',

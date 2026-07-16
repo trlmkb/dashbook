@@ -46,7 +46,7 @@ export const progress: ComponentSpec = {
 		},
 		{
 			name: 'Indicator',
-			token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' },
 			notes: 'The fill is the jade brand colour, not monochrome `--color-primary`.'
 		},
 		{

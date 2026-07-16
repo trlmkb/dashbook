@@ -40,16 +40,16 @@ export const switchSpec: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Track unchecked',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: 'At 30% opacity (0.5.0, core #5116). Was --color-input — the new off-state reads more clearly.'
 		},
 		{
 			name: 'Track checked',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' }
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' }
 		},
 		{
 			name: 'Thumb',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' },
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' },
 			notes: 'Always the surface colour, regardless of state. Shadow `shadow-lg` (Tailwind v4 default) for lift.'
 		},
 		{

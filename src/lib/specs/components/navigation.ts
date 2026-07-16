@@ -38,15 +38,15 @@ export const navigation: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Inactive link',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Active link text',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Active indicator',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes: 'Per variant — may use --color-brand for the secondary pill variant.'
 		}
 	],

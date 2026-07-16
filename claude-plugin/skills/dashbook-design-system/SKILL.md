@@ -1,12 +1,10 @@
 ---
 name: dashbook-design-system
-description: |
-  Use when building Dash.fi product UI, drafting Dash.fi marketing materials, or
-  referencing Dash.fi brand assets. Activates on keywords: "Dash.fi", "dashbook",
-  "jade brand", "dash card", "AdPay agent", "AP agent", "shipping agent",
-  "tokens agent", "partner co-branding", "Dash.fi launch email". Routes the
-  agent to the right Dashbook MCP namespace (product vs marketing) and the
-  canonical anatomy pages.
+description: Use when building Dash.fi product UI, drafting Dash.fi marketing materials, or referencing Dash.fi brand assets. Routes the agent to the right Dashbook MCP namespace (product vs marketing) and the canonical anatomy pages.
+when_to_use: |
+  Activates on keywords: "Dash.fi", "dashbook", "jade brand", "dash card",
+  "AdPay agent", "AP agent", "shipping agent", "tokens agent", "partner
+  co-branding", "Dash.fi launch email".
 ---
 
 # Dashbook design system
@@ -48,6 +46,25 @@ the thin proxy `product_get_logo`, which forwards to the same source).
 
 ## Recommended workflow
 
+### Design handoff contract
+
+Treat Claude Design output as a visual proposal, not a new component implementation.
+Before writing code, identify the target stack and inspect each Dashbook component's
+`implementation` metadata:
+
+- **Svelte / SvelteKit:** when `reusePolicy` is `required-in-svelte`, use the exact
+  `implementation.importStatement`. Do not translate the generated HTML/CSS, copy
+  anatomy classes into a local component, or rebuild the component from a screenshot.
+- **React / React Native / Vue / plain HTML:** call `product_port_to`; the Svelte
+  package is not a cross-framework runtime.
+- **Astro:** reuse the shared Svelte component only when the project enables Svelte
+  and already consumes `@dashfi/svelte`; otherwise use the non-Svelte porting path.
+
+After handoff, scan the generated code for local buttons, inputs, badges, dialogs,
+cards, and other shapes that duplicate a listed shared component. Replace those
+approximations with shared imports while preserving page-specific composition and
+business logic.
+
 0. **Chrome check (BEFORE anything else).** If the screen has a header, footer,
    or sign-in shell — i.e. anything that frames the page rather than living
    inside it — call `marketing_get_logo` first. The wordmark is always a brand
@@ -64,9 +81,9 @@ the thin proxy `product_get_logo`, which forwards to the same source).
    component. Don't guess slugs. The `Chrome` category surfaces page-shell,
    wordmark, auth-footer, and partner-cobrand entries that proxy the marketing
    namespace under product-namespaced names.
-3. Call `product_get_component({ slug })` to fetch the full anatomy. The
-   returned JSON has `dimensions`, `tokens`, `variants`, `sizes`, `composition`,
-   `nonFeatures`, `props`, `example`, and `porting`. Build to those exact values.
+3. Call `product_get_component({ slug })` to fetch the full anatomy and
+   `implementation` routing. In Svelte, import the production component; use the
+   anatomy to verify the result, not to recreate it.
 4. For a non-Svelte stack, also call `product_port_to({ slug, stack })` to get
    the stack-specific snippet template.
 5. For tokens used outside a specific component (page background, type, etc.),
@@ -80,10 +97,11 @@ the thin proxy `product_get_logo`, which forwards to the same source).
   shapes, or a guess at "what the Dash logo probably looks like". If
   `marketing_get_logo` is unavailable for any reason, halt and surface that to
   the user — do not ship an off-brand placeholder.
-- **Brand accent is jade `#2B605C`** on product surfaces. Cobalt `#354CEF` is
+- **Brand accent is `--color-brand`** on product surfaces (currently rendered by
+  the shared lib as `#2B5F5B` light / `#46B9AF` dark). Cobalt is
   marketing-only **except** Button `secondary` which is cobalt on the vnext
   branch. When in doubt call `product_get_token({ name: 'brand' })`.
-- **Destructive is monochrome.** Black on light, white on dark. Never red.
+- **Destructive is orange `#FF4000`** in both modes in the shared library.
 - **Typography**: PP Supply Mono for display / labels / data values. Bai
   Jamjuree for body and UI. PP Supply Mono Ultralight (weight 200) for big
   display headings — uppercase, tight tracking. **PP Supply Mono is paywalled
@@ -146,12 +164,11 @@ Either way, surface to the user that the real wordmark is gated behind
 
 ## Component count + scope
 
-Today: 60 components across 6 categories (Inputs, Display, Feedback,
-Navigation, Layout, Data) **plus a 7th `Chrome` category** that surfaces
-page-shell, wordmark, auth-footer, and partner-cobrand entries (these proxy
-the `marketing_*` namespace under `product_*`-prefixed names so chrome work
-shows up in any product-namespace introspection). See
-`product_list_components` for the current catalogue.
+Use `product_list_components` for the current shared-component catalogue and
+categories rather than relying on a hard-coded count. A separate `Chrome`
+category surfaces page-shell, wordmark, auth-footer, and partner-cobrand
+entries (these proxy the `marketing_*` namespace under `product_*`-prefixed
+names so chrome work shows up in any product-namespace introspection).
 
 ## Slash commands
 
