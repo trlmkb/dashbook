@@ -28,8 +28,13 @@ Never trust counts, versions, or PR/deploy states written in any doc. Run
 ## Checks before calling a change done
 
 ```
-pnpm check && pnpm lint && pnpm test && pnpm spec-audit && pnpm build
+pnpm check && pnpm lint && pnpm test && pnpm spec-audit && pnpm tokens:check && pnpm build
 ```
+
+`pnpm tokens:check` fails if the committed generated token artifacts
+(`src/lib/generated/*`, `tokens/figma*`, `tokens/lib-tokens.reference.css`) are
+out of date vs `tokens/dashbook.tokens.json` — run `pnpm tokens` and commit if it
+fails. (`pnpm build` runs the same check first.)
 
 Repo-wide lint has a known baseline — prove no NEW failures, don't claim a clean
 run. Always tell the human to run the build/checks and to test the change

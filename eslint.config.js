@@ -27,6 +27,8 @@ export default ts.config(
 		}
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/', 'node_modules/']
+		// tokens/*.gen.js are generated appliers pasted into the Figma console
+		// (where `figma` is a global) — machine-generated, not app code.
+		ignores: ['build/', '.svelte-kit/', 'dist/', 'node_modules/', 'tokens/*.gen.js']
 	}
 );
