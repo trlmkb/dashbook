@@ -473,6 +473,12 @@ repositories. The receiver should also scan the completed diff for local
 buttons, inputs, cards, badges, dialogs, tables, tabs, pagination, and other
 duplicates before marking the work complete.
 
+The strict form of this guardrail is a failing CI check — a reuse-lint that
+scans the diff against the implementation registry and blocks a merge that
+re-creates a shared primitive where the package is available (see §9.6). Because
+that lint targets the published package and registry, it can be built in the
+consumer repository first and does not depend on the core migration.
+
 ---
 
 ## 9. Fidelity and drift control
@@ -575,6 +581,34 @@ When Dashbook and an authority disagree:
 6. For a design-language change, obtain explicit owner approval; do not disguise
    it as reconciliation.
 7. Re-run structured, build, and visual verification.
+
+### 9.6 Making drift and reuse strict: generate versus gate
+
+"Can't-drift" and "strict" are two mechanisms for two kinds of problem.
+Generation removes drift from *derived data*: a value with one source and many
+generated outputs has no second copy to diverge. A failing gate enforces what
+cannot be generated — consumer behavior, and structure that is not mechanically
+derivable. The end-state applies the right tool per layer.
+
+| Layer                          | Mechanism                                                                                          | Guarantee                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Token values                   | Generated from one tokenized source that drives the lib theme, Figma, and specs                    | Can't-drift by construction                       |
+| Component anatomy              | Generated where mechanically derivable (`tv`, static class, class map); hard-fail audit for the rest | Can't-drift where generated; can't-ship-stale otherwise |
+| Reuse / implementation routing | Consumer-side CI gate that fails a diff re-creating a shared primitive, fed by the implementation registry | Can't-merge-a-duplicate                           |
+
+Two constraints govern how strict this becomes, and when:
+
+- **The teeth arrive with co-location.** Standalone, the audit can only gate
+  Dashbook's own CI. Only in the Nx workspace can a *library* PR fail because it
+  left a spec stale, and only there can consuming apps enforce reuse through
+  affected checks against the shared registry. Strictness maturity tracks the
+  migration; the migration is an amplifier, not a prerequisite for value. The
+  reuse gate itself can be built in the consumer repository first, since it
+  targets the published package and registry.
+- **The reuse gate must be exception-aware.** It reads the routing policy (§8.2)
+  and honors an explicit allowlist, or it false-positives on the legitimate
+  port/exception cases. It enforces the policy; it does not replace human
+  judgment about when an exception is warranted.
 
 ---
 
