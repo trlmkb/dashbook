@@ -65,7 +65,7 @@ export const dialog: ComponentSpec = {
 		},
 		{
 			name: 'DialogContent surface',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' },
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' },
 			notes:
 				'No border token. Shadow `shadow-xl` (Tailwind v4 default `0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)`) — heavier than the prior `shadow-lg`.'
 		},
@@ -75,7 +75,7 @@ export const dialog: ComponentSpec = {
 		},
 		{
 			name: 'DialogDescription',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: '`text-sm` (14px).'
 		},
 		{

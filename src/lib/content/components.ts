@@ -308,6 +308,14 @@ export const components: ComponentEntry[] = [
 			"import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@dashfi/svelte/ui/pagination'"
 	},
 	{
+		slug: 'pagination-wrapper',
+		name: 'Pagination Wrapper',
+		description: 'Pagination with a page-size Select and optional total count.',
+		category: 'Navigation',
+		status: 'beta',
+		importPath: "import { PaginationWrapper } from '@dashfi/svelte/ui/pagination-wrapper'"
+	},
+	{
 		slug: 'dropdown-menu',
 		name: 'Dropdown Menu',
 		description: 'Contextual action menu attached to a trigger button.',

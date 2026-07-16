@@ -46,16 +46,16 @@ export const drawer: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Content background',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' }
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' }
 		},
 		{
 			name: 'Drag handle',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' }
 		},
 		{ name: 'Overlay', notes: 'Literal `bg-black/80` — 80% pure black, not a theme token.' },
 		{
 			name: 'Description text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		}
 	],
 

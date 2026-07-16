@@ -38,15 +38,15 @@ export const supportModal: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Row border (rest)',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'Row border (hover)',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' }
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' }
 		},
 		{
 			name: 'Description text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		}
 	],
 

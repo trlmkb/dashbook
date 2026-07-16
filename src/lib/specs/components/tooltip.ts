@@ -29,14 +29,14 @@ export const tooltip: ComponentSpec = {
 		{
 			name: 'Animations',
 			value: 'fade + zoom-95 + side-aware slide-in',
-			tw: 'data-[state=open]:animate-in fade-in-0 zoom-in-95'
+			tw: 'animate-in fade-in-0 zoom-in-95'
 		}
 	],
 
 	tokens: [
 		{
 			name: 'Background',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' },
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' },
 			notes: 'Inverted from surrounding surface — that is the tooltip signature.'
 		},
 		{
@@ -157,6 +157,11 @@ export const tooltip: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Aligned the animation trace with the shipped class list: animate-in is applied directly, while close-state animation remains state-qualified.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

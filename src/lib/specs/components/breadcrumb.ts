@@ -57,11 +57,11 @@ export const breadcrumb: ComponentSpec = {
 	tokens: [
 		{
 			name: 'List + links (default)',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Links (hover) + Page (current)',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes: 'Links shift to foreground on hover; Page is foreground always (aria-disabled).'
 		},
 		{

@@ -31,8 +31,8 @@ export const pagination: ComponentSpec = {
 		},
 		{
 			name: 'PaginationLink',
-			value: '36×36 (Button size="icon")',
-			tw: 'size-icon',
+			value: '40×40 (Button size="icon")',
+			tw: 'size-10',
 			notes: 'Variant flips on active: outline when current, ghost otherwise.'
 		},
 		{
@@ -42,19 +42,20 @@ export const pagination: ComponentSpec = {
 		},
 		{
 			name: 'PaginationEllipsis',
-			value: 'non-interactive 36×36 slot showing "..."'
+			value: 'non-interactive 36×36 slot showing "..."',
+			tw: 'size-9'
 		}
 	],
 
 	tokens: [
 		{
 			name: 'Active page (outline variant)',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: 'Inherits Button outline tokens — border + transparent background.'
 		},
 		{
 			name: 'Inactive page (ghost variant)',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Inherits Button ghost tokens — transparent, accent on hover.'
 		}
 	],
@@ -170,6 +171,11 @@ export const pagination: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled PaginationLink with the current Button icon size (40px) and recorded the distinct 36px ellipsis slot.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

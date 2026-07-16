@@ -46,12 +46,12 @@ export const popover: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Background',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' },
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' },
 			notes: 'Brighter than <code>--color-background</code> — that contrast is the popover signature.'
 		},
 		{
 			name: 'Text',
-			token: { cssVar: '--color-popover-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-popover-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{ name: 'Border', notes: 'None — shadow alone separates the popover from the surface.' }
 	],

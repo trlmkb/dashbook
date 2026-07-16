@@ -50,16 +50,16 @@ export const alertError: ComponentSpec = {
 		{
 			name: 'Icon badge bg',
 			notes:
-				"`bg-destructive/10` (10% destructive). In light mode that's `#0000001a`; in dark `#ffffff1a`."
+				"`bg-destructive/10` (10% destructive). The shared lib resolves this from orange `#ff4000` in both modes."
 		},
 		{
 			name: 'Icon glyph',
-			token: { cssVar: '--color-destructive', light: '#000000', dark: '#ffffff' },
-			notes: 'Monochrome via `text-destructive`.'
+			token: { cssVar: '--color-destructive', light: '#ff4000', dark: '#ff4000' },
+			notes: 'Bright orange via `text-destructive`.'
 		},
 		{
 			name: 'Description text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Buttons',
@@ -75,7 +75,7 @@ export const alertError: ComponentSpec = {
 
 	nonFeatures: [
 		"Not the same shape as inline <code>Alert</code>. AlertError is a full-panel illustration; Alert is an inline-row variant. Don't conflate.",
-		'No variant prop — the destructive monochrome treatment is fixed.',
+		'No variant prop — the orange destructive treatment is fixed.',
 		'No custom icon — uses Lucide <code>CircleAlert</code> always. To recolor or replace, compose your own panel using <code>Alert variant="destructive"</code>.'
 	],
 

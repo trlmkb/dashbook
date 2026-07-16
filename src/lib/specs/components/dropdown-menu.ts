@@ -21,16 +21,16 @@ export const dropdownMenu: ComponentSpec = {
 	dimensions: [
 		{
 			name: 'Content',
-			value: 'min 128px wide, 6px radius, 4px padding, 1px border, shadow-md',
-			tw: 'min-w-[8rem] rounded-md p-1 border shadow-md',
-			notes: 'Portal-rendered popover panel.'
+			value: 'min 128px wide, 12px radius, 4px padding, shadow-lg; no border',
+			tw: 'min-w-[8rem] rounded-xl p-1 shadow-lg',
+			notes: 'Portal-rendered popover panel with max-height constrained to available viewport space.'
 		},
 		{
 			name: 'Item',
 			value: '6px horizontal padding, 8px vertical, 14px text',
-			tw: 'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none'
+			tw: 'relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none'
 		},
-		{ name: 'Separator', value: '1px line, 4px vertical margin', tw: '-mx-1 my-1 h-px bg-border' },
+		{ name: 'Separator', value: '1px line, 4px vertical margin', tw: '-mx-1 my-1 h-px bg-muted' },
 		{
 			name: 'Label / group heading',
 			value: '14px semibold',
@@ -38,8 +38,8 @@ export const dropdownMenu: ComponentSpec = {
 		},
 		{
 			name: 'Shortcut',
-			value: '12px right-aligned muted text',
-			tw: 'ml-auto text-xs tracking-widest text-muted-foreground'
+			value: '12px right-aligned text at 60% opacity',
+			tw: 'ml-auto text-xs tracking-widest opacity-60'
 		},
 		{
 			name: 'Checkbox / Radio items',
@@ -52,27 +52,23 @@ export const dropdownMenu: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Content background',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' }
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' }
 		},
 		{
 			name: 'Content text',
-			token: { cssVar: '--color-popover-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-popover-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Item hover / focus background',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' }
 		},
 		{
 			name: 'Item hover / focus text',
-			token: { cssVar: '--color-accent-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-accent-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Separator',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
-		},
-		{
-			name: 'Shortcut text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' }
 		}
 	],
 
@@ -218,6 +214,11 @@ export const dropdownMenu: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled production chrome: content is rounded-xl with shadow-lg and no border; items use rounded-md; separators use bg-muted; shortcut text uses inherited color at 60% opacity.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

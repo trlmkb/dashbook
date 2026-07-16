@@ -8,9 +8,11 @@ import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { allComponentSpecs, getComponentSpec } from '../../specs/components/index.js';
 import {
-	spacingFoundation,
-	typographyFoundation
-} from '../../specs/foundations/index.js';
+	getComponentImplementation,
+	importPathOnly,
+	withComponentImplementation
+} from '../../specs/implementation.js';
+import { spacingFoundation, typographyFoundation } from '../../specs/foundations/index.js';
 import {
 	productColors,
 	baseColors,
@@ -57,11 +59,6 @@ function jsonWithSchema(value: Record<string, unknown>): {
 	return { content: [{ type: 'text', text: JSON.stringify(value, null, 2) }], structuredContent: value };
 }
 
-/** Strip the "import { X } from 'Y'" wrapper down to just "Y". */
-function importPathOnly(importPath: string): string {
-	return importPath.replace(/^import .+ from '/, '').replace(/'$/, '');
-}
-
 export type ProductFoundationName = 'color' | 'typography' | 'spacing' | 'radius' | 'motion' | 'shadows';
 
 /**
@@ -80,7 +77,7 @@ export function getProductFoundationData(name: ProductFoundationName): Record<st
 				marketing: marketingColors,
 				rules: [
 					'Brand accent is single-use. Never combine product jade with marketing cobalt in the same surface.',
-					'Destructive is monochrome — black on light, white on dark. Never red.',
+					'Destructive uses the shared library orange token (#ff4000 in both modes).',
 					'Yellow is highlight only. One element per slide; never a primary surface.'
 				]
 			};
@@ -122,7 +119,6 @@ export function getProductFoundationData(name: ProductFoundationName): Record<st
 			};
 	}
 }
-
 export function registerProductTools(server: McpServer): void {
 	// ── list_components ────────────────────────────────────────────────
 	server.registerTool(
@@ -130,13 +126,15 @@ export function registerProductTools(server: McpServer): void {
 		{
 			title: 'List Dashbook components',
 			description:
-				'Returns the catalogue of components in @dashfi/svelte plus chrome-category scaffolds. Each entry has slug, name, category, status, and importPath. Use this to discover available components before fetching anatomy. The `Chrome` category surfaces page-shell, wordmark, auth-footer, and partner-cobrand entries that proxy the marketing namespace under product-namespaced names — when building any product screen with chrome (login, 2FA, sign-up, magic link, password reset, partner-co-branded pages), look in the Chrome category. ' +
+				'Returns the catalogue of components in @dashfi/svelte plus chrome-category scaffolds. Each entry includes machine-readable implementation routing. When implementation.reusePolicy is required-in-svelte, Svelte/SvelteKit code MUST use the exact shared-library import instead of recreating the component from anatomy HTML/CSS. Use this to discover available components before fetching anatomy. The `Chrome` category surfaces page-shell, wordmark, auth-footer, and partner-cobrand entries that proxy the marketing namespace under product-namespaced names — when building any product screen with chrome (login, 2FA, sign-up, magic link, password reset, partner-co-branded pages), look in the Chrome category. ' +
 				PRODUCT_NON_FEATURES,
 			inputSchema: {
 				category: z
 					.enum(['Inputs', 'Display', 'Feedback', 'Navigation', 'Layout', 'Data', 'Chrome'])
 					.optional()
-					.describe('Filter to one category. Omit for all. Chrome surfaces page-level proxies to marketing assets (wordmark, page-shell, auth-footer, partner-cobrand).'),
+					.describe(
+						'Filter to one category. Omit for all. Chrome surfaces page-level proxies to marketing assets (wordmark, page-shell, auth-footer, partner-cobrand).'
+					),
 				status: z
 					.enum(['stable', 'beta', 'deprecated'])
 					.optional()
@@ -151,7 +149,8 @@ export function registerProductTools(server: McpServer): void {
 				category: s.category,
 				status: s.status,
 				importPath: importPathOnly(s.importPath),
-				description: s.description
+				description: s.description,
+				implementation: getComponentImplementation(s)
 			}));
 			if (category) entries = entries.filter((e) => e.category === category);
 			if (status) entries = entries.filter((e) => e.status === status);
@@ -165,7 +164,7 @@ export function registerProductTools(server: McpServer): void {
 		{
 			title: 'Get a component anatomy',
 			description:
-				'Returns the full structured spec for one component: dimensions, tokens-per-part, variants, sizes, composition rules, non-features, props, porting checklist, and the canonical Svelte usage example. This is the contract for re-implementing the component in any stack. ' +
+				'Returns the full structured spec plus implementation routing. Anatomy is a design/verification contract, not permission to duplicate a production Svelte component. If implementation.reusePolicy is required-in-svelte, Svelte/SvelteKit receivers MUST use implementation.importStatement and must not recreate the component from generated HTML/CSS or screenshots. Non-Svelte receivers should call product_port_to. ' +
 				PRODUCT_NON_FEATURES,
 			inputSchema: {
 				slug: z
@@ -187,7 +186,7 @@ export function registerProductTools(server: McpServer): void {
 					isError: true
 				};
 			}
-			return jsonWithSchema(spec);
+			return jsonWithSchema(withComponentImplementation(spec));
 		}
 	);
 
@@ -234,7 +233,10 @@ export function registerProductTools(server: McpServer): void {
 			if (!match) {
 				return {
 					content: [
-						{ type: 'text', text: `Token "${name}" not found. Try product_get_foundation({name:"color"}) to see all.` }
+						{
+							type: 'text',
+							text: `Token "${name}" not found. Try product_get_foundation({name:"color"}) to see all.`
+						}
 					],
 					isError: true
 				};
@@ -260,13 +262,7 @@ export function registerProductTools(server: McpServer): void {
 			const q = query.toLowerCase();
 			const scored = allComponentSpecs
 				.map((s) => {
-					const haystack = [
-						s.slug,
-						s.name,
-						s.description,
-						s.category,
-						s.importPath
-					]
+					const haystack = [s.slug, s.name, s.description, s.category, s.importPath]
 						.join(' ')
 						.toLowerCase();
 					let score = 0;
@@ -292,6 +288,7 @@ export function registerProductTools(server: McpServer): void {
 					category: r.spec.category,
 					status: r.spec.status,
 					description: r.spec.description,
+					implementation: getComponentImplementation(r.spec),
 					relevance: r.score
 				}))
 			});
@@ -304,13 +301,11 @@ export function registerProductTools(server: McpServer): void {
 		{
 			title: 'Get the porting checklist for a component in a target stack',
 			description:
-				'Returns the stack-specific re-implementation guidance for one component: the dimensions, tokens, and composition rules to honour, plus a starter snippet for that stack. Targets: react, react-native, html-css, vue. ' +
+				'Returns stack-specific porting guidance for a non-Svelte target. Do not use this tool for Svelte/SvelteKit: fetch product_get_component and use implementation.importStatement to import the real @dashfi/svelte component. Targets: react, react-native, html-css, vue. ' +
 				PRODUCT_NON_FEATURES,
 			inputSchema: {
 				slug: z.string().describe('Component slug.'),
-				stack: z
-					.enum(['react', 'react-native', 'html-css', 'vue'])
-					.describe('Target stack.')
+				stack: z.enum(['react', 'react-native', 'html-css', 'vue']).describe('Target stack.')
 			}
 		},
 		async ({ slug, stack }) => {
@@ -330,6 +325,7 @@ export function registerProductTools(server: McpServer): void {
 				slug,
 				stack,
 				name: spec.name,
+				sourceImplementation: getComponentImplementation(spec),
 				contract: {
 					dimensions: spec.dimensions,
 					tokens: spec.tokens,
@@ -360,7 +356,9 @@ export function registerProductTools(server: McpServer): void {
 				variant: z
 					.enum(['wordmark', 'app'])
 					.default('wordmark')
-					.describe('Which mark. `wordmark` = the "dash.fi" letters (viewBox 426×90). `app` = the rounded-square "d" icon (viewBox 236×236).'),
+					.describe(
+						'Which mark. `wordmark` = the "dash.fi" letters (viewBox 426×90). `app` = the rounded-square "d" icon (viewBox 236×236).'
+					),
 				preset: z
 					.string()
 					.optional()
@@ -376,7 +374,9 @@ export function registerProductTools(server: McpServer): void {
 				format: z
 					.enum(['svg', 'png'])
 					.default('svg')
-					.describe('Output format. `svg` (default) returns vector content inline. `png` returns server-rasterized PNG base64-encoded — use when the consumer can\'t render inline SVG.'),
+					.describe(
+						"Output format. `svg` (default) returns vector content inline. `png` returns server-rasterized PNG base64-encoded — use when the consumer can't render inline SVG."
+					),
 				scale: z
 					.number()
 					.int()
@@ -497,8 +497,10 @@ export function registerProductTools(server: McpServer): void {
 					content: 'Wordmark only. No top nav — auth pages are single-purpose.'
 				},
 				footer: {
-					content: 'Slim legal links: Terms · Privacy · Help. Optional FDIC line if the app is post-funding-account-creation.',
-					legalDisclosure: 'Optional — call marketing_get_legal_disclosure({ kind: "deposit-fdic" }) if a card or account is referenced.'
+					content:
+						'Slim legal links: Terms · Privacy · Help. Optional FDIC line if the app is post-funding-account-creation.',
+					legalDisclosure:
+						'Optional — call marketing_get_legal_disclosure({ kind: "deposit-fdic" }) if a card or account is referenced.'
 				}
 			},
 			layout: {
@@ -529,7 +531,8 @@ export function registerProductTools(server: McpServer): void {
 				},
 				header: { content: 'Wordmark only.' },
 				footer: {
-					content: 'Slim legal links: Terms · Privacy. Sign-up explicitly references "Terms of Service" via a checkbox or inline copy near submit.'
+					content:
+						'Slim legal links: Terms · Privacy. Sign-up explicitly references "Terms of Service" via a checkbox or inline copy near submit.'
 				}
 			},
 			layout: {
@@ -559,7 +562,8 @@ export function registerProductTools(server: McpServer): void {
 				},
 				header: { content: 'Wordmark only.' },
 				footer: {
-					content: 'Slim links: "Try a different method" · Help. NO legal disclosure (mid-flow, not terminal).'
+					content:
+						'Slim links: "Try a different method" · Help. NO legal disclosure (mid-flow, not terminal).'
 				}
 			},
 			layout: {
@@ -666,7 +670,8 @@ export function registerProductTools(server: McpServer): void {
 			}
 			return json({
 				...template,
-				wordmarkRule: 'CRITICAL: never invent, reconstruct, or substitute the Dash wordmark. Call product_get_logo (or marketing_get_logo) for the canonical SVG. If unavailable, halt and surface to the user — do not ship a placeholder mark.',
+				wordmarkRule:
+					'CRITICAL: never invent, reconstruct, or substitute the Dash wordmark. Call product_get_logo (or marketing_get_logo) for the canonical SVG. If unavailable, halt and surface to the user — do not ship a placeholder mark.',
 				canonicalReference: `https://dashbook.vercel.app/patterns/auth-split-screen — the live preview + paste-ready code for the auth shell this template describes.`
 			});
 		}
