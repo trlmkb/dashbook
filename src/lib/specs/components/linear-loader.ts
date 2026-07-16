@@ -41,7 +41,7 @@ export const linearLoader: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Bar fill',
-			token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' },
 			notes: '`bg-brand`. Jade.'
 		},
 		{

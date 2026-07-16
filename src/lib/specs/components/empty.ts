@@ -52,21 +52,21 @@ export const empty: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Container border (when applied)',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 			notes: 'Dashed style; only visible if caller adds <code>border</code> class.'
 		},
 		{
 			name: 'Title / foreground',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Description',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: 'Conventional — typically applied at the call site.'
 		},
 		{
 			name: 'EmptyMedia (icon variant) background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' }
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' }
 		}
 	],
 

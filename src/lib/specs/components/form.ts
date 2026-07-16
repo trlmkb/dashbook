@@ -36,11 +36,11 @@ export const form: ComponentSpec = {
 		{
 			name: 'Error message',
 			token: { cssVar: '--color-destructive', light: '#ff4000', dark: '#ff4000' },
-			notes: 'Monochrome — same hex in both modes.'
+			notes: 'Bright orange — same hex in both modes.'
 		},
 		{
 			name: 'Description text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{ name: 'Labels', notes: 'Inherit Label tokens (uppercase mono caps).' }
 	],

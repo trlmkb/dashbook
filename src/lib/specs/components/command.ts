@@ -53,8 +53,8 @@ export const command: ComponentSpec = {
 		},
 		{
 			name: 'CommandSeparator',
-			value: '1px hairline',
-			tw: '-mx-1 my-1 h-px bg-border'
+			value: '1px hairline extending 4px beyond the list inset',
+			tw: '-mx-1 h-px bg-border'
 		},
 		{
 			name: 'CommandDialog',
@@ -66,24 +66,24 @@ export const command: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Surface',
-			token: { cssVar: '--color-popover', light: '#faf8f1', dark: '#0f1413' },
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' },
 			notes: '`bg-popover`.'
 		},
 		{
 			name: 'Surface text',
-			token: { cssVar: '--color-popover-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-popover-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Item hover / selected (bg)',
-			token: { cssVar: '--color-accent', light: '#e6f2ef', dark: '#1d3936' }
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' }
 		},
 		{
 			name: 'Item hover / selected (text)',
-			token: { cssVar: '--color-accent-foreground', light: '#123b39', dark: '#ffffff' }
+			token: { cssVar: '--color-accent-foreground', light: '#123b38', dark: '#ffffff' }
 		},
 		{
 			name: 'Separator',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'Search icon',
@@ -215,6 +215,11 @@ export const command: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Removed the stale vertical margin from CommandSeparator; the shipped primitive is -mx-1 h-px bg-border.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

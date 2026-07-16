@@ -262,7 +262,7 @@ export const authFooter: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Text',
-			notes: '`--fg-muted` (light: `#6E7878`, dark: `#8B9695`). Always muted — never primary.'
+			notes: '`--fg-muted` (light: `#6E8180`, dark: `#819896`). Always muted — never primary.'
 		}
 	],
 

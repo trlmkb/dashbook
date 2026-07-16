@@ -36,8 +36,8 @@ export const calendar: ComponentSpec = {
 		{
 			name: 'Day cell',
 			value: '32×32 hit target',
-			tw: 'size-8',
-			notes: 'The day Button uses size="icon" with default Button height; matches the rest of the system.'
+			tw: 'size-(--cell-size)',
+			notes: 'The Calendar root defines --cell-size as spacing(8), yielding a 32px square day target.'
 		},
 		{
 			name: 'Selected day',
@@ -51,15 +51,15 @@ export const calendar: ComponentSpec = {
 		},
 		{
 			name: 'Outside month',
-			value: 'muted-foreground at 50%',
-			tw: 'text-muted-foreground/50'
+			value: 'muted foreground',
+			tw: 'text-muted-foreground'
 		}
 	],
 
 	tokens: [
 		{
 			name: 'Selected day fill',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' },
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' },
 			notes: 'Background of the currently selected day.'
 		},
 		{
@@ -68,17 +68,17 @@ export const calendar: ComponentSpec = {
 		},
 		{
 			name: 'Today fill',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Background of today when it is not the selected day.'
 		},
 		{
 			name: 'Weekday row text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		},
 		{
 			name: 'Outside-month text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
-			notes: 'Rendered at 50% opacity via text-muted-foreground/50.'
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
+			notes: 'Rendered directly with text-muted-foreground; disabled days independently use opacity-50.'
 		}
 	],
 
@@ -179,8 +179,8 @@ export const calendar: ComponentSpec = {
 	],
 
 	porting: [
-		'bits-ui Calendar wrapped with Tailwind classes. Day cells are icon-sized buttons (size-8); selected/today/outside states swap surface tokens.',
-		'Selected fills <code>--color-primary</code>, today is <code>--color-accent</code>, muted dates use <code>--color-muted-foreground</code> at 50% opacity.'
+		'bits-ui Calendar wrapped with Tailwind classes. Day cells use the root <code>--cell-size</code> variable (32px); selected/today/outside states swap surface tokens.',
+		'Selected fills <code>--color-primary</code>, today is <code>--color-accent</code>, and adjacent-month dates use <code>--color-muted-foreground</code>. Disabled dates independently render at 50% opacity.'
 	],
 
 	example: `<script lang="ts">
@@ -196,6 +196,11 @@ export const calendar: ComponentSpec = {
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled day sizing with the shipped --cell-size variable and corrected adjacent-month styling to text-muted-foreground without an alpha modifier.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

@@ -13,17 +13,17 @@
 
 <button
 	type="button"
-	class="theme-toggle"
+	class="theme-toggle db-press"
 	onclick={() => theme.cycle()}
 	aria-label={label(theme.theme)}
 	title={label(theme.theme)}
 >
 	{#if theme.theme === 'light'}
-		<Sun size={16} strokeWidth={1.5} />
+		<Sun size={16} strokeWidth={1.5} class="toggle-icon" />
 	{:else if theme.theme === 'dark'}
-		<Moon size={16} strokeWidth={1.5} />
+		<Moon size={16} strokeWidth={1.5} class="toggle-icon" />
 	{:else}
-		<Monitor size={16} strokeWidth={1.5} />
+		<Monitor size={16} strokeWidth={1.5} class="toggle-icon" />
 	{/if}
 </button>
 
@@ -40,14 +40,31 @@
 		cursor: pointer;
 		border-radius: 6px;
 		transition:
-			color 150ms,
-			background 150ms;
+			color var(--dur-fast) var(--easing-default),
+			background var(--dur-fast) var(--easing-default);
 	}
 	.theme-toggle:hover {
 		color: var(--fg);
 		background: var(--bg-muted);
 	}
-	.theme-toggle:active {
-		transform: scale(0.97);
+	.theme-toggle:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+	.theme-toggle :global(.toggle-icon) {
+		animation: toggle-swap var(--dur-fast) var(--easing-out) both;
+	}
+	@keyframes toggle-swap {
+		from {
+			opacity: 0;
+			transform: rotate(-45deg) scale(0.8);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.theme-toggle,
+		.theme-toggle :global(.toggle-icon) {
+			animation: none;
+			transition: none;
+		}
 	}
 </style>

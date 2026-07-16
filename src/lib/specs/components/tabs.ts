@@ -34,12 +34,12 @@ export const tabs: ComponentSpec = {
 	tokens: [
 		{
 			name: 'TabsList text colour',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: 'Both variants inherit `text-muted-foreground` on the list; triggers override on active / hover.'
 		},
 		{
 			name: 'TabsList border (primary)',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' },
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' },
 			notes: 'Bottom border uses the default `border` token.'
 		},
 		{
@@ -48,7 +48,7 @@ export const tabs: ComponentSpec = {
 		},
 		{
 			name: 'TabsTrigger active',
-			token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' },
+			token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' },
 			notes:
 				'Primary: bottom border switches to `--color-primary`. Secondary: position indicator pill (border `--color-primary`) slides under the active trigger. `data-[state=active]:pointer-events-none` so the active tab cannot be re-clicked.'
 		},

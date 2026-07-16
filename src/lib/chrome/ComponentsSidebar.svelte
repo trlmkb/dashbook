@@ -47,6 +47,7 @@
 		overflow-y: auto;
 	}
 	.all-link {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -57,16 +58,32 @@
 		color: var(--fg-muted);
 		text-decoration: none;
 		border-left: 1px solid var(--border);
-		transition:
-			color 150ms,
-			border-color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
+	}
+	.all-link::before {
+		content: '';
+		position: absolute;
+		left: -1px;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: var(--brand);
+		transform: scaleY(0);
+		transform-origin: center;
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.all-link:hover {
 		color: var(--fg);
 	}
 	.all-link.active {
 		color: var(--fg);
-		border-left-color: var(--brand);
+	}
+	.all-link.active::before {
+		transform: scaleY(1);
+	}
+	.all-link:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
 	}
 	.count {
 		font-family: var(--font-mono);
@@ -93,27 +110,52 @@
 		gap: 1px;
 	}
 	.sub-item {
+		position: relative;
 		padding: 5px 12px;
 		font-family: var(--font-sans);
 		font-size: 13px;
 		color: var(--fg-muted);
 		text-decoration: none;
 		border-left: 1px solid var(--border);
-		transition:
-			color 150ms,
-			border-color 150ms;
+		transition: color var(--dur-fast) var(--easing-default);
+	}
+	.sub-item::before {
+		content: '';
+		position: absolute;
+		left: -1px;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: var(--brand);
+		transform: scaleY(0);
+		transform-origin: center;
+		transition: transform var(--dur-fast) var(--easing-out);
 	}
 	.sub-item:hover {
 		color: var(--fg);
 	}
 	.sub-item.active {
 		color: var(--fg);
-		border-left-color: var(--brand);
+	}
+	.sub-item.active::before {
+		transform: scaleY(1);
+	}
+	.sub-item:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
 	}
 	@media (max-width: 960px) {
 		.sidebar {
 			position: static;
 			max-height: none;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.all-link,
+		.all-link::before,
+		.sub-item,
+		.sub-item::before {
+			transition: none;
 		}
 	}
 </style>

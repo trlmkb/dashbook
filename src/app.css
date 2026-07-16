@@ -303,3 +303,68 @@
 		color: var(--fg);
 	}
 }
+
+/* --- Motion utilities — v1.1 facelift ------------------------------------ */
+@keyframes db-rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes db-char-up {
+	from {
+		transform: translateY(110%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+.db-reveal {
+	opacity: 0;
+}
+.db-reveal.is-visible {
+	opacity: 1;
+	animation: db-rise-in var(--dur-normal) var(--easing-out) both;
+}
+.db-press {
+	transition: transform var(--dur-instant) var(--easing-default);
+}
+.db-press:active {
+	transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+	.db-reveal,
+	.db-reveal.is-visible {
+		opacity: 1;
+		animation: none;
+	}
+	.db-press:active {
+		transform: none;
+	}
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none !important;
+	}
+}
+
+::view-transition-old(root) {
+	animation: 90ms var(--easing-in) both db-vt-out;
+}
+::view-transition-new(root) {
+	animation: 150ms var(--easing-out) both db-vt-in;
+}
+@keyframes db-vt-out {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes db-vt-in {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+}

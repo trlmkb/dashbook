@@ -308,6 +308,24 @@ export const components: ComponentEntry[] = [
 			"import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@dashfi/svelte/ui/pagination'"
 	},
 	{
+		slug: 'pagination-wrapper',
+		name: 'Pagination Wrapper',
+		description: 'Pagination with a page-size Select and optional total count.',
+		category: 'Navigation',
+		status: 'beta',
+		importPath: "import { PaginationWrapper } from '@dashfi/svelte/ui/pagination-wrapper'"
+	},
+	{
+		slug: 'sidebar',
+		name: 'Sidebar',
+		description:
+			'The authenticated-app navigation shell — collapsible (icon / offcanvas), auto-swaps to a Sheet on mobile, keyboard shortcut (Cmd/Ctrl+B). Family of 20+ sub-components: Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu, SidebarGroup, SidebarHeader/Footer/Rail/Separator/Input.',
+		category: 'Navigation',
+		status: 'beta',
+		importPath:
+			"import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu } from '@dashfi/svelte/ui/sidebar'"
+	},
+	{
 		slug: 'dropdown-menu',
 		name: 'Dropdown Menu',
 		description: 'Contextual action menu attached to a trigger button.',

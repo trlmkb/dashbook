@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import Header from '$chrome/Header.svelte';
 	import Footer from '$chrome/Footer.svelte';
@@ -15,6 +16,17 @@
 	// access is gated independently via `guardInternal()`.
 	onMount(() => {
 		internalState.refresh();
+	});
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
 	});
 
 	// Routes that render full-screen with no header/footer/palette chrome.

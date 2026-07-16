@@ -60,12 +60,12 @@ export const pill: ComponentSpec = {
 			name: 'base',
 			description: 'Neutral.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' } },
+				{ name: 'bg', token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' } },
 				{
 					name: 'text',
-					token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+					token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 				},
-				{ name: 'border', token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' } }
+				{ name: 'border', token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' } }
 			]
 		},
 		{
@@ -76,7 +76,7 @@ export const pill: ComponentSpec = {
 				{ name: 'bg', notes: '`--color-brand` at 10% alpha.' },
 				{
 					name: 'text',
-					token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' }
+					token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' }
 				},
 				{ name: 'border', notes: '`--color-brand` at 30% alpha.' }
 			]

@@ -37,12 +37,12 @@ export const indicator: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Dot + ping',
-			token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' },
 			notes: '`bg-brand`. Jade.'
 		},
 		{
 			name: 'Halo',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' },
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' },
 			notes: '`border-background`. Cream in light, ink in dark.'
 		}
 	],
