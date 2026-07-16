@@ -316,6 +316,16 @@ export const components: ComponentEntry[] = [
 		importPath: "import { PaginationWrapper } from '@dashfi/svelte/ui/pagination-wrapper'"
 	},
 	{
+		slug: 'sidebar',
+		name: 'Sidebar',
+		description:
+			'The authenticated-app navigation shell — collapsible (icon / offcanvas), auto-swaps to a Sheet on mobile, keyboard shortcut (Cmd/Ctrl+B). Family of 20+ sub-components: Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu, SidebarGroup, SidebarHeader/Footer/Rail/Separator/Input.',
+		category: 'Navigation',
+		status: 'beta',
+		importPath:
+			"import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu } from '@dashfi/svelte/ui/sidebar'"
+	},
+	{
 		slug: 'dropdown-menu',
 		name: 'Dropdown Menu',
 		description: 'Contextual action menu attached to a trigger button.',
