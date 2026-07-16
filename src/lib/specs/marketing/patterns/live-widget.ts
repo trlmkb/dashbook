@@ -19,6 +19,9 @@ export const liveWidget: MarketingPatternSpec = {
 		'An interactive product-mock island styled entirely off `--m-*` tokens so it re-themes with the surface (including `[data-marketing-dark]`). All displayed figures — bars, counters, values — are derived from state; nothing is hardcoded to fake an update.',
 
 	source: '/shipping islands: ShipForensicWidget · ShipCalculator · ShipPillars feeds · ShipTrustBar (count-up); also slide/ CarrierBrief, ContractAuditMock',
+	sourceRevision: 'a5be701',
+	lastVerifiedAt: '2026-07-16',
+	verificationStatus: 'partial',
 
 	whenToUse:
 		'When a section needs a small, believable slice of the product — a recovered-savings counter, an audit feed, a mini chart — that animates and reads as "live". CarrierBrief and ContractAuditMock are the reference instances. Reach for the scale-to-fit product shot instead when you want a static, pixel-crisp full screen rather than a moving widget.',
@@ -57,6 +60,20 @@ export const liveWidget: MarketingPatternSpec = {
 		{ name: 'Hydration', value: 'client:visible / idle', notes: 'Island mounts on scroll-in.' },
 		{ name: 'Bars', value: 'height = value / max', notes: 'Every bar derived from the state array.' },
 		{ name: 'Count-up', value: '~800–1200ms', notes: 'Disabled under reduced motion.' },
+	],
+
+	variants: [
+		{ name: 'savings feed', description: 'The default shape — a value + bar/counter feed (CarrierBrief, ContractAuditMock).' },
+		{
+			name: 'term-selector',
+			description:
+				'A Net-1 → Net-60 term picker (a segmented control or slider) drives the recomputed figures live — the /corporate-card instance. The term choice is the only input; every displayed number (rate, float, savings) re-derives from it.',
+		},
+		{
+			name: 'tier-slider',
+			description:
+				'A single slider (spend tier or cashback tier) recomputes the reward/cashback figure as it drags — the /meta-cashback instance. Same one-source-of-truth rule applies: the slider value is state, the displayed figure is derived, never a lookup table of pre-rendered strings.',
+		},
 	],
 
 	props: [
