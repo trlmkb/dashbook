@@ -49,6 +49,10 @@ The drift problem exists *because* specs and lib live apart. The migration to `c
 
 The specs' `canonicalSource` fields already encode the core path (`libs/svelte-components/lib/src/lib/ui/badge/badge.svelte`), so the engine is written against that path shape from day one. Landing in core is a **root-prefix swap**, not a rewrite. There is no version of the migration decision where this work is wasted; it pays off immediately and pays off *most* after migration.
 
+### 3.1 Endgame — this audit is a bridge to "can't-drift"
+
+The decided direction (see `.knowledge/dashbook-operating-model.md` §14) is for Dashbook to become the source of truth via a single **tokenized** source that *generates* the shared library theme and the Figma library. Once values are generated from one source rather than hand-mirrored, the value layer this engine audits **cannot drift** — the "detect-and-correct" loop collapses into "correct by construction." This engine is the bridge to that state: it makes the mirror trustworthy *today* (detect + correct), and its resolver + comparison become the *generation check* that guards the tokens later. Note the layering, though — tokens fix values only. Component **anatomy/Foundation** and **implementation routing** (import vs port vs recipe) still need the extractors and handoff metadata here; a token cannot tell a receiver "this is a Button, import it." Richer tokens make a recreated component look perfect, so this work must stay paired with *stronger* reuse routing, not weaker.
+
 ## 4. Research findings (2026-07-13)
 
 Four parallel read-only research agents analyzed all 62 lib components (three by source pattern, one on the spec-side payoff). Full transcripts in the session; the load-bearing conclusions:
