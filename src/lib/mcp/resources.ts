@@ -17,6 +17,11 @@
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { allComponentSpecs, getComponentSpec } from '../specs/components/index.js';
 import { getProductFoundationData, type ProductFoundationName } from './tools/product.js';
+import {
+	getComponentImplementation,
+	withComponentImplementation,
+	importPathOnly
+} from '../specs/implementation.js';
 
 const JSON_MIME = 'application/json';
 
@@ -28,11 +33,6 @@ const PRODUCT_FOUNDATION_NAMES: ProductFoundationName[] = [
 	'motion',
 	'shadows'
 ];
-
-/** Strip the "import { X } from 'Y'" wrapper down to just "Y". */
-function importPathOnly(importPath: string): string {
-	return importPath.replace(/^import .+ from '/, '').replace(/'$/, '');
-}
 
 export function registerDashbookResources(server: McpServer): void {
 	// ── components (list) ──────────────────────────────────────────────
@@ -52,7 +52,8 @@ export function registerDashbookResources(server: McpServer): void {
 				category: s.category,
 				status: s.status,
 				importPath: importPathOnly(s.importPath),
-				description: s.description
+				description: s.description,
+				implementation: getComponentImplementation(s)
 			}));
 			return {
 				contents: [
@@ -92,7 +93,13 @@ export function registerDashbookResources(server: McpServer): void {
 				throw new Error(`Component "${String(slug)}" not found. Read dashbook://components for available slugs.`);
 			}
 			return {
-				contents: [{ uri: uri.href, mimeType: JSON_MIME, text: JSON.stringify(spec, null, 2) }]
+				contents: [
+					{
+						uri: uri.href,
+						mimeType: JSON_MIME,
+						text: JSON.stringify(withComponentImplementation(spec), null, 2)
+					}
+				]
 			};
 		}
 	);

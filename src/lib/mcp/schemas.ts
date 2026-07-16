@@ -73,7 +73,33 @@ const colorTokenShape = z.object({
 	role: z.string()
 });
 
-/** Mirrors `ComponentSpec` in `src/lib/specs/types.ts`. */
+/** Mirrors `ComponentImplementation` in `src/lib/specs/implementation.ts`. */
+const implementationShape = z.discriminatedUnion('kind', [
+	z.object({
+		kind: z.literal('shared-svelte-component'),
+		reusePolicy: z.literal('required-in-svelte'),
+		package: z.literal('@dashfi/svelte'),
+		importPath: z.string(),
+		importStatement: z.string(),
+		canonicalSource: z.string(),
+		handoffDirective: z.string(),
+		nonSvelteFallback: z.object({
+			action: z.literal('port'),
+			tool: z.literal('product_port_to'),
+			instruction: z.string()
+		})
+	}),
+	z.object({
+		kind: z.literal('dashbook-scaffold'),
+		reusePolicy: z.literal('reference-guidance'),
+		importPath: z.string(),
+		canonicalSource: z.string(),
+		handoffDirective: z.string()
+	})
+]);
+
+/** Mirrors `ComponentSpec` in `src/lib/specs/types.ts`, plus the `implementation`
+ * routing appended by `withComponentImplementation`. */
 const componentSpecShape = {
 	slug: z.string(),
 	name: z.string(),
@@ -93,7 +119,8 @@ const componentSpecShape = {
 	porting: z.array(z.string()),
 	example: z.string(),
 	accessibility: z.array(z.string()),
-	changelog: z.array(changelogEntryShape)
+	changelog: z.array(changelogEntryShape),
+	implementation: implementationShape
 };
 
 /** Mirrors `MarketingTokenUse` in `src/lib/specs/marketing/patterns/types.ts`. */
@@ -143,7 +170,7 @@ const marketingPatternSpecShape = {
 
 // ── Per-tool output schemas ─────────────────────────────────────────────────
 
-/** `product_get_component` — the raw `ComponentSpec`, no fields appended. */
+/** `product_get_component` — the `ComponentSpec` plus appended `implementation` routing. */
 export const productGetComponentOutputSchema = componentSpecShape;
 
 /** `product_get_token` — one resolved `ColorToken`. */
@@ -159,7 +186,8 @@ export const productListComponentsOutputSchema = {
 			category: componentSpecShape.category,
 			status: componentSpecShape.status,
 			importPath: z.string(),
-			description: z.string()
+			description: z.string(),
+			implementation: implementationShape
 		})
 	)
 };
