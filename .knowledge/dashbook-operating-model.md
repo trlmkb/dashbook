@@ -4,7 +4,7 @@
 > **Audience:** Engineers, designers, marketing teams, maintainers, and coding agents  
 > **Last verified:** 2026-07-16  
 > **Current phase:** Standalone Dashbook repository; core Nx migration planned  
-> **Public surface:** `https://brand.dash.fi` is already live — it is the custom domain of the standalone Vercel deployment (`dashbook.vercel.app` also resolves). The Nx migration re-hosts what sits behind `brand.dash.fi` (Vercel → core/AWS); it does not introduce the domain.  
+> **Public surface:** `https://dashbook.vercel.app` is the current live standalone Vercel deployment — it is today's Dashbook prod. `brand.dash.fi` is the **planned** public domain for the Nx migration target; it does **not** yet serve the current Dashbook app. The Nx migration re-hosts the app (Vercel → core/AWS) and cuts `brand.dash.fi` over to it.  
 > **Authority state:** Dashbook is a downstream mirror and delivery layer **today**. The **decided direction** (2026-07-16) is for Dashbook to become the source of truth — a single tokenized source driving the product and marketing code apps and the Figma library. Authority flips only when the §14 gates pass; until then the current implementation wins and Dashbook is corrected to match it.
 
 This document is the durable context and execution model for Dashbook. It
@@ -179,8 +179,8 @@ confirm branches and worktrees before editing.
 | Existing Nx brand scaffold  | `core/packages/brand-book/app` and `core/packages/brand-book/infra` | Old one-page/static scaffold and Terraform; migration substrate, not the current Dashbook codebase |
 | Marketing website           | `/Users/zy/dev/dash/www.dash.fi`                                    | Astro/React dash.fi implementation and marketing authority                                         |
 | Figma library               | External Figma file                                                 | Downstream mirror and design/handoff surface                                                       |
-| Public domain               | `brand.dash.fi` (live now)                                          | Already the custom domain of the standalone Vercel deploy; `dashbook.vercel.app` also resolves      |
-| Hosting                     | Vercel today → core/AWS after migration                             | Migration re-hosts `brand.dash.fi` behind core infra; the public domain itself does not change      |
+| Public domain               | `dashbook.vercel.app` (live now); `brand.dash.fi` planned (NX target) | Current prod is the Vercel deploy. `brand.dash.fi` is reserved for the post-migration host and does **not** yet serve the app |
+| Hosting                     | Vercel today → core/AWS after migration                             | Migration re-hosts the app behind core infra and cuts `brand.dash.fi` over to it                    |
 
 Older documentation alternates between `core/packages/brand/` and the existing
 `core/packages/brand-book/` path. The migration must explicitly choose the Nx
@@ -1252,6 +1252,18 @@ Review this document:
 - Approved by:
 - Follow-up:
 ```
+
+### 2026-07-16 — Domain correction + #17/#15 shipped
+
+- Decision: corrected the public-surface claim. `dashbook.vercel.app` is the
+  current live standalone prod; `brand.dash.fi` is the **planned** Nx-migration
+  domain and does **not** yet serve the app (verified: it returns HTML, not the
+  app's `/api` routes). Fixed the §0 header and the §4 repository-map row.
+- Authority affected: none — Dashbook remains a downstream mirror.
+- Repositories affected: dashbook (docs only).
+- Follow-up: #17 (spec-lib drift audit + handoff routing) and #15 (MCP
+  resources/schemas + implementation routing + ARD server-card + same-origin
+  validation) are merged to main; plugin v0.4.0, MCP server v0.5.0, site v1.2.0.
 
 ### 2026-07-16 — Initial operating model
 
