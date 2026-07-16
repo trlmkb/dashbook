@@ -6,8 +6,9 @@ Dashbook has two namespaces. Product is UI you build into the app — components
 
 ## Model Context Protocol (best for agents)
 
-- [MCP server](https://dashbook.vercel.app/mcp): Streamable HTTP endpoint. `product_*` tools cover components, foundations, tokens, and porting; `marketing_*` tools cover page patterns, marketing foundations, brand voice, logos, card art, partner kits, and legal disclosures. Point any MCP-aware client here.
-- [MCP setup and tool list](https://dashbook.vercel.app/developers/mcp): how to connect Claude Code, claude.ai, Claude Desktop, and other clients.
+- [MCP server](https://dashbook.vercel.app/mcp): Streamable HTTP endpoint. `product_*` tools cover components, foundations, tokens, and porting; `marketing_*` tools cover page patterns, marketing foundations, brand voice, logos, card art, partner kits, and legal disclosures. Also exposes MCP resources (`dashbook://components`, `dashbook://components/{slug}`, `dashbook://foundations/{slug}`) for clients that browse a catalogue instead of calling a tool. Point any MCP-aware client here.
+- [MCP setup and tool list](https://dashbook.vercel.app/developers/mcp): how to connect Claude Code, claude.ai, Claude Desktop, and other clients — including the `claude mcp add` connector command.
+- [ARD manifest](https://dashbook.vercel.app/.well-known/ai-catalog.json): Agentic Resource Discovery manifest listing the MCP server, JSON API, this file, and the docs site — for ARD-aware agent clients that discover callable surfaces automatically.
 
 ## JSON API (no MCP required — CORS-open, 24-hour cache)
 

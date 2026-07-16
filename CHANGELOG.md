@@ -5,6 +5,34 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
+## [1.2.0] — 2026-07-16
+
+### Added — Claude Code integration refresh (plugin v0.4.0, MCP server v0.5.0)
+- ARD discovery manifest at `/.well-known/ai-catalog.json` (draft Agentic
+  Resource Discovery spec) pointing at the MCP server card, JSON API,
+  llms.txt, and docs site. The `application/mcp-server-card+json` entry
+  resolves to a server-card document, not the execution endpoint.
+- MCP resources: `dashbook://components`, `dashbook://components/{slug}`,
+  `dashbook://foundations/{slug}` — same data as the matching product_* tools,
+  for clients that browse a catalogue instead of calling a tool. The component
+  resources carry the same `implementation` handoff routing as the tools and
+  JSON API (§8.3 parity).
+- `outputSchema` (structured content) on product_get_component (incl. the
+  `implementation` field), product_get_token, product_list_components,
+  marketing_get_pattern, and marketing_get_marketing_palette.
+- Origin validation on the public `/mcp` endpoint — allows the request's
+  actual same origin plus a configurable trusted-client allowlist; DNS-
+  rebinding future-proofing, not an auth boundary.
+- Plugin manifest: `displayName`, version 0.4.0; marketplace listing gained
+  `category` and `tags`.
+- SKILL.md: trigger keywords moved to `when_to_use` frontmatter.
+- `/developers/mcp`: "Add as a connector" section (Claude Code CLI,
+  claude.ai custom connector, ARD/llms.txt discovery) and a Resources list.
+
+### Removed
+- Dropped the `prompts` MCP capability flag — the server had declared it
+  without ever registering a prompt.
+
 ## [1.1.0] — 2026-07-16
 
 Spec↔lib drift audit and machine-readable Design → Code handoff routing.
