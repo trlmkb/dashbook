@@ -6,8 +6,9 @@
 	"description": "Dash.fi brand & design system portal",
 	"scripts": {
 		"tokens": "node scripts/build-tokens.mjs",
+		"tokens:check": "node scripts/build-tokens.mjs --check",
 		"dev": "vite dev",
-		"build": "node scripts/build-tokens.mjs && vite build",
+		"build": "node scripts/build-tokens.mjs --check && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

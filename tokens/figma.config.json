@@ -1,0 +1,16 @@
+{
+  "$description": "Figma identifiers for the token sync (read by scripts/build-tokens.mjs). These are configuration for the downstream Figma mirror, not a token authority. Update if the Figma file, collections, or modes change.",
+  "fileKey": "91csAF1OGUmCZROdZlCRSv",
+  "collections": {
+    "base": "3:2",
+    "product": "3:3",
+    "marketing": "3:4"
+  },
+  "modes": {
+    "base": "3:0",
+    "productLight": "3:1",
+    "productDark": "3:2",
+    "marketingLight": "3:3",
+    "marketingDark": "3:4"
+  }
+}

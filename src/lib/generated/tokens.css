@@ -17,7 +17,7 @@
 		--card: #faf8f1;
 		--popover: #ffffff;
 
-		/* Base palette — brand primitives (single source of every hex) */
+		/* Base palette — brand primitives (every brand hex within this mirror) */
 		--dash-cobalt: #354cef;
 		--dash-cobalt-deep: #2a3ecc;
 		--dash-periwinkle: #b6c1f2;

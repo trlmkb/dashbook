@@ -1,7 +1,7 @@
 {
-  "$description": "Dashbook design tokens — the single source of truth. Generates CSS custom properties (src/lib/generated/tokens.css), a typed map (tokens.ts), and Figma variables (tokens/figma.tokens.json). DTCG-format with an inline {light,dark} mode extension for mode-varying tokens. Refs use {base.<name>} and resolve to var(--dash-*) in CSS / VARIABLE_ALIAS in Figma. Edit here, then run `pnpm tokens`.",
+  "$description": "Dashbook token generation input — a normalized MIRROR, not a token authority. Product token authority is @dashfi/svelte (core); marketing authority is the dash.fi website; the audited product-token DATA served by the JSON API / MCP / docs is src/lib/tokens.ts (guarded by `pnpm spec-audit`). This file drives the Dashbook PORTAL's generated CSS (src/lib/generated/tokens.css + theme.css) and a Figma variable mirror (tokens/figma.tokens.json). DTCG-format with an inline {light,dark} mode extension. Refs use {base.<name>} and resolve to var(--dash-*) in CSS / VARIABLE_ALIAS in Figma. Edit here, then run `pnpm tokens`.",
   "base": {
-    "$description": "Brand primitives — the single source of every brand hex. Single mode.",
+    "$description": "Brand primitives — every brand hex within this mirror. Single mode.",
     "dash-cobalt": { "$type": "color", "$value": "#354cef" },
     "dash-cobalt-deep": { "$type": "color", "$value": "#2a3ecc" },
     "dash-periwinkle": { "$type": "color", "$value": "#b6c1f2" },
@@ -18,7 +18,7 @@
     "dash-graphite-soft": { "$type": "color", "$value": "#80817a" }
   },
   "product": {
-    "$description": "Product semantic roles. Light/Dark. Consumed as --<name> in CSS and Product semantic collection in Figma.",
+    "$description": "Dashbook PORTAL chrome roles (Dashbook-owned per operating-model §5). Light/Dark. Drive the portal's --<name> CSS token layer + the Figma Product-semantic mirror. These are the portal's own theme and INTENTIONALLY differ from the audited @dashfi/svelte library values (src/lib/tokens.ts); do not treat this block as the product-token authority or the audited product data.",
     "bg": { "$type": "color", "$value": { "light": "#faf8f1", "dark": "#0f1413" } },
     "bg-muted": { "$type": "color", "$value": { "light": "#eceae0", "dark": "#181e1d" } },
     "fg": { "$type": "color", "$value": { "light": "{base.dash-jade-deep}", "dark": "{base.dash-white}" } },
@@ -85,7 +85,7 @@
     "dur-slow": { "$type": "duration", "$value": "500ms" }
   },
   "tailwind": {
-    "$description": "Tailwind @theme colour roles (--color-*). Light/Dark. Generated into src/lib/generated/theme.css (imported by app.css). NOTE: primary=ink and destructive=orange here — this surface is what @dashfi/svelte utilities render with; the product token layer (--primary #000, --destructive #000) intentionally differs and is a documented follow-up to reconcile.",
+    "$description": "Tailwind @theme colour roles (--color-*) for the Dashbook PORTAL's utility classes. Light/Dark. Generated into src/lib/generated/theme.css (imported by app.css). @dashfi/svelte ships its own theme and does NOT consume this. Values match the portal token layer above (primary=ink, destructive=orange); like that layer they are portal chrome and differ from the audited library values in src/lib/tokens.ts.",
     "background": { "$type": "color", "$value": { "light": "#faf8f1", "dark": "#0f1413" } },
     "foreground": { "$type": "color", "$value": { "light": "{base.dash-jade-deep}", "dark": "{base.dash-white}" } },
     "card": { "$type": "color", "$value": { "light": "#faf8f1", "dark": "#0f1413" } },

@@ -102,7 +102,16 @@ even contradicted the Figma handoff it claimed to mirror). Corrected to match co
 - `destructive`: `#000000` (black) → **orange `#ff4000`** — matches the lib + `@theme` + handoff.
 
 Applied in `tokens/dashbook.tokens.json`, regenerated, and synced to Figma (product
-`primary` → alias to `dash/ink`, `destructive` → orange). Now dashbook mirror == core.
+`primary` → alias to `dash/ink`, `destructive` → orange).
+
+> **Accuracy caveat (2026-07-16):** these corrections move the **portal chrome**
+> toward core but are not a byte-exact match. `spec-audit` resolves the audited lib
+> `primary` light to **#24251d**, whereas `{base.dash-ink}` is **#25261d** (one hex
+> step). More broadly, the portal `product` group (bg, fg-muted, border, brand,
+> etc.) is Dashbook-owned chrome that legitimately differs from the audited library
+> in ~11 roles; it is *not* the audited product-token data (that is `src/lib/tokens.ts`,
+> unchanged here). A true zero-value-change reconcile of the lib itself belongs to
+> Phase 1 in core, not to this Dashbook-side mirror.
 
 > **Note on naming:** `primary` here is the shadcn *action* role (the default button),
 > **not** "the primary brand colour." Jade is the **brand** colour (`brand`/`ring`/`accent`
