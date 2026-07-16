@@ -38,7 +38,9 @@ const manifest = {
 	specVersion: '1.0',
 	host: {
 		displayName: 'Dashbook — Dash.fi design system',
-		documentationUrl: `${DOCS_BASE}/developers/mcp`
+		// Public docs page — /developers/mcp is behind internal-login, so this
+		// public manifest points at the public engineer runbook instead.
+		documentationUrl: `${DOCS_BASE}/use/dev`
 	},
 	entries: [
 		{
@@ -61,7 +63,7 @@ const manifest = {
 			type: 'application/json',
 			url: `${DOCS_BASE}/api/components.json`,
 			description:
-				'CORS-open, no-auth JSON endpoints mirroring the MCP tool responses, for clients without MCP support. Root catalogue at /api/components.json; see /developers/mcp for the full endpoint list.',
+				'CORS-open, no-auth JSON endpoints mirroring the MCP tool responses, for clients without MCP support. Root catalogue at /api/components.json; see /use/dev for the endpoint list and connection guide.',
 			tags: ['design-system', 'brand', 'dash.fi']
 		},
 		{
