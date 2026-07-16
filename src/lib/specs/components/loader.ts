@@ -13,69 +13,47 @@ export const loader: ComponentSpec = {
 
 	dimensions: [
 		{
-			name: 'Outer wrapper',
-			value: '32px padding, 8px gap, centered both axes',
-			tw: 'my-auto flex flex-col items-center justify-center gap-2 p-8'
+			name: 'Glyph',
+			value: '24×24px Lucide Loader icon',
+			tw: 'size-6'
 		},
-		{
-			name: 'Glyph container',
-			value: '20px tall',
-			tw: 'flex h-5 items-center justify-center'
-		},
-		{
-			name: 'Glyph bar',
-			value: '4px tall × 20px wide, 2px radius',
-			tw: 'h-1 w-5 rounded-xs'
-		},
-		{ name: 'Message', value: '14px', tw: 'text-sm' },
 		{
 			name: 'Animation',
-			value: '1.6s cubic-bezier(1,0,0,1) infinite',
-			notes:
-				'Keyframes `loading-animation`: 0% rotate(0deg) → 75% rotate(730deg) → 100% rotate(720deg). Tiny back-and-forth at the end gives the bar a "settle" feel.'
+			value: 'continuous Tailwind spin',
+			tw: 'animate-spin'
 		}
 	],
 
 	tokens: [
 		{
-			name: 'Bar',
-			token: { cssVar: '--color-accent-foreground', light: '#123b39', dark: '#ffffff' },
-			notes: '`bg-accent-foreground`. Deep jade in light, white in dark.'
-		},
-		{
-			name: 'Message text',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' },
+			name: 'Glyph',
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' },
 			notes: '`text-muted-foreground`.'
 		}
 	],
 
 	composition: [
-		'Drop into an empty state, a loading card, a button (overrides padding via <code>class</code> prop).',
-		"Message is optional but defaults to <code>'Loading, please wait..'</code>."
+		'Drop the icon beside caller-owned loading copy or inside a caller-owned status region.',
+		'Use Button\'s built-in <code>loading</code> prop for button loading states; it owns its own spinner.'
 	],
 
 	nonFeatures: [
-		'No size variants. The bar size is brand-tuned.',
-		'No color prop. Mono accent-foreground is the canonical tint.',
+		'No wrapper, padding, or message. Loader is only the spinning icon.',
+		'No size variants. Override <code>class</code> only when the surrounding pattern requires another icon size.',
+		'No color prop. Muted foreground is the canonical tint.',
 		'No determinate progress. For known-progress loading, use <code>LinearLoader</code> or <code>Progress</code>.'
 	],
 
 	props: [
 		{
-			name: 'message',
-			type: 'string',
-			default: "'Loading, please wait..'",
-			description: 'Caption shown beneath the rotating bar.'
-		},
-		{
 			name: 'class',
 			type: 'string',
-			description: 'Additional Tailwind classes appended to the outer container.'
+			description: 'Additional classes merged onto the Lucide Loader icon.'
 		}
 	],
 
 	porting: [
-		'Single rotating bar at 1.6s cubic-bezier(1,0,0,1) + a muted caption. <code>--color-accent-foreground</code> tint.'
+		'24px Lucide Loader icon in <code>--color-muted-foreground</code> with the standard continuous spin animation. Copy and status semantics belong to the caller.'
 	],
 
 	example: `<script lang="ts">
@@ -85,11 +63,16 @@ export const loader: ComponentSpec = {
 <Loader />`,
 
 	accessibility: [
-		'Wrap the loading region with <code>role="status"</code> + <code>aria-live="polite"</code> so screen readers announce the work is in progress.',
-		'The message prop is read by AT — keep it concise and meaningful (e.g. "Loading transactions…").'
+		'The icon alone does not announce loading. Wrap it with caller-owned <code>role="status"</code> and concise visually-hidden or visible copy.',
+		'Keep motion non-essential; the surrounding status text must communicate the state.'
 	],
 
 	changelog: [
+		{
+			version: 'v0.5.0 audit',
+			date: '2026-07-14',
+			note: 'Reconciled against the shipped component. Loader is now a bare 24px muted Lucide spinner; the former padded wrapper, rotating bar, message prop, and custom keyframes are not present in the library.'
+		},
 		{
 			version: 'v0.3.2',
 			date: '2026-05-13',

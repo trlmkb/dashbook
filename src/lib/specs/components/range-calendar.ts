@@ -44,7 +44,7 @@ export const rangeCalendar: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Start / end fill',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' }
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' }
 		},
 		{
 			name: 'Start / end text',
@@ -52,12 +52,12 @@ export const rangeCalendar: ComponentSpec = {
 		},
 		{
 			name: 'Middle tint',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Rendered at ~50% opacity via bg-accent/50.'
 		},
 		{
 			name: 'Outside month',
-			token: { cssVar: '--color-muted-foreground', light: '#6e7878', dark: '#8b9695' }
+			token: { cssVar: '--color-muted-foreground', light: '#6e8180', dark: '#819896' }
 		}
 	],
 

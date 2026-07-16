@@ -14,6 +14,7 @@
 
 import type { RequestHandler } from './$types';
 import { getComponentSpec } from '$lib/specs/components';
+import { withComponentImplementation } from '$lib/specs/implementation';
 
 const ONE_DAY = 60 * 60 * 24;
 
@@ -43,7 +44,7 @@ export const GET: RequestHandler = async ({ params }) => {
 		);
 	}
 
-	return new Response(JSON.stringify(spec, null, 2), {
+	return new Response(JSON.stringify(withComponentImplementation(spec), null, 2), {
 		status: 200,
 		headers: {
 			'Content-Type': 'application/json; charset=utf-8',

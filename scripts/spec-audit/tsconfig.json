@@ -1,0 +1,16 @@
+{
+	"comment": "Self-contained tsconfig for the spec-audit engine. Deliberately does NOT extend the app's SvelteKit tsconfig — the engine is a standalone Node/TS tool. esbuild/vitest pick up the nearest tsconfig, so this isolates the engine from '.svelte-kit/tsconfig.json'.",
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"lib": ["ES2022"],
+		"types": ["node"],
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"verbatimModuleSyntax": false
+	},
+	"include": ["**/*.ts"]
+}

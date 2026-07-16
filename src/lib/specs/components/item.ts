@@ -60,21 +60,21 @@ export const item: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Link hover',
-			token: { cssVar: '--color-accent', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-accent', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Rendered at 50% via [a]:hover:bg-accent/50.'
 		},
 		{
 			name: 'Focus ring',
-			token: { cssVar: '--color-ring', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' },
 			notes: 'Applied via border-ring + ring-ring/50 ring-[3px] on focus.'
 		},
 		{
 			name: 'Outline variant border',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'Muted variant background',
-			token: { cssVar: '--color-muted', light: '#eceae0', dark: '#181e1d' },
+			token: { cssVar: '--color-muted', light: '#f1efea', dark: '#191f1d' },
 			notes: 'Rendered at 50% via bg-muted/50.'
 		}
 	],

@@ -42,11 +42,11 @@ export const fullscreenDialog: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Background',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' }
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' }
 		},
 		{
 			name: 'Logo (light)',
-			token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' },
+			token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' },
 			notes: 'In dark mode the logo overrides to pure white via <code>dark:text-white</code>.'
 		},
 		{ name: 'Close button', notes: 'Inherits Button ghost variant tokens.' }

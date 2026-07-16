@@ -1,5 +1,5 @@
 /**
- * Component spec registry — single source of truth for all 60 components.
+ * Component spec registry — single source of truth for shared components and product chrome.
  *
  * Imported by:
  * - Docs pages (`src/routes/components/<slug>/+page.svelte`) — render anatomy
@@ -53,6 +53,7 @@ import { merchantLogo } from './merchant-logo.js';
 import { multiSelect } from './multi-select.js';
 import { navigation } from './navigation.js';
 import { pagination } from './pagination.js';
+import { paginationWrapper } from './pagination-wrapper.js';
 import { phoneInput } from './phone-input.js';
 import { pill } from './pill.js';
 import { popover } from './popover.js';
@@ -119,6 +120,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 	navigation,
 	'page-shell': pageShell,
 	pagination,
+	'pagination-wrapper': paginationWrapper,
 	'partner-cobrand': partnerCobrand,
 	'phone-input': phoneInput,
 	pill,

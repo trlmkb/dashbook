@@ -5,6 +5,39 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
+## [1.1.0] — 2026-07-16
+
+Spec↔lib drift audit and machine-readable Design → Code handoff routing.
+Bumps the MCP server to **v0.4.0** and the Claude plugin to **v0.3.0** — a
+contract change, so consumers should refresh the plugin to pick it up.
+
+### Added — Drift audit
+- `pnpm spec-audit` — a reusable runner that compares each Dashbook component
+  spec's recorded light/dark token values against the pinned `@dashfi/svelte`
+  theme. `--write` reconciles Dashbook (never upstream), `--json` emits a
+  machine-readable report, `--strict` makes advisory coverage/trace gaps
+  gating. The audit is asymmetric: it corrects Dashbook, not the library.
+- Result on this release: 0 stale resolved values. Source-token coverage gaps
+  and untraced dimension classes are reported as advisory.
+
+### Added — Design → Code handoff routing (MCP server v0.4.0)
+- Every component response now carries a machine-readable `implementation`
+  object. Shared `@dashfi/svelte` components route to
+  `kind: "shared-svelte-component"` / `reusePolicy: "required-in-svelte"` with
+  the exact `importStatement` and a `handoffDirective` telling Svelte/SvelteKit
+  receivers to import the shared component rather than recreate it from anatomy
+  HTML/CSS or screenshots. Non-Svelte receivers get a `nonSvelteFallback`
+  pointing at `product_port_to`. Dashbook-only scaffolds route to
+  `kind: "dashbook-scaffold"` / `reusePolicy: "reference-guidance"`.
+- The same routing is emitted by `product_get_component`,
+  `product_list_components`, `/api/components.json`, and
+  `/api/components/<slug>.json` from one shared enrichment path.
+- Receiving-skill guidance updated to teach the import-vs-port decision.
+
+### Fixed
+- Token drift reconciled against the pinned library (e.g. Button
+  `--color-brand-foreground` dark resolves to `#000000`).
+
 ## [1.0.0] — 2026-05-18
 
 First declared-stable release. Everything below is live at

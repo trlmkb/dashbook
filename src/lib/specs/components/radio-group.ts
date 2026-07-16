@@ -41,7 +41,7 @@ export const radioGroup: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Border',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: 'The same hairline tone as Input borders. Stays the same colour in both checked and unchecked states.'
 		},
 		{
@@ -50,7 +50,7 @@ export const radioGroup: ComponentSpec = {
 		},
 		{
 			name: 'Indicator fill',
-			token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' },
+			token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' },
 			notes: "Via the icon's `fill-primary` class."
 		},
 		{

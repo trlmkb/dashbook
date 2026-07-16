@@ -69,7 +69,7 @@ export const button: ComponentSpec = {
 			tokens: [
 				{
 					name: 'bg',
-					token: { cssVar: '--color-primary', light: '#25261d', dark: '#ffffff' }
+					token: { cssVar: '--color-primary', light: '#24251d', dark: '#ffffff' }
 				},
 				{
 					name: 'text',
@@ -82,10 +82,10 @@ export const button: ComponentSpec = {
 			name: 'brand',
 			description: 'Jade brand button.',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-brand', light: '#2b605c', dark: '#5bb8b0' } },
+				{ name: 'bg', token: { cssVar: '--color-brand', light: '#2b5f5b', dark: '#46b9af' } },
 				{
 					name: 'text',
-					token: { cssVar: '--color-brand-foreground', light: '#ffffff', dark: '#ffffff' }
+					token: { cssVar: '--color-brand-foreground', light: '#ffffff', dark: '#000000' }
 				},
 				{ name: 'hover', notes: 'opacity 80%.' }
 			]
@@ -114,8 +114,8 @@ export const button: ComponentSpec = {
 			description: 'Transparent with a hairline border.',
 			tokens: [
 				{ name: 'bg', notes: 'transparent.' },
-				{ name: 'border', token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' } },
-				{ name: 'text', token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' } },
+				{ name: 'border', token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' } },
+				{ name: 'text', token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' } },
 				{ name: 'hover bg', notes: '`--color-muted` at 50% alpha.' }
 			]
 		},
@@ -123,7 +123,7 @@ export const button: ComponentSpec = {
 			name: 'secondary',
 			description: 'Cobalt blue brand-constant (not warm-grey on this branch).',
 			tokens: [
-				{ name: 'bg', token: { cssVar: '--color-cobalt', light: '#354cef', dark: '#354cef' } },
+				{ name: 'bg', token: { cssVar: '--color-cobalt', light: '#344aef', dark: '#344aef' } },
 				{
 					name: 'text',
 					token: { cssVar: '--color-cobalt-foreground', light: '#ffffff', dark: '#ffffff' }
@@ -140,8 +140,8 @@ export const button: ComponentSpec = {
 					name: 'text',
 					token: {
 						cssVar: '--color-muted-foreground',
-						light: '#6e7878',
-						dark: '#8b9695'
+						light: '#6e8180',
+						dark: '#819896'
 					}
 				},
 				{
@@ -155,7 +155,7 @@ export const button: ComponentSpec = {
 			description: 'Underline-only treatment.',
 			tokens: [
 				{ name: 'bg', notes: 'transparent.' },
-				{ name: 'text', token: { cssVar: '--color-foreground', light: '#123b39', dark: '#ffffff' } },
+				{ name: 'text', token: { cssVar: '--color-foreground', light: '#123b38', dark: '#ffffff' } },
 				{ name: 'underline', notes: '`underline-offset-4`; underline on hover.' }
 			]
 		}

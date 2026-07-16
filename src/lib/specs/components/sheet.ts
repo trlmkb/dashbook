@@ -44,12 +44,12 @@ export const sheet: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Content background',
-			token: { cssVar: '--color-background', light: '#faf8f1', dark: '#0f1413' }
+			token: { cssVar: '--color-background', light: '#faf9f5', dark: '#0f1412' }
 		},
 		{ name: 'Overlay', notes: 'Literal <code>bg-black/40</code> — not a theme token.' },
 		{
 			name: 'Close button focus ring',
-			token: { cssVar: '--color-ring', light: '#2b605c', dark: '#5bb8b0' }
+			token: { cssVar: '--color-ring', light: '#2b5f5b', dark: '#46b9af' }
 		}
 	],
 

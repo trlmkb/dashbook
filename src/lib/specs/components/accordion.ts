@@ -40,7 +40,7 @@ export const accordion: ComponentSpec = {
 	tokens: [
 		{
 			name: 'Item separator',
-			token: { cssVar: '--color-border', light: '#e8e6dc', dark: '#1f2a29' }
+			token: { cssVar: '--color-border', light: '#ebeae5', dark: '#1e2928' }
 		},
 		{
 			name: 'Chevron & text',

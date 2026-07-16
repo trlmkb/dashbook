@@ -47,11 +47,11 @@ export const telInput: ComponentSpec = {
 		{ name: 'Trigger', notes: 'Inherits Button outline variant tokens.' },
 		{
 			name: 'Popover surface',
-			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#141a19' }
+			token: { cssVar: '--color-popover', light: '#ffffff', dark: '#161d1a' }
 		},
 		{
 			name: 'Phone field underline',
-			token: { cssVar: '--color-input', light: '#b6c0bf', dark: '#1f2a29' },
+			token: { cssVar: '--color-input', light: '#c0cecd', dark: '#1e2928' },
 			notes: 'Inherits from Input.'
 		}
 	],
