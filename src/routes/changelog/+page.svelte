@@ -63,10 +63,63 @@
 				</p>
 			</div>
 		</li>
+		<li data-kind="minor" id="v1-3-0">
+			<span class="when">2026-07-16</span>
+			<div class="what">
+				<span class="ver"><a href="#v1-3-0" class="ver-anchor">v1.3.0</a><span class="latest">Latest</span></span>
+				<p>
+					<strong>UI/UX facelift.</strong> Reveal-on-scroll and count-up motion actions
+					(<code>src/lib/utils/motion.ts</code>) plus <code>.db-reveal</code> /
+					<code>.db-press</code> utilities; route view transitions (90ms out / 150ms in); a
+					sticky scroll-condensed header with an animated active-nav underline;
+					per-character hero slide-up; command-palette entrance + selection-highlight;
+					copy-confirm cross-fade; theme-toggle icon swap; animated tab/sidebar indicators;
+					<code>:focus-visible</code> rings across the chrome. Everything is gated behind
+					<code>prefers-reduced-motion</code> and falls back safely when
+					<code>IntersectionObserver</code> is unavailable. The homepage pill, "Recent"
+					band, and footer badge now read from a single <code>releases.ts</code> source.
+				</p>
+			</div>
+		</li>
+		<li data-kind="minor" id="v1-2-0">
+			<span class="when">2026-07-16</span>
+			<div class="what">
+				<span class="ver"><a href="#v1-2-0" class="ver-anchor">v1.2.0</a></span>
+				<p>
+					<strong>Claude Code integration refresh (plugin v0.4.0, MCP server v0.5.0).</strong>
+					MCP resources (<code>dashbook://components</code>, <code>.../{`{slug}`}</code>,
+					<code>dashbook://foundations/{`{slug}`}</code>) and Zod <code>outputSchema</code>s
+					that carry the <code>implementation</code> handoff routing — the same object the
+					tools and JSON API return (§8.3 five-surface parity). ARD discovery manifest at
+					<code>/.well-known/ai-catalog.json</code> whose
+					<code>application/mcp-server-card+json</code> entry resolves to a real server-card
+					document rather than the execution endpoint. Origin validation on
+					<code>/mcp</code> — the request's actual same origin plus a configurable
+					trusted-client allowlist. Dropped the unused <code>prompts</code> capability.
+				</p>
+			</div>
+		</li>
+		<li data-kind="minor" id="v1-1-0">
+			<span class="when">2026-07-16</span>
+			<div class="what">
+				<span class="ver"><a href="#v1-1-0" class="ver-anchor">v1.1.0</a></span>
+				<p>
+					<strong>Spec↔lib drift audit + Design → Code handoff routing (MCP server v0.4.0,
+					plugin v0.3.0).</strong> <code>pnpm spec-audit</code> compares each component
+					spec's recorded light/dark token values against the pinned
+					<code>@dashfi/svelte</code> theme (<code>--write</code> reconciles Dashbook only,
+					never upstream; <code>--strict</code> gates advisory coverage/trace gaps) — 0 stale
+					resolved values. Every component response now carries a machine-readable
+					<code>implementation</code> object routing Svelte receivers to the exact shared
+					import and non-Svelte receivers to <code>product_port_to</code>. Reconciled token
+					drift (e.g. Button dark <code>--color-brand-foreground</code> = <code>#000000</code>).
+				</p>
+			</div>
+		</li>
 		<li data-kind="major" id="v1-0-0">
 			<span class="when">2026-05-18</span>
 			<div class="what">
-				<span class="ver"><a href="#v1-0-0" class="ver-anchor">v1.0.0</a><span class="latest">Latest</span></span>
+				<span class="ver"><a href="#v1-0-0" class="ver-anchor">v1.0.0</a></span>
 				<p>
 					<strong>First declared-stable release.</strong> 60 components and 17 patterns
 					across 7 categories now ship with full anatomy (dimensions, tokens, variants,
