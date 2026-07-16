@@ -58,6 +58,16 @@ export type MarketingPatternSpec = {
 	/** Caveat about source verification (the website repo isn't bundled here). */
 	sourceNote?: string;
 
+	// ── Provenance (§7.3) ────────────────────────────────────────────────
+	// Optional so existing specs keep type-checking; backfill from the dash.fi
+	// source when determinable, else leave unset / mark `unverified`.
+	/** The dash.fi source commit/revision this spec was last checked against. */
+	sourceRevision?: string;
+	/** ISO date (YYYY-MM-DD) the spec was last verified against the source. */
+	lastVerifiedAt?: string;
+	/** How well the spec is confirmed against the live dash.fi source. */
+	verificationStatus?: 'verified' | 'partial' | 'unverified' | 'stale';
+
 	// ── Guidance ─────────────────────────────────────────────────────────
 	whenToUse?: string;
 

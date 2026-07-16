@@ -56,19 +56,13 @@ export const marketingFoundationsContent: MarketingFoundationEntry[] = [
 export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	// Heroes
 	{ slug: 'hero', name: 'Hero', category: 'Heroes', description: 'The base hero primitive — eyebrow, display heading, lede, CTA pair; start-aligned.' },
-	{ slug: 'centered-hero', name: 'CenteredHero', category: 'Heroes', description: 'The default page-opening hero — centred copy unit, CTA pair, optional product shot.' },
-	{ slug: 'asymmetric-product-hero', name: 'AsymmetricProductHero', category: 'Heroes', description: 'Copy beside a large product shot that bleeds off the viewport edge.' },
 	{ slug: 'product-hero', name: 'ProductHero', category: 'Heroes', description: 'Copy with a contained, framed scale-to-fit product shot.' },
-	{ slug: 'cosmic-hero', name: 'CosmicHero', category: 'Heroes', description: 'A high-drama dark opener with an ambient drifting accent glow.' },
-	// Layout frames
-	{ slug: 'slide-frame', name: 'SlideFrame', category: 'Layout frames', description: 'The full-width section band — paper · cream · ink · cobalt.' },
-	{ slug: 'two-col-slide', name: 'TwoColSlide', category: 'Layout frames', description: 'An even two-column copy↔media frame with a reverse prop.' },
+	{ slug: 'cosmic-hero', name: 'CosmicHero', category: 'Heroes', description: 'A high-drama dark opener with an ambient drifting accent glow. No live usage on dash.fi as of 2026-07 — reserved for campaign surfaces.' },
 	// Rhythm & connectors
 	{ slug: 'section-intro', name: 'Section intro (eyebrow + copy unit)', category: 'Rhythm & connectors', description: 'Eyebrow → display heading (accent span) → body. The most-repeated section header.' },
 	{ slug: 'big-quote', name: 'BigQuote', category: 'Rhythm & connectors', description: 'An oversized pull-quote that fills a band — large quote, attribution, optional accent quote-mark.' },
 	{ slug: 'marquee', name: 'Marquee', category: 'Rhythm & connectors', description: 'A horizontally scrolling, infinitely-looping row of logos or phrases; pauses on hover, stops under reduced motion.' },
 	{ slug: 'stat-trio', name: 'StatTrio', category: 'Rhythm & connectors', description: 'Three big stats in a row — a large tabular value plus an uppercase mono label each.' },
-	{ slug: 'stat-strip', name: 'StatStrip', category: 'Rhythm & connectors', description: 'A full-width strip of 3–5 stats on an emphasis band — value + label per stat, hairline dividers. The banded StatTrio.' },
 	// Content blocks
 	{ slug: 'feature-grid', name: 'FeatureGrid', category: 'Content blocks', description: 'A responsive 2–3-column grid of feature cells — icon, title, and blurb.' },
 	{ slug: 'feature-columns', name: 'FeatureColumns', category: 'Content blocks', description: '2–4 equal feature columns without card chrome — icon, heading, text.' },
@@ -80,19 +74,22 @@ export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	{ slug: 'platform-showcase', name: 'PlatformShowcase', category: 'Content blocks', description: 'A copy unit paired with a product visual; two-column, alternating-row friendly.' },
 	{ slug: 'utility-tiles', name: 'UtilityTiles', category: 'Content blocks', description: 'A dense auto-fit grid of small utility tiles — icon, label, optional sublabel.' },
 	{ slug: 'feature-tabs', name: 'Feature tabs', category: 'Content blocks', description: 'Auto-rotating pill tabs with a left→right progress fill.', toolId: 'marketing_feature_tabs' },
+	{ slug: 'faq-accordion', name: 'FaqAccordion', category: 'Content blocks', description: 'A hairline-divided Q/A list — one open at a time, mono "Q."/"A." markers, grid-rows reveal. Closes most marketing pages.' },
+	{ slug: 'calculator-island', name: 'Calculator island', category: 'Content blocks', description: 'A slider-driven estimator — intro column beside a card whose range slider drives a live result (recovery / savings / cashback).' },
 	// Media & proof
+	{ slug: 'trust-stat-band', name: 'TrustStatBand', category: 'Media & proof', description: 'The proof band — a rolling-counter headline stat, pillar stats, and a carrier/logo strip with a "live" indicator.' },
 	{ slug: 'product-shot', name: 'Scale-to-fit product shot', category: 'Media & proof', description: 'Product UI rebuilt as DOM, scaled to fit via a ResizeObserver.', toolId: 'marketing_product_shot' },
 	{ slug: 'testimonial-card', name: 'TestimonialCard', category: 'Media & proof', description: 'A customer quote card — quote, optional quote-mark, and attribution with an optional avatar or logo.' },
 	{ slug: 'case-study-card', name: 'CaseStudyCard', category: 'Media & proof', description: 'A card linking to a case study — one headline metric, a one-line result, and a read-the-story link.' },
 	{ slug: 'logo-rail', name: 'LogoRail', category: 'Media & proof', description: "An evenly-spaced rail of muted monochrome customer logos with an optional “Trusted by” eyebrow." },
 	{ slug: 'customer-platforms-rail', name: 'CustomerPlatformsRail', category: 'Media & proof', description: 'A muted rail of the platforms and integrations customers connect — logo plus optional label per item.' },
-	{ slug: 'pinned-showcase', name: 'PinnedShowcase', category: 'Media & proof', description: 'A sticky product visual stays in view while a column of steps scrolls past; the active step drives the visual.' },
+	{ slug: 'pinned-showcase', name: 'PinnedShowcase', category: 'Media & proof', description: 'A sticky product visual stays in view while a column of steps scrolls past; the active step drives the visual. No live usage on dash.fi as of 2026-07.' },
 	{ slug: 'dashfi-wordmark', name: 'DashfiWordmark', category: 'Media & proof', description: 'Inline use of the single-source Dash.fi wordmark — colourways per band, sizing, clear-space; fetched, never redrawn.' },
 	// CTAs
 	{ slug: 'split-cta', name: 'SplitCTA', category: 'CTAs', description: 'Two-column conversion block: copy + action panel.' },
-	{ slug: 'cta-section', name: 'CTASection', category: 'CTAs', description: 'Centred full-width CTA band on an emphasis surface.' },
 	{ slug: 'section-cta', name: 'SectionCTA', category: 'CTAs', description: 'Lightweight inline end-of-section nudge.' },
 	{ slug: 'home-final-cta', name: 'HomeFinalCTA', category: 'CTAs', description: 'The oversized page closer on the ink band.' },
+	{ slug: 'dark-cta-band', name: 'DarkCtaBand', category: 'CTAs', description: 'The jade-glow closing band — full-width dark section with a rising radial glow, reserved for the final page CTA.' },
 	// Building blocks
 	{ slug: 'squircle-button', name: 'Squircle button', category: 'Building blocks', description: '6px squircle CTA, no shadow, press-scale 0.97.', toolId: 'marketing_button' },
 	{ slug: 'chip', name: 'Chip', category: 'Building blocks', description: 'Soft-tinted pill tag; four tones via data-tone.', toolId: 'marketing_chip' },
