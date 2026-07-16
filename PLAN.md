@@ -1,7 +1,7 @@
 # Dashbook — Master Plan
 
 > Source of truth for the Dash.fi brand & design system portal.
-> Last updated: 2026-07-16 · current version v1.1.0
+> Last updated: 2026-07-16 · current version v1.2.0
 >
 > This document is kept in sync with reality after every task. If a row here
 > disagrees with the codebase, the codebase is right and this file is stale —

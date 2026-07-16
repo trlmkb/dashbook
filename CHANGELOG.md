@@ -5,7 +5,7 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
-## [Unreleased]
+## [1.2.0] — 2026-07-16
 
 ### Added — Claude Code integration refresh (plugin v0.4.0, MCP server v0.5.0)
 - ARD discovery manifest at `/.well-known/ai-catalog.json` (draft Agentic
