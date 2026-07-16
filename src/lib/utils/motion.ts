@@ -5,7 +5,9 @@ const reduced = () =>
 
 /** Adds `is-visible` when the node first enters the viewport. */
 export const reveal: Action<HTMLElement, { delay?: number } | undefined> = (node, opts) => {
-	if (reduced()) {
+	// Reduced motion, or no IntersectionObserver (older/edge runtimes): show
+	// the content immediately rather than leaving it stuck at opacity:0.
+	if (reduced() || typeof IntersectionObserver === 'undefined') {
 		node.classList.add('is-visible');
 		return;
 	}
@@ -31,6 +33,12 @@ export const countUp: Action<HTMLElement, { to: number; duration?: number } | un
 	const to = opts?.to ?? Number(node.textContent ?? 0);
 	const duration = opts?.duration ?? 700;
 	if (reduced() || !Number.isFinite(to)) return;
+	// No IntersectionObserver → no trigger for the count; land on the final
+	// value immediately instead of leaving the node stuck at '0'.
+	if (typeof IntersectionObserver === 'undefined') {
+		node.textContent = String(to);
+		return;
+	}
 	node.textContent = '0';
 	let rafId = 0;
 	const io = new IntersectionObserver((entries) => {
