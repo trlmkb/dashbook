@@ -5,6 +5,34 @@ external-facing changelog for consumers (engineers using the Claude Code
 plugin, dashfi-ui contributors, marketing/sales using the claude.ai
 Connector). The internal-facing tracker is PLAN.md.
 
+## [Unreleased]
+
+Marketing registry correction + §7.3 provenance groundwork — the low-risk +
+provenance slice extracted from PR #16 (see
+`docs/superpowers/plans/2026-07-16-pr16-split.md`, splits 2, 3, and the split-4
+type gate). Data + docs only; no new patterns, no MCP contract break.
+
+### Fixed — marketing content registry
+- Purged 6 phantom ⌘K/search slugs from `src/lib/content/marketing.ts` that had
+  no backing spec (`centered-hero`, `asymmetric-product-hero`, `slide-frame`,
+  `two-col-slide`, `stat-strip`, `cta-section`), and surfaced 4 specs that were
+  live in the registry but missing from the search index (`faq-accordion`,
+  `calculator-island`, `trust-stat-band`, `dark-cta-band`). The content list and
+  the pattern spec registry now match exactly — every content slug resolves to a
+  real spec.
+
+### Added — marketing spec provenance (§7.3)
+- `MarketingPatternSpec` (`src/lib/specs/marketing/patterns/types.ts`) gained
+  three OPTIONAL provenance fields — `sourceRevision`, `lastVerifiedAt`,
+  `verificationStatus` (`verified | partial | unverified | stale`). Optional, so
+  every existing spec still type-checks; the shape is now ready for the gated new
+  marketing patterns.
+- Backfilled provenance + source-grounded notes on the specs verified against the
+  dash.fi source (`a5be701`): `cosmic-hero` and `pinned-showcase` marked `stale`
+  (no live usage — both only appear in the non-routed `_homepage-old.astro`), and
+  `live-widget` marked `partial` with `term-selector` (/corporate-card) and
+  `tier-slider` (/meta-cashback) variants confirmed against the live islands.
+
 ## [1.3.0] — 2026-07-16
 
 UI/UX facelift — the first of four independent PRs from the god-tier
