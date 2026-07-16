@@ -14,7 +14,8 @@
 import type { RequestHandler } from './$types';
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
 import { createDashbookMcpServer } from '$lib/mcp/server.js';
-import { isAllowedOrigin } from '$lib/mcp/origin.js';
+import { isAllowedOrigin, parseTrustedOrigins } from '$lib/mcp/origin.js';
+import { env } from '$env/dynamic/private';
 
 const corsHeaders: Record<string, string> = {
 	'Access-Control-Allow-Origin': '*',
@@ -23,9 +24,9 @@ const corsHeaders: Record<string, string> = {
 	'Access-Control-Expose-Headers': 'Mcp-Session-Id'
 };
 
-async function handle(request: Request): Promise<Response> {
+async function handle(request: Request, sameOrigin: string): Promise<Response> {
 	const origin = request.headers.get('Origin');
-	if (!isAllowedOrigin(origin)) {
+	if (!isAllowedOrigin(origin, sameOrigin, parseTrustedOrigins(env.DASHBOOK_TRUSTED_ORIGINS))) {
 		return new Response('Forbidden — origin not allowed.', {
 			status: 403,
 			headers: { 'Content-Type': 'text/plain; charset=utf-8' }
@@ -49,8 +50,8 @@ async function handle(request: Request): Promise<Response> {
 	});
 }
 
-export const GET: RequestHandler = ({ request }) => handle(request);
-export const POST: RequestHandler = ({ request }) => handle(request);
+export const GET: RequestHandler = ({ request, url }) => handle(request, url.origin);
+export const POST: RequestHandler = ({ request, url }) => handle(request, url.origin);
 
 export const OPTIONS: RequestHandler = () =>
 	new Response(null, { status: 204, headers: corsHeaders });

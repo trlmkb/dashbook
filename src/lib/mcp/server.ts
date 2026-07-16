@@ -27,7 +27,9 @@ import { registerSharedTools } from './tools/shared.js';
 import { registerDashbookResources } from './resources.js';
 
 export const SERVER_NAME = 'dashbook';
-export const SERVER_VERSION = '0.1.0';
+// Tracks the @dashfi/mcp-server package version; surfaced by serverInfo, the
+// `version` tool, and the /.well-known/mcp-server-card.json discovery document.
+export const SERVER_VERSION = '0.5.0';
 
 /** Build a fully-configured MCP server instance. */
 export function createDashbookMcpServer(): McpServer {

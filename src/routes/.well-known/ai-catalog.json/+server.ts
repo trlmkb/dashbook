@@ -45,9 +45,9 @@ const manifest = {
 			identifier: 'urn:air:dash.fi:dashbook:mcp-server',
 			displayName: 'Dashbook MCP server',
 			type: 'application/mcp-server-card+json',
-			url: `${DOCS_BASE}/mcp`,
+			url: `${DOCS_BASE}/.well-known/mcp-server-card.json`,
 			description:
-				'Streamable HTTP MCP server exposing Dash.fi component specs, foundations, tokens, and marketing assets as tools and resources. No auth.',
+				'Server card for the Dashbook MCP server (Streamable HTTP, no auth) — exposes Dash.fi component specs, foundations, tokens, and marketing assets as tools and resources. The card carries the connect endpoint and capabilities.',
 			tags: ['design-system', 'brand', 'dash.fi', 'mcp'],
 			representativeQueries: [
 				'build a Dash.fi UI component',
