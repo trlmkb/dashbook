@@ -209,3 +209,30 @@ A path-configurable Node + TypeScript CLI in dashbook (proposed `scripts/spec-au
 1. **This lift** — the drift/generator engine + one-time audit (this doc).
 2. **Included in this lift** — handoff-routing metadata and receiving-skill guidance.
 3. **Next large lift** — migrate dashbook into the core Nx workspace; the engine moves with it and gains the lib-PR merge gate.
+
+### 11.1 Strictness roadmap — two gates beyond the audit
+
+The audit makes the mirror *trustworthy* (detect + correct). Making it *strict*
+adds two gates on top of expanding what is generated rather than audited (see the
+operating model's "generate versus gate" tiering, §9.6):
+
+- **Expand the generation frontier (anatomy).** Grow the extractors so the
+  mechanically-derivable anatomy subfields (variant set, sizes, class strings for
+  `tv`/static-class/class-map components) are *generated* from lib source rather
+  than hand-authored. Generated subfields can't drift; make `--strict` a blocking
+  CI check for the audited remainder.
+- **Anatomy merge-gate on lib PRs (needs core).** Once dashbook is co-located,
+  install the audit as an Nx-affected gate so a library change that leaves a spec
+  stale fails the *library* PR — drift can't ship.
+- **Consumer reuse-lint (can land now, before the migration).** In dashfi-ui and
+  other frequently-targeted repos, a CI lint that scans the diff against the
+  `implementation` registry from this PR and fails a merge that re-creates a
+  shared primitive where `@dashfi/svelte` is available. This is the strict form
+  of the receiving-repo guardrail and directly addresses the "agent rebuilt
+  Button" failure. It must be exception-aware (honor the port/allowlist policy).
+
+**Recommended order:** stabilize this contract standalone (merge this PR + the
+operating model, expand generation, make `--strict` blocking) → build the
+consumer reuse-lint in core consumers now → then migrate, which turns the audit
+into a lib-PR merge-gate and enables token generation ("can't-drift"). The
+migration is the amplifier, not a prerequisite.
