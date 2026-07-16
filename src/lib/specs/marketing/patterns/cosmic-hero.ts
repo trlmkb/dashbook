@@ -14,7 +14,7 @@ export const cosmicHero: MarketingPatternSpec = {
 	description:
 		'A high-drama dark opener: an ink band with an ambient drifting accent glow behind an oversized display heading and a single CTA. Maximum atmosphere — reduced-motion-safe.',
 
-	source: 'src/components/slide/CosmicHero.astro',
+	source: 'src/components/sections/CosmicHero.astro',
 	sourceNote:
 		'Prop signatures pulled from the brief; verify against the website source. No live usage on dash.fi as of 2026-07 — reserved for campaign surfaces (e.g. a launch or funding-round landing page) rather than the current evergreen site flow.',
 	sourceRevision: 'a5be701',

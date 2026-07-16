@@ -72,7 +72,7 @@ export const liveWidget: MarketingPatternSpec = {
 		{
 			name: 'tier-slider',
 			description:
-				'A single slider (spend tier or cashback tier) recomputes the reward/cashback figure as it drags — the /meta-cashback instance. Same one-source-of-truth rule applies: the slider value is state, the displayed figure is derived, never a lookup table of pre-rendered strings.',
+				'Range sliders (the /meta-cashback MetaCashbackCalculator has spend + balance sliders plus a tier dial) recompute the reward/cashback figure as they drag. Same one-source-of-truth rule applies: the slider values are state, the displayed figure is derived, never a lookup table of pre-rendered strings.',
 		},
 	],
 
