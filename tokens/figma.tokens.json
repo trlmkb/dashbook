@@ -17,52 +17,40 @@
   },
   "product": {
     "bg": {
-      "light": "#faf8f1",
-      "dark": "#0f1413"
+      "light": "#faf9f5",
+      "dark": "#0f1412"
     },
     "bg-muted": {
-      "light": "#eceae0",
-      "dark": "#181e1d"
+      "light": "#f1efea",
+      "dark": "#191f1d"
     },
     "fg": {
-      "light": {
-        "ref": "dash-jade-deep"
-      },
-      "dark": {
-        "ref": "dash-white"
-      }
+      "light": "#123b38",
+      "dark": "#ffffff"
     },
     "fg-muted": {
-      "light": "#6e7878",
-      "dark": "#8b9695"
+      "light": "#6e8180",
+      "dark": "#819896"
     },
     "border": {
-      "light": "#e8e6dc",
-      "dark": "#1f2a29"
+      "light": "#ebeae5",
+      "dark": "#1e2928"
     },
     "input-border": {
-      "light": "#b6c0bf",
-      "dark": "#1f2a29"
+      "light": "#c0cecd",
+      "dark": "#1e2928"
     },
     "primary": {
-      "light": {
-        "ref": "dash-ink"
-      },
-      "dark": {
-        "ref": "dash-white"
-      }
+      "light": "#24251d",
+      "dark": "#ffffff"
     },
     "primary-fg": {
       "light": "#ffffff",
       "dark": "#000000"
     },
     "brand": {
-      "light": {
-        "ref": "dash-jade"
-      },
-      "dark": {
-        "ref": "dash-jade-lifted"
-      }
+      "light": "#2b5f5b",
+      "dark": "#46b9af"
     },
     "brand-fg": {
       "light": "#ffffff",
@@ -73,20 +61,16 @@
       "dark": "#ff4000"
     },
     "ring": {
-      "light": {
-        "ref": "dash-jade"
-      },
-      "dark": {
-        "ref": "dash-jade-lifted"
-      }
+      "light": "#2b5f5b",
+      "dark": "#46b9af"
     },
     "card": {
-      "light": "#faf8f1",
-      "dark": "#0f1413"
+      "light": "#faf9f5",
+      "dark": "#0f1412"
     },
     "popover": {
       "light": "#ffffff",
-      "dark": "#141a19"
+      "dark": "#161d1a"
     }
   },
   "marketingAlias": {

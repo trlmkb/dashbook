@@ -4,53 +4,53 @@
    This is a REFERENCE for the packages/brand migration — wiring the lib to consume it is a reviewed core change. */
 @layer base {
 	:root {
-		--background: 47 47% 96%;
-		--foreground: 177 53% 15%;
-		--card: 47 47% 96%;
-		--card-foreground: 177 53% 15%;
+		--background: 48 33% 97%;
+		--foreground: 176 53% 15%;
+		--card: 48 33% 97%;
+		--card-foreground: 176 53% 15%;
 		--popover: 0 0% 100%;
-		--popover-foreground: 177 53% 15%;
-		--primary: 67 13% 13%;
+		--popover-foreground: 176 53% 15%;
+		--primary: 68 12% 13%;
 		--primary-foreground: 0 0% 100%;
-		--secondary: 50 24% 90%;
-		--secondary-foreground: 177 53% 15%;
-		--muted: 50 24% 90%;
-		--muted-foreground: 180 4% 45%;
-		--accent: 50 24% 90%;
-		--accent-foreground: 177 53% 15%;
+		--secondary: 43 20% 93%;
+		--secondary-foreground: 176 53% 15%;
+		--muted: 43 20% 93%;
+		--muted-foreground: 177 8% 47%;
+		--accent: 43 20% 93%;
+		--accent-foreground: 176 53% 15%;
 		--destructive: 15 100% 50%;
 		--destructive-foreground: 0 0% 100%;
 		--brand: 175 38% 27%;
 		--brand-foreground: 0 0% 100%;
 		--cobalt: 233 85% 57%;
 		--cobalt-foreground: 0 0% 100%;
-		--border: 50 21% 89%;
-		--input: 174 7% 73%;
+		--border: 50 13% 91%;
+		--input: 176 13% 78%;
 		--ring: 175 38% 27%;
 	}
 	.dark {
-		--background: 168 14% 7%;
+		--background: 156 14% 7%;
 		--foreground: 0 0% 100%;
-		--card: 168 14% 7%;
+		--card: 156 14% 7%;
 		--card-foreground: 0 0% 100%;
-		--popover: 170 13% 9%;
+		--popover: 154 14% 10%;
 		--popover-foreground: 0 0% 100%;
 		--primary: 0 0% 100%;
 		--primary-foreground: 0 0% 0%;
-		--secondary: 170 11% 11%;
+		--secondary: 160 11% 11%;
 		--secondary-foreground: 0 0% 100%;
-		--muted: 170 11% 11%;
-		--muted-foreground: 175 5% 57%;
-		--accent: 170 11% 11%;
+		--muted: 160 11% 11%;
+		--muted-foreground: 175 10% 55%;
+		--accent: 160 11% 11%;
 		--accent-foreground: 0 0% 100%;
 		--destructive: 15 100% 50%;
 		--destructive-foreground: 0 0% 100%;
-		--brand: 175 40% 54%;
+		--brand: 175 45% 50%;
 		--brand-foreground: 0 0% 100%;
 		--cobalt: 233 85% 57%;
 		--cobalt-foreground: 0 0% 100%;
 		--border: 175 15% 14%;
 		--input: 175 15% 14%;
-		--ring: 175 40% 54%;
+		--ring: 175 45% 50%;
 	}
 }
