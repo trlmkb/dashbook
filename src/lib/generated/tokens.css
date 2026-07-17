@@ -2,19 +2,19 @@
 @layer base {
 	:root {
 		/* Product semantic — light */
-		--bg: #faf8f1;
-		--bg-muted: #eceae0;
-		--fg: var(--dash-jade-deep);
-		--fg-muted: #6e7878;
-		--border: #e8e6dc;
-		--input-border: #b6c0bf;
-		--primary: var(--dash-ink);
+		--bg: #faf9f5;
+		--bg-muted: #f1efea;
+		--fg: #123b38;
+		--fg-muted: #6e8180;
+		--border: #ebeae5;
+		--input-border: #c0cecd;
+		--primary: #24251d;
 		--primary-fg: #ffffff;
-		--brand: var(--dash-jade);
+		--brand: #2b5f5b;
 		--brand-fg: #ffffff;
 		--destructive: #ff4000;
-		--ring: var(--dash-jade);
-		--card: #faf8f1;
+		--ring: #2b5f5b;
+		--card: #faf9f5;
 		--popover: #ffffff;
 
 		/* Base palette — brand primitives (every brand hex within this mirror) */
@@ -83,20 +83,20 @@
 
 	html.dark,
 	[data-theme='dark'] {
-		--bg: #0f1413;
-		--bg-muted: #181e1d;
-		--fg: var(--dash-white);
-		--fg-muted: #8b9695;
-		--border: #1f2a29;
-		--input-border: #1f2a29;
-		--primary: var(--dash-white);
+		--bg: #0f1412;
+		--bg-muted: #191f1d;
+		--fg: #ffffff;
+		--fg-muted: #819896;
+		--border: #1e2928;
+		--input-border: #1e2928;
+		--primary: #ffffff;
 		--primary-fg: #000000;
-		--brand: var(--dash-jade-lifted);
+		--brand: #46b9af;
 		--brand-fg: #ffffff;
 		--destructive: #ff4000;
-		--ring: var(--dash-jade-lifted);
-		--card: #0f1413;
-		--popover: #141a19;
+		--ring: #46b9af;
+		--card: #0f1412;
+		--popover: #161d1a;
 	}
 
 	[data-marketing-dark] {
