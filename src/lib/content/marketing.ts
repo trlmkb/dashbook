@@ -76,8 +76,12 @@ export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	{ slug: 'feature-tabs', name: 'Feature tabs', category: 'Content blocks', description: 'Auto-rotating pill tabs with a left→right progress fill.', toolId: 'marketing_feature_tabs' },
 	{ slug: 'faq-accordion', name: 'FaqAccordion', category: 'Content blocks', description: 'A hairline-divided Q/A list — one open at a time, mono "Q."/"A." markers, grid-rows reveal. Closes most marketing pages.' },
 	{ slug: 'calculator-island', name: 'Calculator island', category: 'Content blocks', description: 'A slider-driven estimator — intro column beside a card whose range slider drives a live result (recovery / savings / cashback).' },
+	{ slug: 'comparison-table', name: 'ComparisonTable', category: 'Content blocks', description: 'A 4-column us-vs-alternatives grid — row-label plus Dash.fi and two competitors, emphasized Dash.fi column, zebra rows, horizontal scroll on mobile.' },
+	{ slug: 'action-plan', name: 'ActionPlan', category: 'Content blocks', description: 'A ranked list of recommended actions — numbered rows with a title, effort/timeline meta, and a dollar-impact figure.' },
 	// Media & proof
 	{ slug: 'trust-stat-band', name: 'TrustStatBand', category: 'Media & proof', description: 'The proof band — a rolling-counter headline stat, pillar stats, and a carrier/logo strip with a "live" indicator.' },
+	{ slug: 'data-table-band', name: 'DataTableBand', category: 'Media & proof', description: 'A compact findings table inside a product-screenshot mock — issue, severity pill, monthly and annual cost, description, and a highlighted total row.' },
+	{ slug: 'chart-band', name: 'ChartBand', category: 'Media & proof', description: 'CSS-bar charts in a product mock — horizontal or vertical bars in a single accent series, plus a minimal range-pill strip variant.' },
 	{ slug: 'product-shot', name: 'Scale-to-fit product shot', category: 'Media & proof', description: 'Product UI rebuilt as DOM, scaled to fit via a ResizeObserver.', toolId: 'marketing_product_shot' },
 	{ slug: 'testimonial-card', name: 'TestimonialCard', category: 'Media & proof', description: 'A customer quote card — quote, optional quote-mark, and attribution with an optional avatar or logo.' },
 	{ slug: 'case-study-card', name: 'CaseStudyCard', category: 'Media & proof', description: 'A card linking to a case study — one headline metric, a one-line result, and a read-the-story link.' },
@@ -90,6 +94,7 @@ export const marketingPatternsContent: MarketingPatternContentEntry[] = [
 	{ slug: 'section-cta', name: 'SectionCTA', category: 'CTAs', description: 'Lightweight inline end-of-section nudge.' },
 	{ slug: 'home-final-cta', name: 'HomeFinalCTA', category: 'CTAs', description: 'The oversized page closer on the ink band.' },
 	{ slug: 'dark-cta-band', name: 'DarkCtaBand', category: 'CTAs', description: 'The jade-glow closing band — full-width dark section with a rising radial glow, reserved for the final page CTA.' },
+	{ slug: 'form-capture', name: 'FormCapture', category: 'CTAs', description: 'Lead capture — a single-field inline email form, or a HubSpot embed (inline or modal) for multi-field applications.' },
 	// Building blocks
 	{ slug: 'squircle-button', name: 'Squircle button', category: 'Building blocks', description: '6px squircle CTA, no shadow, press-scale 0.97.', toolId: 'marketing_button' },
 	{ slug: 'chip', name: 'Chip', category: 'Building blocks', description: 'Soft-tinted pill tag; four tones via data-tone.', toolId: 'marketing_chip' },
