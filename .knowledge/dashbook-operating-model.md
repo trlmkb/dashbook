@@ -1114,6 +1114,13 @@ work.
 content is each PR's *operating-model decision* and *required-before-merge*
 column; the GitHub state column drifts.
 
+> **Refresh 2026-07-17 (`gh pr list`):** of #13–#17, only **#16 is still open**.
+> #13, #14, #15, #17 merged 2026-07-16; the portal↔lib token reconcile shipped as
+> **#25** (merged 2026-07-17). #13 landed **reframed as mirror / generation tooling**
+> (not an authority claim) with the `pnpm tokens --check` drift gate — matching the
+> decision in its row. The durable decision / required-before-merge columns below are
+> retained for history; regenerate live state from `gh pr list`.
+
 | PR                                                                             | GitHub state                        | Role                                                                                            | Operating-model decision                                                                                                                                                                            | Required before merge                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [#13 — Figma library + token SSOT](https://github.com/trlmkb/dashbook/pull/13) | Open, ready                         | Token generator, generated CSS/TS/Figma payload, Code Connect context                           | **Do not merge as an authority claim.** Preserve the tooling, but treat inputs as downstream mirrors until core consumes them. Prefer folding the authority work into the Nx/core token transition. | Reconcile actual core-rendered values; rename/reframe SSOT language; add generated drift check; correct README claims; make Figma IDs/config and missing-variable behavior robust; decide integration with #17 audit          |
@@ -1282,6 +1289,36 @@ Review this document:
 - Approved by:
 - Follow-up:
 ```
+
+### 2026-07-17 — Token SSOT direction locked + migration-spec Phase 0 reconciled
+
+- Decision: the future canonical product-token source will live in **core** (a
+  `core/packages/brand/tokens` package consumed by `@dashfi/svelte`), per §11.3 /
+  §14 and the migration spec's Phase 1. Timing: Dashbook-side **groundwork now**
+  (done — see below); the **relocate-into-core + authority flip** run as one
+  isolated PR train at the start of the Nx migration (post-M1), **never fused** with
+  the app-lift or any visual change. Marketing token authority stays with the
+  website (§11.4); the flip is product-only.
+- Authority affected: **none yet.** This records the *decided direction and moment
+  of transfer*; authority does not flip until the §14 gates pass and the switch is
+  thrown explicitly. Dashbook remains a mirror.
+- Repositories affected: dashbook (docs only).
+- Migration/compatibility notes: the §11.2 generation gate is **already shipped** —
+  `pnpm tokens:check` (`build-tokens.mjs --check`, also run by `pnpm build`) fails on
+  stale generated artifacts; verified green (6 artifacts up to date, 2026-07-17). The
+  DTCG file and README are framed as a normalized mirror / generation input, not
+  authority. `src/lib/tokens.ts` is deliberately **kept** hand-maintained and
+  `spec-audit`-guarded (not generated) to avoid an unaudited parallel source; the
+  migration spec's Phase 0 wording that said to retire it was stale and has been
+  corrected.
+- Approved by: zygis (session decisions, 2026-07-17).
+- Follow-up: schedule the Phase 1 zero-value-change reconcile in core when the Nx
+  migration begins. Known limits recorded for that work: `tokens:check` only proves
+  generated files match the DTCG source, **not** that the DTCG portal-chrome group
+  matches the lib (that chrome legitimately differs in ~11 roles and is not covered
+  by `spec-audit`, which guards `tokens.ts`); `lib-tokens.reference.css` is generated
+  but not yet consumed by the lib and uses recomputed HSL (pin the lib's authored
+  HSL at Phase 1); Figma variable sync stays manual (plugin paste, Professional plan).
 
 ### 2026-07-16 — Domain correction + #17/#15 shipped
 
