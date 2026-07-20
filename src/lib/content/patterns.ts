@@ -162,6 +162,35 @@ export const patterns: PatternEntry[] = [
 		uses: ['Card', 'Pill', 'Progress', 'Switch', 'Button', 'Separator']
 	},
 
+	// Drafts — scaffolded shape, content still being authored (render the "Drafting" notice)
+	{
+		slug: 'statement-archive',
+		name: 'Statement archive',
+		description:
+			'Year pager over monthly statement rows, each opening a preview modal (PDF/CSV export). The shape for any "archive of periodic documents" surface — statements, tax forms, annual reports.',
+		category: 'Data',
+		uses: ['Button', 'Dialog', 'Pill'],
+		draft: true
+	},
+	{
+		slug: 'role-permission-matrix',
+		name: 'Role permission matrix',
+		description:
+			'Master-detail: role list on the left, a permission checkbox grid on the right, collapsing to a Select-driven single-column view on mobile. For any many-roles × many-capabilities admin surface.',
+		category: 'Forms',
+		uses: ['Select', 'Checkbox', 'Separator'],
+		draft: true
+	},
+	{
+		slug: 'product-catalog',
+		name: 'Product catalog',
+		description:
+			'Enable/disable rows for a set of offerable products, each with an off-ramp confirmation dialog and an expandable pricing table. For admin surfaces that toggle product availability rather than edit records.',
+		category: 'Layout',
+		uses: ['Switch', 'AlertDialog', 'Table'],
+		draft: true
+	},
+
 	// Architecture — cross-cutting page-level techniques
 	{
 		slug: 'auth-route-groups',
