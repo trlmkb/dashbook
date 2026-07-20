@@ -96,6 +96,30 @@ export const patterns: PatternEntry[] = [
 		category: 'Data',
 		uses: ['Pill', 'Table', 'Button']
 	},
+	{
+		slug: 'bulk-action-bar',
+		name: 'Bulk action bar',
+		description:
+			'The sticky selection toolbar that appears once ≥1 row is checked. Count + clear on the left, an async BulkRunner-driven action group on the right, a busy/progress state that disables the group and reports a toast when the run finishes.',
+		category: 'Data',
+		uses: ['Button', 'Loader', 'toast']
+	},
+	{
+		slug: 'card-gallery',
+		name: 'Card gallery',
+		description:
+			'Grid↔list toggle over a set of issued cards, with a cardholder combobox facet, status chips, and per-card freeze/edit/duplicate/archive actions. The overview shape for any "collection of visual objects" surface.',
+		category: 'Data',
+		uses: ['ToggleGroup', 'Command', 'Popover', 'Select', 'Input', 'Pagination']
+	},
+	{
+		slug: 'notification-inbox',
+		name: 'Notification inbox',
+		description:
+			'Today / Yesterday / This week / This month / Older grouping over a flat notification feed, with a date-range Select filter and click-to-mark-read. The canonical shape for any chronological, groupable feed.',
+		category: 'Data',
+		uses: ['Select', 'Separator', 'Pill']
+	},
 
 	// Forms
 	{
@@ -123,6 +147,22 @@ export const patterns: PatternEntry[] = [
 		category: 'Forms',
 		uses: ['Button', 'Input', 'Label', '+layout.server.ts']
 	},
+	{
+		slug: 'in-dialog-stepper',
+		name: 'In-dialog stepper',
+		description:
+			'A stepper that lives entirely inside one Dialog — a `steps` array of `{ component, props }`, current index in local state, direction-aware `fly` transition on step change. Used for add-funds, wire details, and other modal-scoped multi-step flows that don\'t warrant their own route.',
+		category: 'Forms',
+		uses: ['Dialog', 'Skeleton']
+	},
+	{
+		slug: 'bulk-import-wizard',
+		name: 'Bulk import wizard',
+		description:
+			'Template → upload → map columns → process, in one Dialog with a left step-rail. Drag-and-drop or click-to-browse CSV upload, auto-detected column mapping against required fields, a LinearLoader-driven processing state, and a "keep working" escape hatch so the import runs in the background.',
+		category: 'Forms',
+		uses: ['Dialog', 'Select', 'LinearLoader', 'Pill', 'Alert']
+	},
 
 	// Confirmation
 	{
@@ -132,6 +172,14 @@ export const patterns: PatternEntry[] = [
 			'Two-step gate for irreversible actions — close card, revoke virtual, terminate user. AlertDialog with a single destructive primary.',
 		category: 'Confirmation',
 		uses: ['Button', 'AlertDialog']
+	},
+	{
+		slug: 'secret-reveal',
+		name: 'Secret reveal',
+		description:
+			'Reveal-once semantics for API keys and webhook secrets — a Dialog that opens already showing the value, with an explicit "won\'t be shown again" warning and a copy-to-clipboard field. There is no re-open; the value must be regenerated to be seen twice.',
+		category: 'Confirmation',
+		uses: ['Dialog', 'Button']
 	},
 
 	// States
