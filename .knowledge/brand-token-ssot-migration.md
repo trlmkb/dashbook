@@ -1,7 +1,12 @@
 # Brand design-token single-source-of-truth — migration spec
 
-Status: **draft for team sign-off. No app-move code yet** (a small dashbook mirror
-correction has already shipped — see §6).
+Status: **draft for team sign-off. No core/app-move code yet.** Dashbook-side
+groundwork (Phase 0) has shipped: the mirror correction (§6), the zero-dep
+generator, and the `pnpm tokens --check` drift gate are in place, and
+`src/lib/tokens.ts` is deliberately kept as the audited data source (not
+generated). Direction locked 2026-07-17 (canonical token source in **core**;
+groundwork-now / relocate-and-flip-at-migration timing) — see the operating-model
+change log.
 Pairs with [`brand-book-migration-analysis.md`](./brand-book-migration-analysis.md)
 (the dashbook→core **app** move — decided: adapter-node → Docker → ECR → Lambda →
 CloudFront, target `core/packages/brand/`). That analysis covers hosting; this doc
@@ -41,7 +46,7 @@ conventions:
 | dashbook token layer (`--dash-*`/`--*`/`--m-*`) | dashbook `src/lib/generated/tokens.css` (now generated) | **mirror** (was hand-authored; now generated) |
 | dashbook `@theme` (`--color-*`) | dashbook `src/lib/generated/theme.css` (now generated) | **mirror** |
 | Figma variables + text styles | Figma `91csAF1OGUmCZROdZlCRSv` | **mirror** |
-| TS token map | dashbook `src/lib/tokens.ts` (hand-maintained) | **mirror** (JSON API/MCP still read it — Phase 0 gap) |
+| TS token map | dashbook `src/lib/tokens.ts` (hand-maintained) | **mirror** — audited product-token data the JSON API/MCP read; kept hand-maintained + `spec-audit`-guarded **on purpose** (a generated map would be an unaudited parallel source). Not a gap. |
 
 ## 3. Target architecture
 
@@ -74,9 +79,13 @@ inputs upstream** and pointing consumers at them — not rebuilding tooling.
 
 ## 5. Phased plan
 
-- **Phase 0 — correct the dashbook mirror (partly done, §6).** Also: point dashbook's
-  JSON API / MCP / foundations at the generated `tokens.ts` (retire hand-maintained
-  `src/lib/tokens.ts`). Dashbook-only.
+- **Phase 0 — Dashbook mirror groundwork (shipped).** Mirror corrected (§6); the
+  zero-dep generator emits the portal CSS layer + `@theme` + Figma payloads + the
+  lib HSL reference, and `pnpm tokens --check` (run by `pnpm build` and CI) fails on
+  stale generated output. `src/lib/tokens.ts` is **kept** as the hand-maintained,
+  `spec-audit`-guarded audited product-token data the JSON API / MCP / foundations
+  serve — deliberately **not** generated, because a second generated map would be an
+  unaudited parallel source (operating-model §11.2, §14). Dashbook-only.
 - **Phase 1 — product source into core.** Extract `core/packages/brand/tokens` from the
   lib's `global.css` (+ the zero-dep generator). The lib consumes its own generated HSL;
   add lib-only roles (`success`, `warning`, `sidebar-*`, `card-surface-*`). `workspace:*`.
@@ -128,7 +137,7 @@ deliberately keeps default = dark, brand = jade. Changing it is a core-side desi
 - **Tailwind v3 (lib) vs v4 (dashbook)** → generator emits both formats; no forced upgrade.
 - **hex→HSL rounding** → pin the lib's existing HSL triplets in the source rather than recomputing.
 - **Nx build/cache + workspace deps** → mirror `dashfi-ui` / `brand-book` conventions.
-- **JSON API/MCP output shape** when retiring `src/lib/tokens.ts` → keep export names/shape; snapshot-test.
+- **JSON API/MCP output shape** → `src/lib/tokens.ts` is retained as the audited data source (not generated); keep its export names/shape stable and snapshot-test if its internals change.
 
 ## 8. Verification checklist (per phase)
 
@@ -136,7 +145,7 @@ deliberately keeps default = dark, brand = jade. Changing it is a core-side desi
 - [ ] Lib Storybook + app.dash render unchanged on a zero-value-change reconcile.
 - [ ] dashbook `pnpm build` + `pnpm check` clean.
 - [ ] Figma reconcile reports only expected diffs.
-- [ ] JSON API `/api/foundations/color.json` shape unchanged (Phase 0).
+- [x] JSON API `/api/foundations/color.json` shape unchanged — `tokens.ts` retained, not generated (Phase 0, shipped).
 
 ## 9. Non-goals
 
